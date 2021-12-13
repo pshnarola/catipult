@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 body{
     font-family: 'Montserrat', sans-serif !important;
+    background: #fff;
 }
 
 
@@ -117,11 +118,25 @@ body{
 .nav-sm .nside-nav .menu_section .side-menu li a i {
     position: initial;
     margin: 0 !important;
+    font-size: 18px !important;
 }
 .nav-sm .nside-nav .menu_section .side-menu li + li {
     margin-top: 30px;
 }
-
+.nav-sm .nside-nav .nside-toggle a svg {
+    transform: rotate(180deg);
+}
+.nnavbar-header .nav-right-item li.user-menu .dropdown-usermenu {
+    top: 50px !important;
+    right: 0;
+    z-index: 1;
+}
+.nnavbar-header .nav-right-item li.user-menu {
+    position: relative;
+}
+.nnavbar-header .nav-right-item li.user-menu .dropdown-usermenu li {
+    margin: 0;
+}
 
 
 // header-css
@@ -130,6 +145,78 @@ body{
 }
 .nav-sm .main_container .nnavbar-header {
     margin-left: 88px;
+}
+.nnavbar-header .nav_menu {
+    background: transparent;
+    margin: 0;
+    padding: 0 24px 0 32px;
+    border: 0;
+}
+.nnavbar-header .nav_menu nav.navigation {
+    border-bottom: 1px solid #DAE3E8;
+    margin-bottom: 16px;
+    padding: 16px 0 15px;
+    align-items: center;
+}
+.nnavbar-header .nav_menu nav.navigation h1 {
+    margin: 0;
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 28px;
+    line-height: 32px;
+    color: #000000;
+}
+.nnavbar-header .btn-coach {
+    background: #043750;
+    border-radius: 100px;
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+    display: inline-block;
+}
+.nnavbar-header .nav-right-item {
+    width: 100% !important;
+}
+.nnavbar-header .btn-coach i {
+    margin-right: 10px;
+}
+.nnavbar-header .nav-right-item li {
+    margin: 0;
+    display: inline-block;
+}
+.nnavbar-header .nav-right-item li + li {
+    margin-left: 25px;
+}
+.nnavbar-header .nav-notification a {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+.nnavbar-header .nav-notification a span {
+    position: absolute !important;
+    top: -3px !important;
+    right: -3px !important;
+    background: #FF4000 !important;
+    width: 5px !important;
+    height: 5px !important;
+    left: auto !important;
+}
+.nnavbar-header .nav-right-item li.user-menu > a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.nnavbar-header .nav-right-item li.user-menu > a img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
 }
 
 // sidebar-content-css

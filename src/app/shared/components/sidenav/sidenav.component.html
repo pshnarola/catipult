@@ -28,14 +28,14 @@
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
         <ul class="nav side-menu">
-          <li><a id="dashboard" (click)="dash();" class='nav-link active'><i class="fa fa-home"></i>My Dashboard</a></li>
+          <li><a id="dashboard" (click)="dash();" class='nav-link' [ngClass]="{'active': myDashboard}"><i class="fa fa-home"></i>My Dashboard</a></li>
           <li><a id="reviewQuestions" (click)="rvQuestion();" class='nav-link'><i class="fas fa-comment-alt" style='font-weight: 400;'></i>Review Questions</a></li>
-          <li><a id="outcomeStatement" (click)="outStatement();" class='nav-link'><i class="fas fa-file-alt" style='font-weight: 400;'></i>Three Year Outcome</a></li>
-          <li><a id="companySetUp" (click)='goToCompanySetup();' class='nav-link'><i class="fas fa-house-user"></i>My Company</a></li>
+          <li><a id="outcomeStatement" (click)="outStatement();" class='nav-link' [ngClass]="{'active': threeYearOutcome}"><i class="fas fa-file-alt" style='font-weight: 400;'></i>Three Year Outcome</a></li>
+          <li><a id="companySetUp" (click)='goToCompanySetup();' class='nav-link' [ngClass]="{'active': myCompany}"><i class="fas fa-house-user"></i>My Company</a></li>
           <!-- <li><a id="meetings" *ngIf='organizationData && organizationData.features && organizationData.features.meetings && organizationData.features.meetings=="enabled"' (click)='goToMeetings();' class='nav-link'><i class="fas fa-users"></i>My Meetings</a></li> -->
-          <li><a id="meetings" (click)='goToMeetings();' class='nav-link'><i class="fas fa-users"></i>My Meetings</a></li>
-          <li><a id='portfolioView' (click)='showPortfolioView();' class='nav-link' *ngIf='isPortfolioAccount'><i class='fas fa-city'></i>Coaching Portfolio</a></li>
-          <li><a id='tutorials' (click)='goToTutorials();' class='nav-link'><i class="fas fa-video"></i>Tutorials</a></li>
+          <li><a id="meetings" (click)='goToMeetings();' class='nav-link' [ngClass]="{'active': myMeeting}"><i class="fas fa-users"></i>My Meetings</a></li>
+          <li><a id='portfolioView' (click)='showPortfolioView();' class='nav-link' *ngIf='isPortfolioAccount' [ngClass]="{'active': portfolio}"><i class='fas fa-city'></i>Coaching Portfolio</a></li>
+          <li><a id='tutorials' (click)='goToTutorials();' class='nav-link' [ngClass]="{'active': tutorials}"><i class="fas fa-video"></i>Tutorials</a></li>
           <li><a id='featureRequest' (click)='showModal(suggestionModal,"modal-sm");' class='nav-link'><i class='fas fa-bullhorn'></i>Feature Request</a></li>
           <li><a (click)='goToUrl("https://catipult.ai/blog/category/resources/");' class='nav-link'><i class='fas fa-blog'></i>catipult.ai Blog</a></li>
           <!-- <li><a class='versionColor' style='cursor: default !important;'>Version: {{ version }}</a></li> -->
