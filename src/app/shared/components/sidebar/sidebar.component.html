@@ -1,0 +1,58 @@
+<div id="sidebar" fxLayout="column" fxFlex=100 >
+        <div  style="padding: 12px 0px 0px 11px;overflow: hidden;">
+
+                <img src="../../../../assets/images/onboarding/step1/left-logo.png">
+        </div>
+        <div  style="overflow: hidden;padding-top: 40px;" fxLayoutAlign="start start">
+                <mat-nav-list>
+                        <a mat-list-item routerLinkActive="active" routerLink="['/dashboard']" (click)= "dash()">
+                            <img src="../../../../assets/icons/dashboard.png"> <span class="textcss"> {{ 'Dashboard' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">dashboard</mat-icon>  -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/you']">
+                            <img src="../../../../assets/icons/You.png"> <span class="textcss"> {{ 'You' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">build</mat-icon> {{ 'You' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/leadership']">
+                            <img src="../../../../assets/icons/leadership.png"> <span class="textcss"> {{ 'Leadership' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">whatshot</mat-icon> {{ 'Leadership' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/employees']">
+                            <img src="../../../../assets/icons/employee.png"> <span class="textcss"> {{ 'Employees' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Employees' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/customers']">
+                            <img src="../../../../assets/icons/customers.png"> <span class="textcss"> {{ 'Customers' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">sentiment_very_satisfied</mat-icon> {{ 'Customers' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/financialpartner']">
+                            <img src="../../../../assets/icons/financial.png"> <span class="textcss"> {{ 'Financial Partner' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">account_balance</mat-icon> {{ 'Financial Partner' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/cash']">
+                            <img src="../../../../assets/icons/cash.png"> <span class="textcss"> {{ 'Cash' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">account_balance_wallet</mat-icon> {{ 'Cash' }} -->
+                        </a>
+                        <a mat-list-item routerLinkActive="'active'" routerLink="['/growth']">
+                            <img src="../../../../assets/icons/leadership.png"> <span class="textcss"> {{ 'Growth' }}</span>
+                            <!-- <mat-icon class="sidenav-icon">timeline</mat-icon> {{ 'Growth' }} -->
+                        </a>
+                        <mat-divider></mat-divider>
+                        <a mat-list-item routerLinkActive="'active'" (click)="qupdates()" routerLink="['/dash/quaupdates']">
+                          <img src="../../../../assets/icons/progress-arrows.png"> <span class="textcss"> {{ 'Quarterly Updates' }}</span>
+                          <!-- <mat-icon class="sidenav-icon">timeline</mat-icon> {{ 'Growth' }} -->
+                      </a>
+
+                      <!-- "['/user/jim']" -->
+                      <a mat-list-item routerLinkActive="'active'" (click)="cupdates()" routerLink="['/dash/charpupdates']">
+                        <img src="../../../../assets/icons/progress-arrows.png"> <span class="textcss"> {{ 'Charp Updates' }}</span>
+                        <!-- <mat-icon class="sidenav-icon">timeline</mat-icon> {{ 'Growth' }} -->
+                    </a>
+                    <a mat-list-item routerLinkActive="'active'" (click)="rvQuestion()" routerLink="['/step2Review']">
+                      <img src="../../../../assets/icons/progress-arrows.png"> <span class="textcss"> {{ 'Review Questions' }}</span>
+                      <!-- <mat-icon class="sidenav-icon">timeline</mat-icon> {{ 'Growth' }} -->
+                  </a>
+                    </mat-nav-list>
+        </div>
+
+</div>

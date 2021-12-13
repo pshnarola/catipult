@@ -1,0 +1,32 @@
+<div id="sidebar">
+    <mat-toolbar  class="fix-nav">
+        <button type="button" mat-icon-button class="visible-md">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <div class="nav-brand custom_navbrand">
+            Dashboard
+        </div>
+      </mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLinkActive="active" routerLink="['/dashboard']">
+                <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Dashboard' }}
+            </a>
+
+            <!-- <a mat-list-item routerLinkActive="active"  (click)="qupdates()" routerLink="['/dashboard']">
+              <mat-icon class="sidenav-icon">question_answer</mat-icon> {{ 'Questions' }}
+          </a> -->
+          <a mat-list-item routerLinkActive="active"  (click)="rDept()">
+            <mat-icon class="sidenav-icon">pageview</mat-icon> {{ 'Department' }}
+        </a>
+        <a mat-list-item routerLinkActive="active"  (click)="rUser()">
+            <mat-icon class="sidenav-icon">supervisor_account</mat-icon> {{ 'Roles' }}
+        </a>
+        <a mat-list-item routerLinkActive="active"  (click)="rUsers()">
+            <mat-icon class="sidenav-icon">pageview</mat-icon> {{ 'Users' }}
+        </a>
+        <!-- <a mat-list-item routerLinkActive="active"  (click)="logout()">
+          <mat-icon class="sidenav-icon">vpn_key</mat-icon> {{ 'Logout' }}
+      </a> -->
+
+        </mat-nav-list>
+    </div>

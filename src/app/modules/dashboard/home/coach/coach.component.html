@@ -1,0 +1,64 @@
+<div class="x_panel">
+    <div class="x_content">
+        <div class="x_title row" style='width:100%;padding-bottom:0; margin-bottom:0;'>
+            <h2 style="color: #73879C !important;">Assignments</h2>
+        </div>
+        <!-- <div class="x_title row" style='width:100%;margin-bottom:0;'>
+          <p><strong>Coach: {{ coachName }}</strong></p>
+        </div> -->
+      <div *ngIf='!assignmentData || assignmentData?.length<1'>
+          <p>No assignment data to display</p>
+        </div>
+        <table mat-table  [dataSource]="assignmentData" multiTemplateDataRows class="table" matSort *ngIf='assignmentData && assignmentData?.length>0'>
+          <ng-container matColumnDef='ID'>
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef='let element' (click)='showModal(userAssignment,"modal-md"); editAssignment(element)' class='link'>{{ element.ID }}</td>
+          </ng-container>
+          <ng-container matColumnDef='Type'>
+            <th mat-header-cell *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef='let element'>{{ element.Type }}</td>
+          </ng-container>
+          <ng-container matColumnDef='Assignment'>
+            <th mat-header-cell *matHeaderCellDef>Assignment</th>
+            <td mat-cell *matCellDef='let element' (click)='goToAssignment(element.Url);' [ngClass]="{'link':element.Url}">{{ element.Assignment }}</td>
+          </ng-container>
+          <ng-container matColumnDef='Status'>
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef='let element'>{{ element.Status }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="assignmentColumns"></tr>
+          <tr mat-row *matRowDef="let element; columns: assignmentColumns;" class="element-row"></tr>
+        </table>
+    </div>
+</div>
+
+<ng-template #userAssignment>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Edit Assignment</h2></div>
+    </h4>
+  </div>  
+  <!-- Assignment -->
+  <div class='modal-footer'>
+    <div class='input-box padding-bottom' style='text-align:left !important;'>
+      <span class="">Assignment</span>
+      <input name="milestoneDueDate" class="form-control" [(ngModel)]='editAssignmentDescription'>  
+    </div>
+    <div class='input-box padding-bottom' style='text-align:left !important;'>
+      <span class="">Url</span>
+      <input name="assignmentUrl" class="form-control" [(ngModel)]='editAssignmentUrl'>  
+    </div>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label>Status</mat-label>
+      <mat-select class='form-control' [(ngModel)]="editAssignmentStatus" name='milestoneStatus'>
+        <mat-option *ngFor="let s of status" [value]="s.value">{{ s.viewValue }}</mat-option>
+      </mat-select>  
+    </mat-form-field>
+    <div class='padding-top'>
+      <button class='form-control btn btn-primary' (click)='updateAssignment();'>Update</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,179 @@
+<!-- top navigation -->
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+
+<div class="right_col ml230" role="main" *ngIf="leftStyle === 'large'">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!-- listing_section-->
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h2>CHARP Updates</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="row center_flex">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <video controls="true" class="embed-responsive-item">
+                    <source
+                      src="{{ videoUrl }}charp.mp4"
+                      type="video/mp4"
+                    />
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <br /><br />
+            <div class="table-responsive">
+              <mat-tab-group
+                dynamicHeight
+                fxFlex="100"
+                [selectedIndex]="selectIndex"
+                (selectedIndexChange)="driverChange($event)"
+              >
+                <mat-tab *ngFor="let item of drivers" (click)="drive(item)">
+                  <ng-template mat-tab-label>
+                    <div fxFlex>
+                      <img src="{{ item.driverImage }}" class="iconImg" />
+                    </div>
+                  </ng-template>
+                  <div
+                    fxLayout="row"
+                    fxLayout.lt-md="column"
+                    fxFlex
+                    fxLayoutGap="20px"
+                  >
+                    <div class="row" style="width: 100%;">
+                      <div class="table-responsive">
+                        <table id="datatable-buttons" class="table table-hover" cellspacing="0" width="100%">
+                          <thead>
+                            <tr class="myHead">
+                              <th data-column-id="patient_name">KPI</th>
+                              <th data-column-id="patient_name">Target</th>
+                              <th data-column-id='unit'>Unit</th>
+                              <th data-column-id="id">Milestones / Rocks</th>
+                              <th data-column-id="id">Assignee</th>
+                              <th data-column-id="patient_name">Due Date</th>
+                              <th data-column-id="patient_name">CHARP Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of kpiData1">
+                              <td>{{ element.objective }}</td>
+                              <td>{{ element.qty }}</td>
+                              <td>{{ element.unit }}</td>
+                              <td>{{ element.achieveText }}</td>
+                              <td>{{ element.User ? element.User.name + ' ' + element.User.lname : "" }}</td>
+                              <td>{{ element.dueDate }}</td>
+                              <td>
+                                <mat-select [(ngModel)]="element.charpStatus" (selectionChange)="charpUpdate(element)">
+                                  <mat-option *ngFor="let food of foods" [value]="food.value">{{ food.viewValue }}</mat-option>
+                                </mat-select>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="search_btn">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right_col ml230" role="main" *ngIf="leftStyle === 'mobile'">
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h2>CHARP Updates</h2>
+              <img src="{{ drivers[currentDriver].driverImage }}" alt="" class="src"/>
+              <div class="clearfix"></div>
+            </div>
+            <div class="table-responsive">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <table id="datatable-buttons" class="table table-hover" cellspacing="0" width="100%">
+                  <thead>
+                    <tr class="myHead">
+                      <th data-column-id="patient_name">KPI</th>
+                      <th data-column-id="id">Milestones / Rocks</th>
+                      <th data-column-id="patient_name">Due Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ kpiData1[currentIndex]?.objective }}</td>
+                      <td>{{ kpiData1[currentIndex]?.achieveText }}</td>
+                      <td>{{ kpiData1[currentIndex]?.dueDate }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button class="btn3 btn-success mr0 {{ cStatus }}" (click)="kpiData1[currentIndex].charpStatus = 'C'; charpUpdate(kpiData1[currentIndex])">Change</button>
+                <button class="btn3 btn-success mr0 {{ hStatus }}" (click)="kpiData1[currentIndex].charpStatus = 'H'; charpUpdate(kpiData1[currentIndex])">Help</button>
+                <button class="btn3 btn-success mr0 {{ aStatus }}" (click)="kpiData1[currentIndex].charpStatus = 'A'; charpUpdate(kpiData1[currentIndex])">Aware</button>
+                <button
+                  class="btn3 btn-success mr0 {{ rStatus }}"
+                  (click)="
+                    kpiData1[currentIndex].charpStatus = 'R';
+                    charpUpdate(kpiData1[currentIndex])
+                  "
+                >
+                  Redirect
+                </button>
+                <button
+                  class="btn3 btn-success mr0 {{ pStatus }}"
+                  (click)="
+                    kpiData1[currentIndex].charpStatus = 'P';
+                    charpUpdate(kpiData1[currentIndex])
+                  "
+                >
+                  Plan
+                </button>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <!-- <button  class="btn btn-success mr0" (click)="back()">
+                          Back
+                    </button> -->
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 webkit_right">
+                  <button class="btn btn-success mr0" (click)="next()">
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="search_btn">
+                  <!-- <button type="submit" class="btn btn-success mr0" id="command-add" data-row-id="0">Submit</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/listing_section-->
+      </div>
+    </div>
+  </div>
+  <!--/Class -->
+</div>

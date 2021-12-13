@@ -1,0 +1,215 @@
+<div class="{{leftStyle}}" fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+
+
+
+
+    <div fxFlex="35" style="background-color: #1f2532;height: -webkit-fill-available;">
+      <div fxFlex fxLayout="row" fxLayoutAlign="space-around start" class="headerFix">
+        <button mat-raised-button class="add"
+        [routerLink]="['/kpijourney']">
+        Home
+      </button>
+      <button mat-raised-button class="add"
+      [routerLink]="['/plan/step6']">
+      Back
+    </button>
+
+
+</div>
+        <div fxFlex class="headerFix">
+
+                <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center">
+                <mat-card class="cardleft">
+
+                       <mat-card-content fxFlex fxLayout="column">
+                        <span class="header">Step4:</span>
+                        <!-- <span class="content"> Please take your time to answer
+                          the questions below.
+                        </span> -->
+                       </mat-card-content>
+                       <mat-card-footer class="footer">
+
+                          Assign high-level tasks necessary to move those rocks to team members
+                      </mat-card-footer>
+                    </mat-card>
+                    <!-- <mat-card class="cardleft">
+                      <mat-card-content>
+                        <vg-player>
+                          <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                            <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+                          </video>
+                        </vg-player>
+                      </mat-card-content>
+                    </mat-card> -->
+        </div>
+    </div>
+    <div fxFlex="65" class="flex70">
+        <div fxFlex class="driverH">
+          Milestones
+        </div>
+        <div fxFlex fxLayout="row wrap" class="contentHeader">
+            <mat-card class="example-card">
+                <mat-card-header>
+
+                  <!-- <mat-card-title></mat-card-title> -->
+                  <mat-card-subtitle>Recruit 15 Employees</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content fxFlex=100 fxLayoutAlign="start start" fxLayout="column">
+                    <textarea matInput placeholder="To Do Task"></textarea>
+                    <div fxFlex>
+                        Due Date <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                    <button fxFlex mat-icon-button fxLayout="row" fxLayoutAlign="end start" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>dialpad</mat-icon>
+                          <span>Assign User</span>
+                        </button>
+                      </mat-menu>
+                </mat-card-content>
+              </mat-card>
+              <mat-card class="example-card">
+                  <mat-card-header>
+
+                    <!-- <mat-card-title></mat-card-title> -->
+                    <mat-card-subtitle>Achieve  20% Growth</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                      <textarea matInput placeholder="To Do Task"></textarea>
+                      <button mat-icon-button  [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item>
+                            <mat-icon>accessibility</mat-icon>
+                            <span>Assign User</span>
+                          </button>
+                        </mat-menu>
+                  </mat-card-content>
+                </mat-card>
+                <mat-card class="example-card">
+                    <mat-card-header>
+
+                      <!-- <mat-card-title></mat-card-title> -->
+                      <mat-card-subtitle>Achieve  20% Growth</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <textarea matInput placeholder="To Do Task"></textarea>
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                              <mat-icon>accessibility</mat-icon>
+                              <span>Assign User</span>
+                            </button>
+                          </mat-menu>
+                    </mat-card-content>
+                  </mat-card>
+                  <mat-card class="example-card">
+                      <mat-card-header>
+
+                        <!-- <mat-card-title></mat-card-title> -->
+                        <mat-card-subtitle>Achieve  20% Growth</mat-card-subtitle>
+                      </mat-card-header>
+                      <mat-card-content>
+                          <textarea matInput placeholder="To Do Task"></textarea>
+                          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                              <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                              <button mat-menu-item>
+                                <mat-icon>accessibility</mat-icon>
+                                <span>Assign User</span>
+                              </button>
+                            </mat-menu>
+                      </mat-card-content>
+                    </mat-card>
+                    <mat-card class="example-card">
+                        <mat-card-header>
+
+                          <!-- <mat-card-title></mat-card-title> -->
+                          <mat-card-subtitle>Achieve  20% Growth</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <textarea matInput placeholder="To Do Task"></textarea>
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                              </button>
+                              <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                  <mat-icon>accessibility</mat-icon>
+                                  <span>Assign User</span>
+                                </button>
+                              </mat-menu>
+                        </mat-card-content>
+                      </mat-card>
+                      <mat-card class="example-card">
+                          <mat-card-header>
+
+                            <!-- <mat-card-title></mat-card-title> -->
+                            <mat-card-subtitle>Achieve  20% Growth</mat-card-subtitle>
+                          </mat-card-header>
+                          <mat-card-content>
+                              <textarea matInput placeholder="To Do Task"></textarea>
+                              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                  <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                  <button mat-menu-item>
+                                    <mat-icon>accessibility</mat-icon>
+                                    <span>Assign User</span>
+                                  </button>
+                                </mat-menu>
+                          </mat-card-content>
+                        </mat-card>
+          <!-- <span>
+            Now that you've watched the video, let's answer a set of questions
+          </span> -->
+
+
+        </div>
+
+        <div fxFlex class="question" fxLayout="column">
+
+
+
+
+<!--
+              <div fxFlex fxFill fxLayoutAlign="start start" fxLayout="row">
+
+                <div class="example-container" fxLayoutAlign="start start" fxLayout="row" fxFlex fxFill >
+
+                </div>
+              </div> -->
+
+              <div fxFlex style="margin: 2%" fxLayoutAlign="end">
+
+                <!-- <button  mat-raised-button class="btn"
+                  [routerLink]="['/plan/step5']">
+                  Skip
+                </button> -->
+                <button mat-raised-button class="add" [disabled]="ELEMENT_DATA.length===0"
+                  [routerLink]="['/journey/kpijourney']">
+                  Next
+                  <i class="material-icons">
+                    arrow_forward
+                    </i>
+                </button>
+
+
+              </div>
+            </div>
+
+
+      </div>
+
+
+  </div>

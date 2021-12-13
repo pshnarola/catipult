@@ -1,0 +1,76 @@
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+
+<div class="right_col ml230" role="main">
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <!-- <div class="col-md-12 col-sm-12 col-xs-12 pl0">
+              <h2>Three Year Outcome - Professional</h2>
+            </div> -->
+            <div class="pl0">
+              <h2 style='width:auto !important;'>Three Year Outcome</h2>
+              <a *ngIf='!editFlag'><i class="fas fa-edit" style='font-size:12px;margin-left:6px; color: #73879C; margin-top:8px;cursor: pointer;' (click)='edit();'></i></a>
+              <div class="clearfix"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-sm-12 col-xs-12" style='margin-left:10px;'>
+                <div *ngIf="!editFlag">
+                  <div [innerHtml]="statement"></div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="x_content text_center_left" *ngIf="editFlag">
+              <br />
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <angular-editor [(ngModel)]="statement" [config]="config" name="desc"></angular-editor>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="search_btn">
+                    <button type="submit" [disabled]="statement.length > 0 ? false : true" class="btn btn-success" (click)="save()">Edit</button>
+                    <button type="submit" class="btn btn-primary mr0px" (click)="cancel()">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12 float_r">
+                <div class="table-responsive" *ngIf="rfpOptions">
+                  <table id="grey_datatable-responsive" class="table table-hover" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let season of rfpOptions; let i = index">
+                        <td>
+                          <label class="control-label float_l f18 mt0 lh1 cfont">{{ season.question }}</label>
+                        </td>
+                        <td>
+                          <label class="control-label float_l f18 mt0 lh1 cfont">{{ season.answer }}</label>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

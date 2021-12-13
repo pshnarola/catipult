@@ -1,0 +1,33 @@
+::ng-deep .base-card {
+    // min-width:310px;
+    // max-width:500px !important;
+    color: #73879C;
+}
+
+.meeting-item{
+    visibility: hidden;
+  }
+  
+  .meeting:hover .meeting-item {
+    -webkit-animation: fadein .75s;
+    animation: fadein .75s;
+    visibility: visible;
+  }
+  
+::ng-deep .mat-form-field-flex{
+    background-color:transparent !important;
+    border:none !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    background-color:transparent !important;
+    padding-right:0px !important;
+}
+
+// .mat-card-header-text {
+//   // margin-left: 0px !important;
+// }
+
+// ::ng-deep .mat-card-header-text {
+//   margin-left:0px !important;
+// }

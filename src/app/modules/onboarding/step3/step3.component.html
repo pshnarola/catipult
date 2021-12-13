@@ -1,0 +1,54 @@
+<div class="{{leftStyle}}">
+
+
+
+        <div fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+            <div fxFlex="30" class="flex70" style="background-color: #1f2532;height: 100vh;">
+                <div fxFlex class="headerFix" [routerLink]="['/kpijourney']">
+
+                        <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+                </div>
+                <!-- <div fxFlex fxLayout="column" fxLayoutAlign="center">
+                        <mat-card class="cardleft">
+                               <mat-card-header class="header">Michael Douglas  You've chose to </mat-card-header>
+                               <mat-card-content class="content">
+                                    Jump straight to creating your KPIs.
+                               </mat-card-content>
+                            <mat-card-footer class="footer">
+                                    Please watch this quick, 2-minute video on the Seven Business Drivers and how you'll be creating Key Performance Indicators for your company.
+                            </mat-card-footer>
+                              </mat-card>
+                </div>             -->
+            </div>
+            <div fxFlex="70" class="flex70">
+                <div fxFlex class="contentHeader">
+                    <span>
+                            let's answer a set of questions
+                    </span>
+
+
+                </div>
+
+                <div fxFlex  class="question" fxLayout="column" >
+                        <label id="example-radio-group-label" fxFlex>
+                            <span>How many employees does your company have?                      </span>      </label>
+                        <mat-card class="card" fxFlex fxLayoutAlign="start" *ngFor="let season of seasons">
+                                <mat-radio-button fxFlex class="example-radio-button"  [value]="season"> {{season}}</mat-radio-button>
+                              </mat-card>
+
+                              <div fxFlex  style="margin: 2%" fxFlex fxLayoutAlign="end">
+                                    <button mat-raised-button class="btn" [routerLink]="['/journey/driver1']">
+                                        Skip
+                                </button>
+                                <button mat-raised-button class="btn" [routerLink]="['/journey/driver1']">
+                                    Next
+                            </button>
+
+
+                            </div>
+                </div>
+
+                </div>
+
+        </div>
+        </div>

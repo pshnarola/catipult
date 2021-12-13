@@ -1,0 +1,311 @@
+<!-- top navigation -->
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+
+<button
+  type="button"
+  id="openModalMile"
+  style="display: none"
+  class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal"
+  data-target="#openModalM"
+></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="openModalM"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalMile"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Update Milestone/Rocks
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+        <form id="demo-form2" method="post">
+          <table
+            id="c_datatable-responsive"
+            class="table dt-responsive nowrap c_table"
+            cellspacing="0"
+            width="100%"
+          >
+            <tbody>
+              <tr>
+                <td>
+                  <label class="control-label float_l f18 mt0">Milestone</label>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="miletxt"
+                    [(ngModel)]="mileText"
+                  />
+                </td>
+              </tr>
+              <tr *ngIf="dueDate">
+                <td>
+                  <label class="control-label float_l f18 mt0">Quarter</label>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button
+                      type="button"
+                      class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      {{ selectQuarter }} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li
+                        *ngFor="let item of quarterList; let i = index"
+                        (click)="selectqu(item)"
+                      >
+                        {{ item.type }}
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="dueDate">
+                <td>
+                  <label class="control-label float_l f18 mt0">Due Date</label>
+                </td>
+                <td>
+                  <input
+                    name="datepick"
+                    [owlDateTime]="dt1"
+                    class="form-control"
+                    [min]="minDate"
+                    [max]="endDate"
+                    [(ngModel)]="startDate"
+                    [owlDateTimeTrigger]="dt1"
+                    placeholder="Date Time"
+                  />
+                  <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                </td>
+              </tr>
+              <tr *ngIf="!dueDate">
+                <td>
+                  <label class="control-label float_l f18 mt0">Due Date</label>
+                </td>
+                <td>
+                  NA
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+                (click)="confirmU()"
+                [disabled]="isupdate"
+              >
+                <b>Update</b>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+                (click)="confirmD()"
+              >
+                <b>Delete</b>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+              >
+                <b>Cancel</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+<!-- /invite user modal -->
+<div class="right_col ml230" role="main">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="col-md-12 col-sm-12 col-xs-12 pl0">
+              <h2>Milestones / Rocks</h2>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <div class="x_content text_center_left">
+              <br />
+
+              <div class="row table-responsive">
+                <table
+                  id="grey_datatable-responsive"
+                  class="table table-striped table-bordered dt-responsive custtable nowrap"
+                  cellspacing="0"
+                  width="100%"
+                >
+                  <thead>
+                    <tr>
+                      <!-- <th>Kpi.No.</th> -->
+                      <th>Drivers</th>
+                      <th>KPI</th>
+                      <th>Milestones / Rocks</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let element of dataSource">
+                      <td><img src="{{ element.Driver.driverImage }}" alt=""/></td>
+                      <td *ngIf='element.Driver.driverName != "You"'>{{ element.objective }} {{ element.qty }} {{ element.unit }}</td>
+                      <td *ngIf='element.Driver.driverName == "You"'><a><i role="button" class='fa fa-eye' style="color: red; font-weight:400;"> Click to display</i></a></td>
+                      <td *ngIf='element.Driver.driverName == "You"'><a><i role="button" class='fa fa-eye' style="color: red; font-weight:400;"> Click to display</i></a></td>
+                      <td *ngIf='element.Driver.driverName != "You"'>
+                        <button type="button" class="btn badge_btn" *ngFor="let hero of element.Milestones; let i = index" (click)="updateM(hero)">
+                          <span class="badge badge-light">{{ i + 1 }}</span>&nbsp;{{ hero.achieveText }}
+                        </button>
+                      </td>
+                      <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#invite_user_modal1" (click)="pick(element)">Add</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br />
+              <br />
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 webkit_right pr0">
+                  <div class="">
+                    <button (click)="next()" type="submit" class="btn btn-primary b_blue f18 bw100 mr0px"><b>Next</b></button>
+                  </div>
+                </div>
+              </div>
+              <br /><br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invite_user_modal1"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Add Milestones
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-body">
+            <!-- <form role="form"> -->
+
+            <div class="">
+              <div class="col-md-12 col-sm-12 col-xs-12 float_r p0">
+                <table
+                  id="c_datatable-responsive"
+                  class="table dt-responsive nowrap c_table"
+                  cellspacing="0"
+                  width="100%"
+                >
+                  <tbody>
+                    <tr>
+                      <td>
+                        <label class="control-label float_l f18 mt0"
+                          >Enter Your Milestones</label
+                        >
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Add Milestones"
+                          [(ngModel)]="milestone"
+                          name="objective"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!--     -->
+          </div>
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+            <div class="">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                (click)="save()"
+                class="btn btn-primary b_blue f18 bw100 mr0px"
+              >
+                <b>Save</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

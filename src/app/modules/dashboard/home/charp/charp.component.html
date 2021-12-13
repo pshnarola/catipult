@@ -1,0 +1,22 @@
+<div class="x_panel">
+  <div class="x_content">
+    <mat-list fxFlex="100" fxLayout="column">
+      <div class="kpiChart" style='font-size:1.2em;'>
+        Change - {{ cCount/(total-dCount) | percent }}
+        <mat-progress-bar mode="determinate" [value]="cCount/(total-dCount) * 100"></mat-progress-bar>
+        <br>
+        Help - {{ hCount/(total-dCount) | percent }}
+        <mat-progress-bar mode="determinate" [value]="hCount/(total-dCount) * 100"></mat-progress-bar>
+        <br>
+        Aware - {{ aCount/(total-dCount) | percent }}
+        <mat-progress-bar mode="determinate" [value]="aCount/(total-dCount) * 100"></mat-progress-bar>
+        <br>
+        Redirect - {{ rCount/(total-dCount) | percent }}
+        <mat-progress-bar mode="determinate" [value]="rCount/(total-dCount) * 100"></mat-progress-bar>
+        <br>
+        Plan - {{ pCount/(total-dCount) | percent }}
+        <mat-progress-bar mode="determinate" [value]="pCount/(total-dCount) * 100"></mat-progress-bar>
+      </div>
+    </mat-list>
+  </div>
+</div>

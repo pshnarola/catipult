@@ -1,0 +1,807 @@
+<app-loader></app-loader>
+<!-- top navigation -->
+<app-on-top-nav></app-on-top-nav>
+<!-- /top navigation -->
+<div class="col-md-3 left_col menu_fixed w500">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+    <div class="navbar nav_title" style="border: 0;">
+      <a [routerLink]="['/journey/kpijourney']" class="site_title"
+        ><img src="{{ imageUrl }}onboarding/step1/left-logo.png"/> <span></span
+      ></a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row customised_outer h80">
+      <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h1 class="white"><b>Step 3: Create and assign milestones</b></h1>
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4 class="blue">
+              <b>Please take your time to answer the questions below</b>
+            </h4>
+          </div>
+        </div> -->
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4 class="white tjustify">
+              <b class="cbold"
+                >In this step, you will drag and drop the milestones you just
+                created into the quarters in which they are to be completed.
+                Quarters are pre-determined from when you are starting your
+                Catipult journey. <br /> <br/> If you are starting your Catipult
+                journey in the second calendar quarter, your Catipult quarter
+                will be Quarter One and Catipult will automatically assign the
+                current date to the first quarter and adjust all other quarters
+                to be relative to Quarter One's start date.</b
+              >
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+<!-- page content -->
+<div class="right_col ml500" role="main">
+  <!-- Class -->
+  <div class="clearfix"></div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+      <div class="" style="background-color:white;">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Milestones</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="todo"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event, 0, 1, 0, 0, 0)"
+          style="  border-collapse:separate;
+                  border-spacing:0 15px; "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of todo" cdkDrag>
+            {{ item.objective }}
+            <img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 1 ({{ quarterList[0]?.startDate.split('T')[0] }} - {{ quarterList[0]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList1="cdkDropList"
+          [cdkDropListData]="done"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[0].qsID,
+              quarterList[0],
+              quarterList[0].startDate,
+              quarterList[0].endDate,
+              done
+            )
+          "
+        >
+          <div
+            class="example-box"
+            style='background-color:rgb(200,200,200); color: #2A3F54;'
+            *ngFor="let item of done"
+            cdkDrag
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Hooray!"
+          >
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 2 ({{ quarterList[1]?.startDate.split('T')[0] }} - {{ quarterList[1]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList2="cdkDropList"
+          [cdkDropListData]="done1"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[1].qsID,
+              quarterList[1],
+              quarterList[1].startDate,
+              quarterList[1].endDate,
+              done1
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done1" cdkDrag>
+            {{ item.objective }}
+            <img src="{{ item.driverImage }}" style="height: 40px;" class="iconImg"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 3 ({{ quarterList[2]?.startDate.split('T')[0] }} - {{ quarterList[2]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList3="cdkDropList"
+          [cdkDropListData]="done2"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[2].qsID,
+              quarterList[2],
+              quarterList[2].startDate,
+              quarterList[2].endDate,
+              done2
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done2" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 4 ({{ quarterList[3]?.startDate.split('T')[0] }} - {{ quarterList[3]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          #doneList4="cdkDropList"
+          [cdkDropListData]="done3"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[3].qsID,
+              quarterList[3],
+              quarterList[3].startDate,
+              quarterList[3].endDate,
+              done3
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done3" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 5 ({{ quarterList[4]?.startDate.split('T')[0] }} - {{ quarterList[4]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList5="cdkDropList"
+          [cdkDropListData]="done4"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[4].qsID,
+              quarterList[4],
+              quarterList[4].startDate,
+              quarterList[4].endDate,
+              done4
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done4" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 6 ({{ quarterList[5]?.startDate.split('T')[0] }} - {{ quarterList[5]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList6="cdkDropList"
+          [cdkDropListData]="done5"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[5].qsID,
+              quarterList[5],
+              quarterList[5].startDate,
+              quarterList[5].endDate,
+              done5
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done5" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 7 ({{ quarterList[6]?.startDate.split('T')[0] }} - {{ quarterList[6]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList7="cdkDropList"
+          [cdkDropListData]="done6"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[6].qsID,
+              quarterList[6],
+              quarterList[6].startDate,
+              quarterList[6].endDate,
+              done6
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done6" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 8 ({{ quarterList[7]?.startDate.split('T')[0] }} - {{ quarterList[7]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList8="cdkDropList"
+          [cdkDropListData]="done8"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[7].qsID,
+              quarterList[7],
+              quarterList[7].startDate,
+              quarterList[7].endDate,
+              done8
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done8" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 9 ({{ quarterList[8]?.startDate.split('T')[0] }} - {{ quarterList[8]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList9="cdkDropList"
+          [cdkDropListData]="done9"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[8].qsID,
+              quarterList[8],
+              quarterList[8].startDate,
+              quarterList[8].endDate,
+              done9
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done9" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 10 ({{ quarterList[9]?.startDate.split('T')[0] }} - {{ quarterList[9]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList10="cdkDropList"
+          [cdkDropListData]="done10"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[9].qsID,
+              quarterList[9],
+              quarterList[9].startDate,
+              quarterList[0].endDate,
+              done10
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done10" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 11 ({{ quarterList[10]?.startDate.split('T')[0] }} - {{ quarterList[10]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList11="cdkDropList"
+          [cdkDropListData]="done11"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[10].qsID,
+              quarterList[10],
+              quarterList[10].startDate,
+              quarterList[0].endDate,
+              done11
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done11" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell milestone_scroll">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <label class="control-label float_l c_label">Quarter 12 ({{ quarterList[11]?.startDate.split('T')[0] }} - {{ quarterList[11]?.endDate.split('T')[0] }})</label>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          #doneList12="cdkDropList"
+          [cdkDropListData]="done12"
+          [cdkDropListConnectedTo]="[
+            doneList1,
+            doneList2,
+            doneList3,
+            doneList4,
+            doneList5,
+            doneList6,
+            doneList7,
+            doneList8,
+            doneList9,
+            doneList10,
+            doneList11,
+            doneList12,
+            todoList
+          ]"
+          class="example-list"
+          (cdkDropListDropped)="
+            drop(
+              $event,
+              quarterList[11].qsID,
+              quarterList[11],
+              quarterList[11].startDate,
+              quarterList[0].endDate,
+              done12
+            )
+          "
+        >
+          <div class="example-box" style='background-color:rgb(200,200,200); color: #2A3F54;' *ngFor="let item of done12" cdkDrag>
+            {{ item.objective
+            }}<img
+              src="{{ item.driverImage }}"
+              style="height: 40px;"
+              class="iconImg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+      <button
+        type="submit"
+        [disabled]="todo.length !== 0"
+        class="btn btn-primary b_blue f18 bw100 mr0px"
+        (click)="home()"
+      >
+        <b>Next</b>
+      </button>
+    </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->
+
+<button
+  type="button"
+  id="openModalButton3"
+  style="display: none"
+  class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal"
+  data-target="#invite_user_modal4"
+></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invite_user_modal4"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel4"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Choose Due Date
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="modal-body">
+            <!-- <form role="form"> -->
+
+            <div class="">
+              <div class="col-md-12 col-sm-12 col-xs-12 float_r p0">
+                <table
+                  id="c_datatable-responsive"
+                  class="table dt-responsive nowrap c_table"
+                  cellspacing="0"
+                  width="100%"
+                >
+                  <tbody>
+                    <tr>
+                      <td>
+                        <label class="control-label float_l f18 mt0">{{
+                          activeQuarter
+                        }}</label>
+                      </td>
+                      <td>
+                        <input
+                          [owlDateTime]="dt1"
+                          class="form-control"
+                          [min]="minDate"
+                          [max]="endDate"
+                          [(ngModel)]="startDate"
+                          [owlDateTimeTrigger]="dt1"
+                          placeholder="Date Time"
+                        />
+                        <owl-date-time
+                          [pickerType]="'calendar'"
+                          #dt1
+                        ></owl-date-time>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <br />
+            <!-- </form> -->
+          </div>
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 float_r p0">
+            <div class="">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 bw100"
+                (click)="confirm(true)"
+              >
+                <b>Save</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

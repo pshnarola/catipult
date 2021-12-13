@@ -1,0 +1,48 @@
+.border-left {
+    border-left-style: solid;
+    border-left-width:2px;
+    border-left-color:rgb(240,240,240);
+}
+
+.border-right {
+    border-right-style: solid;
+    border-right-width:2px;
+    border-right-color:rgb(240,240,240);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1/3;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "attendees agenda ."
+        "notes score scoreNotes"
+}
+
+.attendee-grid {
+    grid-area: attendees;
+}
+
+.agenda-grid {
+    grid-area: agenda;
+}
+
+.scoreNotes-grid {
+    grid-area:scoreNotes;
+}
+
+.score-grid {
+    grid-area: score;
+}
+
+.notes-grid {
+    grid-area:notes;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}

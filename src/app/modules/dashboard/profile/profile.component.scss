@@ -1,0 +1,28 @@
+.coach-text{
+    padding-top: .3em;
+    padding-left: 2.5em;
+}
+
+::ng-deep .mat-select{
+    outline: 0 !important;
+    border-width: 0 0 2px !important;
+    box-shadow: none !important;
+    border-color: #d9d9d9 !important;
+  }
+  
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding-left:0px !important;
+    padding-right:0px !important;
+    background-color: transparent;
+    padding-top:0px;
+}
+
+::ng-deep .mat-form-field-label {
+    margin-top:0px !important;
+}
+
+::ng-deep .mat-form-field-flex {
+    background-color:white !important;
+    border-style: none !important;
+    padding-top:0px !important;
+}

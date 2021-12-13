@@ -1,0 +1,48 @@
+<div class="right_col ml230" role="main">
+    <div class="row">
+        <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="x_title">
+            <h2 style="color: #73879C !important;width:auto !important;">Meeting Archive<i [ngClass]='displayMeetingHistory ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='setMeetingArchiveDisplay();'></i></h2>
+            <a matTooltip="Show active meetings" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i class='fas fa-box-open' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' (click)='goToActiveMeetings();'></i></a>
+            <div class="clearfix"></div>
+            </div>
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4' *ngIf='displayMeetingHistory'>
+                <mat-card class="base-card" style='min-height:50px;color: #73879C;' *ngFor='let m of meetingHistoryData; let i = index'>
+                    <mat-card-header class=''>
+                        <mat-card-title class='meeting' style='margin:0px; font-size:15px !important;'>{{ m.meetingName }} ({{ m.meetingHistory.length }})<i [ngClass]='meetingHistoryData && meetingHistoryData?.length>0 && meetingHistoryData[i].display=="expanded" ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='expandMeeting(i);'></i>
+                        </mat-card-title>
+                        
+                    </mat-card-header>
+                    <mat-card-content class='' style='padding-bottom:10px !important;' *ngIf='meetingHistoryData && meetingHistoryData?.length>0 && meetingHistoryData[i].display=="expanded"'>
+                        <div class="container">
+                            <div>
+                                <mat-card class="all-user-card" style='min-width:70px;' *ngFor='let h of m.meetingHistory; let j = index'>
+                                    <mat-card-header>
+                                        <mat-card-title class='portfolio-group-title standard-font meeting' style='margin-left:0px !important;font-size:1.1em;cursor:pointer;' (click)='showMeetingDetail(h);'>{{ h.meetingDate | date: 'MMM d, y, h:mm a' }}
+                                            <i class='meeting-item fas fa-times-circle' style='color:red; padding-left:5px !important;' (click)='$event.stopPropagation();deleteMeetingPrompt(i,j);' *ngIf='h.userRole=="Host"'></i>
+                                            <mat-card-subtitle class='' style='padding-top:10px!important;' *ngIf='h.deleteStatus || h.deleteStatus==""' (click)='$event.stopPropagation();'>
+                                                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
+                                                    <mat-form-field appearance = 'fill' style='font-size:12px;width'>
+                                                        <input name='editDeleteStatus' matInput style='border-bottom:rgb(200,200,200);border-bottom-width:1px;border-bottom-style: solid;' [(ngModel)]='h.deleteStatus' placeholder='delete'>
+                                                    </mat-form-field>    
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                                    <button class='btn btn-primary' *ngIf='!h.deleteStatus || h.deleteStatus.toLowerCase()!="delete"' disabled>Delete</button>
+                                                    <button class='btn btn-primary' (click)='deleteMeeting(h);' *ngIf='h.deleteStatus.toLowerCase()=="delete"'>Delete</button>  
+                                                </div>
+                                            </mat-card-subtitle>
+                                        </mat-card-title>
+                                    </mat-card-header>
+                                </mat-card>
+                            </div>    
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8' style='padding-top:25px;' *ngIf='displayMeetingDetail'>
+            <hr>
+                <app-meeting-detail [meetingData]='activeMeetingData'></app-meeting-detail>
+            </div>
+        </div>
+    </div>
+</div>

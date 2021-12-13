@@ -1,0 +1,169 @@
+<app-loader></app-loader>
+<!-- top navigation -->
+<app-on-top-nav></app-on-top-nav>
+
+<div class="col-md-3 left_col menu_fixed w500">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+      <div class="navbar nav_title" style="border: 0;">
+          <a [routerLink]="['/dashboard']" class="site_title"><img src="assets/images/left-logo.png"> <span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row customised_outer h80">
+          <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h1 class="white"><b>Step 3 : </b></h1>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h4 class="white"><b>Your answers from Step 2 are what we call Milestones. Milestones are important, high-level objectives that
+                        must be met along the way to creating your outcome.</b></h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+
+<!-- page content -->
+<div class="right_col ml500" role="main">
+    <!-- Class -->
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel c_x_panel">
+                    <div class="x_content text_center_left">
+                        <br />
+                        <form id="demo-form2"   method="post">
+                          <div class="row table-responsive">
+                            <table id="grey_datatable-responsive" class="table table-striped table-bordered dt-responsive custtable nowrap" cellspacing="0" width="100%">
+                              <thead>
+                                  <tr>
+                                      <!-- <th>Kpi.No.</th> -->
+                                      <th>KPI</th>
+                                      <th>Milestones</th>
+                                      <th>Action</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let element of dataSource">
+                                  <td>{{element.objective}} {{element.qty }} {{element.unit}}</td>
+                                  <!-- <td>{{element.qty}}</!-->
+                                    <td>
+                                      <ul class="heroes">
+                                        <li *ngFor="let hero of element.Milestones, let i= index">
+                                          <span class="badge">{{i+1}}</span> {{hero.achieveText}}
+                                        </li>
+                                      </ul>
+                                    </td>
+                                  <td>
+                                      <!-- <i class="material-icons" >
+                                          edit
+                                        </i>
+                                        <i class="material-icons" (click)="delete(element)">
+                                          delete
+                                        </i> -->
+                                        <!-- <button type="button" class="btn btn-xs btn-default command-view mr5"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button> -->
+                                        <button type="button" class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal1" (click)="pick(element)">Add</button>
+                                    <!-- <button type="button" class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal1" (click)="edit(element)"><span class="glyphicon glyphicon-edit"></span></button> -->
+                                    <!-- <button type="submit" class="btn btn-xs btn-default command-print mr5" (click)="delete(element)"><span class="glyphicon glyphicon-trash"></span></button> -->
+                                  </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 webkit_right pr0">
+
+                                    <div class="">
+                                        <button type="submit" [routerLink]="['/plan/step5']" class="btn btn-primary b_white c_blue f18 bw100" ><b>Skip</b></button>
+                                        <button  (click)="next()" type="submit"  class="btn btn-primary b_blue f18 bw100"><b>Next</b></button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br><br>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Class -->
+</div>
+<!-- /page content -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <!-- <form role="form"> -->
+                  <form id="demo-form2"   method="post">
+
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <h4 class="panel-title">  Add Milestone  </h4>
+                          </div>
+                    </div>
+                      <br>
+
+
+                      <div class="">
+                          <div class="col-md-12 col-sm-12 col-xs-12 float_r p0">
+                            <table id="c_datatable-responsive" class="table dt-responsive nowrap c_table" cellspacing="0" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <td>
+                                          <label class="control-label float_l f18 mt0">Enter Your Milestone</label>
+                                      </td>
+                                      <td>
+                                          <input type="text" class="form-control" placeholder="Add Milestones"
+                                          [(ngModel)]="milestone" name="objective">
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+
+                          </div>
+                      </div>
+                  </form>
+              <!-- </form> -->
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal" (click)="save()"
+                       class="btn btn-primary b_blue f18 w100"><b>Save</b></button>
+                  </div>
+
+
+
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>

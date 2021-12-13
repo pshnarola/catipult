@@ -1,0 +1,171 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <div class='col-xs-4 col-sm-4 col-md-3 col-lg-3 col-xl-3'>
+            <h2 style="color: #73879C !important;">Team Targets & Performance</h2>
+            <mat-card class="all-user-card" style='min-width:300px;max-height:150px;padding-top:0px;padding-bottom:0px;cursor:pointer;' *ngFor='let u of userList; let i = index' (click)='refreshUserDetail(u);'>
+                <mat-card-header style='padding-top:10px;'>
+                    <img mat-card-avatar class="example-header-image" [src]='u.imageUrl ? u.imageUrl : "assets/img.jpg"'>
+                    <mat-card-title style='min-width:250px;font-size:15px;color:#73879C;'>{{ u.User }}</mat-card-title>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class='col-xs-0 col-sm-0 col-md-2 col-lg-2 col-xl-2'>
+        </div>
+        <div class='col-xs-8 col-sm-8 col-md-7 col-lg-7 col-xl-7' *ngIf='activeUser && displayData'>
+            <h2>{{ activeUser }} Outcomes</h2>
+            <table mat-table  [dataSource]="kpiData" multiTemplateDataRows class="table" matSort>
+                <ng-container matColumnDef="{{ column }}" *ngFor="let column of kpiColumns">
+                  <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                  <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="kpiColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: kpiColumns;"></tr>
+            </table>
+            <h2>{{ activeUser }} Milestones</h2>
+            <div class=''>
+              <table mat-table  [dataSource]="milestoneData" class="table">
+                <ng-container matColumnDef="ID" *ngIf='userRole=="admin"'>
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let element"  style='color: #007bff; cursor: pointer;padding-left:24px;'(click)='editMilestone(milestoneEdit,"modal-md",element);'> {{element.ID}} <i style='color:#73879C;font-size:10px;' [ngClass]="element.recurringFrequency ? 'fas fa-sync' : ''"></i></td>
+                </ng-container>
+                <ng-container matColumnDef="ID" *ngIf='userRole!="admin"'>
+                  <th mat-header-cell *matHeaderCellDef>ID</th>
+                  <td mat-cell *matCellDef="let element" style='cursor:pointer;' matTooltip="Non-admin users are currently not allowed to edit milestones through data sharing." matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"> {{element.ID}} <i style='color:#73879C;font-size:10px;' [ngClass]="element.recurringFrequency ? 'fas fa-sync' : ''"></i></td>
+                </ng-container>
+                <ng-container matColumnDef="Milestone">
+                  <th mat-header-cell *matHeaderCellDef>Milestone</th>
+                  <td mat-cell *matCellDef="let element"> {{element.Milestone}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Due Date">
+                  <th mat-header-cell *matHeaderCellDef>Due Date</th>
+                  <td mat-cell *matCellDef="let element"> {{element['Due Date']}} </td>
+                </ng-container>
+                <ng-container matColumnDef="KPI">
+                  <th mat-header-cell *matHeaderCellDef>KPI</th>
+                  <td mat-cell *matCellDef="let element"> {{element.KPI}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                  <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+                </ng-container>
+                <ng-container matColumnDef="User">
+                  <th mat-header-cell *matHeaderCellDef>User</th>
+                  <td mat-cell *matCellDef="let element"> {{element.User}} <a style='padding-left:10px !important;font-size:15px !important;cursor:pointer;'  matTooltip="{{ element.note }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i style='padding-left:2px;color:#73879C;font-size:12px;' [ngClass]="element.note ? 'far fa-sticky-note' : ''"></i></a></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="milestoneColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: milestoneColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<ng-template #milestoneEdit>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <img src="{{ driverImg }}"/>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body">
+    <br>
+    <div class="container">
+      <div class='row'>
+        <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+          <span class=''>Milestone</span>
+          <input name='edit_MilestoneAchieveText' type="text" class="form-control" style='padding-bottom:10px;' placeholder="Working out" [(ngModel)]='editMilestoneAchieveText'>    
+        </div>
+        <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+          <span class="">Due Date</span>
+          <input type='date' class="form-control" style='line-height:normal !important;padding-bottom:9px;' placeholder = 'mm-dd-yyyy' name='edit_MilestoneDueDate' [(ngModel)]='editMilestoneDueDate' (change)='updateQuarterList();'>  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Status</mat-label>
+            <mat-select class='form-control' [(ngModel)]="editMilestoneStatus" name='edit_MilestoneStatus'>
+              <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Assigned</mat-label>
+            <mat-select class='form-control' [(ngModel)]="editMilestoneAssignedUid" name='edit_milestoneAssigned' (selectionChange)='updateQuarterList()'>
+              <mat-option *ngFor="let u of userList" [value]="u.uID">{{ u.User }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6" style='padding-left:1px !important;'>
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+            Recurring
+            <div class='row' [ngClass]="editMilestoneIsRecurring?'isRecurring':'isNotRecurring'" style='border-style:solid;border-width:2px;height:30px;margin-left:10px;margin-bottom:10px;margin-top:5px;max-width:75px;cursor:pointer;' (click)='setMilestoneRecurringEdit();'>
+              <div *ngIf='editMilestoneIsRecurring' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#337ab7'></div>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#337ab7;height:100%;'></div>  
+              </div>
+              <div *ngIf='!editMilestoneIsRecurring' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#666666;height:100%;'></div>  
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#666666;text-align:right;'></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12" style='padding-right:0px !important;'>
+            <div *ngIf='editMilestoneIsRecurring'>
+              <mat-form-field appearance='fill' style='width:100%;'>
+                <mat-label>Frequency</mat-label>
+                <mat-select class='form-control' [(ngModel)]="editMilestoneRecurringFrequency" name='edit_milestoneRecurringFrequency'>
+                  <mat-option *ngFor="let f of frequency" [value]="f.value">{{ f.viewValue }}</mat-option>
+                </mat-select>  
+              </mat-form-field>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            Comments
+          <textarea name="milestoneEditNote" id="id_MilestoneEditNote" [(ngModel)]='editMilestoneNote'cols="30" rows="2" class='' style='width:100%;margin-top:5px;border-color:#d9d9d9 !important;'></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="">
+            <button type="submit" data-dismiss="modal" class="btn btn-primary" *ngIf='!editMilestoneAssigned || !editMilestoneDueDate || !editMilestoneAchieveText' disabled><b>Update</b></button>
+            <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)='updateMilestone()' *ngIf='editMilestoneAssigned && editMilestoneDueDate && editMilestoneAchieveText'><b>Update</b></button>
+            <!-- <button type="submit" data-dismiss="modal" class="btn btn-danger" style='margin-left:0px !important;' (click)='modalRef.hide();showModal(milestoneDelete,"modal-sm");'><b>Delete</b></button> -->
+          </div>
+      </div>
+    </div>  
+  </div> 
+</ng-template> 
+
+<ng-template #milestoneDelete>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='modalRef.hide();showModal(milestoneEdit,"modal-sm");clearDeleteModal();'>
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Delete Milestone</h2></div>
+    </h4>
+  </div>  
+  <div class='modal-footer'>
+    <div class='input-box padding-bottom'>
+      <span class=''>Please confirm you want to delete the milestone by typing <span class='text-danger'>delete</span> below.</span>
+      <input id='delete_milestone' name='delete_Text' type="text" class="form-control" [(ngModel)]='deleteText'>
+    </div>
+    <button class='btn btn-danger' (click)='deleteMilestone();modalRef.hide();' *ngIf='deleteText==="delete"'>Delete Milestone</button>
+    <button class='btn btn-danger' *ngIf='deleteText!="delete"' disabled>Delete Milestone</button>
+    <button class='btn btn-primary' style='margin-left:auto !important;' (click)='modalRef.hide();showModal(milestoneEdit,"modal-sm");clearDeleteModal();'>Cancel</button>
+  </div>
+</ng-template>

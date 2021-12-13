@@ -1,0 +1,245 @@
+<app-loader></app-loader>
+<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+  <div class="left_col scroll-view">
+      <div class="navbar nav_title" style="border: 0;">
+          <a href="index.html" class="site_title p10"><img src="assets/images/left-logo.png" class="img-responsive"><span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <!-- menu profile quick info -->
+      <div class="profile">
+          <div class="profile_pic">
+              <img src="assets/img.jpg" alt="..." class="img-circle profile_img" />
+          </div>
+          <div class="profile_info">
+              <span>Welcome</span>
+              <h2>{{name}}</h2>
+          </div>
+      </div>
+      <!-- /menu profile quick info -->
+      <br />
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+              <br><br><br>
+              <ul class="nav side-menu">
+                  <li>
+                      <a id="dashboard" (click)="dash()">
+                          <i class="fa fa-home"></i>
+                          Dashboard
+                          <span id="dashboardchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                      <!-- <ul class="nav child_menu">
+                          <li><a href="index2.html">Dashboard2</a></li>
+                          <li><a href="index3.html">Dashboard3</a></li>
+                      </ul> -->
+                  </li>
+                  <li>
+                      <a id="you" (click)="anchorClicked($event)">
+                          <i class="fa fa-edit"></i>
+                          You
+                          <span id="youchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="leadership" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Leadership
+                          <span id="leadershipchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="employee" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Employee
+                          <span id="employeechevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="customer" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Customer
+                          <span id="customerchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="financial_partner" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Financial Partner
+                          <span id="financialpartnerchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="cash" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Cash
+                          <span id="cashchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="growth" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Growth
+                          <span id="growthchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="quarterly_updates" (click)="qupdates()">
+                          <i class="fa fa-desktop"></i>
+                              Quarterly Updates
+                          <span id="quarterlyupdateschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="charp_updates" (click)="cupdates()">
+                          <i class="fa fa-desktop"></i>
+                              Charp Updates
+                          <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                    <a id="charp_updates" (click)="rvQuestion()">
+                        <i class="fa fa-desktop"></i>
+                            Review Questions
+                        <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+                    </a>
+                </li>
+
+              </ul>
+          </div>
+      </div>
+      <!-- /sidebar menu -->
+  </div>
+</div>
+<!-- top navigation -->
+<div class="top_nav ml230">
+  <div class="nav_menu">
+      <nav>
+          <div class="nav toggle">
+              <a id="menu_toggle" (click)="toggleClicked($event)"><i class="fa fa-bars"></i></a>
+          </div>
+          <div class="nav navbar-nav navbar-right">
+
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+
+            <li class="">
+
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="assets/img.jpg" alt="" />{{name | titlecase}}
+                    <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li>
+                        <a
+                        (click)="routeHome()" routerLinkActive="router-link-active" ><i class="fa fa-home pull-right"></i> Home</a>
+                    </li>
+                  <li>
+                    <a  routerLinkActive="router-link-active" (click)="resetKpi()" ><i class="fa fa-home pull-right"></i>Reset All Data</a>
+                </li>
+                    <li>
+                        <a  (click)="login()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+              <a id="menu_toggle1" (click)="notify()"><i class="fa fa-refresh"></i></a>
+
+            </li>
+        </ul>
+      </nav>
+  </div>
+</div>
+<!-- /top navigation -->
+<button type="button" id="openModalButton2" style="display: none"  class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal3"></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                  <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+                    Rest KPI Journey
+                  </div>
+              </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <!-- <form role="form"> -->
+                  <form id="demo-form2"   method="post">
+
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          Are you sure you want to erase all previous Answers, Objectives and Milestones?            </div>
+                    </div>
+                      <br>
+
+
+
+                      <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+                  </form>
+              <!-- </form> -->
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                       class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+
+                  </div>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                      class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+                    </div>
+
+
+
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+<div class="right_col ml230" role="main">
+  <!-- speedometer -->
+  <div class="row tile_count">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h4>Notifications</h4>
+        <ul class="timeline">
+          <li *ngFor="let item of notifications">
+            <a target="_blank" href="https://www.totoprayogo.com/#">{{item.achieveText}}</a>
+            <a href="#" class="float-right">{{item.createdAt| date: 'medium'}}</a>
+            <p>{{item.dueDate}} for your milestone</p>
+            <!-- <p>{{item.assignerName}}</p> alloted by
+            <p>{{item.assigneeName}}</p> -->
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- /speedometer -->
+
+
+</div>

@@ -1,0 +1,3534 @@
+<!-- <app-loader></app-loader> -->
+
+
+<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+  <div class="left_col scroll-view">
+    <div class="navbar nav_title" style="border: 0;">
+      <a class="site_title p10"><img src="assets/images/left-logo.png"
+          class="img-responsive"><span></span></a>
+    </div>
+    <div class="clearfix"></div>
+    <!-- menu profile quick info -->
+    <div class="profile">
+      <div class="profile_pic">
+        <img src="{{url}}" alt="" class="img-circle profile_img" />
+      </div>
+      <div class="profile_info">
+        <span>Welcome</span>
+        <h2>{{name}}</h2>
+      </div>
+    </div>
+    <!-- /menu profile quick info -->
+    <br />
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <br><br><br>
+        <ul class="nav side-menu">
+          <li>
+            <a id="dashboard" (click)="dash()">
+              <i class="fa fa-home"></i>
+              Dashboard
+              <span id="dashboardchevron" class="fa fa-chevron-down"></span>
+
+            </a>
+
+            <!-- <ul class="nav child_menu">
+                          <li><a href="index2.html">Dashboard2</a></li>
+                          <li><a href="index3.html">Dashboard3</a></li>
+                      </ul> -->
+          </li>
+
+          <li>
+            <a id="quarterly_updates" (click)="qupdates()">
+              <i class="fa fa-desktop"></i>
+              Quarterly Updates
+              <span id="quarterlyupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="cupdates()">
+              <i class="fa fa-desktop"></i>
+              CHARP Updates
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="kpiAll()">
+              <i class="fa fa-desktop"></i>
+              KPI
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="mileAll()">
+              <i class="fa fa-desktop"></i>
+              Milestones
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="manager()">
+              <i class="fa fa-desktop"></i>
+              Manager
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+          <li>
+            <a id="charp_updates" (click)="rvQuestion()">
+              <i class="fa fa-desktop"></i>
+              Review Questions
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="quarterly_updates" (click)="outStatement()">
+              <i class="fa fa-desktop"></i>
+              Outcome Statement
+              <span id="quarterlyupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="quarterly_updates" (click)="rDept()" *ngIf="userRole === 'admin'">
+              <i class="fa fa-desktop"></i>
+              Department
+              <span id="quarterlyupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="rUser()" *ngIf="userRole === 'admin'">
+              <i class="fa fa-desktop"></i>
+              Roles
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="rUsers()" *ngIf="userRole === 'admin'">
+              <i class="fa fa-desktop"></i>
+              Users
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <!-- /sidebar menu -->
+  </div>
+</div>
+<!-- top navigation -->
+<div class="top_nav ml230">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle" (click)="toggleClicked($event)"><i class="fa fa-bars"></i></a>
+      </div>
+      <div class="nav navbar-nav navbar-right">
+
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="">
+
+          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img src="{{url}}" alt="" />{{name | titlecase}}
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li>
+              <a (click)="routeHome()" routerLinkActive="router-link-active"><i class="fa fa-home pull-right"></i>
+                Home</a>
+            </li>
+            <li>
+              <a (click)="updateProfile()" routerLinkActive="router-link-active"><i class="fa fa-home pull-right"></i>
+                Profile</a>
+            </li>
+            <li>
+              <a routerLinkActive="router-link-active" (click)="resetKpi()"><i class="fa fa-home pull-right"></i>Reset All Data</a>
+            </li>
+            <li>
+              <a (click)="login()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li class="">
+              <a id="menu_toggle1" (click)="notify()"><i class="fa fa-info-circle"></i></a>
+
+            </li> -->
+        <!-- notification -->
+        <li role="presentation" (click)="notify()">
+
+          <a href="javascript:;"  class="notifications" data-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fa fa-bell"></i>
+            <span class="num" *ngIf="notifications.length>0">{{notifications.length}}</span>
+
+          </a>
+        </li>
+        <!-- /notification -->
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- /top navigation -->
+<button type="button" id="openModalButton2" style="display: none" class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal" data-target="#invite_user_modal3"></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Rest KPI Journey
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            Are you sure you want to erase all previous Answers, Objectives and Milestones? </div>
+        </div>
+        <br>
+
+
+
+        <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100"
+                (click)="confirm()"><b>Ok</b></button>
+
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+<!-- <label >h</label> -->
+<div class="right_col ml230" role="main" (click)="toggleClass()">
+  <div class="row">
+    <div class="x_panel">
+      <div class="x_content">
+        <h2 style="color: #73879C !important;">{{uID? 'Dashboard (Manager)':'Dashboard'}}
+        </h2>
+      </div>
+    </div>
+
+  </div>
+  <!-- speedometer -->
+  <!-- <div class="row tile_count">
+    <div>Slider</div>
+    <owl-carousel-o [options]="customOptions" (translated)="getPassedData($event)" #owlCar>
+
+      <ng-container *ngFor="let slide of activeSlides">
+        <ng-template carouselSlide [id]="slide.driverID">
+          <img [src]="slide.driverImage" [alt]="slide.driverName" [title]="slide.driverName">
+        </ng-template>
+      </ng-container>
+
+    </owl-carousel-o>
+    <p>
+      <a class="btn btn-success" (click)="owlCar.prev()">prev</a>
+      <a class="btn btn-success" (click)="owlCar.next()">next</a>
+    </p>
+  </div> -->
+  <div class="row tile_count">
+    <div fxFlex=100 fxLayout="column" class="example-container">
+      <div fxFlex fxLayout="row" fxLayoutAlign="start start">
+
+
+        <mat-tab-group dynamicHeight fxFlex="100" mat-stretch-tabs>
+          <mat-tab >
+            <ng-template mat-tab-label style="border-left: unset !important;">
+              <div fxFlex (click)="changeD(drivers[0].driverID,0)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> You</span>
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': you.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+
+
+                <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                  <div >
+                    <span class="count_top cf"><i class="fa fa-table"></i>
+                      {{you.actual}}/{{you.outOff}}</span>
+                  </div>
+                  <div >
+                    <span class="count_top cf"><i class="fa fa-percent"></i>
+                      {{((you.actual/you.outOff))| percent}}</span>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </ng-template>
+
+
+                <!--/Class -->
+
+                  <!-- test -->
+
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <!-- listing_section-->
+                      <div class="x_panel">
+                        <div class="x_content">
+                          <div class="x_title">
+                            <h2 style="color: #73879C !important;">KPI Targets</h2>
+                            <ul class="nav navbar-right panel_toolbox ctoolbox">
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                              </li>
+                              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="table-responsive">
+                            <table id="datatable-buttons"
+                              class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                              width="100%">
+                              <thead>
+                                <tr class="myHead">
+                                  <th data-column-id="id" data-type="numeric" data-identifier="true"
+                                    data-header-css-class="cbg-header-name">Sr.No</th>
+                                  <th data-column-id="patient_name">KPI</th>
+                                  <th data-column-id="patient_name">Unit</th>
+                                  <th data-column-id="patient_name">Actual</th>
+
+                                  <th data-column-id="patient_name">Target</th>
+                                  <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <tr *ngFor="let item of kpiMileData; let i=index">
+                                  <td>{{i+1}}</td>
+                                  <td>{{item.objective}}</td>
+                                  <td>{{item.unit}}</td>
+                                  <td>{{item.achieveQty}}</td>
+                                  <td>{{item.qty}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/listing_section-->
+                    </div>
+                    <!-- pie chart -->
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                          <ul class="nav navbar-right panel_toolbox ctoolbox">
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <mat-list fxFlex=100 fxLayout="column">
+                            <div class="kpiChart">
+                              <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                                [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                                [legend]="pieChartLegend">
+                              </canvas>
+                            </div>
+
+                            <mat-divider></mat-divider>
+                            <!-- <div fxFlex fxLayout="row" class="desc">
+                                    <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                        </div>
+                                <div fxFlex fxLayoutAlign="start start" class="top">
+                                    8000
+                                </div>
+                                <div  fxFlex fxLayoutAlign="center start"class="status">
+                                        Success
+                                    </div>
+                                    <div fxFlex fxLayoutAlign="end start" class="status">
+                                            19 Min Ago
+                                        </div>
+
+                            </div>
+                            <div fxFlex fxLayout="row" class="desc">
+                                    <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                        </div>
+                                <div fxFlex fxLayoutAlign="start start" class="top">
+                                    9000
+                                </div>
+                                <div  fxFlex fxLayoutAlign="center start"class="status">
+                                        Ongoing
+                                    </div>
+                                    <div fxFlex fxLayoutAlign="end start" class="status">
+                                            25 Min Ago
+                                        </div>
+
+                            </div>
+                            <div fxFlex fxLayout="row" class="desc">
+                                    <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                        </div>
+                                <div fxFlex fxLayoutAlign="start start" class="top">
+                                    2000
+                                </div>
+                                <div  fxFlex fxLayoutAlign="center start"class="status">
+                                        Completed`
+                                    </div>
+                                    <div fxFlex fxLayoutAlign="end start" class="status">
+                                            5 Min Ago
+                                        </div>
+
+                            </div> -->
+
+                          </mat-list>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /pie chart -->
+                  </div>
+                  <div class="row" *ngIf="milestoneusers?.length>0">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2 style="color: #73879C !important;">Users Assign</h2>
+                          <ul class="nav navbar-right panel_toolbox ctoolbox">
+                              <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                      aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                              </li>
+                              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                          </ul>
+                          <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
+                      <div class="nav-wrapper">
+                        <ul class="nav nav-tabs navtab">
+                          <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+          <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                          <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                            *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                            <a data-toggle="tab" href="#tab{{i}}">
+                              <div class="text_center row">
+                                <div class="center_flex">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <span class="count_top cf">
+                                        {{item.User.name + ' '+ item.User.lname}}</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <span class="count_top cf"><i
+                                                class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <span class="count_top cf"><i
+                                                class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+
+                          </li>
+
+
+
+                        </ul>
+                      </div>
+    <div class="tab-content">
+
+      <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                      class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                          <div class="table-responsive">
+                            <table id="grey_datatable-responsive"
+                              class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                              width="100%">
+                              <thead>
+                                <tr>
+                                  <!-- <th>Kpi.No.</th> -->
+                                  <th>KPI</th>
+                                  <th>Actual</th>
+                                  <th>Target</th>
+                                  <th>% of Target</th>
+
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let element of userKpiData">
+                                  <td>{{element.objective}}</td>
+                                  <td>{{element.achieveQty}}</td>
+                                  <td>{{element.qty}}</td>
+                                  <td>
+                                    {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                                  </td>
+
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- <div id="tab1" class="tab-pane fade in active">
+          <h3>Switch to the other tab to see the carousel</h3>
+          <p>Some content.</p>
+      </div>
+      <div id="tab2" class="tab-pane fade">
+          <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+      </div> -->
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <!-- listing_section-->
+                      <div class="x_panel">
+                        <div class="x_content">
+                          <div class="x_title">
+                            <h2>MileStones</h2>
+                            <ul class="nav navbar-right panel_toolbox ctoolbox">
+                              <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                  aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                              </li>
+                              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="table-responsive">
+                            <table id="datatable-buttons"
+                              class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                              width="100%">
+                              <thead>
+                                <tr class="myHead">
+                                  <th data-column-id="id" data-type="numeric" data-identifier="true"
+                                    data-header-css-class="cbg-header-name">Sr.No</th>
+                                  <th data-column-id="patient_name">Milestones</th>
+                                  <th data-column-id="patient_name">DueDate</th>
+                                  <th data-column-id="patient_name">Status</th>
+                                  <th data-column-id="patient_name">Assign User</th>
+                                  <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of milestoneusers; let i=index">
+                                  <td>{{i+1}}</td>
+                                  <td>{{item.achieveText}}</td>
+                                  <td>{{item.dueDate}}</td>
+                                  <td>{{item.charpStatus}}</td>
+                                  <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                                  <!-- <td>
+                                  <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                                  <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                                  <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                                  </td> -->
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/listing_section-->
+                    </div>
+                  </div>
+
+
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[1].driverID,1)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Leadership</span>
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': leader.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>
+                        {{leader.actual}}/{{leader.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((leader.actual/leader.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (onload) ="getKpi(item,i)"  (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+<div class="tab-content">
+
+  <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                      class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[2].driverID,2)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Employees</span>
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': customer.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>
+                        {{employee.actual}}/{{employee.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((employee.actual/employee.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+<div class="tab-content">
+
+  <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                      class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[3].driverID,3)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Customers</span>
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': customer.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>{{customer.actual}}/{{customer.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((customer.actual/customer.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+<div class="tab-content">
+
+  <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+  class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[4].driverID,4)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Financial Partners</span>
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': partner.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+                  <!-- <img  src="../../../../assets/images/dashboard/row1/speed4.png"> -->
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>
+                        {{partner.actual}}/{{partner.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((partner.actual/partner.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+<div class="tab-content">
+
+  <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+  class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[5].driverID,5)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Cash</span>
+
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': cash.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>
+                        {{cash.actual}}/{{cash.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((cash.actual/cash.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+                  <div class="tab-content">
+
+                    <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                    class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div (click)="changeD(drivers[6].driverID,6)">
+                <div fxFlex fxFill fxLayout="column">
+                  <span class="headertext"> Growth</span>
+
+                  <div id="logo">
+                    <img src="../../../../assets/images/dashboard/row1/growth-meter.png" class="speedometer">
+
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="needle"
+                      [ngStyle]="{'transform': growth.degree}">
+                    <img src="../../../../assets/images/dashboard/row1/growthDot.png" class="center">
+
+                  </div>
+
+                  <div fxFlex=100 fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                      <span class="count_top cf"><i class="fa fa-table"></i>{{growth.actual}}/{{growth.outOff}}</span>
+                    </div>
+                    <div style="    padding-left: 7px;
+                                ">
+                      <i class="fa fa-percent"></i>
+                      <span>{{((growth.actual/growth.outOff))| percent}}</span>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </ng-template>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2 style="color: #73879C !important;">KPI Targets</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">KPI</th>
+                            <th data-column-id="patient_name">Unit</th>
+                            <th data-column-id="patient_name">Actual</th>
+
+                            <th data-column-id="patient_name">Target</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr *ngFor="let item of kpiMileData; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.objective}}</td>
+                            <td>{{item.unit}}</td>
+                            <td>{{item.achieveQty}}</td>
+                            <td>{{item.qty}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+              <!-- pie chart -->
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Assignee Performance</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                          aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <mat-list fxFlex=100 fxLayout="column">
+                      <div class="kpiChart">
+                        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                          [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+
+                      <mat-divider></mat-divider>
+                      <!-- <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="colo">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              8000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Success
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      19 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloS">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              9000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Ongoing
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      25 Min Ago
+                                  </div>
+
+                      </div>
+                      <div fxFlex fxLayout="row" class="desc">
+                              <div fxFlex=5 fxLayoutAlign="start start" class="coloP">
+
+                                  </div>
+                          <div fxFlex fxLayoutAlign="start start" class="top">
+                              2000
+                          </div>
+                          <div  fxFlex fxLayoutAlign="center start"class="status">
+                                  Completed`
+                              </div>
+                              <div fxFlex fxLayoutAlign="end start" class="status">
+                                      5 Min Ago
+                                  </div>
+
+                      </div> -->
+
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+              <!-- /pie chart -->
+            </div>
+            <div class="row" *ngIf="milestoneusers?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Assign</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="nav-wrapper">
+                    <ul class="nav nav-tabs navtab">
+                      <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+      <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                      <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                        *ngFor="let item of milestoneusers1, let i=index" (click)="getKpi(item,i)">
+                        <a data-toggle="tab" href="#tab{{i}}">
+                          <div class="text_center row">
+                            <div class="center_flex">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <img class="img-circle img-responsive photo" src="{{item.User.info? 'https://api.catipult.ai/'+item.User.info.photo : 'assets/images/img.jpg'}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="count_top cf">
+                                    {{item.User.name + ' '+ item.User.lname}}</span>
+                            </div>
+                            <div class="row" *ngIf="userCurrentIndex === i">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-table"></i> {{userKpiData ? userKpiData.length: 0}}</span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <span class="count_top cf"><i
+                                            class="fa fa-percent"></i> {{avg(userKpiData)| number:'1.2-2'}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+<div class="tab-content">
+
+  <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                      class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                      <div class="table-responsive">
+                        <table id="grey_datatable-responsive"
+                          class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                          width="100%">
+                          <thead>
+                            <tr>
+                              <!-- <th>Kpi.No.</th> -->
+                              <th>KPI</th>
+                              <th>Actual</th>
+                              <th>Target</th>
+                              <th>% of Target</th>
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let element of userKpiData">
+                              <td>{{element.objective}}</td>
+                              <td>{{element.achieveQty}}</td>
+                              <td>{{element.qty}}</td>
+                              <td>
+                                {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                              </td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <!-- <div id="tab1" class="tab-pane fade in active">
+      <h3>Switch to the other tab to see the carousel</h3>
+      <p>Some content.</p>
+  </div>
+  <div id="tab2" class="tab-pane fade">
+      <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+  </div> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl2?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level2</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState1 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl2, let i=index" (click)="getKpi1(item,i)">
+                      <a data-toggle="tab" href="#tabl{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal2 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal2)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl{{userCurrentIndex1}}" *ngIf="userCurrentIndex1===currState1"
+                class="tab-pane fade {{userCurrentIndex1===currState1 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal2">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="milestoneusersl3?.length>0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2 style="color: #73879C !important;">Users Level3</h2>
+                    <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs navtab">
+                    <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+    <li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                    <li [ngClass]="i ===currState2 ? 'current active' : 'current'"
+                      *ngFor="let item of milestoneusersl3, let i=index" (click)="getKpi2(item,i)">
+                      <a data-toggle="tab" href="#tabl3{{i}}">
+                        <div class="text_center row">
+                          <div class="center_flex">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                              </div>
+                          </div>
+                          <div class="row">
+                              <span class="count_top cf">
+                                  {{item.name + ' '+ item.lname}}</span>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-table"></i> {{userKpiDatal3 ? userKpiDatal2.length: 0}}</span>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-6">
+                                  <span class="count_top cf"><i
+                                          class="fa fa-percent"></i> {{avg(userKpiDatal3)| number:'1.2-2'}}</span>
+                              </div>
+                          </div>
+                      </div>
+                      </a>
+
+                    </li>
+
+
+
+                  </ul>
+                </div>
+<div class="tab-content">
+
+<div id="tabl3{{userCurrentIndex2}}" *ngIf="userCurrentIndex2===currState2"
+                class="tab-pane fade {{userCurrentIndex2===currState2 ? 'in active': ''}}">
+                    <div class="table-responsive">
+                      <table id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr>
+                            <!-- <th>Kpi.No.</th> -->
+                            <th>KPI</th>
+                            <th>Actual</th>
+                            <th>Target</th>
+                            <th>% of Target</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let element of userKpiDatal3">
+                            <td>{{element.objective}}</td>
+                            <td>{{element.achieveQty}}</td>
+                            <td>{{element.qty}}</td>
+                            <td>
+                              {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- listing_section-->
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="x_title">
+                      <h2>MileStones</h2>
+                      <ul class="nav navbar-right panel_toolbox ctoolbox">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="table-responsive">
+                      <table id="datatable-buttons"
+                        class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                        width="100%">
+                        <thead>
+                          <tr class="myHead">
+                            <th data-column-id="id" data-type="numeric" data-identifier="true"
+                              data-header-css-class="cbg-header-name">Sr.No</th>
+                            <th data-column-id="patient_name">Milestones</th>
+                            <th data-column-id="patient_name">DueDate</th>
+                            <th data-column-id="patient_name">Status</th>
+                            <th data-column-id="patient_name">Assign User</th>
+                            <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of milestoneusers; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.achieveText}}</td>
+                            <td>{{item.dueDate}}</td>
+                            <td>{{item.charpStatus}}</td>
+                            <td>{{item.User? item.User.name+' '+item.User.lname: ''| titlecase }}</td>
+                            <!-- <td>
+                            <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button>
+                            <button type="button" class="btn btn-xs btn-default command-edit" onclick=""><span class="glyphicon glyphicon-edit"></span></button>
+                            <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> -->
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!--/listing_section-->
+              </div>
+            </div>
+          </mat-tab>
+
+
+
+
+
+
+
+
+
+
+        </mat-tab-group>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- /speedometer -->
+
+
+</div>

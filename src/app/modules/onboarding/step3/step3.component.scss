@@ -1,0 +1,211 @@
+.step3 {
+    background-image: url("/assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    .headerFix{
+      height: 160px;
+  background-color: #1f2532;
+  padding: 37px 0px 0px 11px;
+  overflow: hidden;
+
+    }
+    .cardleft {
+      max-width: 100%;
+      margin-top: 18%;
+      height: 100vh;
+      transition: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      .header{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        margin-left: -29px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #f0f0f0;
+      }
+      .content{
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: left;
+        color: #00b2ff;
+      }
+      .footer{
+        display: contents;
+        font-family: Roboto;
+        margin-left: 0px;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.67;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+      }
+    }
+    .contentHeader{
+        margin: 10% 10% 1% 10%;
+
+
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #1f2532;
+    }
+    .question{
+        margin: 2%;
+        .example-radio-group {
+            margin: 15px 0;
+          }
+          .card {
+            margin-right: 10px !important;
+            transition: none !important;
+            box-shadow: none !important;
+            .example-form {
+              min-width: 150px;
+              max-width: 500px;
+              width: 100%;
+            }
+
+            .example-full-width {
+              width: 100%;
+            }
+
+          }
+          .btn{
+            width: 140px;
+            height: 50px;
+            margin-right: 1%;
+            font-family: Roboto;
+            font-size: 18px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.67;
+            letter-spacing: normal;
+            text-align: center;
+            vertical-align: middle;
+            color: #f0f0f0;
+            border-radius: 4px;
+            background-color: #2aa9e0;
+          }
+    }
+
+
+  }
+  .step3response {
+    background-image: url("/assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: -webkit-fill-available;
+    .headerFix{
+      height: 60px;
+  background-color: #1f2532;
+  padding: 37px 0px 0px 11px;
+  overflow: hidden;
+  .imgclass{
+    width: 160px;
+    height: 28px;
+    margin-top: -15px;
+  }
+    }
+    .cardleft {
+      max-width: 100%;
+      transition: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      .header{
+
+        font-family: Roboto;
+        font-size: 16px;
+        margin-left: -29px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #f0f0f0;
+      }
+      .content{
+        margin-left: 0px;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #00b2ff;
+      }
+      .footer{
+        display: none;
+      }
+    }
+    .contentHeader{
+        margin: 3% 5% 10% 6%;
+
+
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #1f2532;
+    }
+    .question{
+        margin: 2%;
+        .example-radio-group {
+            margin: 15px 0;
+          }
+          .card {
+            margin-right: 10px !important;
+            transition: none !important;
+            box-shadow: none !important;
+            .example-radio-button {
+                margin: 5px;
+              }
+
+          }
+          .btn{
+            width: 140px;
+            height: 50px;
+            margin-right: 6%;
+            font-family: Roboto;
+            font-size: 18px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.67;
+            letter-spacing: normal;
+            text-align: center;
+            vertical-align: middle;
+            color: #f0f0f0;
+            border-radius: 4px;
+            background-color: #2aa9e0;
+          }
+    }
+
+  }

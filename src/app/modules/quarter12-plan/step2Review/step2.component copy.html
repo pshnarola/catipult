@@ -1,0 +1,94 @@
+<div class="{{leftStyle}}">
+
+
+
+        <div fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+            <div fxFlex="35" class="flex70" style="background-color: #1f2532;height: -webkit-fill-available;">
+                <div fxFlex class="headerFix" [routerLink]="['/kpijourney']">
+
+                        <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="center">
+                        <mat-card class="cardleft">
+
+                               <mat-card-content fxFlex fxLayout="column">
+                                   <span class="header">
+                                        Step1:
+                                   </span>
+                                   <span class="content"> Creating Your Outcome Statement.
+                                        Please answer the questions below</span>
+                               </mat-card-content>
+                            <mat-card-footer class="footer">
+                                    <vg-player>
+                                            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                                                <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+                                            </video>
+                                        </vg-player>
+                            </mat-card-footer>
+                              </mat-card>
+                </div>
+            </div>
+            <div fxFlex="65" class="flex70">
+                        <div fxFlex class="contentHeader">
+                          <span>
+                            Now that you've watched the video, let's answer a set of questions
+                          </span>
+
+                        </div>
+
+                        <div fxFlex  class="question" fxLayout="column" >
+                          <div fxFlex fxFill fxLayout="row" fxLayoutAlign="end end">
+                            Questions => {{currentIndex+1}}/{{qBankData.length}}
+                          </div>
+                            <label id="example-radio-group-label" fxFlex>
+                                <span class="spantxt">{{qBankData[currentIndex]?.question}}                      </span>      </label>
+                                <div style="height: 350px; overflow-y:auto;margin-top: 10px;">
+                                  <ng-container *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Single Choice'">
+                                    <mat-card class="card" fxFlex fxLayoutAlign="start"  *ngFor="let season of qBankData[currentIndex]?.Options;let i = index">
+                                        <mat-radio-button [checked]='season.correctAns === true ? true: false' fxFlex class="example-radio-button" (click)="submitAns(season,i)"  [value]="season.optionID"> {{season.option}}</mat-radio-button>
+                                      </mat-card>
+                                    </ng-container>
+                                      <mat-card class="card" fxFlex fxLayoutAlign="start" *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'">
+                                          <textarea matInput [(ngModel)]="qBankData[currentIndex].desc" placeholder="Enter Description" class="inputdesc"></textarea>
+                                        </mat-card>
+                                        <ng-container  *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Multiple Choice'" >
+
+                                        <mat-card class="card" fxFlex fxLayoutAlign="start" *ngFor="let season of qBankData[currentIndex]?.Options;let i = index">
+                                            <mat-checkbox fxFlex class="example-radio-button" (change)="submitAnsM($event,season,i)" [checked]="season.correctAns"> {{season.option}}</mat-checkbox>
+                                          </mat-card>
+                                        </ng-container>
+
+                                        <ng-container >
+
+                                            <mat-card class="card" fxFlex fxLayoutAlign="start" *ngFor="let season of rfpOptions;let i = index">
+                                                <mat-checkbox fxFlex class="example-radio-button" (change)="submitAnsRfpq($event,season,i)"> {{season.answer}}</mat-checkbox>
+                                              </mat-card>
+                                            </ng-container>
+                                </div>
+
+
+                                  <div fxFlex  style="margin: 2%" fxFlex fxLayoutAlign="end">
+                                    <button mat-raised-button class="btn" *ngIf="currentIndex >=1 " (click)="back()">
+                                      Back
+                              </button>
+                                        <button mat-raised-button class="btn" (click)="skip()">
+                                            Skip
+                                    </button>
+                                    <!-- <button mat-raised-button class="btn" (click)="next()">
+                                      Submit
+                              </button> -->
+                                    <button mat-raised-button class="btn"*ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'" (click)="nextD()">
+                                        Next
+                                </button>
+                                <button mat-raised-button class="btn" (click)="next()" *ngIf="qBankData[currentIndex]?.QuestionType?.typeName !== 'Descriptive'">
+                                    Next
+                            </button>
+
+
+                                </div>
+                    </div>
+
+                      </div>
+
+        </div>
+        </div>

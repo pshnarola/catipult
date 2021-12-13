@@ -1,0 +1,380 @@
+<!-- top navigation -->
+<app-loader></app-loader>
+
+<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+  <div class="left_col scroll-view">
+    <div class="navbar nav_title" style="border: 0;">
+      <a [routerLink]="['/dashboard']" class="site_title p10"
+        ><img
+          src="assets/images/left-logo.png"
+          class="img-responsive"/><span></span
+      ></a>
+    </div>
+    <div class="clearfix"></div>
+    <!-- menu profile quick info -->
+    <div class="profile">
+      <div class="profile_pic">
+        <img src="{{ url }}" alt="" class="img-circle profile_img" />
+      </div>
+      <div class="profile_info">
+        <span>Welcome</span>
+        <h2>{{ name }}</h2>
+      </div>
+    </div>
+    <!-- /menu profile quick info -->
+    <br />
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <br /><br /><br />
+        <ul class="nav side-menu">
+          <li>
+            <a id="dashboard" (click)="dash()">
+              <i class="fa fa-home"></i>
+              Dashboard
+              <span id="dashboardchevron" class="fa fa-chevron-down"></span>
+            </a>
+            <!-- <ul class="nav child_menu">
+                        <li><a href="index2.html">Dashboard2</a></li>
+                        <li><a href="index3.html">Dashboard3</a></li>
+                    </ul> -->
+          </li>
+
+          <li>
+            <a id="quarterly_updates" (click)="qupdates()">
+              <i class="fa fa-desktop"></i>
+              Quarterly Updates
+              <span
+                id="quarterlyupdateschevron"
+                class="fa fa-chevron-down"
+              ></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="cupdates()">
+              <i class="fa fa-desktop"></i>
+              Charp Updates
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="kpiAll()">
+              <i class="fa fa-desktop"></i>
+              KPI
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="mileAll()">
+              <i class="fa fa-desktop"></i>
+              Milestones
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="charp_updates" (click)="rvQuestion()">
+              <i class="fa fa-desktop"></i>
+              Review Questions
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a id="quarterly_updates" (click)="outStatement()">
+              <i class="fa fa-desktop"></i>
+              Outcome Statement
+              <span
+                id="quarterlyupdateschevron"
+                class="fa fa-chevron-down"
+              ></span>
+            </a>
+          </li>
+          <li></li>
+          <li>
+            <a
+              id="quarterly_updates"
+              (click)="rDept()"
+              *ngIf="userRole === 'admin'"
+            >
+              <i class="fa fa-desktop"></i>
+              Department
+              <span
+                id="quarterlyupdateschevron"
+                class="fa fa-chevron-down"
+              ></span>
+            </a>
+          </li>
+          <li>
+            <a
+              id="charp_updates"
+              (click)="rUser()"
+              *ngIf="userRole === 'admin'"
+            >
+              <i class="fa fa-desktop"></i>
+              Roles
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+          <li>
+            <a
+              id="charp_updates"
+              (click)="rUsers()"
+              *ngIf="userRole === 'admin'"
+            >
+              <i class="fa fa-desktop"></i>
+              Users
+              <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /sidebar menu -->
+  </div>
+</div>
+<!-- top navigation -->
+<div class="top_nav ml230">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle" (click)="toggleClicked($event)"
+          ><i class="fa fa-bars"></i
+        ></a>
+      </div>
+      <div class="nav navbar-nav navbar-right"></div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a
+            href="javascript:;"
+            class="user-profile dropdown-toggle"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img src="{{ url }}" alt="" />{{ name | titlecase }}
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li>
+              <a (click)="routeHome()" routerLinkActive="router-link-active"
+                ><i class="fa fa-home pull-right"></i> Home</a
+              >
+            </li>
+            <li>
+              <a (click)="updateProfile()" routerLinkActive="router-link-active"
+                ><i class="fa fa-home pull-right"></i> Profile</a
+              >
+            </li>
+            <li>
+              <a routerLinkActive="router-link-active" (click)="resetKpi()"
+                ><i class="fa fa-home pull-right"></i>Reset All Data</a
+              >
+            </li>
+            <li>
+              <a (click)="login()"
+                ><i class="fa fa-sign-out pull-right"></i> Log Out</a
+              >
+            </li>
+          </ul>
+        </li>
+        <!-- <li class="">
+              <a id="menu_toggle1" (click)="notify()"><i class="fa fa-info-circle"></i></a>
+
+            </li> -->
+        <!-- notification -->
+        <li role="presentation" (click)="notify()">
+          <a
+            href="javascript:;"
+            class="notifications"
+            data-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa fa-bell"></i>
+          </a>
+        </li>
+        <!-- /notification -->
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- /top navigation -->
+<button
+  type="button"
+  id="openModalButton2"
+  style="display: none"
+  class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal"
+  data-target="#invite_user_modal3"
+></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invite_user_modal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel3"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Rest KPI Journey
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              Are you sure you want to erase all previous Answers, Objectives
+              and Milestones?
+            </div>
+          </div>
+          <br />
+        </form>
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100" (click)="confirm()">
+                <b>Ok</b>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100">
+                <b>Cancel</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+<!-- page content -->
+<div class="right_col ml230" role="main">
+  <!-- Class -->
+  <div class="clearfix"></div>
+
+  <div class="row outer_div">
+    <table id="grey_datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap ctable" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Driver</th>
+          <th>Milestone</th>
+          <th>Assigned User</th>
+          <th>Due Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of kpiData">
+          <td>
+            <img src="{{ element.driverImage }}" style="height: 40px;" class="iconImg"/>
+          </td>
+          <td>{{ element.objective }}</td>
+          <td>{{ element.assignName }}</td>
+          <td>{{ element.dueDate + 'T00:00:00.000Z' | date: 'MM/dd/yyyy'}}</td>
+          <td>
+            <button type="button" *ngIf="element.driverID !== 'f27f4b24-33b4-4b5e-a41c-16e0537d029a'" class="btn btn-xs btn-default command-edit mr5" (click)="assign(element)">
+              <span class="glyphicon glyphicon-user"></span></button>
+            <label *ngIf="element.driverID === 'f27f4b24-33b4-4b5e-a41c-16e0537d029a'">NA</label>
+            <button type="button" id="openModalButton4" style="display: none" class="btn btn-xs btn-default command-edit mr5" data-toggle="modal" data-target="#invite_user_modal4"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+      <button type="submit" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="home()" routerLinkActive="router-link-active">
+        <b>Next</b>
+      </button>
+    </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->
+
+<!-- invite user modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invite_user_modal4"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel4"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Select User
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body table-responsive">
+        <table id="grey_datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Due Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let element of users">
+              <td>{{ element.name }}</td>
+              <td>{{ element.email }}</td>
+              <td>{{ element.role }}</td>
+              <td>
+                <input [owlDateTime]="dt1" [min]="startDate" [max]="endDate" [(ngModel)]="dueDate" [value]="startDate" [owlDateTimeTrigger]="dt1" placeholder="Date Time"/>
+                <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+              </td>
+              <td>
+                <mat-radio-button value="element.uID" (click)="select(element)">Assign</mat-radio-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+            <div class="">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="save()">
+                <b>Assign</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->

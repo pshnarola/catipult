@@ -1,0 +1,104 @@
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<div class="col-md-3 left_col menu_fixed w500">
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12 ">
+    <div class="navbar nav_title" style="border: 0;">
+      <a [routerLink]="['/dashboard']" class="site_title"
+        ><img src="{{ imageUrl }}onboarding/step1/left-logo.png"/> <span></span
+      ></a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row customised_outer h80">
+      <div
+        class="col-lg-12 col-md-12 col-sm-12 col-xs-12 customised_inner f500"
+      >
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <img src="{{ imageUrl }}left-center.png" class="img-responsive" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right_col ml500" role="main">
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-11 col-sm-12 col-xs-12">
+        <div class="x_panel c_x_panel">
+          <div class="x_content text_center_left">
+           <form id="demo-form2" method="post">
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <h1 class=""><b>Welcome, {{ name }}</b></h1>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <h4 class="">
+                    <b>Before you begin your journey, please watch this quick
+                      overview video of Catipult and what you'll be
+                      experiencing.</b>
+                  </h4>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="true" class="embed-responsive-item">
+                      <source src="{{ videoUrl }}opening.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="row mtm25">
+                <div class="col-md-4 col-sm-12 col-xs-12 p15 center_flex" (click)="key12()">
+                  <img src="{{ imageUrl }}nav_12keybig.png" class="img-responsive"/>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 p15 pt0 center_flex" (click)="next()">
+                  <img src="{{ imageUrl }}nav_jumpkeybig.png" class="img-responsive"/>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12 p15 pt0 center_flex" (click)="gotoDashboard();">
+                  <img src="{{ imageUrl }}nav_dashboard.png" class="img-responsive"/>
+                </div>
+                <!-- <button type="button" id="openModalButton" style="display: none" class="btn btn-xs btn-default command-edit mr5" data-toggle="modal" data-target="#invite_user_modal"></button> -->
+              </div>
+              <!-- <p (click)="gotoDashboard();" style='text-align:center; cursor:pointer;'>Take me straight to the dashboard.</p> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="invite_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">Rest KPI Journey</div>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">Are you sure you want to erase all previous Answers, Objectives and Milestones?</div>
+          </div>
+          <br />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

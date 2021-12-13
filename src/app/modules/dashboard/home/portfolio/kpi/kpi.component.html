@@ -1,0 +1,86 @@
+<div class="x_panel">
+    <div class="x_content">
+      <div class="x_title" style='margin-bottom:0px; padding-bottom:0px;'>
+        <h2 style="color: #73879C !important;">Targets (KPIs) for {{ driverName }}</h2>
+        <ul class="nav navbar-right panel_toolbox ctoolbox">
+          <li *ngIf="displayYouData" (click)="showYouData();">
+            <a><i class='fas fa-eye-slash' style="color: green; font-weight:400;" ></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div style='margin-bottom:25px;'>
+        <a style='margin-left:5px; color:#73879C;'>What do we have to achieve to reach our 3 year objective?</a>
+      </div>
+      <div class="table-responsive">
+        <table id="datatable-buttons" class="table table-hover" cellspacing="0" width="100%">
+          <thead>
+            <tr class="myHead">
+              <th data-column-id="id" data-type="numeric" data-identifier="true" data-header-css-class="cbg-header-name">Number</th>
+              <th data-column-id="patient_name">KPI</th>
+              <th data-column-id="patient_name">Target</th>
+              <th data-column-id="patient_name">Reporting Frequency</th>
+              <th data-column-id="patient_name">Actual</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="displayYouData">
+            <tr *ngFor="let item of kpiMileData; let i = index">
+              <td><a style='color: #007bff; cursor: pointer;' data-toggle="modal" data-target="#editKpiData1" (click)="edit(template,i)">{{ i + 1 }}</a></td>
+              <td><a [class.font-red]="item.achieveQty<item.qty">{{ item.objective }}</a></td>
+              <td>{{ item.qty | number }}</td>
+              <td>{{ item.unit }}</td>
+              <td>{{ item.achieveQty | number }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="!displayYouData">
+            <tr>
+              <td colspan='5' style='text-align:center;'><a><i role="button" class='fa fa-eye' style="color: red; font-weight:400;" (click)="showYouData();"> Click to display</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #template>  
+    <div class="modal-header">  
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+        <span aria-hidden="true">×</span>  
+      </button>  
+      <h4 class="modal-title" id="myModalLabel">
+        <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            <img src="{{ driverImg }}"/>
+        </div>
+      </h4>
+    </div>  
+    <div class="modal-body">
+      <form id="kpiData" method="post">
+        <br>
+        <div class='padding-bottom'>
+          <span class=''>KPI</span>
+          <input id='edit_KpiObjective' name='kpiObjective' type="text" class="form-control" placeholder="Example: Working out" name='kpiObjective' [(ngModel)]='kpiObjectiveEdit'> 
+        </div>
+        <div class='padding-bottom'>
+          <span class="">Target</span>
+          <input id='edit_KpiTarget' name="qty" class="form-control" placeholder="Example: $50000" name='kpiTarget' [(ngModel)]='kpiQuantityEdit'>  
+        </div>
+        <div class='padding-bottom'>
+          <span class="">Actual</span>
+          <input id='edit_KpiActual' name="qty" class="form-control" placeholder="Example: $50000" name='kpiActual' [(ngModel)]='kpiAchievedQuantityEdit'>  
+        </div>
+        <div>
+          <span class="">Unit Type</span>
+          <input id='edit_KpiUnit' type="text" name="unit" class="form-control" placeholder="Example: dollar" name='kpiUnit' [(ngModel)]='kpiUnitEdit'>  
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="">
+                <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)='updateKpiData()'><b>Save</b></button>
+            </div>
+        </div>
+      </div>  
+    </div> 
+  </ng-template> 

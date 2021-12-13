@@ -1,0 +1,121 @@
+<app-loader></app-loader>
+<div class="right_col ml230" role="main">
+
+    <!-- Class -->
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel" *ngIf="!updateFlag">
+
+                <div class="x_title">
+                  <h2>Add Department</h2>
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                  <br />
+
+                  <form id="demo-form2" action="" method="post" class="">
+
+                    <div class="form-group">
+                      <div class="row-centered">
+                        <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                          <label for="patient_name" class="control-label">Enter the Department Name</label>
+                          <input class="form-control" [(ngModel)]="depttext" name="SignSymptom" id="SignSymptom" wrap="hard"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+
+                    <div class="form-group">
+                      <div class="col-md-12 col-sm-6 col-xs-12" style="text-align:center;">
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                        <input name="method" id="method" type="hidden" value="">
+                        <input name="submit_Update" type="hidden">
+                        <button type="submit" form="demo-form2" class="btn btn-success" id="next"
+                        (click)="submitD()" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Submit</button>
+                      </div>
+                    </div>
+
+                  </form>
+
+                </div>
+
+              </div>
+              <div class="x_panel" *ngIf="updateFlag">
+
+                  <div class="x_title">
+                    <h2>Update Department</h2>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+                    <br />
+
+                    <form id="demo-form2" action="" method="post" class="">
+
+                      <div class="form-group">
+                        <div class="row-centered">
+                          <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                            <label for="patient_name" class="control-label">Update the Department Name</label>
+                            <textarea class="form-control" [(ngModel)]="updateDept.deptName" name="SignSymptom" id="SignSymptom" rows="4" cols="50" style="height:40px;" wrap="hard"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="ln_solid"></div>
+
+                      <div class="form-group">
+                        <div class="col-md-12 col-sm-6 col-xs-12" style="text-align:center;">
+                          <button type="reset" (click)="cancelD()" class="btn btn-primary">Cancel</button>
+                          <input name="method" id="method" type="hidden" value="">
+                          <input name="submit_Update" type="hidden">
+                          <button type="submit" form="demo-form2" class="btn btn-success" id="next"
+                          (click)="submitU()" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Update</button>
+                        </div>
+                      </div>
+
+                    </form>
+
+                  </div>
+
+                </div>
+          <!-- listing_section-->
+          <div class="x_panel" *ngIf="showlist">
+            <div class="x_content">
+              <div class="table-responsive">
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <thead>
+                    <tr class="myHead">
+                        <th data-column-id="seq">Sr. No</th>
+                      <th data-column-id="patient_mobile_no">Department Name</th>
+                      <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of dept; let i=index">
+                      <td>{{i+1}} </td>
+                      <td> {{item.deptName}}</td>
+                      <td>
+                        <!-- <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button> -->
+                        <button type="button" class="btn btn-xs btn-success mbunset"  onclick=""><span class="glyphicon glyphicon-edit" (click)="editd(item)"></span></button>
+                        <button type="submit" class="btn btn-xs btn-danger mbunset" onclick=""><span class="glyphicon glyphicon-trash" (click)="deleteDept(item)"></span></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--/listing_section-->
+
+        </div>
+      </div>
+    </div>
+    <!--/Class -->
+
+  </div>

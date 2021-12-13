@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Info</mat-card-title>
+  <mat-card-content>
+      <label for="patient_name12" *ngIf="list.length === 0" class="control-label">Do you want to delete Questions ?</label>
+
+    <div class="x_panel" *ngIf="list.length>0">
+      <div class="x_content">
+        <div class="table-responsive">
+          <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr class="myHead">
+                <th data-column-id="id" data-type="numeric" data-identifier="true" data-header-css-class="cbg-header-name" style="width:6%;">Seq. No</th>
+                <th data-column-id="patient_mobile_no">Question</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list; let i=index">
+                <td>{{item.Question.seqNo}} </td>
+                <td> {{item.Question.question}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <label for="patient_name12sd" class="control-label">Remove Dependency First from Above Questions</label>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+      <button type="button" *ngIf="list.length === 0 ? true: false" class="btn btn-xs btn-default command-view" (click)="confirm()">OK</button>
+      <button type="button" class="btn btn-xs btn-default command-view" (click)="onNoClick()">Cancel</button>
+  </mat-card-actions>
+  </mat-card>

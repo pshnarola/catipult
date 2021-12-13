@@ -1,0 +1,222 @@
+<div class="{{leftStyle}}">
+
+
+
+  <div fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+    <div fxFlex="35" style="background-color: #1f2532;height: -webkit-fill-available;">
+      <div fxFlex class="headerFix" [routerLink]="['/kpijourney']">
+
+        <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="center">
+        <mat-card class="cardleft">
+          <mat-card-header>
+            <img src="../../../../assets/images/driver/left_top.png" class="imgleft">
+          </mat-card-header>
+          <mat-card-content fxFlex fxLayout="column">
+            <span class="header">Thanks! Let's get on with creating your KPIs.</span>
+            <span class="content"> We're going to walk through creating three
+              KPIs for each of the Seven Business Drivers.</span>
+          </mat-card-content>
+          <mat-card-footer class="footer">
+            <vg-player>
+              <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                <source src="../../../../assets/Videos/BusinessDriver01.mp4" type="video/mp4">
+              </video>
+            </vg-player>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    </div>
+    <div fxFlex="65" class="flex70">
+      <div fxFlex class="driverH">
+        <img src="../../../../assets/images/driver/left_top.png" class="imgleft">
+      </div>
+      <div fxFlex class="contentHeader">
+
+        <span>
+          Now that you've watched the video, let's answer a set of questions
+        </span>
+        <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+Outcome Statement
+</mat-panel-title>
+</mat-expansion-panel-header>
+<p>
+  {{statement}}
+</p>
+</mat-expansion-panel>
+</mat-accordion>
+
+      </div>
+
+      <div fxFlex class="question" fxLayout="column">
+        <label id="example-radio-group-label" fxFlex style="    margin-bottom: 17px;        ">
+          <span>What are the three MOST Important objectives you must meet in order to make your personal goal for your
+            health and well being? </span> </label>
+        <form class="mat-dialog-content" #formControl="ngForm">
+          <div fxFlex=100 fxLayoutAlign="start" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayout="row" fxFill style="padding-top: 10px;">
+            <div fxFlex=30>
+              <label  class="{{headerObj === false ? 'btnHeader':'btnHeaderR'}}">
+                <span class="spanh">Enter Your Kpi here </span></label>
+            </div>
+            <div fxFlex=70>
+              <input matInput #objective placeholder="Example: Working out" [(ngModel)]="element.objective"
+              name="objective" required class="inputclass">
+            </div>
+
+          </div>
+
+          <div fxFlex=100 fxLayoutAlign="start" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayout="row" fxFill style="padding-top: 10px">
+            <div fxFlex=30>
+            <label  class="{{headerU === false ? 'btnHeader':'btnHeaderR'}}">
+              <span class="spanh">Quantify Your Kpi </span></label>
+            </div>
+            <div fxFlex=70>
+              <input matInput placeholder="Example: $50000" (keypress)="numberOnly($event)" [(ngModel)]="element.qty" name="qty" required type="number"
+              class="inputclass">
+
+            </div>
+
+          </div>
+          <div fxFlex=100 fxLayoutAlign="start" fxLayout="row" fxLayoutGap="10px" fxLayout.lt-md="column" fxFill style="padding-top: 10px">
+            <div fxFlex=30>
+            <label class="{{headerM === false ? 'btnHeader':'btnHeaderR'}}">
+              <span class="spanh">Unit of Quantification </span></label>
+            </div>
+            <div fxFlex=70>
+              <input matInput placeholder="Example: dollar" [(ngModel)]="element.unit" name="unit" required
+              class="inputclass">
+            </div>
+          </div>
+
+        </form>
+
+
+
+
+        <div fxFlex style="margin-bottom: 6%;margin-top: 2%" fxLayoutAlign="end">
+          <button mat-button class="btn" [disabled]="!formControl.valid" *ngIf="editFlag" (click)="save()"
+            tabindex="-1">Save</button>
+          <button mat-button class="btn" [disabled]="!formControl.valid" (click)="add()" *ngIf="!editFlag"
+            tabindex="-1">Submit</button>
+          <button  mat-raised-button class="add"
+            (click)="next()" *ngIf="ELEMENT_DATA.length === 0">
+            Skip
+          </button>
+          <button mat-raised-button class="add" (click)="next()" *ngIf="ELEMENT_DATA.length >= 1"[disabled]="ELEMENT_DATA.length===0"
+           >
+            Next
+            <i class="material-icons">
+              arrow_forward
+              </i>
+          </button>
+
+
+        </div>
+        <div fxFlex fxFill fxLayoutAlign="start start" fxLayout="row">
+
+          <div class="example-container" fxLayoutAlign="start start" fxLayout="row" fxFlex fxFill >
+            <table mat-table [dataSource]="dataSource"  style="width: 98%;">
+
+              <!-- Position Column -->
+              <!-- <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Kpi.No.</span> </th>
+                <td mat-cell *matCellDef="let element; let i = index;" class="tdclass"> {{i+1}} </td>
+              </ng-container> -->
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="objective">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Objective</span> </th>
+                <td mat-cell *matCellDef="let element" style="width: 45%;padding: 1%;" class="tdclass">
+                  {{element.objective}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Quantity</span> </th>
+                <td mat-cell *matCellDef="let element" class="tdclass"> {{element.qty}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Unit
+                  </span></th>
+                <td mat-cell *matCellDef="let element" class="tdclass"> {{element.unit}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Action </span></th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                  <i class="material-icons" (click)="edit(element)">
+                    edit
+                  </i>
+                  <i class="material-icons" (click)="delete(element)">
+                    delete
+                  </i>
+
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <!-- <table mat-table [dataSource]="dataSource"  style="width: 98%;">
+
+
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Kpi.No.</span> </th>
+                <td mat-cell *matCellDef="let element; let i = index;" class="tdclass"> {{i+1}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="objective">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Objective</span> </th>
+                <td mat-cell *matCellDef="let element" style="width: 45%;padding: 1%;" class="tdclass">
+                  {{element.objective}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Quantity</span> </th>
+                <td mat-cell *matCellDef="let element" class="tdclass"> {{element.qty}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Unit
+                  </span></th>
+                <td mat-cell *matCellDef="let element" class="tdclass"> {{element.unit}} </td>
+              </ng-container>
+
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Action </span></th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                  <i class="material-icons" (click)="edit(element)">
+                    edit
+                  </i>
+                  <i class="material-icons" (click)="delete(element)">
+                    delete
+                  </i>
+
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table> -->
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

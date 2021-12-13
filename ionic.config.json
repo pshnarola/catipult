@@ -1,0 +1,7 @@
+{
+  "name": "catipult",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

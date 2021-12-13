@@ -1,0 +1,126 @@
+<!-- page content -->
+<app-loader></app-loader>
+
+<div class="right_col unset_margin_left" role="main">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row row-centered">
+      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 col-centered center_block">
+        <div class="x_panel p0">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 p0 back_image">
+            <img src="https://s3.amazonaws.com/catipult.ai.assets/images/social-media-caution.png" alt="..." class="img-responsive"/>
+          </div>
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            <img src="https://s3.amazonaws.com/catipult.ai.assets/images/social-media-caution.png" alt="..." class="img-responsive" style="display:none;"/>
+            <div class="x_content">
+              <br />
+              <form [formGroup]="userDetailsForm" (ngSubmit)="onLogin(userDetailsForm.value)" class="form-horizontal form-label-left input_mask">
+                <div class="form-group center_flex" style='margin-bottom:0px !important;'>
+                  <div class="" style='margin-bottom:0px !important;'>
+                    <img src="https://s3.amazonaws.com/catipult.ai.assets/images/logo.png" alt="..." class="img-responsive"/>
+                  </div>
+                </div>
+                <div class="form-group" style='margin-bottom:50px !important;'>
+                  <label class="control-label col-lg-10 col-md-10 col-sm-12 col-xs-12" style='width:100% !important;padding-right:15px !important;text-align:center !important; margin-top:0px !important;padding-top:0px !important;'>simple management software so you can live a better life</label>
+                </div>
+                <br />
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" formControlName="email" placeholder="Email"/>
+                    <span class="fas fa-envelope form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="password" formControlName="password" placeholder="Password"/>
+                    <span class="fa fa-lock form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" type="submit" [disabled]="!userDetailsForm.valid" class="btn btn-primary w100 login_btn">LOGIN</button>
+                    <button type="button" id="openModalButton" style="display: none" class="btn btn-xs btn-default command-edit mr5" data-toggle="modal" data-target="#invite_user_modal"></button>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text_center">
+                  <!-- <a href='https://catipult.ai/my-account/lost-password/'>Lost your Password?</a> -->
+                  <a [routerLink]="['/forgotpassword']">Lost your password?</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->
+
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Login
+          </div>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              {{ status === "OFFLINE" ? "User is not connected to internet" : errorMsg }}
+            </div>
+          </div>
+          <br />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+            <div class="">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 bw100 mr0px"><b>Ok</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+
+<ng-template #navigation>  
+  <div class="modal-header">  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-xs-12 col-sm-12 col-md-12 text_center">
+          <h2 style='margin:0px;font-size:30px;'>Choose your destination</h2>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body" style='padding-top:0px;padding-bottom:0px;'>
+    <div class='padding-bottom' style='padding-top:10px;text-align:center;'>
+      <!-- <p style='width:100%;font-size:15px;padding-bottom:10px;'>Would you like to continue to the <a style='cursor:pointer;text-decoration: underline;color: #007bff;' (click)='hideModal();'>strategic planner</a> or go straight to your <a style='text-decoration: underline;color: #007bff;' [routerLink]="['/dashboard']" (click)='hideModal();'>dashboard</a>?</p>  -->
+      <p style='width:100%;font-size:15px;padding-bottom:10px;padding-top:10px;'>Would you like to continue to the strategic planner or go straight to your dashboard?</p> 
+    </div>
+    <div class="row modal-footer">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" style='padding-left:0px;padding-right:0px;text-align:center;'>
+              <button type="submit" class="btn btn-primary" style='min-width:135px;' (click)='hideModal();'><b>Strategic Planner</b></button>
+          </div>
+          <div class='col-sm-6 col-md-6 col-lg-6 col-xl-6' style='padding-left:0px;padding-right:0px;text-align:center;'>
+            <button type="submit" class="btn btn-primary" style='min-width:135px;' [routerLink]="['/dashboard']" (click)='hideModal();'><b>Dashboard</b></button>
+          </div>
+      </div>
+    </div>  
+  </div>
+</ng-template> 

@@ -1,0 +1,423 @@
+// row 1
+.navHome {
+  padding: initial;
+  li {
+    display: block;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    position: relative;
+
+    .imgtop {
+      width: 100px;
+      height: 100px;
+    }
+    .heading {
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.5;
+      letter-spacing: 0.96px;
+      text-align: left;
+      color: #484848;
+    }
+    .bottom {
+      font-family: Roboto;
+      font-size: 20px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.2;
+      letter-spacing: 1.2px;
+      text-align: left;
+      color: #484848;
+    }
+    &:hover {
+      background-color: #c0c0c0;
+      cursor: pointer;
+      &:after {
+        border-top: #c0c0c0;
+      }
+    }
+    &.current {
+      &:after {
+        width: 0;
+        height: 0;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #ffffff;
+        content: " ";
+        position: absolute;
+        bottom: -10px;
+        left: 40%;
+      }
+    }
+  }
+}
+:host ::ng-deep .mat-tab-label-content {
+  position: relative;
+  left: 0;
+  height: 65px;
+  border-left: 2px solid #adb2b5;
+  margin-top: 10px;
+}
+:host ::ng-deep .mat-tab-label-content:first-child {
+  border-left: unset !important;
+}
+:host ::ng-deep .mat-tab-label-active {
+  display: flex !important;
+  border: unset !important;
+  border-width: unset !important;
+  margin: unset !important;
+}
+
+.example-container {
+  height: 100vh !important;
+  width: 100% !important;
+  // overflow: auto;
+  background-image: url(/assets/images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* notification */
+
+.headertext {
+  font-family: Roboto;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: 0.96px;
+  color: #484848;
+  text-align: center;
+}
+.inputc {
+  width: 210px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: #ebeff2;
+}
+.kpiDetails {
+  background-color: #ffffff;
+  height: max-content;
+  .kpiChart {
+    display: block;
+    width: 371px;
+    height: 199px;
+  }
+  .desc {
+    .top {
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 2.5;
+      letter-spacing: 0.23px;
+      text-align: left;
+      color: #000000;
+    }
+    .colo {
+      border-left: 5px solid red;
+    }
+    .coloS {
+      border-left: 5px solid green;
+    }
+    .coloP {
+      border-left: 5px solid violet;
+    }
+    .status {
+      font-family: Roboto;
+      font-size: 14px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 3.21;
+      letter-spacing: 0.18px;
+      text-align: left;
+      color: #999999;
+    }
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.mat-card {
+  text-align: center;
+  img {
+    border-radius: 5px;
+    margin-top: -25px;
+  }
+}
+.mat-table {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+:host ::ng-deep .mat-tab-label {
+  line-height: 21px;
+  height: 80px;
+  padding: 0 5px;
+
+  cursor: pointer;
+  box-sizing: border-box;
+  opacity: 0.6;
+  border-radius: 10px;
+}
+:host ::ng-deep .mat-tab-label-active {
+  display: inline;
+  border: solid;
+  border-width: 1px 1px 0 1px;
+  margin: 0 5px 0 0;
+}
+
+:host ::ng-deep .mat-tab-label {
+  height: 22em !important;
+  min-width: auto !important;
+}
+:host ::ng-deep .mat-tab-header {
+  // height: 22em !important;
+  height: 2px;
+  min-width: auto !important;
+}
+.photo {
+  width: 12rem !important;
+  min-height: 5rem;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+input:focus {
+  border-color: green;
+}
+
+// overriding standard classes
+.modal-footer {
+  border-top: 0px;
+  text-align: center;
+}
+
+.modal-header {
+  padding: 15px 15px 0px 15px;
+  border-bottom: 0px;
+}
+
+@media (min-width: 768px) {
+  .modal-md {
+    width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 400px;
+  }
+}
+
+.modal-body {
+  padding: 0px 15px 0px 15px;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .btn {
+    width: 100%;
+  }
+}
+
+.padding-bottom {
+  padding: 0px 0px 10px 0px;
+}
+
+.padding-top {
+  padding: 10px 0px 0px 0px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+  padding: 0;
+}
+
+td.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail {
+  padding: 0;
+  border-top: none;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  // background: #777;
+  background: transparent;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.element-description {
+  padding: 16px;
+}
+
+.element-description-attribution {
+  opacity: 0.5;
+}
+
+.inner-table {
+  width: 100%;
+  background: rgb(249, 249, 249);
+  color: #73879c;
+}
+
+.inner-table mat-form-field {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  width: 200px;
+}
+
+//format overwrites
+.mat-cell {
+  color: #73879c;
+}
+
+.mat-select {
+  color: #555 !important;
+  padding: 6px 12px !important;
+}
+
+.padding-bottom {
+  padding: 0px 0px 10px 0px;
+}
+
+.padding-top {
+  padding: 10px 0px 0px 0px;
+}
+
+.input-box {
+  text-align: left;
+}
+
+::ng-deep .mat-card-header-text {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-infix {
+  position: inherit !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+
+// ::ng-deep .mat-label{
+//   font-size:17px;
+// }
+
+::ng-deep .mat-select {
+  outline: 0 !important;
+  border-width: 0 0 2px !important;
+  box-shadow: none !important;
+  border-color: #d9d9d9 !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.form-control {
+  height: auto !important;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+::ng-deep .select-format {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+input:focus {
+  border-color: green;
+}
+
+.left-align {
+  text-align: left !important;
+}
+
+.isCorporate {
+  border-color: #337ab7;
+}
+
+.isNotCorporate {
+  border-color: #666666;
+}
+
+::ng-deep .toolTip {
+  font-size: 13px !important;
+}
+
+.font-red {
+  color: red !important;
+}

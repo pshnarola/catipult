@@ -1,0 +1,50 @@
+.title {
+  margin-bottom: 20px;
+}
+
+.centered-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.video {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  height: 33.75vw;
+  width: 60vw;
+}
+
+.video iframe {
+  height: 100%;
+  width: 100%;
+}
+
+iframe {
+  border:none !important;
+}
+
+::ng-deep .mat-card-title {
+  font-size:15px !important;
+}
+
+// ::ng-deep .mat-card {
+//   min-width: 400px;
+//   // background:transparent !important;
+//   box-shadow:none !important;
+// }
+
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  // justify-content: space-around;
+}
+
+.flex-item {
+  width:auto;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom:0px !important;
+}

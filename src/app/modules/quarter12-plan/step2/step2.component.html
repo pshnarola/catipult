@@ -1,0 +1,336 @@
+<!-- page content -->
+<app-loader></app-loader>
+<!-- top navigation -->
+<app-on-top-nav></app-on-top-nav>
+<!-- /top navigation -->
+<div class="col-md-3 left_col menu_fixed w500">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+    <div class="navbar nav_title" style="border: 0;">
+      <a class="site_title" [routerLink]="['/journey/kpijourney']"
+        ><img src="{{ imageUrl }}onboarding/step1/left-logo.png" style="width: 100%;"/>
+        <span></span
+      ></a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row customised_outer h80">
+      <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <img src="{{ driverImg }}" class="img-responsive"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h1 class="white">
+              <b *ngIf="driverImg === driver1Image">Step 1: Plan your outcome</b>
+              <b *ngIf="driverImg !== driver1Image">Step 2: Define your KPIs</b>
+            </h1>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="driverImg !== driver1Image">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4 class="blue"><b>Watch the following video </b></h4>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div
+              class="embed-responsive embed-responsive-16by9"
+              *ngIf="driverVideo"
+            >
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ driverImg !== driver1Image ? driverVideo : videoUrl + 'outcome.mp4' }}" type="video/mp4"/>
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+<!-- page content -->
+<div class="right_col ml500" role="main">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel c_x_panel">
+          <div class="x_content text_center_left">
+            <br />
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <h3 class="mt0">
+                  <b>Let's answer a set of questions</b>
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label float_r f18"
+                  >Question No : {{ currentIndex + 1 }}/{{
+                    qBankData.length
+                  }}</label
+                >
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <label class="control-label float_l f18">{{
+                  qBankData[currentIndex]?.question
+                }}</label>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table
+                id="datatable-responsive"
+                class="table dt-responsive nowrap c_table tleft"
+                cellspacing="0"
+                width="100%"
+              >
+                <tbody>
+                  <ng-container
+                    *ngIf="
+                      qBankData[currentIndex]?.QuestionType?.typeName ===
+                      'Single Choice'
+                    "
+                  >
+                    <tr
+                      *ngFor="
+                        let season of qBankData[currentIndex]?.Options;
+                        let i = index
+                      "
+                    >
+                      <td>
+                        <mat-radio-button
+                          [checked]="season.correctAns === true ? true : false"
+                          fxFlex
+                          class="example-radio-button"
+                          (click)="submitAns(season, i)"
+                          [value]="season.optionID"
+                        >
+                          {{ season.option }}</mat-radio-button
+                        >
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
+                      qBankData[currentIndex]?.QuestionType?.typeName ===
+                      'Multiple Choice'
+                    "
+                  >
+                    <tr
+                      *ngFor="
+                        let season of qBankData[currentIndex]?.Options;
+                        let i = index
+                      "
+                    >
+                      <td>
+                        <mat-checkbox
+                          class="example-radio-button"
+                          (change)="submitAnsM($event, season, i)"
+                          [checked]="season.correctAns"
+                        >
+                          {{ season.option }}</mat-checkbox
+                        >
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr
+                    *ngIf="
+                      qBankData[currentIndex]?.QuestionType?.typeName ===
+                      'Descriptive'
+                    "
+                  >
+                    <td>
+                      <textarea
+                        name="desc"
+                        [(ngModel)]="qBankData[currentIndex].desc"
+                        placeholder="Enter Description"
+                        class="form-control"
+                        rows="5"
+                      ></textarea>
+                    </td>
+                  </tr>
+                  <ng-container *ngIf="leftStyle === 'web'">
+                    <div class="table-responsive" *ngIf="rfpOptions.length > 0">
+                      <table
+                        id="grey_datatable-responsive"
+                        class="table table-striped table-bordered dt-responsive nowrap vam"
+                        cellspacing="0"
+                        width="100%"
+                      >
+                        <thead>
+                          <tr>
+                            <th>Select</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let season of rfpOptions; let i = index">
+                            <td class="w1">
+                              <!-- <input type="checkbox" class="flat c_radio" name="" id="" value=""  (click)="submitAnsRfpq($event,season,i)"> -->
+                              <mat-checkbox
+                                class="flat mt0"
+                                (change)="submitAnsRfpq($event, season, i)"
+                              ></mat-checkbox>
+                            </td>
+                            <td>
+                              <label
+                                class="control-label float_l f18 mt0 lh1"
+                                >{{ season.question }}</label
+                              >
+                            </td>
+                            <td>
+                              <label
+                                class="control-label float_l f18 mt0 lh1 "
+                                >{{ season.answer }}</label
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="leftStyle === 'mobile' && rfpOptions.length > 0"
+                  >
+                    <div>
+                      <div class="">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label for="patient_name" class="control-label"
+                            >Question:</label
+                          >
+                          <label
+                            for="patient_nameds"
+                            class="has-feedback-left"
+                            >{{ rfpOptions[currIndex].question }}</label
+                          >
+                          <!-- <input type="text" readonly class="form-control has-feedback-left cfc" id="inputSuccess2" [(ngModel)]="rfpOptions[currIndex].question" name="questiontext"> -->
+                          <!-- <label class="control-label f18">{{rfpOptions[currIndex].question}}</label> -->
+                        </div>
+                      </div>
+                      <div class="">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label for="patient_names" class="control-label"
+                            >Answer:</label
+                          >
+                          <label
+                            for="patient_nameffds"
+                            class="has-feedback-left"
+                            >{{ rfpOptions[currIndex].answer }}</label
+                          >
+                          <!-- <input type="text" readonly class="has-feedback-left" id="inputSuccess2" [(ngModel)]="rfpOptions[currIndex].answer" name="answertext"> -->
+                          <!-- <label class="control-label float_l f18">Answer =>{{rfpOptions[currIndex].answer}}</label> -->
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 center_flex p0">
+                        <div class="col-md-6 col-sm-6 col-xs-6 tleft">
+                          <div class="">
+                            <mat-checkbox
+                              class="flat mt0"
+                              [(ngModel)]="checked"
+                              (change)="
+                                submitAnsRfpq(
+                                  $event,
+                                  rfpOptions[currIndex],
+                                  currIndex
+                                )
+                              "
+                            ></mat-checkbox>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 tright">
+                          <div class="">
+                            <button
+                              type="submit"
+                              class="btn btn-primary b_blue f18 mr0px"
+                              (click)="nextrfpq()"
+                            >
+                              <b>Next RFPQ</b>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <!-- <div class="row">
+                              <div class="col-md-6 col-sm-12 col-xs-12 float_r p0">
+                                  <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="currentIndex >=1 " >
+                                      <button type="submit" class="btn btn-primary b_blue f18 w100" (click)="back()"><b>Back</b></button>
+                                  </div>
+                                  <div class="col-md-4 col-sm-12 col-xs-12">
+                                      <button type="submit" (click)="skip()" class="btn btn-primary b_blue f18 w100"><b>Skip Driver</b></button>
+                                  </div>
+                                  <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'">
+                                      <button type="submit" (click)="nextD()" class="btn btn-primary b_blue f18 w100"><b>Next Question</b></button>
+                                  </div>
+                                  <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="qBankData[currentIndex]?.QuestionType?.typeName !== 'Descriptive'">
+                                      <button type="submit" class="btn btn-primary b_blue f18 w100" (click)="next()"><b *ngIf="qBankData.length -1 === currentIndex">Next</b>
+                                        <b *ngIf="qBankData.length -1 !== currentIndex">Next Question</b></button>
+                                  </div>
+                              </div>
+                          </div> -->
+            <div
+              class="row"
+              *ngIf="rfpOptions.length === 0 || leftStyle === 'web'"
+            >
+              <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+                <div class="">
+                  <button
+                    type="submit"
+                    class="btn btn-primary b_blue f18 bw100"
+                    (click)="back()"
+                    *ngIf="currentIndex >= 1"
+                  >
+                    <b>Back</b>
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary b_blue f18 bw100"
+                    (click)="skip()"
+                  >
+                    <b>Skip Questions</b>
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary b_blue f18 bw100 mr0px"
+                    (click)="nextD()"
+                    *ngIf="
+                      qBankData[currentIndex]?.QuestionType?.typeName ===
+                      'Descriptive'
+                    "
+                  >
+                    <b>Next</b>
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary b_blue f18 bw100 mr0px"
+                    (click)="next()"
+                    *ngIf="
+                      qBankData[currentIndex]?.QuestionType?.typeName !==
+                      'Descriptive'
+                    "
+                  >
+                    <b>Next</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->

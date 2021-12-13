@@ -1,0 +1,19 @@
+<div fxFlex=100 fxLayout="column" class="driver" fxLayoutAlign="center start">
+    <div fxFlex=100 fxLayoutAlign="center center" style="margin-top: 10px;" fxLayout="row wrap">
+        <mat-card class="example-card" *ngFor="let item of drivers" (click)="drive(item)">
+            <mat-card-header>
+              <!-- <mat-card-title>Driver1</mat-card-title> -->
+            </mat-card-header>
+            <mat-card-content class="txtalign">
+                <img src="{{item.driverImage}}" class="iconImg">
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- <button mat-button (click)="drive(item)">Edit</button>
+              <button mat-button (click)="drive(item)">View</button> -->
+            </mat-card-actions>
+          </mat-card>
+
+    </div>
+
+
+  </div>

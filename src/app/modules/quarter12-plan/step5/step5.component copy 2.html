@@ -1,0 +1,414 @@
+<div class="col-md-3 left_col menu_fixed">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+      <div class="navbar nav_title" style="border: 0;">
+          <a href="index.html" class="site_title"><img src="assets/images/left-logo.png"> <span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row customised_outer h80">
+          <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h1 class="white"><b>Step 3 : </b></h1>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h4 class="blue"><b>Please take your time to answer the questions below</b></h4>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h4 class="white"><b>Your answers from Step 2 are what we call Milestones. Milestones are important, high-level objectives that must be met along the way to creating your outcome. In this step, you will drag and drop your answers into one of the 12 quarter boxes to the left</b></h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+<!-- page content -->
+<div class="right_col" role="main">
+  <!-- Class -->
+  <div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+          <form id="demo-form2"   method="post">
+              <div class="" style="background-color:white;">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label">Milestones</label>
+                      </div>
+                  </div>
+                  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                  [cdkDropListConnectedTo]="[doneList1,doneList2,doneList3,doneList4,doneList5,doneList6, doneList7, doneList8, doneList9,doneList10,doneList11,doneList12]"
+                  class="example-list" (cdkDropListDropped)="drop($event)" style="  border-collapse:separate;
+                  border-spacing:0 15px; ">
+                  <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+                </div>
+              </div>
+          </form>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 1</label>
+                      </div>
+                  </div>
+                  <div cdkDropList #doneList1="cdkDropList" [cdkDropListData]="done"
+                          [cdkDropListConnectedTo]="[doneList2,todoList]" class="example-list"
+                          (cdkDropListDropped)="drop($event)">
+                          <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+                        </div>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 2</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 3</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 4</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 5</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <tbody>
+                          <!-- <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>                                         -->
+                      </tbody>
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 6</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 7</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 8</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group pl0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 9</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <tbody>
+                          <!-- <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>                                         -->
+                      </tbody>
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 10</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 11</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+          <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+              <form id="demo-form2"   method="post">
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                          <label class="control-label float_l c_label"> Quarter 12</label>
+                      </div>
+                  </div>
+                  <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                      <!-- <tbody>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Get up</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Brush teeth</label>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <label class="control-label float_l c_label mt0">Take a shower</label>
+                              </td>
+                          </tr>
+                      </tbody> -->
+                  </table>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-2 col-sm-12 col-xs-12 float_r pr0">
+          <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Next</b></button>
+      </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->

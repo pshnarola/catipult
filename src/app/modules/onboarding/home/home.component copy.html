@@ -1,0 +1,168 @@
+<!-- top navigation -->
+<app-on-top-nav></app-on-top-nav>
+<div class="col-md-3 left_col menu_fixed w500 custom">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12 ">
+      <div class="navbar nav_title" style="border: 0;">
+          <a  class="site_title csite_title p10"><img src="assets/images/left-logo.png"> <span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row customised_outer h80">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <img src="assets/images/left-center.png" class="img-responsive">
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+<!-- page content -->
+<div class="right_col ml500" role="main">
+
+  <!-- Class -->
+  <div class="">
+      <div class="clearfix"></div>
+
+      <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel c_x_panel">
+
+                  <div class="x_content text_center_left">
+                      <br />
+
+                      <form id="demo-form2"   method="post">
+
+                          <div class="form-group">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <h1 class="black"><b>Welcome: {{name| titlecase}}</b></h1>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <h4 class="black"><b>Since this is your first time using Catipult by Live Fused, choose your next move:</b></h4>
+                              </div>
+                          </div>
+
+                          <!-- <br><br><br><br><br><br> -->
+                          <div class="form-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <video controls="true" class="embed-responsive-item">
+                                        <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4" />
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- <div class="clearfix"></div> -->
+
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12 p15" [routerLink]="['/plan/step1']">
+                                <img src="assets/images/12keybig.png" class="img-responsive">
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-xs-12 p15" (click)="next()">
+                                <img src="assets/images/jumpkeybig.png" class="img-responsive">
+                            </div>
+                            <button type="button" id="openModalButton" style="display: none"  class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal"></button>
+                        </div>
+<!--
+                          <div class="form-group">
+                              <div class="col-md-7 col-sm-12 col-xs-12" [routerLink]="['/plan/step1']">
+
+                                      <img src="assets/images/12keybig.png" class="img-responsive">
+
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <div class="col-md-7 col-sm-12 col-xs-12" (click)="next()">
+
+                                      <img src="assets/images/jumpkeybig.png" class="img-responsive">
+
+                              </div>
+                              <button type="button" id="openModalButton" style="display: none"  class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal"></button>
+                          </div> -->
+
+                      </form>
+
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/Class -->
+
+</div>
+<!-- /page content -->
+
+
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                  <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+                    Rest KPI Journey
+                  </div>
+              </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <!-- <form role="form"> -->
+                  <form id="demo-form2"   method="post">
+
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          Are you sure you want to erase all previous Answers, Objectives and Milestones?            </div>
+                    </div>
+                      <br>
+
+
+
+                      <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+                  </form>
+              <!-- </form> -->
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                       class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+
+                  </div>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                      class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+                    </div>
+
+
+
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /invite user modal -->

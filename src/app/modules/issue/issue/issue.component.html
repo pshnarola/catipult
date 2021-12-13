@@ -1,0 +1,103 @@
+<div class='x_panel' style='border:none;'>
+    <div class="container">
+        <h2 class='title-grid'>Issues</h2>
+        <div class='icon-grid'>
+          <i class='fas fa-plus' style='color: #1f2532;cursor:pointer;padding-right:5px;'  matTooltip="Create new issue" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over" (click)='showModal(t_newIssue,"modal-sm");initializeNewIssue();' *ngIf='data?.user?.uID && modify'></i>
+          <i class='fas fa-plus' style='color: #d3d3d3;padding-right:5px;'  matTooltip="Choose a user before creating an issue." matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over" *ngIf='!data?.user?.uID || !modify' disabled></i>          
+          <a *ngIf='!displayIssueArchive' (click)='showIssueArchive(true);' matTooltip="Show closed issues" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i class='fas fa-archive' style='padding-left:5px;cursor:pointer; color: #1f2532;'></i></a>
+          <a *ngIf='displayIssueArchive' (click)='showIssueArchive(false);' matTooltip="Show open issues" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i class='fas fa-box-open' style='padding-left:5px;cursor:pointer; color: #1f2532;'></i></a>
+        </div>
+    </div>
+    <table mat-table  [dataSource]="issueDataActive" class="table" style='color:#73879C;'>
+      <ng-container matColumnDef="ID" *ngIf='modify'>
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element" style='color: #007bff !important; cursor: pointer;padding-left:24px;text-decoration:underline;'(click)='EditIssue(t_editIssue,"modal-sm",element);'>{{ element.ID }}</td>
+      </ng-container>
+      <ng-container matColumnDef="ID" *ngIf='!modify'>
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element" style='padding-left:24px;'>{{ element.ID }}</td>
+      </ng-container>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element"> {{ element.issueName }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Notes">
+        <th mat-header-cell *matHeaderCellDef>Decision</th>
+        <td mat-cell *matCellDef="let element" [innerHTML]='element.issueNote'> {{ element.issueNote }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{ element.issueStatus }} </td>
+      </ng-container>
+      <ng-container matColumnDef="User">
+        <th mat-header-cell *matHeaderCellDef>Owner</th>
+        <td mat-cell *matCellDef="let element">{{ element.User.name }} {{ element.User.lname }}<a style='padding-left:10px !important;font-size:15px !important;cursor:pointer;'  matTooltip="{{ element.note }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i style='padding-left:2px;color:#73879C;font-size:12px;' [ngClass]="element.note ? 'far fa-sticky-note' : ''"></i></a></td>
+      </ng-container>
+        <tr mat-header-row *matHeaderRowDef="issueColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: issueColumns;"></tr>
+    </table>
+</div>
+
+<ng-template #t_newIssue>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="modal-title" id="myModalLabel">
+        <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <h2>Create Issue</h2>
+        </div>
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div class="issue-container" style="text-align:left !important;">
+        <mat-form-field appearance="fill" class='input-field' style="width:100%;padding-bottom:10px;">
+            <mat-label>Issue</mat-label>
+            <input type='text' matInput placeholder='Issue 1' [(ngModel)]='newIssue.issueName'>
+          </mat-form-field>
+        <mat-form-field appearance="fill" class='' style="width:100%;padding-bottom:10px;">
+            <mat-label>Status</mat-label>
+            <mat-select class="form-control" [(ngModel)] = 'newIssue.issueStatus' name="nm_NewIssueStatus">
+                <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>            
+            </mat-select>
+        </mat-form-field>
+        <angular-editor style='text-align:left;' [(ngModel)]="newIssue.issueNote" [config]="config" name='nm_NewIssueNote' ngDefaultControl></angular-editor>
+      </div>
+      <div style="text-align:right;padding-top:10px;">
+        <button class="btn btn-primary" *ngIf='!newIssue.issueName || newIssue.issueName.length==0' disabled>Create</button>
+        <button class="btn btn-primary" *ngIf='newIssue.issueName && newIssue.issueName.length>0' (click)='createNewIssue();'>Create</button>
+      </div>
+    </div>
+</ng-template>
+
+<ng-template #t_editIssue>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+        <h2>Edit Issue</h2>
+      </div>
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="issue-container" style="text-align:left !important;">
+      <mat-form-field appearance="fill" class='input-field' style="width:100%;padding-bottom:10px;">
+          <mat-label>Issue</mat-label>
+          <input type='text' matInput placeholder='Issue 1' [(ngModel)]='editIssue.issueName'>
+        </mat-form-field>
+      <mat-form-field appearance="fill" class='' style="width:100%;padding-bottom:10px;">
+          <mat-label>Status</mat-label>
+          <mat-select class="form-control" [(ngModel)] = 'editIssue.issueStatus' name="ed_NewIssueStatus">
+              <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>            
+          </mat-select>
+      </mat-form-field>
+      <angular-editor style='text-align:left;' [(ngModel)]="editIssue.issueNote" [config]="config" name='nm_EditIssueNote' ngDefaultControl></angular-editor>
+    </div>
+    <div style="text-align:right;padding-top:10px;">
+      <button class="btn btn-primary" *ngIf='!editIssue.issueName || editIssue.issueName.length==0' disabled>Update</button>
+      <button class="btn btn-primary" *ngIf='editIssue.issueName && editIssue.issueName.length>0' (click)='UpdateIssue();'>Update</button>
+    </div>
+  </div>
+</ng-template>

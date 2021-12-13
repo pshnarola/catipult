@@ -1,0 +1,52 @@
+<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+  <div class="left_col scroll-view">
+      <div class="navbar nav_title" style="border: 0;">
+          <a [routerLink]="['/dashboard']" class="site_title p10"><img src="assets/images/left-logo.png" class="img-responsive"><span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <!-- menu profile quick info -->
+      <div class="profile">
+          <div class="profile_pic">
+              <img src="{{url}}" alt="..." class="img-circle profile_img" />
+          </div>
+          <div class="profile_info">
+              <span>Welcome</span>
+              <h2>{{name}}</h2>
+          </div>
+      </div>
+      <!-- /menu profile quick info -->
+      <br />
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+              <br><br><br>
+              <ul class="nav side-menu">
+                  <li>
+                      <a id="dashboard" (click)="dash()">
+                          <i class="fa fa-home"></i>
+                          Dashboard
+                          <span id="dashboardchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a id="quarterly_updates" (click)="qNavi()">
+                          <i class="fa fa-desktop"></i>
+                          Questions
+                          <span id="quarterlyupdateschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="charp_updates" (click)="org()">
+                          <i class="fa fa-desktop"></i>
+                              Organizations
+                          <span id="charpupdateschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+
+              </ul>
+          </div>
+      </div>
+      <!-- /sidebar menu -->
+  </div>
+</div>

@@ -1,0 +1,186 @@
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+
+<button type="button" id="openModalButton2" style="display: none"  class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_user_modal3"></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                  <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+                    Rest KPI Journey
+                  </div>
+              </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <!-- <form role="form"> -->
+                  <form id="demo-form2"   method="post">
+
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          Are you sure you want to erase all previous Answers, Objectives and Milestones?            </div>
+                    </div>
+                      <br>
+
+
+
+                      <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+                  </form>
+              <!-- </form> -->
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                       class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+
+                  </div>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                      class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+                    </div>
+
+
+
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+<div class="right_col ml230" role="main">
+  <div class="row">
+    <div class="x_panel">
+      <div class="x_content">
+        <h2 style="color: #73879C !important;">Managers
+        </h2>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row tile_count">
+    <div fxFlex=100 fxLayout="column" class="example-container">
+      <div fxFlex fxLayout="row" fxLayoutAlign="start start">
+
+        <div class="row" *ngIf="milestonemanagers?.length>0">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2 style="color: #73879C !important;">Users</h2>
+                <ul class="nav navbar-right panel_toolbox ctoolbox">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-expanded="false"><i class="fa fa-refresh"></i></a>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            <div class="nav-wrapper">
+              <ul class="nav nav-tabs navtab">
+                <!-- <li><a data-toggle="tab" href="#tab1">tab 1</a></li>
+
+<li><a data-toggle="tab" href="#tab2">tab 2</a></li> -->
+
+                <li [ngClass]="i ===currState ? 'current active' : 'current'"
+                  *ngFor="let item of milestonemanagers, let i=index" (click)="getKpi(item,i)">
+                  <a data-toggle="tab" href="#tab{{i}}">
+                    <div class="text_center row">
+                      <div class="center_flex">
+                          <div class="col-md-6 col-sm-6 col-xs-6">
+                              <img class="img-circle img-responsive photo" src="{{item.info? 'https://api.catipult.ai/'+item.info.photo : 'assets/images/img.jpg'}}">
+                          </div>
+                      </div>
+                      <div class="row">
+                          <span class="count_top cf">
+                              {{item.name + ' '+ item.lname}}</span>
+                      </div>
+                  </div>
+                  </a>
+
+                </li>
+
+
+
+              </ul>
+            </div>
+            <div class="tab-content">
+
+              <div id="tab{{userCurrentIndex}}" *ngIf="userCurrentIndex===currState"
+                                  class="tab-pane fade {{userCurrentIndex===currState ? 'in active': ''}}">
+                                  <div class="table-responsive">
+                                    <table id="grey_datatable-responsive"
+                                      class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0"
+                                      width="100%">
+                                      <thead>
+                                        <tr>
+                                          <!-- <th>Kpi.No.</th> -->
+                                          <th>KPI</th>
+                                          <th>Actual</th>
+                                          <th>Target</th>
+                                          <th>% of Target</th>
+
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let element of userKpiData">
+                                          <td>{{element.objective}}</td>
+                                          <td>{{element.achieveQty}}</td>
+                                          <td>{{element.qty}}</td>
+                                          <td>
+                                            {{ (element.achieveQty/ element.qty) * 100 | number:'1.2-2' }}
+                                          </td>
+
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                                <!-- <div id="tab1" class="tab-pane fade in active">
+                  <h3>Switch to the other tab to see the carousel</h3>
+                  <p>Some content.</p>
+              </div>
+              <div id="tab2" class="tab-pane fade">
+                  <p>Demo from <a href="https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html">https://owlcarousel2.github.io/OwlCarousel2/demos/basic.html</a></p>
+              </div> -->
+                              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- /speedometer -->
+
+
+</div>
+

@@ -1,0 +1,60 @@
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0px;
+    bottom: 0;
+    background: #1f2532;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+    z-index: 999;
+    -ms-overflow-y: auto;
+    overflow-y: auto;
+    .textcss{
+        margin-left: 14px;
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.56;
+        letter-spacing: normal;
+        text-align: left;
+        color: #fbfbfb;
+    }
+    .mat-nav-list {
+        width: 100%;
+        a {
+            .mat-icon {
+                margin-right: 15px;
+            }
+            display: block;
+        }
+    }
+}
+.nested-menu {
+    .nested {
+        list-style-type: none;
+    }
+    .submenu {
+        display: none;
+        height: 0;
+    }
+    & .expand {
+        &.submenu {
+            display: block;
+            list-style-type: none;
+            height: auto;
+            margin: 0;
+            li {
+                a {
+                    padding: 10px;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 992px) {
+    #sidebar {
+        left: -250px;
+    }
+}

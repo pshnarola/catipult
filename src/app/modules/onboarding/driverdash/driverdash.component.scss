@@ -1,0 +1,293 @@
+.swiper {
+  height: 300px;
+  width: 400px;
+}
+.swiper-slide {
+  width: 250px !important;
+  margin-right: 10px;
+  margin: 2% 2% 3% 0%;
+  height: 324px;
+  border-radius: 4px;
+  border: solid 1px #e3e6ed;
+  background-color: #f1f1f1;
+  .kpihead{
+    margin-left: 43px;
+    margin-top: -8px;
+    font-family: Roboto;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 4.58;
+  letter-spacing: normal;
+  text-align: left;
+  color: #7d7d7d;
+  }
+  .kpidata{
+    margin-left: 43px;
+    margin-top: -28px;
+
+    font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 3.21;
+  letter-spacing: normal;
+  text-align: left;
+  color: #2b2b2b;
+  }
+}
+.swiper-wrapper {
+  z-index:3;
+}
+.swiper-pagination {
+  z-index:2;
+}
+
+.step2 {
+    background-image: url("/assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    .cdk-program-focused { display: none; }
+    .headerFix{
+      height: 160px;
+  background-color: #1f2532;
+  padding: 37px 0px 0px 11px;
+  overflow: hidden;
+  
+    } 
+    .iconImg{
+      width: 100%;
+    }
+    .cardleft {
+      max-width: 100%;
+      height: 100vh;
+      transition: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      .header{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #f0f0f0;
+      }
+      .content{
+        font-family: Roboto;
+        font-size: 24px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: left;
+        color: #00b2ff;
+      }
+      .footer{
+        font-family: Roboto;
+        margin-left: 0px;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.67;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+      }
+    } 
+    .example-container {
+      height: 400px;
+      overflow: auto;
+    }
+    
+    table {
+      width: 100%;
+      .bg{
+        background-color: #1f2532;
+      }
+      .headerText{
+        width: 20px;
+  height: 10px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+      }     
+    }
+    .btn{
+      width: 140px;
+      height: 50px;
+      margin-right: 1%;
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.67;
+      letter-spacing: normal;
+      text-align: center;
+      vertical-align: middle;
+      color: #f0f0f0;
+      border-radius: 4px;
+      background-color: #2aa9e0;
+    }    
+    .contentHeader{
+      margin: 10% 10% 1% 10%;
+      
+height: 20px;
+font-family: Roboto;
+font-size: 20px;
+font-weight: 500;
+font-style: normal;
+font-stretch: normal;
+line-height: 1.5;
+letter-spacing: normal;
+text-align: left;
+color: #1f2532;
+  }
+  }
+  .step2response {
+    background-image: url("/assets/images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    .mat-tab-label {
+      height: 93px !important;
+  }
+    .iconImg{
+      width: 42px;
+    }
+    .headerFix{
+      height: 60px;
+  background-color: #1f2532;
+  padding: 37px 0px 0px 11px;
+  overflow: hidden;
+  .imgclass{
+    width: 160px;
+    height: 28px;
+    margin-top: -15px;
+  }
+    }
+    .cardleft {
+      max-width: 100%;
+      transition: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      .header{
+       
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #f0f0f0;
+      }
+      .content{
+        margin-left: 0px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: #00b2ff;
+      }
+      .footer{
+        margin-left: 0px;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+      }
+    }      
+    .welcome{
+      
+      position: relative;
+      top:20%;
+      left: 5%;
+     
+      .card {
+          max-width: 550px;
+          margin-right: 10px !important;
+          transition: none !important;
+          box-shadow: none !important;
+          background: transparent;
+          .heading{
+              font-size: 36px !important;
+          font-family: Roboto;
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: #2b2b2b;
+          }
+        }      
+    }
+    .card {
+      cursor: pointer;
+      margin-right: 10px !important;
+      transition: none !important;
+      box-shadow: none !important;
+      background: transparent;
+      .btn{
+        height: 50px;
+        border-radius: 4px;
+        background-color: #2aa9e0;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.67;
+        letter-spacing: normal;
+        text-align: center;
+        color: #f0f0f0;
+      }
+    }   
+    .btn{
+      height: 50px;
+      margin-top: 10px;
+      border-radius: 4px;
+      background-color: #2aa9e0;
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.67;
+      letter-spacing: normal;
+      text-align: center;
+      color: #f0f0f0;
+    } 
+    .plankpi{
+      width: 550px;
+      height: 100px;
+      border-radius: 4px;
+      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+      background-color: #ffffff;
+    }
+  }
+  

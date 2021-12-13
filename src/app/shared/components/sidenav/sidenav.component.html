@@ -1,0 +1,70 @@
+<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+  <div class="left_col scroll-view">
+    <div class="navbar nav_title" style="border: 0;">
+      <a class="site_title p10">
+        <img src="assets/images/onboarding/step1/left-logo.png" class="img-responsive navmd" />
+        <span></span>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+    <!-- menu profile quick info -->
+    <div class="profile">
+      <div class="profile_pic">
+        <img src="{{ url }}" alt="" class="img-circle profile_img" />
+      </div>
+      <div class="profile_info">
+        <span>Welcome</span>
+        <h2>{{ name }}</h2>
+      </div>
+    </div>
+    <!-- /menu profile quick info -->
+    <br />
+    <!-- sidebar menu -->
+    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+      <div class="menu_section">
+        <div class="clearfix"></div>
+        <ul class="nav side-menu">
+          <li><a id="dashboard" (click)="dash();" class='nav-link'><i class="fa fa-home"></i>My Dashboard</a></li>
+          <li><a id="reviewQuestions" (click)="rvQuestion();" class='nav-link'><i class="fas fa-comment-alt" style='font-weight: 400;'></i>Review Questions</a></li>
+          <li><a id="outcomeStatement" (click)="outStatement();" class='nav-link'><i class="fas fa-file-alt" style='font-weight: 400;'></i>Three Year Outcome</a></li>
+          <li><a id="companySetUp" (click)='goToCompanySetup();' class='nav-link'><i class="fas fa-house-user"></i>My Company</a></li>
+          <li><a id="meetings" *ngIf='organizationData && organizationData.features && organizationData.features.meetings && organizationData.features.meetings=="enabled"' (click)='goToMeetings();' class='nav-link'><i class="fas fa-users"></i>My Meetings</a></li>
+          <li><a id='portfolioView' (click)='showPortfolioView();' class='nav-link' *ngIf='isPortfolioAccount'><i class='fas fa-city'></i>Coaching Portfolio</a></li>
+          <li><a id='tutorials' (click)='goToTutorials();' class='nav-link'><i class="fas fa-video"></i>Tutorials</a></li>
+          <li><a id='featureRequest' (click)='showModal(suggestionModal,"modal-sm");' class='nav-link'><i class='fas fa-bullhorn'></i>Feature Request</a></li>
+          <li><a (click)='goToUrl("https://catipult.ai/blog/category/resources/");' class='nav-link'><i class='fas fa-blog'></i>catipult.ai Blog</a></li>
+          <li><a class='versionColor' style='cursor: default !important;'>Version: {{ version }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #suggestionModal>  
+  <div class="modal-header" style='padding-bottom:0 !important;'>  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <h1 style='font-size:25px; font-weight:500 !important;'>Feature Suggestion</h1>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px; font-weight:500;'>Type</mat-label>
+      <mat-select class='form-control' [(ngModel)]='featureType' name='featureRequestType' style='height:auto !important; color: #73879C !important;'>
+        <mat-option *ngFor='let f of featureTypeList' [value]='f.value'>{{ f.viewValue }}</mat-option>
+      </mat-select>
+    </mat-form-field>  
+    <label for='newSuggestion'>Description <a *ngIf='featureDescription'><a [ngStyle]="{'color': featureDescription.length>255 ? 'red' : '#73879C'}">{{ featureDescription.length }}</a>/255</a></label>
+    <textarea name="featureRequestDescription" id="newSuggestion" cols="30" rows="6" style='width:100% !important; border-color: #d9d9d9 !important; font-size: 14px !important;' [(ngModel)]='featureDescription'></textarea>
+  </div>
+  <div class="modal-footer" style='padding-left: 10px !important; padding-right: 10px !important;'>
+      <div class="col-md-12 col-sm-12 col-xs-12" style='padding:0 !important;'>
+        <button *ngIf='featureDescription && featureDescription.length<=255' type="submit" data-dismiss="modal" class="btn btn-primary" style='width:100%;' (click)='submitSuggestion();'><b>Submit</b></button>
+        <button *ngIf='!featureDescription || featureDescription.length>255' type="submit" data-dismiss="modal" class="btn btn-primary" style='width:100%;' disabled><b>Submit</b></button>
+      </div>
+  </div> 
+</ng-template> 

@@ -1,0 +1,172 @@
+<app-loader></app-loader>
+<!-- top navigation -->
+<div class="top_nav ml500">
+  <div class="nav_menu">
+      <nav>
+          <div class="nav toggle">
+              <!-- <a id="menu_toggle" (click)="toggleClicked($event)"><i class="fa fa-bars"></i></a> -->
+              <!-- <i id="menu_toggle" (click)="toggleClicked($event)"><i class="fa fa-arrow-left"></i></a> -->
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <img src="assets/img.jpg" alt="" />{{name | titlecase}}
+                      <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li>
+                      <a [routerLink]="['/journey/kpijourney']" routerLinkActive="router-link-active" ><i class="fa fa-home pull-right"></i> Home</a>
+                  </li>
+                  <li>
+                      <a [routerLink]="['/account/login']"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  </li>
+                  </ul>
+              </li>
+          </ul>
+      </nav>
+  </div>
+</div>
+<!-- /top navigation -->
+<div class="col-md-3 left_col menu_fixed w500">
+    <!-- left_col scroll-view -->
+    <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+        <div class="navbar nav_title" style="border: 0;">
+            <a [routerLink]="['/dashboard']" class="site_title"><img src="assets/images/left-logo.png"> <span></span></a>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row customised_outer h80">
+            <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h1 class="white"><b>Step 3 : </b></h1>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h4 class="blue"><b>Congratulations! You've just created an
+                            12-quarter integrated strategic plan.</b></h4>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h4 class="white"><b>Each quarter is what we call a 90-Day Sprint. The next step is to take the first 90-Day Sprint and break it down into the things that need to be done each month in order to hit those objectives.</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/left_col scroll-view -->
+  </div>
+
+  <!-- page content -->
+  <div class="right_col ml500" role="main">
+    <!-- Class -->
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+            <form id="demo-form2"   method="post">
+                <div class="" style="background-color:white;">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label float_l c_label">KPI</label>
+                        </div>
+                    </div>
+                    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                    [cdkDropListConnectedTo]="[doneList1,doneList2,doneList3,doneList4,doneList5,doneList6, doneList7, doneList8, doneList9,doneList10,doneList11,doneList12]"
+                    class="example-list" (cdkDropListDropped)="drop($event)" style="  border-collapse:separate;
+                    border-spacing:0 15px; ">
+                    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.type}} - {{item.qty}}</div>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12 form-group pl0">
+            <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+                <form id="demo-form2"   method="post">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label float_l c_label"> Quarter 1</label>
+                        </div>
+                    </div>
+                    <div cdkDropList #doneList1="cdkDropList" [cdkDropListData]="done"
+                            [cdkDropListConnectedTo]="[doneList2,todoList]" class="example-list"
+                            (cdkDropListDropped)="drop($event)">
+                            <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.type}} - {{item.qty}}</div>
+                          </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12 form-group ">
+            <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+                <form id="demo-form2"   method="post">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label float_l c_label"> Quarter 2</label>
+                        </div>
+                    </div>
+                    <!-- <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Get up</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Brush teeth</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Take a shower</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12 form-group pr0">
+            <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+                <form id="demo-form2"   method="post">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label float_l c_label"> Quarter 3</label>
+                        </div>
+                    </div>
+                    <!-- <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Get up</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Brush teeth</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label class="control-label float_l c_label mt0">Take a shower</label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-sm-12 col-xs-12 float_r pr0">
+            <button type="submit"  class="btn btn-primary b_blue f18 w100" [routerLink]="['/plan/assigntask']"><b>Next</b></button>
+        </div>
+    </div>
+    <!--/Class -->
+  </div>
+  <!-- /page content -->

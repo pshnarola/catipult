@@ -1,0 +1,143 @@
+
+<div fxFlex=100 fxLayout="column" class="example-container">
+  <div fxLayout="row" fxLayoutAlign="center start">
+    <h2>Quarter Updates</h2>
+    </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="start start">
+<!--
+        <table>
+          <thead class="bg">
+            <tr>
+              <td>
+                  <span class="headerText">Kpi</span>
+              </td>
+              <td>
+                  <span class="headerText">Target</span>
+              </td>
+              <td>
+                  <span class="headerText">Q1 Result</span>
+              </td>
+              <td>
+                  <span class="headerText">Q2 Result</span>
+              </td>
+              <td>
+                  <span class="headerText">Q3 Result</span>
+              </td>
+              <td>
+                  <span class="headerText">Q4 Result</span>
+              </td>
+            </tr>
+          </thead>
+            <tr *ngFor="let item of ELEMENT_DATA">
+
+              <td class="tdclass" style="width: 200px !important;">
+                  <span>{{ item.objective }}</span></td>
+              <td class="tdclass">{{ item.qty }} {{ item.unit }}</td>
+              <td class="tdclass">
+                  <input  placeholder="" type="text"   name="unit" required
+                  style="margin: 2px;border:none;    width: 30px;" autocomplete="off"
+                    />
+              </td>
+              <td class="tdclass">
+                  <input  placeholder="" type="text"   name="unit" required
+                  style="margin: 2px;border:none;    width: 30px;" autocomplete="off"
+                    />
+              </td>
+              <td class="tdclass">
+                  <input  placeholder="" type="text"   name="unit" required
+                  style="margin: 2px;border:none;    width: 30px;" autocomplete="off"
+                    />
+              </td>
+              <td class="tdclass">
+                  <input  placeholder="" type="text"   name="unit" required
+                  style="margin: 2px;border:none;    width: 30px;" autocomplete="off"
+                    />
+              </td>
+            </tr>
+          </table> -->
+
+          <table mat-table  [dataSource]="dataSource" >
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="objective">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">KPI</span> </th>
+                <td mat-cell *matCellDef="let element" style="padding: 1%;" class="tdclass">
+                  <span class="textcss">{{element.objective}}</span>  </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="ml1">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Target</span> </th>
+                <td mat-cell *matCellDef="let element" style="padding: 1%;" class="tdclass">
+                  <span class="textcss">{{element.qty}} {{element.unit}}</span> </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="q1">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Q1 Result</span> </th>
+                <td mat-cell *matCellDef="let element" class="tdclass">
+                    <input  placeholder="" type="text"   name="unit" required
+                  style="margin: 2px;border:none;width: 30px;" autocomplete="off"
+                    />
+                  </td>
+              </ng-container>
+              <ng-container matColumnDef="q2">
+                  <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Q2 Result</span> </th>
+                  <td mat-cell *matCellDef="let element" class="tdclass">
+                      <input  placeholder="" type="text"   name="unit" required
+                      style="margin: 2px;border:none;width: 30px;" autocomplete="off"
+                      />
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="q3">
+                    <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Q3 Result</span> </th>
+                    <td mat-cell *matCellDef="let element" class="tdclass">
+                        <input  placeholder="" type="text"   name="unit" required
+                        style="margin: 2px;border:none;width: 30px;" autocomplete="off"
+                        />
+
+
+                      </td>
+                  </ng-container>
+                  <ng-container matColumnDef="q4">
+                      <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Q4 Result</span> </th>
+                      <td mat-cell *matCellDef="let element" class="tdclass">
+                          <input matInput placeholder="" type="text"   name="unit" required
+                          style="margin: 2px;border:none;width: 30px;" autocomplete="off"
+                          />
+
+
+                        </td>
+                    </ng-container>
+
+
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Action </span></th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                  <!-- <i class="material-icons" (click)="edit(element)">
+                    edit
+                  </i>
+                  <i class="material-icons" (click)="delete(element)">
+                    delete
+                  </i> -->
+
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+
+    </div>
+
+
+</div>
+<div fxFlex fxLayout="row" fxLayoutAlign="end end">
+    <button mat-raised-button class="btn" [routerLink]="['/dash']">
+      Submit
+</button>
+
+</div>
+

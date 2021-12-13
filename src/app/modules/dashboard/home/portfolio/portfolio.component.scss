@@ -1,0 +1,159 @@
+.all-user-card {
+    min-width: 300px;
+    max-height: 60px;
+  }
+
+.selected-user-card {
+  // width: 800px;
+  width: 100%;
+}
+
+.example-header-image {
+    background-size: cover;
+}
+
+.padding-bottom{
+  padding: 0px 0px 10px 0px;
+}
+
+.padding-top{
+  padding: 10px 0px 0px 0px;
+}
+
+.input-box{
+  text-align: left;
+}
+
+::ng-deep .mat-card-header-text{
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-infix{
+  position: inherit !important;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  padding-bottom:0px !important;
+}
+
+::ng-deep .mat-select{
+  outline: 0 !important;
+  border-width: 0 0 2px !important;
+  box-shadow: none !important;
+  border-color: #d9d9d9 !important;
+
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding-left:0px !important;
+  padding-right:0px !important;
+}
+
+.form-control {
+  height:auto !important;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+::ng-deep .select-format {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+input:focus {
+  border-color: green
+}
+
+.left-align{
+  text-align:left !important;
+}
+
+.btn-success {
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.btn-expand{
+  border-bottom-style: solid;
+  width: 100% !important;
+  border-bottom-width: 2px;
+  border-bottom-color: lightgray;
+}
+
+::ng-deep .poseidon .mat-form-field {
+  width: auto !important;
+}
+
+::ng-deep .poseidon .mat-form-field-appearance-fill .mat-form-field-flex{
+  background-color:none;
+}
+
+::ng-deep .poseidon .mat-form-field-flex {
+  border-style:none;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+input:focus {
+  border-color: green
+}
+
+.portfolio-group-title-icon{
+  visibility: hidden;
+}
+
+.portfolio-group-title:hover .portfolio-group-title-icon {
+  -webkit-animation: fadein .5s;
+  animation: fadein .5s;
+  visibility: visible;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@-webkit-keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+::ng-deep .toolTip {
+  font-size:13px !important;
+}
+
+::ng-deep .mat-card-header-text{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+::ng-deep .mat-card-content {
+  overflow: auto;
+}
+
+::ng-deep .mat-form-field-flex {
+  background-color: transparent !important;
+}

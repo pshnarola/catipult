@@ -1,0 +1,27 @@
+<div class="container" style='padding-left:0px;background:white;'>
+    <div class='attendee-grid' style='text-align:center;'>
+        <h1 style='font-size:1.5em;'>Attendees</h1>
+        <p *ngFor='let p of meetingData.meetingUserHistories'><i [ngClass]='p.userStatus=="present" ? "fas fa-check-circle green" : "fas fa-times-circle red"' style='padding-right:5px;'></i>{{ p.User.name }} {{ p.User.lname }}</p>
+    </div>
+    <div class='agenda-grid' style='text-align:center;'>
+        <h1 style='font-size:1.5em;'>{{ meetingData.meetingName }}</h1>
+        <h2 style='font-size:1.25em;'>{{ meetingData.meetingDate | date: 'MMM d, y, h:mm a' }}</h2>
+        <br>
+        <h4>Agenda</h4>
+        <p style='font-weight:600;' *ngFor='let a of meetingData.timerData'>{{ a.name }} : {{ a.display }}</p>
+        <hr>
+    </div>
+    <div class='notes-grid' style='text-align:left;'>
+        <h2 style='text-align:center;'>Meeting Notes</h2>
+        <a [innerHtml]="meetingData.meetingNotes"></a>
+    </div>
+    <div class='score-grid' style='text-align:center;'>
+        <a style='color:#73879C;font-size:20px;font-weight:400;'>Meeting Score (0-10)</a>
+        <br>
+        <a style='font-size:100px;color:#73879C;'>{{ meetingData.meetingScore }}</a>
+    </div>
+    <div class='scoreNotes-grid' style='text-align:left;'>
+        <h2 style='text-align:center;'>Score Notes</h2>
+        <a [innerHtml]="meetingData.scoreNotes"></a>
+    </div>  
+</div>

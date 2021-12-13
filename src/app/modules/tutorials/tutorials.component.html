@@ -1,0 +1,43 @@
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+<div class="right_col ml230 title" role="main">
+  <div class="title">
+    <h1>Catipult How-To Video Tutorials</h1>
+  </div>
+  <!-- <div class='flex-container' >
+      <div class='flex-item' *ngFor='let v of videos;let i of index'>
+        <iframe [src]="v.url | safe" webkitallowfullscreen mozallowfullscreen allowfullscreen width='400' height='200'></iframe>
+      </div>
+  <div>
+  </div> -->
+  <!-- <div>
+    <input matInput type="text" [(ngModel)]="tags" (input)="searchVideos()">
+  </div> -->
+  <div class='flex-container'>
+    <i class='fas fa-search flex-item' style='width:5%;font-size:40px;margin:auto;text-align:right;padding-right:10px;'></i>
+    <div style='width:95%'>
+      <mat-form-field class='flex-item' style='width:100%'>
+        <input matInput type="text" (input)="searchVideos($event.target.value)" placeholder='Search' style='font-size:20px;'>
+      </mat-form-field>  
+      <p *ngIf='videosFiltered.length>0'>Matches Found: {{ videosFiltered.length }}</p>
+    </div>
+  </div>
+
+  <div fxLayout='row wrap' *ngIf='videosFiltered.length==0'>
+    <mat-card *ngFor='let v of videos;let i of index'>
+      <iframe [src]="v.url | safe" webkitallowfullscreen mozallowfullscreen allowfullscreen width='400' height='200'></iframe>
+      <mat-card-title>{{ v.description }}</mat-card-title>
+      <mat-card-subtitle style='margin-bottom:5px !important;'>{{ v.author }}</mat-card-subtitle>
+      <mat-card-subtitle>Tags: {{ v.tags }}</mat-card-subtitle>
+    </mat-card>  
+  </div>
+
+  <div fxLayout='row wrap' *ngIf='videosFiltered.length>0'>
+    <mat-card *ngFor='let v of videosFiltered;let i of index'>
+      <iframe [src]="v.url | safe" webkitallowfullscreen mozallowfullscreen allowfullscreen width='400' height='200'></iframe>
+      <mat-card-title>{{ v.description }}</mat-card-title>
+      <mat-card-subtitle>{{ v.author }}</mat-card-subtitle>
+      <mat-card-subtitle>Tags: {{ v.tags }}</mat-card-subtitle>
+    </mat-card>  
+  </div>
+</div>

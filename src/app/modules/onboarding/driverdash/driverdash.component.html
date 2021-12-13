@@ -1,0 +1,261 @@
+
+<div class="{{leftStyle}}">
+
+
+
+  <div fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+    <div fxFlex="35" style="background-color: #1f2532;height: -webkit-fill-available;">
+      <div fxFlex class="headerFix" [routerLink]="['/kpijourney']">
+
+        <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="center">
+        <mat-card class="cardleft">
+
+          <mat-card-content fxFlex fxLayout="column">
+            <span class="header">Congratulations! </span>
+            <span class="content">Here are you KPIs for the Seven Business Drivers and your company dashboard. Next,
+              let's auto-update as many as we can.
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxFlex="65" class="flex70">
+      <div fxFlex class="contentHeader" fxLayoutAlign="end">
+        <i class="material-icons">
+          info
+        </i>
+
+
+      </div>
+
+      <div fxFlex fxLayout="row wrap" fxLayoutAlign="start">
+        <mat-tab-group dynamicHeight fxFlex="100">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver1.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              <mat-tab-group dynamicHeight fxFlex="100">
+                        <mat-tab label="Quarter 1">
+                                        <div class="example-container mat-elevation-z8">
+                                                        <table mat-table [dataSource]="dataSource">
+
+                                                          <!-- Position Column -->
+                                                          <ng-container matColumnDef="position">
+                                                            <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">No.</span>  </th>
+                                                            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                                                          </ng-container>
+
+                                                          <!-- Name Column -->
+                                                          <ng-container matColumnDef="name">
+                                                            <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">Kpi</span>  </th>
+                                                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                                          </ng-container>
+
+                                                          <!-- Weight Column -->
+                                                          <ng-container matColumnDef="weight">
+                                                            <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText">When is it Due</span> </th>
+                                                            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                                                          </ng-container>
+
+                                                          <!-- Symbol Column -->
+                                                          <ng-container matColumnDef="symbol">
+                                                            <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> How can the
+                                                                        group help? </span></th>
+                                                            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                                                          </ng-container>
+
+                                                          <!-- Charp Column -->
+                                                          <ng-container matColumnDef="status">
+                                                                        <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Check-in
+                                                                                        Status (CHARP) </span></th>
+                                                                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                                                                      </ng-container>
+
+                                                                      <!-- Symbol Column -->
+                                                          <ng-container matColumnDef="notes">
+                                                                        <th mat-header-cell *matHeaderCellDef class="bg"><span class="headerText"> Notes </span></th>
+                                                                        <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+                                                                      </ng-container>
+
+                                                          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                                        </table>
+                                                      </div>
+
+                                                 </mat-tab>
+
+                        <mat-tab label="Quarter 2">
+                           <div fxFlex>
+
+
+
+<!--
+ <div  class="swiper-container" [swiper]="config" style="background: white;">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+          <div fxFlex fxLayout="column" fxFill fxLayoutAlign="start start">
+              <span class="kpihead"> Kpi</span>
+              <span class="kpidata"> Insurance</span>
+
+              <span class="kpihead"> when is it due</span>
+              <span class="kpidata"> 25/04/2020</span>
+
+              <span class="kpihead"> How can Group can help ?</span>
+              <span class="kpidata"> More Info</span>
+
+              <span class="kpihead"> check in status(CHARP)</span>
+              <span class="kpidata"> C</span>
+
+              <span class="kpihead"> Note</span>
+              <span class="kpidata"> lasld sldlsldlsds</span>
+            </div>
+      </div>
+      <div class="swiper-slide">
+          <div fxFlex fxLayout="column" fxFill fxLayoutAlign="start start">
+              <span class="kpihead"> Kpi</span>
+              <span class="kpidata"> Insurance</span>
+
+              <span class="kpihead"> when is it due</span>
+              <span class="kpidata"> 25/04/2020</span>
+
+              <span class="kpihead"> How can Group can help ?</span>
+              <span class="kpidata"> More Info</span>
+
+              <span class="kpihead"> check in status(CHARP)</span>
+              <span class="kpidata"> C</span>
+
+              <span class="kpihead"> Note</span>
+              <span class="kpidata"> lasld sldlsldlsds</span>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <div fxFlex fxLayout="column" fxFill fxLayoutAlign="start start">
+                <span class="kpihead"> Kpi</span>
+                <span class="kpidata"> Insurance</span>
+
+                <span class="kpihead"> when is it due</span>
+                <span class="kpidata"> 25/04/2020</span>
+
+                <span class="kpihead"> How can Group can help ?</span>
+                <span class="kpidata"> More Info</span>
+
+                <span class="kpihead"> check in status(CHARP)</span>
+                <span class="kpidata"> C</span>
+
+                <span class="kpihead"> Note</span>
+                <span class="kpidata"> lasld sldlsldlsds</span>
+              </div>
+          </div>
+    </div>
+
+    <div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
+    <div class="swiper-pagination" [hidden]="config.pagination === false"></div>
+  </div> -->
+                           </div>
+                        </mat-tab>
+                        <mat-tab label="Quarter 3"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 4"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 5"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 6"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 7"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 8"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 9"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 10"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 11"> Content 3 </mat-tab>
+                        <mat-tab label="Quarter 12"> Content 3 </mat-tab>
+              </mat-tab-group>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver2.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver3.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver4.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver5.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver6.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <div fxFlex>
+                <img src="../../../../assets/images/driver/tab/driver7.png" class="iconImg">
+
+              </div>
+            </ng-template>
+            <div fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+              content
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+        <div fxFlex style="margin: 2%"fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutAlign="end">
+            <button mat-raised-button class="btn" [routerLink]="['/plan/step7']">
+              Skip
+      </button>
+      <button mat-raised-button class="btn" [routerLink]="['/plan/step7']">
+        Next
+</button>
+
+
+                      </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

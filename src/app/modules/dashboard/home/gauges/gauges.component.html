@@ -1,0 +1,169 @@
+
+<div id='gauge' fxLayout='row'>
+  <ng-container>
+    <div class='scroll-container'>
+      <button class='scroll scroll-left' (click)='scrollLeft($event)'><i class='fas fa-chevron-left'></i></button>
+    </div>
+    <div id='cards' class='cards' fxLayout='row'>
+      <div class='content' (click)='setDriverName(you.driverID,you.driverName)'>
+        <mat-card class='mat-elevation-z4 isActive'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ you.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("You");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !you || !you.total || you.total-you.dCount==0, "gauge": you && you.total && you.total-you.dCount>0}'>
+            <p *ngIf='!you || !you.total || you.total-you.dCount==0'>No Activity</p>
+            <div id='chart-You'>
+              <canvas id="myChart-You" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ you.pCount / (you.total-you.dCount) | percent }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+      <div class='content' (click)='setDriverName(leadership.driverID,leadership.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ leadership.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Leadership");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !leadership || !leadership.total || leadership.total-leadership.dCount==0, "gauge": leadership && leadership.total && leadership.total-leadership.dCount>0}'>
+            <p *ngIf='!leadership || !leadership.total || leadership.total-leadership.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Leadership'>
+              <canvas id="myChart-Leadership" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ leadership.pCount / (leadership.total-leadership.dCount) | percent  }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+      <div class='content' (click)='setDriverName(employees.driverID,employees.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ employees.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Employees");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !employees || !employees.total || employees.total-employees.dCount==0, "gauge": employees && employees.total && employees.total-employees.dCount>0}'>
+            <p *ngIf='!employees || !employees.total || employees.total-employees.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Employees'>
+              <canvas id="myChart-Employees" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ employees.pCount / (employees.total-employees.dCount) | percent }} </p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+      <div class='content' (click)='setDriverName(customers.driverID,customers.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ customers.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Customers");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !customers || !customers.total || customers.total-customers.dCount==0, "gauge": customers && customers.total && customers.total-customers.dCount>0}'>
+            <p *ngIf='!customers || !customers.total || customers.total-customers.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Customers'>
+              <canvas id="myChart-Customers" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ customers.pCount / (customers.total-customers.dCount) | percent }} </p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+      <div class='content' (click)='setDriverName(financialPartners.driverID,financialPartners.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:15%;text-align:left;'></p>
+              <p style='float:left;width:65%;text-align:center;' *ngIf='dashStatus'>{{ financialPartners.driverName }}</p>
+              <a style='cursor:pointer;float:right;width:20%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Financial Partners");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !financialPartners || !financialPartners.total || financialPartners.total-financialPartners.dCount==0, "gauge": financialPartners && financialPartners.total && financialPartners.total-financialPartners.dCount>0}'>
+            <p *ngIf='!financialPartners || !financialPartners.total || financialPartners.total-financialPartners.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Financial Partners'>
+              <canvas id="myChart-Financial Partners" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ financialPartners.pCount / (financialPartners.total-financialPartners.dCount) | percent }} </p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+      <div class='content' (click)='setDriverName(cash.driverID,cash.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ cash.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Cash");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !cash || !cash.total || cash.total-cash.dCount==0, "gauge": cash && cash.total && cash.total-cash.dCount>0}'>
+            <p *ngIf='!cash || !cash.total || cash.total-cash.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Cash'>
+              <canvas id="myChart-Cash" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ cash.pCount / (cash.total-cash.dCount) | percent }} </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class='content' (click)='setDriverName(growth.driverID,growth.driverName)'>
+        <mat-card class='mat-elevation-z4'>
+          <div class='cardHeader'>
+            <mat-card-title class='cardTitle'>
+              <p style='float:left;width:33.33333%;text-align:left;'></p>
+              <p style='float:left;width:33.33333%;text-align:center;' *ngIf='dashStatus'>{{ growth.driverName }}</p>
+              <a style='float:right;width:33.33333%;text-align:right;padding-right:5px;'><i class='fas fa-video video' (click)='showModal(video,"modal-md");setVideo("Growth");' alt=""></i></a>  
+            </mat-card-title>
+          </div>
+          <div class='gaugeSpacer'></div>
+          <mat-card-content [ngClass]='{"no-activity": !growth || !growth.total || growth.total-growth.dCount==0, "gauge": growth && growth.total && growth.total-growth.dCount>0}'>
+            <p *ngIf='!growth || !growth.total || growth.total-growth.dCount==0'>No Activity</p>
+          <!-- <mat-card-content> -->
+            <div id='chart-Growth'>
+              <canvas id="myChart-Growth" width="100" height="100"></canvas>
+            </div>
+            <p *ngIf='dashStatus' class='cardBody'>{{ growth.pCount / (growth.total-growth.dCount) | percent }} </p>
+          </mat-card-content>
+        </mat-card>
+      </div> 
+    </div>
+    <div>
+      <button class='scroll scroll-right' (click)='scrollRight($event)'><i class='fas fa-chevron-right'></i></button>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #video>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h1>{{ videoDriverName }} Driver</h1></div>
+    </h4>
+  </div>
+  <!-- Video -->
+  <div class='modal-footer'>
+    <div class="embed-responsive embed-responsive-16by9">
+      <video autoplay controls="true" class="embed-responsive-item"><source src="{{ videoUrl }}" type="video/mp4" style='height:100px;width:100px;'/></video>
+    </div>
+    </div>
+</ng-template>

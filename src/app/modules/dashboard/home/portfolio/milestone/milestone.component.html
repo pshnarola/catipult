@@ -1,0 +1,107 @@
+<div class="x_panel">
+    <div class="x_content">
+      <div class="x_title" style='padding-bottom:0px; margin-bottom:0px;'>
+        <h2 *ngIf='displayMilestoneDetail && driverName=="You"'>Plan to hit {{ driverName }} targets (KPIs)</h2>
+        <h2 *ngIf='displayMilestoneDetail && driverName!="You"'>Management plan to hit {{ driverName }} targets (KPIs)</h2>
+        <h2 *ngIf='!displayMilestoneDetail'>{{ driverName }} Milestone Summary</h2>
+        <ul class="nav navbar-right panel_toolbox ctoolbox">
+          <li *ngIf="displayMilestoneData && displayMilestoneDetail" (click)="showMilestoneData();">
+            <a><i class='fas fa-eye-slash' style="color: green; font-weight:400;" ></i></a>
+          </li>
+          <li *ngIf='displayMilestoneDetail' (click)='showMilestoneDetail();'>
+            <a><i class='fas fa-chart-bar' style='color:#1f2532;'></i></a>
+          </li>
+          <li *ngIf='!displayMilestoneDetail' (click)='showMilestoneDetail();'>
+            <a><i class='fas fa-table' style='color: #1f2532;'></i></a>
+          </li>
+          <li>
+            <a *ngIf='displayMilestoneDetail && !displayMilestoneArchive' (click)='showMilestoneArchive();'><i class='fas fa-archive' style='color: #1f2532;'></i></a>
+            <a *ngIf='displayMilestoneDetail && displayMilestoneArchive' (click)='showMilestoneArchive();'><i class='fas fa-box-open' style='color: #1f2532;'></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div style='margin-bottom:25px;'>
+        <a style='margin-left:5px;color:#73879C;'>How are we going to achieve our 3 year targets?</a>
+      </div>
+      <div *ngIf='!displayMilestoneDetail'>
+        <app-dashboard-charp></app-dashboard-charp>
+      </div>
+      <div class="table-responsive" *ngIf='displayMilestoneDetail'>
+        <table id="datatable-buttons" class="table table-hover" cellspacing="0" width="100%">
+          <thead>
+            <tr class="myHead">
+              <th data-column-id="id" data-type="numeric" data-identifier="true" data-header-css-class="cbg-header-name">Number</th>
+              <th data-column-id='kpi'>KPI</th>
+              <th data-column-id="patient_name">Milestones / Rocks</th>
+              <th data-column-id="patient_name">Due Date</th>
+              <th data-column-id="patient_name">Status</th>
+              <th data-column-id="patient_name">Who</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="displayMilestoneData && displayMilestoneDetail">
+            <tr *ngFor="let item of milestoneusersKpi; let i = index">
+              <td><a style='color: #007bff; cursor: pointer;' data-toggle="modal" data-target="#edit_milestone1" (click)="milestoneEdit(template,i)">{{ i + 1 }}</a></td>
+              <td>{{ item.objective }}</td>
+              <td>{{ item.achieveText }}</td>
+              <td>{{ item.dueDate }}</td>
+              <td>{{ item.charpStatus }}</td>
+              <td>{{ item.User ? item.User.name + " " + item.User.lname : ("") }}</td>
+            </tr>
+          </tbody><tbody *ngIf="!displayMilestoneData || !displayMilestoneDetail">
+            <tr>
+              <td colspan='5' style='text-align:center;'><a><i role="button" class='fa fa-eye' style="color: red; font-weight:400;" (click)="showMilestoneData();"> Click to display</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+<ng-template #template>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <img src="{{ driverImg }}"/>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body">
+    <form id="milestoneEdit" method="post">
+      <br>
+      <div class='padding-bottom'>
+        <span class=''>Milestone</span>
+        <input name='kpiObjective' type="text" class="form-control" placeholder="Example: Working out" name='milestone' [(ngModel)]='milestoneMilestoneEdit'>    
+      </div>
+      <div class='padding-bottom'>
+        <span class="">Due Date</span>
+        <input name="qty" type='date' class="form-control" placeholder="Example: $50000" name='milestoneDueDate' [(ngModel)]='milestoneDueDateEdit' (change)='updateQuarterList()'>  
+      </div>
+      <div class='padding-bottom'>
+        <span class="">Status</span>
+        <mat-select [(ngModel)]="milestoneStatusEdit" name='milestoneStatus'>
+          <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>
+        </mat-select>
+      </div>
+      <div>
+        <span class="">Assigned</span>
+        <mat-select [ngClass]='form-control' [(ngModel)]="milestoneAssignedEdit" name='milestoneAssigned' (selectionChange)='updateQuarterList()'>
+          <mat-option *ngFor="let u of userList" [value]="u.name + ' ' + u.lname">{{ u.name + ' ' + u.lname }}</mat-option>
+        </mat-select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)='updateMilestoneData()'><b>Save</b></button>
+          </div>
+      </div>
+    </div>  
+  </div> 
+  </ng-template> 

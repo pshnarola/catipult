@@ -1,0 +1,343 @@
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+
+<button
+  type="button"
+  id="openModalButton2"
+  style="display: none"
+  class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal"
+  data-target="#invite_user_modal3"
+></button>
+<button
+  type="button"
+  id="openModalButton3"
+  style="display: none"
+  class="btn btn-xs btn-default command-edit mr5"
+  data-toggle="modal"
+  data-target="#invite_success_modal"
+></button>
+<!-- invite user modal -->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="invite_user_modal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel3"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            Rest KPI Journey
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              Are you sure you want to erase all previous Answers, Objectives
+              and Milestones?
+            </div>
+          </div>
+          <br />
+
+          <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+        </form>
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+                (click)="confirm()"
+              >
+                <b>Ok</b>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+              >
+                <b>Cancel</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="invite_success_modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="invite_success_modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center"></div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              Quarter Status Updated
+            </div>
+          </div>
+          <br />
+
+          <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+        </form>
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"
+              >
+                <b>Ok</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->
+
+<div class="right_col ml230" role="main">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <!-- listing_section-->
+        <div class="x_panel">
+          <div class="x_content">
+            <div class="x_title">
+              <h2>Quarterly Updates</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="table-responsive">
+              <table
+                id="datatable-buttons"
+                class="table table-striped table-bordered dt-responsive nowrap"
+                cellspacing="0"
+                width="100%"
+              >
+                <thead>
+                  <tr class="myHead">
+                    <th
+                      data-column-id="id"
+                      data-type="numeric"
+                      data-identifier="true"
+                      data-header-css-class="cbg-header-name"
+                    >
+                      KPI
+                    </th>
+                    <th data-column-id="patient_name">Target</th>
+                    <th data-column-id="patient_name">Unit</th>
+                    <th data-column-id="patient_name">Achieved Quantity</th>
+                    <th data-column-id="patient_name">%</th>
+                    <th
+                      data-column-id="commands"
+                      data-formatter="commands"
+                      data-sortable="false"
+                      data-header-css-class="cbg-header-name"
+                      style="width:11%;"
+                    >
+                      Commands
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of kpiData">
+                    <td>{{ element.objective }}</td>
+                    <td>{{ element.qty }}</td>
+                    <td>{{ element.unit }}</td>
+
+                    <td>
+                      {{ element.achieveQty }}
+                      <!-- <input type="text" name="target" min="0" max="{{element.qty}}" [(ngModel)]="element.achieveQty"  class="form-control cform-control br0" placeholder="Achieved Quantity"> -->
+                    </td>
+                    <td>
+                      {{
+                        (element.achieveQty.replace('$','').replace(',','') / element.qty.replace('$','').replace(',','')) * 100
+                          | number: "1.2-2"
+                      }}
+                    </td>
+                    <td>
+                      <!-- data-toggle="modal" data-target="#invite_success_modal" -->
+                      <!-- <button type="button" class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-toggle="modal" data-target="#updatequarter" (click)="open(element)">Update</button> -->
+                      <button
+                        type="button"
+                        class="btn btn-primary mbunset"
+                        data-toggle="modal"
+                        data-toggle="modal"
+                        data-target="#updatequarter"
+                        (click)="open(element)"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="search_btn">
+                  <!-- <button type="submit" class="btn btn-success mr0" id="command-add" data-row-id="0">Submit</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/listing_section-->
+      </div>
+    </div>
+  </div>
+  <!--/Class -->
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="updatequarter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="updatequarter3"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+            What was the actual that was achieved?
+          </div>
+        </h4>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- <form role="form"> -->
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <input
+                
+                name="target"
+                min="0"
+                max="{{ temp.qty }}"
+                [(ngModel)]="temp.achieveQty"
+                class="form-control cform-control br0"
+                placeholder="Achieved Quantity"
+              />
+            </div>
+          </div>
+          <br />
+          <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+        </form>
+        <!-- </form> -->
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+            <div class="">
+              <!-- <button type="submit"  data-dismiss="modal"
+                       class="btn btn-primary b_blue f18 bw100 mr0px" (click)="save(temp)"><b>Update</b></button> -->
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-success"
+                (click)="save(temp)"
+              >
+                <b>Submit</b>
+              </button>
+              <button
+                type="submit"
+                data-dismiss="modal"
+                class="btn btn-primary"
+              >
+                <b>Cancel</b>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /invite user modal -->

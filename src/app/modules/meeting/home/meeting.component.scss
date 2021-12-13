@@ -1,0 +1,295 @@
+.base-card {
+    min-width:300px;
+}
+
+.card-header-image {
+  background-size: cover;
+}
+
+.small-font {
+  font-size:12px;
+}
+
+.start-meeting {
+  color: green;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.preview-meeting {
+  color: #1f2532;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.stop-meeting {
+  color: red;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+::ng-deep .agenda-item-icon{
+  padding-right:10px;
+}
+
+.agenda-item-done {
+  color: #28DF99;
+}
+
+.agenda-item-open {
+  color:rgb(0,169,221)
+}
+
+.agenda-item-togo {
+  color: gray;
+}
+
+.agenda {
+  list-style: none;
+  // padding-left:10px;
+}
+
+.agenda-item{
+  font-size: 18px;
+  color:#73879C;
+}
+
+.time-remaining{
+  color:inherit;
+}
+
+.time-remaining-warning {
+  color:orange;
+}
+
+.time-remaining-danger {
+  color:red;
+}
+
+.time-remaining-info {
+  // color:inherit;
+  color:#73879C;
+}
+
+.time-remaining-success {
+  color: green;
+}
+::ng-deep .toolTip {
+  font-size:13px !important;
+}
+
+.meeting-title {
+  text-align:center !important;
+}
+
+/* input formatting */
+
+::ng-deep .mat-select{
+  outline: 0 !important;
+  border-width: 0 0 2px !important;
+  box-shadow: none !important;
+  border-color: #d9d9d9 !important;
+
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding-left:0px !important;
+  padding-right:0px !important;
+}
+
+.form-control {
+  height:auto !important;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+::ng-deep .select-format {
+  outline: 0;
+  border-width: 0 0 2px;
+  box-shadow: none;
+  border-color: #d9d9d9;
+}
+
+input:focus {
+  border-color: green
+}
+
+.attendee-item{
+  visibility: hidden;
+}
+
+.attendee:hover .attendee-item {
+  -webkit-animation: fadein .75s;
+  animation: fadein .75s;
+  visibility: visible;
+}
+
+.agenda-control {
+  visibility: hidden;
+}
+
+.agenda:hover .agenda-control {
+  -webkit-animation: fadein .75s;
+  animation: fadein .75s;
+  visibility: visible;
+  cursor: pointer;
+  color:#73879C;
+}
+
+.meeting-tools{
+  visibility: hidden;
+}
+
+.meeting:hover .meeting-tools {
+  -webkit-animation: fadein .5s;
+  animation: fadein .5s;
+  visibility: visible;
+}
+
+.hide-attendee-list {
+  -webkit-animation: fadeout .5s;
+  animation: fadeout .5s;
+  visibility: hidden;
+}
+
+.display-attendee-list {
+  -webkit-animation: fadein .5s;
+  animation: fadein .5s;
+  visibility: visible;
+}
+
+.meeting-tools:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@-webkit-keyframes fadeout {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.isCustomTimer{
+  border-color:#337ab7;
+}
+
+.isNotCustomTimer{
+  border-color:#666666;
+}
+
+::ng-deep .mat-form-field-infix{
+  position: revert !important;
+  padding-bottom:2px;
+}
+
+::ng-deep .poseidon .mat-form-field-appearance-fill .mat-form-field-flex{
+  background-color:white;
+}
+
+textarea:focus {
+ outline-style:none; 
+}
+
+textarea {
+  border: 2px solid;
+  border-color: #e3e6ed;
+}
+
+.full-width {
+  width:100% !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom:0px !important;
+  padding-right:0px !important;
+}
+
+::ng-deep .mat-form-field-infix {
+  padding-bottom: 0px !important;
+  // text-align:center;
+}
+
+::ng-deep .poseidon .mat-form-field-flex {
+  border-style:none;
+}
+
+.white-background {
+  background-color: white;
+}
+
+.text-area-label{
+  margin-left: 10px;
+  padding-left:5px;
+  padding-right:5px;
+  background-color: white;
+  font-size:20px;
+}
+
+.text-area-body{
+  // width:400px;
+  height:200px;
+  font-size:15px;
+}
+
+.padding-bottom {
+  padding-bottom:10px !important;
+}
+
+::ng-deep .owl-dt-timer-hour12 .owl-dt-timer-hour12-box {
+  margin-top:12px !important;
+}
+
+.is-not-visible{
+  visibility: hidden;
+}
+
+::ng-deep .mat-cell {
+  color:#73879C !important;
+}
+
+::ng-deep .mat-header-cell {
+  color:#73879C !important;
+}
+
+.border-bottom-light {
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:rgb(240,240,240);
+}
+
+.top-border-light {
+  border-top-style:solid;
+  border-top-width:1px;
+  border-top-color:rgb(240,240,240);
+}
+
+.border-right-light {
+  border-right-style:solid;
+  border-right-width:1px;
+  border-right-color:rgb(240,240,240);
+}
+
+.isRecurring{
+  border-color:#337ab7;
+}
+
+.isNotRecurring{
+  border-color:#666666;
+}

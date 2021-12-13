@@ -1,0 +1,177 @@
+<div class="register-page">
+        <div class="content">
+            <!-- <h1 class="app-name">Sb Admin Material</h1> -->
+            <div  fxLayout="row" fxLayout.lt-md="column" fxFlex>
+                    <div>
+                            <img src="../../../../assets/images/signup.png">
+                        </div>
+                        <div fxFlex=50  fxLayoutAlign="start">
+                                        <form [formGroup]="userDetailsForm" (ngSubmit)="onRegister(userDetailsForm.value)" class="login-form">
+                                    <div fxFlex fxLayoutAlign="center">
+                                        <div fxFlex=10>
+
+                                        </div>
+
+                                    </div>
+                                        <div class="text-center">
+                                                <img src="../../../../assets/logo.jpg">
+                                        </div>
+                                        <div class="text-center">
+                                                Enter Information to Continue registration
+                                        </div>
+                                        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+                                            <div fxFlexFill>
+                                                <div fxLayoutAlign="start" fxLayout="row">
+                                                                <div [fxFlex]="90">
+                                                                        <p style="padding-left: 30px">{{email}}</p>
+
+                                                                </div>
+                                                                <div [fxFlex]="10">
+                                                                        <!-- <mat-icon class="sidenav-icon">account_circle</mat-icon>  -->
+                                                                </div>
+                                                        </div>
+                                            </div>
+                                    <div fxFlexFill>
+                                        <mat-form-field class="w-100"  [floatLabel]="'never'">
+                                            <div fxLayoutAlign="start" fxLayout="row">
+                                                    <div [fxFlex]="90">
+                                                            <input matInput placeholder="First Name" type="text" formControlName="name">
+                                                    </div>
+                                                    <div [fxFlex]="10">
+                                                            <mat-icon class="sidenav-icon">input</mat-icon>
+                                                    </div>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+                                    <div fxFlexFill>
+                                        <mat-form-field class="w-100"  [floatLabel]="'never'">
+                                            <div fxLayoutAlign="start" fxLayout="row">
+                                                    <div [fxFlex]="90">
+                                                            <input matInput placeholder="Last Name" type="text" formControlName="lname">
+                                                    </div>
+                                                    <div [fxFlex]="10">
+                                                            <mat-icon class="sidenav-icon">input</mat-icon>
+                                                    </div>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+
+
+                                                <div fxFlexFill>
+                                                    <mat-form-field class="w-100"  [floatLabel]="'never'">
+                                                        <div fxLayoutAlign="start" fxLayout="row">
+                                                                <div [fxFlex]="90">
+                                                                        <input matInput placeholder="Password" type="password" formControlName="password">
+                                                                </div>
+                                                                <div [fxFlex]="10">
+                                                                        <mat-icon class="sidenav-icon">vpn_key</mat-icon>
+                                                                </div>
+                                                        </div>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+
+                                            <div fxFlexFill>
+                                                <mat-form-field class="w-100"  [floatLabel]="'never'">
+                                                    <div fxLayoutAlign="start" fxLayout="row">
+                                                            <div [fxFlex]="90">
+                                                                    <input matInput placeholder="Confirm Password" type="password" formControlName="password2">
+                                                            </div>
+                                                            <div [fxFlex]="10">
+                                                                    <mat-icon class="sidenav-icon">vpn_key</mat-icon>
+                                                            </div>
+                                                    </div>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+
+                                        <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                                            <div fxFlexFill class="w-100">
+                                                <button  class="btn-login">Sign up</button>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                            </div>
+
+            </div>
+
+        </div>
+    </div>
+<!--
+    <div fxFlex=50  fxLayoutAlign="start">
+                <form class="login-form" fxFlex  >
+                    <div fxFlex fxLayoutAlign="center">
+                        <div fxFlex=10>
+
+                        </div>
+
+                    </div>
+                        <div class="text-center">
+                                <img src="../../../../assets/logo.jpg">
+                        </div>
+                        <div class="text-center">
+                                Enter the email address associated with your account,  and will receive link to verify their information and access
+                        </div>
+                        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+
+                                <div fxFlexFill>
+                                    <mat-form-field class="w-100">
+                                        <div fxLayoutAlign="start" fxLayout="row">
+                                                <div [fxFlex]="90">
+                                                        <input matInput placeholder="Full Name">
+                                                </div>
+                                                <div [fxFlex]="10">
+                                                        <mat-icon class="sidenav-icon">account_circle</mat-icon>
+                                                </div>
+                                        </div>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                    <div fxLayoutAlign="start" fxLayout="row">
+                                            <div [fxFlex]="90">
+                                                    <input matInput placeholder="Enter Your Email">
+                                            </div>
+                                            <div [fxFlex]="10">
+                                                    <mat-icon class="sidenav-icon">email</mat-icon>
+                                            </div>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill>
+                                <mat-form-field class="w-100">
+                                        <div fxLayoutAlign="start" fxLayout="row">
+                                                <div [fxFlex]="90">
+                                                        <input matInput  placeholder="Phone Number">
+                                                </div>
+                                                <div [fxFlex]="10">
+                                                        <mat-icon class="sidenav-icon">phone</mat-icon>
+                                                </div>
+                                        </div>
+
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                            <div fxFlexFill class="w-100">
+                                <button  class="btn-login" (click)="onLogin()">Sign up with Email</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+            </div> -->

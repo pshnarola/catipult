@@ -1,0 +1,393 @@
+<div class="right_col ml230" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <div class='col-md-2 col-lg-4 col-xl-4'></div>
+                    <div class='company-card col-xs-12 col-sm-10 col-md-8 col-lg-4 col-xl-4' style='min-height:200px;margin:auto;background-color:rgb(255,255,255);padding-left:0px;padding-right:unset !important;'>
+                      <div class='col-md-6 col-lg-6 col-xl-6 company-card-header' style='background-color:white; text-align:center;'>
+                        <div class='company-card-logo' style='display:flex;justify-content:center;align-items:center;overflow:hidden;'>
+                          <img [src]='orgEditLogoUrl ? orgEditLogoUrl : "assets/img.jpg"' style='max-width:100%;' alt="">
+                        </div>
+                        <div class='company-card-title' style='display:flex;justify-content:center;align-items:center;'>
+                          <h5 style='float:none !important; width:100%;text-align:center;'>{{ orgName }}</h5>
+                        </div>
+                      </div>
+                      <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 company-card-detail-height' style='padding-left:0 !important;padding-right:unset !important;'>
+                      <div class='company-card-line-break'>
+                        </div>
+                        <div class='container' style='overflow:hidden;'>
+                          <div class='row' style='color:rgb(240,240,240);height:40px;background-color:rgb(100,100,100);margin-left:unset !important;'>
+                            <div class='col-md-2 col-lg-2 col-xl-2' style='height:100%;padding-left:unset !important; padding-right:unset !important;'>
+                              <a><i class='fas fa-map-marker-alt' style='color:rgb(240,240,240);background-color:rgb(8,134,175);width:40px;height:100%;margin:auto;padding-top:11px;font-size:15px;padding-left:10px;'></i></a>
+                            </div>
+                            <div class='col-md-10 col-lg-10 col-xl-10' style='height:40px;'>
+                              <h5 *ngIf='orgEditAddress && orgEditCity' style='color:rgb(240,240,240);'>{{ orgEditAddress }} {{ orgEditCity }}</h5>
+                            </div>
+                          </div>
+                        </div>
+                        <div class='container' style='overflow:hidden;'>
+                          <div class='row' style='color:rgb(240,240,240);height:40px;background-color:rgb(150,150,150);margin-left:unset !important;'>
+                            <div class='col-md-2 col-lg-2 col-xl-2' style='height:100%;padding-left:unset !important; padding-right:unset !important;'>
+                              <a><i class='fas fa-globe' style='color:rgb(240,240,240);background-color:rgb(0,169,221);width:40px;height:100%;margin:auto;padding-top:11px;font-size:15px;padding-left:10px;'></i></a>
+                            </div>
+                            <div class='col-md-10 col-lg-10 col-xl-10'>
+                              <h5 style='color:rgb(240,240,240);'>{{ orgEditEmail }}</h5>
+                            </div>
+                          </div>
+                        </div>
+                          <div class='container' style='overflow:hidden;'>
+                            <div class='row' style='color:rgb(240,240,240);height:40px;background-color:rgb(100,100,100);margin-left:unset !important;'>
+                              <div class='col-md-2 col-lg-2 col-xl-2' style='height:100%;padding-left:unset !important; padding-right:unset !important;'>
+                                <a><i class='fas fa-phone' style='color:rgb(255, 226, 226);background-color:rgb(8,134,175);width:40px;height:100%;margin:auto;padding-top:11px;font-size:15px;padding-left:10px;'></i></a>
+                              </div>
+                              <div class='col-md-10 col-lg-10 col-xl-10'>
+                                <h5 style='margin-top:12px;'>{{ orgEditPhoneNumber | mask: '(000) 000-0000' }}</h5>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="clearfix"></div>                      
+                    </div>
+                    <a><i class="fas fa-plus" style='font-size:12px; margin-left:15px; color: #73879C;cursor:pointer;'(click)='showModal(companySetupAdd,"modal-md")' *ngIf="userRole === 'admin'"></i></a><a><i class="fas fa-edit" style='font-size:12px; margin-left:6px; color: #73879C; cursor:pointer;' (click)='showModal(companySetupEdit,"modal-md");' *ngIf="userRole === 'admin'"></i></a>
+                  </div>
+                  <div class="mat-card col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="orgEditMission || orgEditVision || orgEditValues || orgEditOutcomeStatement" style='color: #73879C;'>
+                    <mat-card-header *ngIf="orgEditMission">
+                      <mat-card-title style='font-size:1.1em;'>Mission</mat-card-title>
+                      <mat-card-subtitle style='margin-inline-start:10px;'>{{ orgEditMission }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-header *ngIf="orgEditVision">
+                      <mat-card-title style='font-size:1.1em;'>Vision</mat-card-title>
+                      <mat-card-subtitle style='margin-inline-start:10px;'>{{ orgEditVision }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-header *ngIf="orgEditValues">
+                      <mat-card-title style='font-size:1.1em;'>Values</mat-card-title>
+                      <mat-card-subtitle style='margin-inline-start:10px;'>{{ orgEditValues }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-header *ngIf="orgEditOutcomeStatement">
+                      <mat-card-title style='font-size:1.1em;'>Three Year Outcome</mat-card-title>
+                      <mat-card-subtitle style='margin-inline-start:10px;'>{{ orgEditOutcomeStatement }}</mat-card-subtitle>
+                    </mat-card-header>
+                  </div>
+                  <div class="row" *ngIf="orgData && orgData?.length && userRole === 'admin'">
+                    <div fxLayout='row wrap' class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <mat-card class="company-detail-department-card" style='min-height:150px; color: #73879C;' *ngFor='let d of orgData; let i = index' data-toggle="collapse" data-parent="#accordion" href="#userList" aria-expanded="false" aria-controls="userList">
+                        <mat-card-header>
+                          <mat-card-title style='font-size:1.1em'>{{ d.deptName }}<a><i class="fas fa-edit" style='font-size:12px;margin-left:4px;cursor:pointer;' (click)='showModal(departmentSetupEdit,"modal-md");setEditData(d);'></i></a></mat-card-title>
+                          <mat-card-subtitle style='margin-bottom:.5em; font-size:1em;' *ngFor='let r of d.Roles'><strong>{{ r.roleName }} - {{ r.leval }}</strong>
+                            <mat-card-subtitle style='margin-bottom:.5em; font-size:1em; margin-left:5px;margin-top:.5px;' *ngFor='let u of r.Users'>{{ u.name }} {{ u.lname }}<i class='fas fa-user-tie' style='padding-left:7px;cursor:pointer;' *ngIf='u.Manager?.email' mat-raised-button matTooltip="Manager: {{ u.Manager?.name }} {{ u.Manager?.lname }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"></i></mat-card-subtitle>
+                          </mat-card-subtitle>
+                        </mat-card-header>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #companySetupAdd>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>What would you like to add?</h2></div>
+    </h4>
+  </div>  
+  <div class="modal-body row">
+    <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("department");'>
+      <div *ngIf="newElement=='department'" style='color:green;'>
+        <div><i class="fas fa-house-user" style='font-size:40px;'></i></div>
+        <div><h4>Department</h4></div>
+      </div>
+      <div *ngIf="newElement!='department'">
+        <div><i class="fas fa-house-user" style='font-size:40px;'></i></div>
+        <div><h4>Department</h4></div>
+      </div>
+    </div>
+    <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("role");'>
+      <div *ngIf="newElement=='role'" style='color:green;'>
+        <div><i class="fas fa-address-book" style='font-size:40px;'></i></div>
+        <div><h4>Role</h4></div>  
+      </div>
+      <div *ngIf="newElement!='role'">
+        <div><i class="fas fa-address-book" style='font-size:40px;'></i></div>
+        <div><h4>Role</h4></div>  
+      </div>
+    </div>
+    <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("user");updateOrgUserList();'>
+      <div *ngIf="newElement=='user'" style='color:green;'>
+        <div><i class="fa fa-users" style='font-size:40px;'></i></div>
+        <div><h4>User</h4></div>
+      </div>
+      <div *ngIf="newElement!='user'">
+        <div><i class="fa fa-users" style='font-size:40px;'></i></div>
+        <div><h4>User</h4></div>
+      </div>
+    </div>
+  </div>
+  <!-- Department -->
+  <div class='modal-footer' *ngIf='newElement=="department"'>
+    <div class='input-box'>
+      <span class="">Department</span>
+      <input id='new_Department' type="text" name="newDepartment" class="form-control" placeholder="Example: Marketing" [(ngModel)]='deptNewDepartmentName'>  
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn'*ngIf='!deptNewDepartmentName || deptNewDepartmentName?.length<1' disabled>Add {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='createNewDepartment();' *ngIf='deptNewDepartmentName && deptNewDepartmentName?.length>0'>Add {{ newElement }}</button>
+    </div>
+  </div>
+  <!-- Role -->
+  <div class='modal-footer' *ngIf='newElement=="role"'>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Department</mat-label>
+      <mat-select [(ngModel)]='roleNewDepartmentId' name='roleDepartmentName' class='form-control'>
+        <mat-option *ngFor='let d of orgData' [value]='d.depID'>{{ d.deptName }}</mat-option>
+      </mat-select>
+    </mat-form-field>  
+    <div class='input-box padding-bottom'>
+      <span class=''>Role</span>
+      <input name='newRoleName' type="text" class="form-control" placeholder="Example: Chief Financial Officer" [(ngModel)]='roleNewRoleName'>    
+    </div>
+    <div class='input-box padding-bottom'>
+      <span class="">Level</span>
+      <input name="newRoleLevel" type='text' class="form-control" placeholder="Example: L2" [(ngModel)]='roleNewLevel'>  
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!roleNewRoleName || roleNewRoleName?.length<1 || !roleNewLevel || roleNewLevel?.length<1' disabled>Add {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='createNewRole();' *ngIf='roleNewRoleName && roleNewRoleName?.length>0 && roleNewLevel && roleNewLevel?.length>0'>Add {{ newElement }}</button>
+    </div>
+  </div>
+  <!-- User -->
+  <div class='modal-footer' *ngIf='newElement=="user"'>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Department</mat-label>
+      <mat-select [(ngModel)]='deptNewDepartmentName' name='newUserDepartment' class='form-control' (selectionChange)='setUserData(deptNewDepartmentName);'>
+        <mat-option *ngFor='let d of orgData' [value]='d.depID'>{{ d.deptName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Role</mat-label>
+      <mat-select class='form-control' [(ngModel)]='userNewRoleId' name='newUserRole'>
+        <mat-option *ngFor='let r of roleList' [value]='r.rID'>{{ r.roleName }}</mat-option>
+      </mat-select>
+    </mat-form-field>  
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Reports To</mat-label>
+      <mat-select [(ngModel)]='userNewManagerUserId' name='editManagerUserId' class='form-control'>
+        <mat-option *ngFor='let u of orgUserListSupervisor' [value]='u.uID'>{{ u.First }} {{ u.Last }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class='input-box'>
+      <span class="">Email</span>
+      <input id='newUserEmail' type="text" name="new_UserEmail" class="form-control" placeholder="JohnSmith@email.com" [(ngModel)]='userNewEmail'>  
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!deptNewDepartmentName || deptNewDepartmentName?.length<1 || !userNewRoleId || userNewRoleId?.length<1 || !userNewEmail || userNewEmail?.length<1' disabled>Add {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='createNewUser();' *ngIf='deptNewDepartmentName && deptNewDepartmentName?.length>0 && userNewRoleId && userNewRoleId?.length>0 && userNewEmail && userNewEmail?.length>0'>Add {{ newElement }}</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #companySetupEdit>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Edit Organization</h2></div>
+    </h4>
+  </div>
+  <!-- Organization -->
+  <div class='modal-footer'>
+    <div class='input-box'>
+      <span class="">Name</span>
+      <input id='edit_OrgName' type="text" name="editOrgName" class="form-control" placeholder="catipult.ai" [(ngModel)]='orgEditOrgName'>  
+    </div>
+    <div class='input-box'>
+      <span class="">Address</span>
+      <input id='edit_OrgAddress' type="text" name="editOrgAddress" class="form-control" placeholder="123 Main St." [(ngModel)]='orgEditAddress'>  
+    </div>
+    <div class='input-box'>
+      <span class="">City</span>
+      <input id='edit_OrgCity' type="text" name="editOrgCity" class="form-control" placeholder="Indianapolis" [(ngModel)]='orgEditCity'>  
+    </div>
+    <div class='input-box'>
+      <span class="">Logo Url</span>
+      <input id='edit_OrgLogoUrl' type="text" name="editOrgLogo" class="form-control" placeholder="https://catipult.ai/wp-content/uploads/2020/02/Catipult-tm-logo.png" [(ngModel)]='orgEditLogoUrl'>  
+    </div>
+    <div class='input-box'>
+      <span class="">Email</span>
+      <input id='edit_OrgEmail' type="text" name="editOrgEmail" class="form-control" placeholder="support@catipult.ai" [(ngModel)]='orgEditEmail'>  
+    </div>
+    <div class='input-box'>
+      <span class="">Phone</span>
+      <input id='edit_OrgPhone' type="text" name="editOrgPhone" class="form-control" placeholder="3175555555" [(ngModel)]='orgEditPhoneNumber' mask='(000) 000-0000'>
+    </div>
+    <div class='input-box'>
+      <span class="">Mission</span>
+      <div class="grow-wrap" [attr.data-replicated-value]="orgEditMission">
+        <textarea rows="1" id='edit_OrgMission' type="text" name="editOrgMission" class="form-control" placeholder="Transform career development by providing personalized automated coaching" [(ngModel)]='orgEditMission'></textarea>
+    </div>
+    </div>
+    <div class='input-box'>
+      <span class="">Vision</span>
+      <div class="grow-wrap" [attr.data-replicated-value]="orgEditVision">
+        <textarea rows="1" id='edit_OrgVision' type="text" name="editOrgVision" class="form-control" placeholder="Make automated coahing personal" [(ngModel)]='orgEditVision'></textarea>
+      </div>
+    </div>
+    <div class='input-box'>
+      <span class="">Values</span>
+      <div class="grow-wrap" [attr.data-replicated-value]="orgEditValues">
+        <textarea rows="1" id='edit_OrgValues' type="text" name="editOrgValues" class="form-control" placeholder="Integrity, honesty, and customer service" [(ngModel)]='orgEditValues'></textarea>
+      </div>
+    </div>
+    <div class='input-box'>
+      <span class="">Three Year Outcome</span>
+      <div class="grow-wrap" [attr.data-replicated-value]="orgEditOutcomeStatement">
+        <textarea rows="1" id='edit_OrgOutcomeStatement' type="text" name="editOrgOutcomeStatement" class="form-control" placeholder="Provide coaching to 100,000 professionals in three years" [(ngModel)]='orgEditOutcomeStatement'></textarea>
+      </div>
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!orgEditOrgName || orgEditOrgName?.length<1 || !orgEditEmail || orgEditEmail?.length<1' disabled>Edit Organization</button>
+      <button class='form-control btn btn-primary' (click)='editOrganization();' *ngIf='orgEditOrgName && orgEditOrgName?.length>0 && orgEditEmail && orgEditEmail?.length>0'>Edit Organization</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #departmentSetupEdit>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>What would you like to edit?</h2></div>
+    </h4>
+  </div>  
+  <div class="modal-body row">
+    <div class='col-xs-2 col-sm-2 col-md-2 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("department");'>
+      <div *ngIf="newElement=='department'" style='color:green;'>
+        <div><i class="fas fa-house-user" style='font-size:40px;'></i></div>
+        <div><h4>Department</h4></div>
+      </div>
+      <div *ngIf="newElement!='department'">
+        <div><i class="fas fa-house-user" style='font-size:40px;'></i></div>
+        <div><h4>Department</h4></div>
+      </div>
+    </div>
+    <div class='col-xs-2 col-sm-2 col-md-2 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("role");'>
+      <div *ngIf="newElement=='role'" style='color:green;'>
+        <div><i class="fas fa-address-book" style='font-size:40px;'></i></div>
+        <div><h4>Role</h4></div>  
+      </div>
+      <div *ngIf="newElement!='role'">
+        <div><i class="fas fa-address-book" style='font-size:40px;'></i></div>
+        <div><h4>Role</h4></div>  
+      </div>
+    </div>
+    <div class='col-xs-2 col-sm-2 col-md-2 col-lg-4 col-xl-4' style='text-align:center; cursor: pointer;' (click)='addCompanyElement("user");setUserData(deptEditDepartmentId);'>
+      <div *ngIf="newElement=='user'" style='color:green;'>
+        <div><i class="fa fa-users" style='font-size:40px;'></i></div>
+        <div><h4>User</h4></div>
+      </div>
+      <div *ngIf="newElement!='user'">
+        <div><i class="fa fa-users" style='font-size:40px;'></i></div>
+        <div><h4>User</h4></div>
+      </div>
+    </div>
+  </div>
+  <!-- Department -->
+  <div class='modal-footer' *ngIf='newElement=="department"'>
+    <div class='input-box'>
+      <span class="">Department</span>
+      <input id='new_Department' type="text" name="newDepartment" class="form-control" placeholder="Example: Marketing" [(ngModel)]='deptEditDepartmentName'>  
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!deptEditDepartmentName || deptEditDepartmentName?.length<1' disabled>Update {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='editDepartment();' *ngIf='deptEditDepartmentName && deptEditDepartmentName?.length>0'>Update {{ newElement }}</button>
+      <button class='form-control btn btn-danger' style='margin-left:0px !important;' *ngIf='roleList?.length<1' (click)='modalRef.hide();setDeleteElement("Department");showModal(deleteElementTemplate,"modal-sm");'>Delete {{ newElement }}</button>
+    </div>
+  </div>
+  <!-- Role -->
+  <div class='modal-footer' *ngIf='newElement=="role"'>
+    <div class='input-box'>
+      <span class="">Department</span>
+      <input id='edit_Department' type="text" name="editDepartment" class="form-control" placeholder="Example: Marketing" [(ngModel)]='deptEditDepartmentName' disabled>  
+    </div>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Role</mat-label>
+      <mat-select [(ngModel)]='roleEditRoleId' name='editRoleNameSelect' class='form-control' (selectionChange)='refreshRoleEdit();getRoleUser(roleEditRoleId,roleList)'>
+        <mat-option *ngFor='let r of roleList' [value]='r.rID' >{{ r.roleName }}</mat-option>
+      </mat-select>
+    </mat-form-field>  
+    <div class='input-box padding-bottom'>
+      <span class="">Role Name</span>
+      <input name="editRoleName" class="form-control" placeholder="Senior Manager, Operations" [(ngModel)]='roleEditRoleName'>  
+    </div>
+    <div class='input-box padding-bottom'>
+      <span class="">Level</span>
+      <input name="editRoleLevel" class="form-control" placeholder="L2" [(ngModel)]='roleEditRoleLevel'>  
+    </div>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!roleEditRoleId || roleEditRoleId?.length<1 || !roleEditRoleLevel || roleEditRoleLevel?.length<1' disabled>Update {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='editRole();' *ngIf='roleEditRoleId && roleEditRoleId?.length>0 && roleEditRoleLevel && roleEditRoleLevel?.length>0'>Update {{ newElement }}</button>
+      <button class='form-control btn btn-danger' style='margin-left:0px !important;' *ngIf='roleEditRoleId && !roleHasUser' (click)='modalRef.hide();setDeleteElement("Role");showModal(deleteElementTemplate,"modal-sm");'>Delete {{ newElement }}</button>
+    </div>
+  </div>
+  <!-- User -->
+  <div class='modal-footer' *ngIf='newElement=="user"'>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>User</mat-label>
+      <mat-select [(ngModel)]='userEditUserId' name='editUserName' class='form-control' (selectionChange)='setUserData(deptEditDepartmentId);setUserEditData(deptEditDepartmentId);updateOrgUserList();'>
+        <mat-option *ngFor='let u of userEditUserList' [value]='u.uID'>{{ u.name }} {{ u.lname }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Department</mat-label>
+      <mat-select [(ngModel)]='userEditDepId' name='editUserDepartment' class='form-control' (selectionChange)='setUserData(userEditDepId);'>
+        <mat-option *ngFor='let d of departmentList' [value]='d.depID'>{{ d.deptName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Role</mat-label>
+      <mat-select [(ngModel)]='userEditRoleId' name='editUserName' class='form-control'>
+        <mat-option *ngFor='let r of roleList' [value]='r.rID'>{{ r.roleName }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance='fill' style='width:100%;'>
+      <mat-label style='font-size:17px;'>Reports To</mat-label>
+      <mat-select [(ngModel)]='userEditManagerUserId' name='editManagerUserId' class='form-control'>
+        <mat-option *ngFor='let u of orgUserListSupervisor' [value]='u.uID'>{{ u.First }} {{ u.Last }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class='padding-top'>
+      <button class='form-control btn' *ngIf='!userEditUserId || userEditUserId?.length<1 || !userEditRoleId || userEditRoleId?.length<1' disabled>Update {{ newElement }}</button>
+      <button class='form-control btn btn-primary' (click)='editUser();' *ngIf='userEditUserId && userEditUserId?.length>0 && userEditRoleId && userEditRoleId?.length>0'>Update {{ newElement }}</button>
+      <button class='form-control btn btn-danger' style='margin-left:0px !important;' *ngIf='userEditUserId' (click)='modalRef.hide();setDeleteElement("User");showModal(deleteElementTemplate,"modal-sm");'>Delete {{ newElement }}</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteElementTemplate>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='modalRef.hide();showModal(departmentSetupEdit,"modal-md");clearDeleteModal();'>
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Delete {{ deleteElementType }}</h2></div>
+    </h4>
+  </div>  
+  <div class='modal-footer'>
+    <div class='input-box padding-bottom'>
+      <span class=''>Please confirm you want to delete the {{ deleteElementType }} by typing <span class='text-danger'>delete</span> below.</span>
+      <input id='delete_element' name='elementDelete' type="text" class="form-control" [(ngModel)]='deleteText'>
+    </div>
+    <button class='btn btn-danger' style='width:100%;' (click)='deleteElement();modalRef.hide();' *ngIf='deleteText==="delete"'>Delete {{ deleteElementType }}</button>
+    <button class='btn btn-danger' style='width:100%;' *ngIf='deleteText!="delete"' disabled>Delete {{ deleteElementType }}</button>
+    <button class='btn btn-primary' style='width:100%;margin-left:auto !important;' (click)='modalRef.hide();showModal(departmentSetupEdit,"modal-md");clearDeleteModal();'>Cancel</button>
+  </div>
+</ng-template>

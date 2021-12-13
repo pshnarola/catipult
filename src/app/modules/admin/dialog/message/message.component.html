@@ -1,0 +1,12 @@
+<mat-card>
+    <!-- <mat-card-title>Info</mat-card-title> -->
+    <mat-card-content>
+        <label for="patient_name12"  class="control-label">{{message}}</label>
+
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button type="button"  class="btn btn-xs btn-default command-view" (click)="confirm()">OK</button>
+        <button type="button" *ngIf="data ==='Do You Really want to delete Role ?'" class="btn btn-xs btn-default command-view" (click)="onNoClick()">Cancel</button>
+    </mat-card-actions>
+    </mat-card>

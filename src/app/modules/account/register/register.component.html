@@ -1,0 +1,102 @@
+<div class="right_col unset_margin_left" role="main">
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row row-centered">
+      <div class="col-md-8 col-sm-12 col-xs-12 col-centered center_block">
+        <div class="x_panel p0">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 p0 back_image">
+            <img src="{{ imageUrl }}signup.png" alt="..." class="img-responsive"/>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+            <img src="{{ imageUrl }}signup.png" alt="..." class="img-responsive" style="display:none;"/>
+            <div class="x_content">
+              <br/>
+              <form class="form-horizontal form-label-left input_mask" [formGroup]="userDetailsForm" (ngSubmit)="onRegister(userDetailsForm.value)">
+                <div class="form-group center_flex">
+                  <div class="col-lg-7 col-md-7">
+                    <img src="{{ imageUrl }}logo.png" alt="..." class="img-responsive"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-lg-10 col-md-10 col-sm-12 col-xs-12 col-md-offset-1 text_center">simple management software so you can live a better life</label>
+                </div>
+                <br/>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" formControlName="name" placeholder="First Name"/>
+                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" formControlName="lname" placeholder="Last Name"/>
+                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="password" formControlName="password" placeholder="Password"/>
+                    <span class="fa fa-lock form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input class="date-picker form-control col-md-7 col-xs-12" required="required" type="password" formControlName="password2" placeholder="Confirm Password"/>
+                    <span class="fa fa-lock form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input #inputEl class="form-control col-md-12 col-xs-12" type="checkbox" formControlName="check" (change)="agreeTerm(inputEl.checked)"/>I agree to the <a href="https://catipult.ai/terms-of-use/" style="color: blue;" target="_blank">terms and conditions</a>
+                    <span class="form-control-feedback right" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="form-group">
+                  <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+                    <button [disabled]="!agree" type="button" (click)="onRegister(userDetailsForm.value)" class="btn btn-primary w100 login_btn">Register</button>
+                    <button type="button" id="openModalButton" style="display: none" class="btn btn-xs btn-default command-edit mr5" data-toggle="modal" data-target="#invite_user_modal"></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="invite_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          <div class="col-md-12 col-sm-12 col-xs-12 text_center"></div>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form id="demo-form2" method="post">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">{{ info }}</div>
+          </div>
+          <br/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <button type="submit" data-dismiss="modal" class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

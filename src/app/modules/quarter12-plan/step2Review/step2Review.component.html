@@ -1,0 +1,166 @@
+<!-- top navigation -->
+<app-loader></app-loader>
+<app-on-top-nav></app-on-top-nav>
+<!-- /top navigation -->
+<div class="col-md-3 left_col menu_fixed w500 custom">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+    <div class="navbar nav_title" style="border: 0;">
+      <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active" class="site_title csite_title p10"><img src="{{ imageUrl }}onboarding/step1/left-logo.png" style="width: 100%;"/>
+        <span></span>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row customised_outer h80">
+      <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <img src="{{ drivers[currentDriver]?.driverImage }}" class="img-responsive"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h1 class="white"><b>Review Answers </b></h1>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <h4 class="blue">
+              <b>Watch the following video</b>
+            </h4>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '1'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{drivers[currentDriver].driverVideo}}" type="video/mp4"/>
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '2'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{drivers[currentDriver].driverVideo}}" type="video/mp4"/>
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '3'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{ drivers[currentDriver].driverVideo }}" type="video/mp4"/>
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '4'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{ drivers[currentDriver].driverVideo }}" type="video/mp4" />
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '5'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{ drivers[currentDriver].driverVideo }}" type="video/mp4"/>
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '6'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{ drivers[currentDriver].driverVideo }}" type="video/mp4"/>
+              </video>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9" *ngIf="drivers[currentDriver]?.seqNo === '7'">
+              <video controls="true" class="embed-responsive-item">
+                <source src="{{ videoUrl }}{{ drivers[currentDriver].driverVideo }}" type="video/mp4"/>
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+<!-- page content -->
+<div class="right_col ml500" role="main">
+  <!-- Class -->
+  <div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel c_x_panel">
+          <div class="x_content text_center_left">
+            <br />
+            <form id="demo-form2" method="post">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label float_r f18">Question No : {{ currentIndex + 1 }}/{{qBankData.length}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label float_l f18">{{qBankData[currentIndex]?.question}}</label>
+                </div>
+              </div>
+              <table id="datatable-responsive" class="table dt-responsive nowrap c_table" cellspacing="0" width="100%">
+                <tbody>
+                  <ng-container *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Single Choice'">
+                    Single Choice
+                    <tr *ngFor="let season of qBankData[currentIndex]?.Options; let i = index">
+                      <td>
+                        <mat-radio-group [disabled]="true">
+                          <mat-radio-button [disable]="true" [checked]="season.correctAns === true ? true : false" fxFlex class="example-radio-button" (click)="submitAns(season, i)" [value]="season.optionID">{{ season.option }}</mat-radio-button>
+                        </mat-radio-group>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Multiple Choice'">
+                    Multiple Choice
+                    <tr *ngFor="let season of qBankData[currentIndex]?.Options; let i = index">
+                      <td>
+                        <mat-checkbox [readonly]="true" class="example-radio-button" (change)="submitAnsM($event, season, i)" [checked]="season.correctAns">{{ season.option }}</mat-checkbox>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr *ngIf="qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'">
+                    Description
+                    <td>
+                      <textarea name="desc" [readonly]="false" [(ngModel)]="qBankData[currentIndex].desc" placeholder="Enter Description" class="form-control" rows="5"></textarea>
+                    </td>
+                  </tr>
+                  <ng-container>
+                    <tr *ngFor="let season of rfpOptions; let i = index">
+                      rfpOptions
+                      <td>
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label  f18">Question: {{ season.question }}</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label f18 left">Your Answer: {{ season.answer }}</label>
+                            <mat-checkbox fxFlex class="example-radio-button float_r" (change)="submitAnsRfpq($event, season, i)"></mat-checkbox>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 webkit_right">
+                  <div class="">
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100" (click)="back()" *ngIf="currentIndex >= 1"><b>Back</b></button>
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100" (click)="skip()"><b>Skip Driver</b></button>
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="nextD()" *ngIf="totalQuestions==currentQuestion && qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'"><b>Next</b></button>
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="nextD()" *ngIf="totalQuestions==currentQuestion && qBankData[currentIndex]?.QuestionType?.typeName != 'Descriptive'"><b>Next</b></button>
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="next()" *ngIf="totalQuestions!=currentQuestion && qBankData[currentIndex]?.QuestionType?.typeName != 'Descriptive'"><b>Next</b></button>
+                    <button type="submit" class="btn btn-primary b_blue f18 bw100 mr0px" (click)="submitDescription(); next()" *ngIf="totalQuestions!=currentQuestion && qBankData[currentIndex]?.QuestionType?.typeName === 'Descriptive'"><b>Next</b></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

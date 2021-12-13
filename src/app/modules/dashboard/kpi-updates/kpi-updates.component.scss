@@ -1,0 +1,93 @@
+.example-container {
+  height: 100vh !important;
+  width: 100% !important;
+  overflow: auto;
+  background-image: url(/assets/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg {
+  border-right: white 1px solid;
+  text-align: center;
+  width: 100px;
+  background-color: #1f2532;
+}
+.active{
+  background-color: darkgreen !important;
+    color: white !important;
+}
+.tdclass {
+  text-align: center;
+  border-right: gray 1px solid;
+}
+.mat-form-field-flex{
+  padding-left: 30px;
+    border: none;
+    // border-color: #e3e6ed;
+    /* border-radius: 4px; */
+    /* background-color: white; */
+}
+.headerText {
+  text-align: center;
+  width: 20px;
+  height: 10px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+}
+.spankpi{
+  margin-left: 13%;
+    margin-right: 11%;
+}
+.btn3{
+  width: 98%;
+  height: 50px;
+  margin-right: 1%;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: gray;
+  border-radius: 10px;
+  background-color: white;
+}
+.btn4{
+  width: 140px;
+  height: 50px;
+  margin-right: 8%;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
+  vertical-align: middle;
+  color: #f0f0f0;
+  border-radius: 4px;
+  background-color: #2aa9e0;
+}
+
+.textcss{
+  font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: center;
+}

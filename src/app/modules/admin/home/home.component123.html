@@ -1,0 +1,100 @@
+<app-loader></app-loader>
+<div class="home-page">
+
+
+<div fxFlex fxLayout="column" fxLayoutAlign="center start">
+    <button mat-flat-button color="primary" (click)="inviteAdd()"  >Invite User</button>
+    <div fxFlex fxFill>
+        <mat-card>
+            <mat-card-header>
+              <span class="text-center">
+                <h2>Users</h2></span>
+            </mat-card-header>
+            <mat-card-content>
+                    <mat-list >
+                            <!-- <h3 mat-subheader>Outlets</h3> -->
+                            <mat-list-item>
+                              <div fxFlex=40 fxLayoutAlign="center center" style="background-color: grey">
+                                  <h4 style="color: white">Email</h4>
+                              </div>
+
+                                <div fxFlex=40 fxLayoutAlign="center center" style="background-color: grey">
+                                    <h4 style="color: white">Role</h4>
+                                  </div>
+                                  <div fxFlex=20 fxLayoutAlign="center center" style="background-color: grey">
+                                    <h4 style="color: white">Action</h4>
+                                  </div>
+
+
+                            </mat-list-item>
+                            <mat-list-item *ngFor="let user of users">
+                                <div fxFlex=40 fxLayoutAlign="start center">
+                                    <h4  style="word-wrap: normal; overflow-wrap: break-word;white-space: initial;">{{user.email}}</h4>
+                                </div>
+                                <div fxFlex=40 fxLayoutAlign="center center">
+                                    <h4>{{user.roleName}}</h4>
+                                  </div>
+                                  <div fxFlex=20 fxLayoutAlign="center center">
+                                    <button type="submit"  data-toggle="modal" data-target="#invite_user_modal1" data-toggle="modal" *ngIf="user.leval !== 'l1'" class="btn btn-xs btn-default command-print" onclick="" (click)="selecUser(user)"><span class="glyphicon glyphicon-trash"  ></span></button>
+                                    <!-- <button type="button" class="btn btn-xs btn-default command-edit mr5"   (click)="assign(element)"><span class="glyphicon glyphicon-user"></span></button> -->
+                                  </div>
+
+                                <mat-divider></mat-divider>
+
+
+                              <mat-divider></mat-divider>
+                            </mat-list-item>
+
+                          </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+</div>
+
+
+<!-- invite user modal -->
+<!-- Modal -->
+<div class="modal fade" id="invite_user_modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                  <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+
+                  </div>
+                  <!-- <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+                    Total Qty = {{totalQty}}
+                </div> -->
+              </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body table-responsive">
+            Warning! All KPIs and MIlestones for this user will be lost and cannot be retrieved!
+            <br>
+            Are you sure you want to delete user?
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 p0">
+                <button type="submit"  data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100" (click)="deleteUser(selectuser)"><b>Ok</b></button>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r">
+                <button type="submit"  data-dismiss="modal"
+                class="btn btn-primary b_blue f18 w100"><b>Cancel</b></button>
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /invite user modal -->

@@ -1,0 +1,61 @@
+<div class="col-md-3 left_col menu_fixed w230">
+  <div class="left_col scroll-view">
+      <div class="navbar nav_title" style="border: 0;">
+          <a href="index.html" class="site_title p10"><img src="assets/images/left-logo.png" class="img-responsive"><span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <!-- menu profile quick info -->
+      <div class="profile">
+          <div class="profile_pic">
+              <img src="assets/images/img.jpg" alt="..." class="img-circle profile_img" />
+          </div>
+          <div class="profile_info">
+              <span>Welcome</span>
+              <h2>John Doe</h2>
+          </div>
+      </div>
+      <!-- /menu profile quick info -->
+      <br />
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+          <div class="menu_section">
+              <br><br><br>
+              <ul class="nav side-menu">
+                  <li>
+                      <a id="dashboard" (click)="anchorClicked($event)">
+                          <i class="fa fa-home"></i>
+                          Dashboard
+                          <span id="dashboardchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                      <!-- <ul class="nav child_menu">
+                          <li><a href="index2.html">Dashboard2</a></li>
+                          <li><a href="index3.html">Dashboard3</a></li>
+                      </ul> -->
+                  </li>
+                  <li>
+                      <a id="department" (click)="anchorClicked($event)">
+                          <i class="fa fa-edit"></i>
+                          Department
+                          <span id="departmentchevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="roles" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Roles
+                          <span id="roleschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+                  <li>
+                      <a id="users" (click)="anchorClicked($event)">
+                          <i class="fa fa-desktop"></i>
+                              Users
+                          <span id="userschevron" class="fa fa-chevron-down"></span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      <!-- /sidebar menu -->
+  </div>
+</div>

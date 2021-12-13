@@ -1,0 +1,61 @@
+<div class="invite-page">
+
+
+<form #formControl="ngForm" (ngSubmit)="addUser()" class="login-form flex70">
+    <div fxFlex fxLayoutAlign="center"  fxlayout="row" fxLayoutAlign="center center">
+        <div fxFlex>
+          Add User
+        </div>
+
+    </div>
+
+        <div fxFlex class="input-align"  fxlayout="row" fxlayout.lt-md="column">
+
+            <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+                <mat-form-field [floatLabel]="'never'">
+                    <div fxLayoutAlign="start" fxLayout="row">
+                            <div [fxFlex]="90">
+                                    <input matInput #email  [(ngModel)]="data.email" name="email" placeholder="Enter User Email" required>
+                            </div>
+                            <div [fxFlex]="10">
+                                    <mat-icon class="sidenav-icon">email</mat-icon>
+                            </div>
+                    </div>
+                </mat-form-field>
+                <mat-error *ngIf="formControl.invalid" style="color: red;">{{getErrorMessage()}}</mat-error>
+            </div>
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+           <label> Select Department</label>
+            <mat-form-field [floatLabel]="'never'">
+                    <mat-label>Select Department</mat-label>
+                    <mat-select (selectionChange)="selectDept($event.value)" [(ngModel)]="depID" name="dept" required>
+                      <mat-option *ngFor="let role of depts" [value]="role?.depID">
+                        {{role.deptName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="formControl.invalid" style="color: red;">{{getErrorMessage()}}</mat-error> -->
+    </div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+            <label> Select Roles</label>
+                <mat-form-field [floatLabel]="'never'">
+                        <mat-label>Select Roles</mat-label>
+                        <mat-select [(ngModel)]="roleID" name="roles" required>
+                          <mat-option *ngFor="let role of roles" [value]="role?.rID">
+                            {{role.roleName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <!-- <mat-error *ngIf="formControl.invalid" style="color: red;">{{getErrorMessage()}}</mat-error> -->
+        </div>
+
+        <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill class="w-100">
+                <button mat-button class="btn-login"  [disabled]="!formControl.valid" [mat-dialog-close]="1"  (click)="addUser()" >Invite</button>
+            </div>
+        </div>
+
+    </form>
+
+  </div>

@@ -1,0 +1,60 @@
+<div class="{{leftStyle}}">
+
+
+
+        <div fxLayout="row" fxLayout.lt-md="column" fxFlex=100>
+            <div fxFlex="35" style="background-color: #1f2532;height: -webkit-fill-available;">
+                <div fxFlex class="headerFix" [routerLink]="['/kpijourney']">
+
+                        <img src="../../../../assets/images/onboarding/step1/left-logo.png" class="imgclass">
+                </div>
+                <div fxFlex fxLayout="column" fxLayoutAlign="center">
+                        <mat-card class="cardleft">
+
+                               <mat-card-content fxFlex fxLayout="column">
+                                   <span class="header">Step1:</span>
+                                   <span class="content"> Write your Outcome Statement. </span>
+                               </mat-card-content>
+                            <mat-card-footer class="footer">
+                                    Here are YOUR answers to the previous questions. Now, place them into a paragraph following the guidelines to the left.
+                            </mat-card-footer>
+                              </mat-card>
+                </div>
+            </div>
+            <div fxFlex="65" class="flex70">
+                        <div fxFlex class="contentHeader">
+                          <!-- <span>
+                            Now that you've watched the video, let's answer a set of questions
+                          </span> -->
+
+
+                        </div>
+
+                        <div fxFlex class="question" fxLayout="column">
+                          <label id="example-radio-group-label" fxFlex style="    margin-bottom: 17px;        ">
+                            <span>Write your Outcome Statement. </span> </label>
+                          <div fxLayoutAlign="start">
+                                  <div fxFlex=100 fxLayoutAlign="start" fxFill>
+                                        <textarea matInput placeholder="Enter Outcome Statements" class="inputclass" [(ngModel)]="outStatement"></textarea>
+                                  </div>
+
+
+                          </div>
+
+
+
+
+                          <div fxFlex style="margin: 2%" fxFlex fxLayoutAlign="end">
+                              <button mat-raised-button class="btn"  (click)="registerS()">
+                                Next
+                        </button>
+
+
+                          </div>
+                        </div>
+
+
+                      </div>
+
+        </div>
+        </div>

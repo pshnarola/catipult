@@ -1,0 +1,577 @@
+<app-loader></app-loader>
+<app-topbar></app-topbar>
+<app-leftsidebar></app-leftsidebar>
+<div class="right_col" role="main">
+
+    <!-- Class -->
+    <div class="">
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel" *ngIf="!updateFlag">
+
+            <div class="x_title">
+              <h2>Add Questionaire</h2>
+              <div class="clearfix"></div>
+              <div>{{driverName}}</div>
+            </div>
+
+            <div class="x_content">
+              <br />
+
+              <form id="demo-form2" action="" method="post" class="">
+                  <div class="form-group">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="qn_type" class="control-label">Select the Question Type</label>
+                        <select (change)="qType($event.target.value)" class="select2_group form-control">
+                            <option *ngFor="let qt of qtypes" value={{qt.qtID}}>
+                              {{qt.typeName}}
+                            </option>
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="form-group" *ngIf="hideAll || desc || rfpFlag">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter the Question</label>
+                      <textarea class="form-control" [(ngModel)]="qtext" name="SignSymptom" id="SignSymptom" rows="4" cols="50" style="height:40px;" wrap="hard"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="hideAll || desc|| rfpFlag">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter Question Sequence Number</label>
+                      <input class="form-control" [(ngModel)]="seqNo" (change)="getAvailable()"  name="seqNo" id="seqNo" rows="4" cols="50" style="height:40px;" type="number" wrap="hard"/>
+                      <label for="patient_name1" class="control-label">{{status}}</label>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="form-group" *ngIf="rfpFlag">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="patient_name" class="control-label">Select Questions</label>
+                        <button  class="btn btn-success" id="next"
+                        (click)="selectQuestions()" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Select Questions</button>
+                      </div>
+                    </div>
+                  </div> -->
+                <div class="form-group cloned_input" *ngIf="hideAll && o1flag">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter the Option</label>
+                    </div>
+                  </div>
+                  <div class="row-centered">
+                    <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                      <input type="text" id="o1" name="o1" [(ngModel)]="o1text" required="required" class="form-control">
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                      <div class="cloning_div right">
+                        <button type="button" class="btn btn-primary btnDel" value="Delete" disabled="disabled">Delete</button>
+                        <button type="button" class="btn btn-primary" id="btnAdd1" (click)="addoption2()">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group cloned_input" *ngIf="hideAll && o2flag">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="patient_name" class="control-label">Enter the Option</label>
+                      </div>
+                    </div>
+                    <div class="row-centered">
+                      <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                        <input type="text" id="o2" name="o2" required="required" [(ngModel)]="o2text" class="form-control">
+                      </div>
+                      <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                        <div class="cloning_div right">
+                          <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption2()">Delete</button>
+                          <button type="button" class="btn btn-primary" id="btnAdd2" (click)="addoption3()">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group cloned_input" *ngIf="hideAll && o3flag">
+                      <div class="row-centered">
+                        <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                          <label for="patient_name" class="control-label">Enter the Option</label>
+                        </div>
+                      </div>
+                      <div class="row-centered">
+                        <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                          <input type="text" id="o3" name="o3" required="required" [(ngModel)]="o3text" class="form-control">
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                          <div class="cloning_div right">
+                            <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption3()">Delete</button>
+                            <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption4()">Add</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group cloned_input" *ngIf="hideAll && o4flag">
+                        <div class="row-centered">
+                          <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                            <label for="patient_name" class="control-label">Enter the Option</label>
+                          </div>
+                        </div>
+                        <div class="row-centered">
+                          <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                            <input type="text" id="o4" name="o4" required="required" [(ngModel)]="o4text" class="form-control">
+                          </div>
+                          <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                            <div class="cloning_div right">
+                              <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption4()">Delete</button>
+                              <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption5()">Add</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group cloned_input" *ngIf="hideAll && o5flag">
+                          <div class="row-centered">
+                            <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                              <label for="patient_name" class="control-label">Enter the Option</label>
+                            </div>
+                          </div>
+                          <div class="row-centered">
+                            <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                              <input type="text" id="o5" name="o5" required="required" [(ngModel)]="o5text" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                              <div class="cloning_div right">
+                                <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption5()">Delete</button>
+                                <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption6()">Add</button>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group cloned_input" *ngIf="hideAll && o6flag">
+                            <div class="row-centered">
+                              <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                <label for="patient_name" class="control-label">Enter the Option</label>
+                              </div>
+                            </div>
+                            <div class="row-centered">
+                              <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                <input type="text" id="o6" name="o6" required="required" [(ngModel)]="o6text" class="form-control">
+                              </div>
+                              <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                <div class="cloning_div right">
+                                  <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption6()">Delete</button>
+                                      <button type="button" class="btn btn-primary" id="btnAdd7" (click)="addoption7()">Add</button>
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group cloned_input" *ngIf="hideAll && o7flag">
+                              <div class="row-centered">
+                                <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                  <label for="patient_name" class="control-label">Enter the Option</label>
+                                </div>
+                              </div>
+                              <div class="row-centered">
+                                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                  <input type="text" id="o7" name="o7" required="required" [(ngModel)]="o7text" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                  <div class="cloning_div right">
+                                    <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption7()">Delete</button>
+                                        <button type="button" class="btn btn-primary" id="btnAdd17" (click)="addoption8()">Add</button>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <div class="form-group cloned_input" *ngIf="hideAll && o8flag">
+                              <div class="row-centered">
+                                <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                  <label for="patient_name" class="control-label">Enter the Option</label>
+                                </div>
+                              </div>
+                              <div class="row-centered">
+                                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                  <input type="text" id="o8" name="o8" required="required" [(ngModel)]="o8text" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                  <div class="cloning_div right">
+                                      <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption8()">Delete</button>
+                                      <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption9()">Add</button>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group cloned_input" *ngIf="hideAll && o9flag">
+                                <div class="row-centered">
+                                  <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                    <label for="patient_name" class="control-label">Enter the Option</label>
+                                  </div>
+                                </div>
+                                <div class="row-centered">
+                                  <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                    <input type="text" id="o9" name="o9" required="required" [(ngModel)]="o9text" class="form-control">
+                                  </div>
+                                  <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                    <div class="cloning_div right">
+                                        <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption9()">Delete</button>
+                                        <button type="button" class="btn btn-primary" id="btnAdd10" (click)="addoption10()">Add</button>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group cloned_input" *ngIf="hideAll && o10flag">
+                                  <div class="row-centered">
+                                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                      <label for="patient_name" class="control-label">Enter the Option</label>
+                                    </div>
+                                  </div>
+                                  <div class="row-centered">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                      <input type="text" id="o10" name="o10" required="required" [(ngModel)]="o9text" class="form-control">
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                      <div class="cloning_div right">
+                                          <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption10()">Delete</button>
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                <div class="ln_solid"></div>
+
+                <div class="form-group">
+                  <div class="col-md-12 col-sm-6 col-xs-12" style="text-align:center;">
+                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <input name="method" id="method" type="hidden" value="">
+                    <input name="submit_Update" type="hidden">
+                    <button type="submit" form="demo-form2" class="btn btn-success" id="next"   [disabled] ="status === 'Available' ? false: true"
+                    (click)="submit()" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Submit</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+          <div class="x_panel" *ngIf="updateFlag">
+
+            <div class="x_title">
+              <h2>Update Question</h2>
+              <div class="clearfix"></div>
+              <div>{{driverName}}</div>
+            </div>
+
+            <div class="x_content">
+              <br />
+
+              <form id="demo-form2" action="" method="post" class="">
+                  <div class="form-group">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="qn_type" class="control-label">Select the Question Type</label>
+                        <select (change)="qType($event.target.value)" name="something"  class="select2_group form-control" [(ngModel)]="selectedOption" [disabled]="true">
+                            <option *ngFor="let qt of qtypes" value={{qt.qtID}} >
+                              {{qt.typeName}}
+                            </option>
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter the Question</label>
+                      <textarea class="form-control" [(ngModel)]="updateQ.question" name="SignSymptom" id="SignSymptom" rows="4" cols="50" style="height:40px;" wrap="hard"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter Question Sequence Number</label>
+                      <input class="form-control"  [(ngModel)]="updateQ.seqNo" name="seqNo" id="seqNo" rows="4" cols="50" style="height:40px;" type="number" wrap="hard"/>
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-group" *ngIf="rfpFlag">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="patient_name" class="control-label">Select Questions</label>
+                        <button  class="btn btn-success" id="next"
+                        (click)="selectQuestions(updateQ.queID,updateQ.seqNo,'u')" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Select Questions</button>
+                      </div>
+                    </div>
+                  </div>
+                <div class="form-group cloned_input" *ngIf="o1flag && !rfpFlag">
+                  <div class="row-centered">
+                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                      <label for="patient_name" class="control-label">Enter the Option</label>
+                    </div>
+                  </div>
+                  <div class="row-centered">
+                    <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                      <input type="text" id="o1" name="o1" [(ngModel)]="updateQ?.Options[0].option" required="required" class="form-control">
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                      <div class="cloning_div right">
+                        <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" disabled="disabled">Delete</button>
+                        <button type="button" class="btn btn-primary" id="btnAdd1" (click)="addoption2()">Add</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group cloned_input" *ngIf="o2flag && !rfpFlag">
+                    <div class="row-centered">
+                      <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                        <label for="patient_name" class="control-label">Enter the Option</label>
+                      </div>
+                    </div>
+                    <div class="row-centered">
+                      <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                        <input type="text" id="o2" name="o2" required="required" [(ngModel)]="updateQ?.Options[1].option" class="form-control">
+                      </div>
+                      <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                        <div class="cloning_div right">
+                          <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption2()">Delete</button>
+                          <button type="button" class="btn btn-primary" id="btnAdd2" (click)="addoption3()">Add</button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group cloned_input" *ngIf="o3flag && !rfpFlag">
+                      <div class="row-centered">
+                        <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                          <label for="patient_name" class="control-label">Enter the Option</label>
+                        </div>
+                      </div>
+                      <div class="row-centered">
+                        <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                          <input type="text" id="o3" name="o3" required="required" [(ngModel)]="updateQ?.Options[2].option" class="form-control">
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                          <div class="cloning_div right">
+                            <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption3()">Delete</button>
+                            <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption4()">Add</button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group cloned_input" *ngIf="o4flag && !rfpFlag">
+                        <div class="row-centered">
+                          <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                            <label for="patient_name" class="control-label">Enter the Option</label>
+                          </div>
+                        </div>
+                        <div class="row-centered">
+                          <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                            <input type="text" id="o4" name="o4" required="required" [(ngModel)]="updateQ?.Options[3].option" class="form-control">
+                          </div>
+                          <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                            <div class="cloning_div right">
+                              <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption4()">Delete</button>
+                              <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption5()">Add</button> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group cloned_input" *ngIf="o5flag && !rfpFlag">
+                          <div class="row-centered">
+                            <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                              <label for="patient_name" class="control-label">Enter the Option</label>
+                            </div>
+                          </div>
+                          <div class="row-centered">
+                            <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                              <input type="text" id="o5" name="o5" required="required" [(ngModel)]="updateQ?.Options[4].option" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                              <div class="cloning_div right">
+                                <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption5()">Delete</button>
+                                <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption6()">Add</button> -->
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group cloned_input" *ngIf="o6flag && !rfpFlag">
+                            <div class="row-centered">
+                              <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                <label for="patient_name" class="control-label">Enter the Option</label>
+                              </div>
+                            </div>
+                            <div class="row-centered">
+                              <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                <input type="text" id="o6" name="o6" required="required" [(ngModel)]="updateQ?.Options[5].option" class="form-control">
+                              </div>
+                              <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                <div class="cloning_div right">
+                                  <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption6()">Delete</button>
+                                      <button type="button" class="btn btn-primary" id="btnAdd7" (click)="addoption7()">Add</button> -->
+
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group cloned_input" *ngIf="o7flag && !rfpFlag">
+                              <div class="row-centered">
+                                <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                  <label for="patient_name" class="control-label">Enter the Option</label>
+                                </div>
+                              </div>
+                              <div class="row-centered">
+                                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                  <input type="text" id="o7" name="o7" required="required" [(ngModel)]="updateQ?.Options[6].option" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                  <div class="cloning_div right">
+                                    <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption7()">Delete</button>
+                                        <button type="button" class="btn btn-primary" id="btnAdd17" (click)="addoption8()">Add</button> -->
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <div class="form-group cloned_input" *ngIf="o8flag && !rfpFlag">
+                              <div class="row-centered">
+                                <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                  <label for="patient_name" class="control-label">Enter the Option</label>
+                                </div>
+                              </div>
+                              <div class="row-centered">
+                                <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                  <input type="text" id="o8" name="o8" required="required" [(ngModel)]="updateQ?.Options[7].option" class="form-control">
+                                </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                  <div class="cloning_div right">
+                                      <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption8()">Delete</button>
+                                      <button type="button" class="btn btn-primary" id="btnAdd3" (click)="addoption9()">Add</button> -->
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group cloned_input" *ngIf="o9flag && !rfpFlag">
+                                <div class="row-centered">
+                                  <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                    <label for="patient_name" class="control-label">Enter the Option</label>
+                                  </div>
+                                </div>
+                                <div class="row-centered">
+                                  <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                    <input type="text" id="o9" name="o9" required="required" [(ngModel)]="updateQ?.Options[8].option" class="form-control">
+                                  </div>
+                                  <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                    <div class="cloning_div right">
+                                        <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption9()">Delete</button>
+                                        <button type="button" class="btn btn-primary" id="btnAdd10" (click)="addoption10()">Add</button> -->
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group cloned_input" *ngIf="o10flag && !rfpFlag">
+                                  <div class="row-centered">
+                                    <div class="col-md-8 col-sm-6 col-xs-12 col-centered">
+                                      <label for="patient_name" class="control-label">Enter the Option</label>
+                                    </div>
+                                  </div>
+                                  <div class="row-centered">
+                                    <div class="col-md-5 col-sm-6 col-xs-12 col-centered">
+                                      <input type="text" id="o10" name="o10" required="required" [(ngModel)]="updateQ?.Options[9].option" class="form-control">
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12 col-centered relative">
+                                      <div class="cloning_div right">
+                                          <!-- <button type="button" class="btn btn-primary btnDel" value="Delete" (click)="removeoption10()">Delete</button> -->
+
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                <div class="ln_solid"></div>
+
+                <div class="form-group">
+                  <div class="col-md-12 col-sm-6 col-xs-12" style="text-align:center;">
+
+                    <input name="method" id="method" type="hidden" value="">
+                    <input name="submit_Update" type="hidden">
+                    <button type="submit" form="demo-form2" class="btn btn-success" id="next"
+                    (click)="updateItem()" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Update</button>
+                    <button type="submit" form="demo-form2" class="btn btn-success" id="next"
+                    (click)="cancelItem()" data-toggle="collapse" data-target="#collapse35" aria-expanded="false" aria-controls="collapse4">Cancel</button>
+                  </div>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+          <!-- listing_section-->
+          <div class="x_panel" *ngIf="showlist">
+            <div class="x_content">
+              <div class="table-responsive">
+                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                  <thead>
+                    <tr class="myHead">
+                      <th data-column-id="id" data-type="numeric" data-identifier="true" data-header-css-class="cbg-header-name" style="width:6%;">Seq. No</th>
+                      <th data-column-id="patient_mobile_no">Qn. Title</th>
+                      <th data-column-id="doctor_name">Option1</th>
+                      <th data-column-id="doctor_name">Option2</th>
+                      <th data-column-id="doctor_name">Option3</th>
+                      <th data-column-id="doctor_name">Option4</th>
+                      <th data-column-id="doctor_name">Option5</th>
+                      <th data-column-id="doctor_name">Option6</th>
+                      <th data-column-id="doctor_name">Option7</th>
+                      <th data-column-id="doctor_name">Option8</th>
+                      <th data-column-id="doctor_name">Option9</th>
+                      <th data-column-id="doctor_name">Option10</th>
+                      <th data-column-id="doctor_name">Type</th>
+                      <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="cbg-header-name" style="width:11%;">Commands</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of qList; let i=index">
+                      <td>{{item.seqNo}} </td>
+                      <td> {{item.question}}</td>
+                      <td> {{item.Options? item.Options[0]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[1]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[2]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[3]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[4]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[5]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[6]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[7]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[8]?.option: ''}}</td>
+                      <td>{{item.Options? item.Options[9]?.option: ''}}</td>
+                      <td>{{item.QuestionType? item.QuestionTypetext: ''}}</td>
+                      <td>
+                        <!-- <button type="button" class="btn btn-xs btn-default command-view"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button> -->
+                        <button type="button" class="btn btn-xs btn-default command-edit"  onclick=""><span class="glyphicon glyphicon-edit" (click)="editQ(item)"></span></button>
+                        <button type="submit" class="btn btn-xs btn-default command-print" onclick=""><span class="glyphicon glyphicon-trash" (click)="deleteQ(item)"></span></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--/listing_section-->
+
+        </div>
+      </div>
+    </div>
+    <!--/Class -->
+
+  </div>

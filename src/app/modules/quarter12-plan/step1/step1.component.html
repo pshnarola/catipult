@@ -1,0 +1,77 @@
+
+<!-- top navigation -->
+<app-on-top-nav></app-on-top-nav>
+<!-- /top navigation -->
+<div class="col-md-3 left_col menu_fixed w500">
+  <!-- left_col scroll-view -->
+  <div class="left_col scroll-view col-md-12 col-sm-12 col-xs-12">
+      <div class="navbar nav_title" style="border: 0;">
+          <a class="site_title"><img src="{{ imageUrl }}onboarding/step1/left-logo.png" style="width: 100%;"> <span></span></a>
+      </div>
+      <div class="clearfix"></div>
+      <div class="row customised_outer h80">
+          <div class="col-md-12 col-sm-12 col-xs-12 customised_inner f500">
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h1 class="white"><b>{{ name | titlecase }}</b></h1>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h4 class="blue"><b>You've chosen to begin the 12 Quarter Planning process that will culminate in the creation of your Seven Business Driver KPI dashboard </b></h4>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h4 class="white"><b>Please watch this quick video to see you how you'll be creating this strategic plan. </b></h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/left_col scroll-view -->
+</div>
+
+<!-- page content -->
+<div class="right_col ml500" role="main">
+  <!-- Class -->
+  <div class="">
+      <div class="clearfix"></div>
+      <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel c_x_panel">
+                  <div class="x_content text_center_left">
+                      <br />
+                      <form id="demo-form2"  method="post">
+                          <div class="row">
+                              <div class="col-md-10 col-sm-12 col-xs-12">
+                                  <h3 class="black mt0"><b>I already have my Objectives ready. Please take me there directly</b></h3>
+                              </div>
+                              <div class="col-md-2 col-sm-12 col-xs-12 text-right" >
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100" (click)="jumpStraight()" ><b>Jump</b></button>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <div class="embed-responsive embed-responsive-16by9">
+                                      <video controls="true" class="embed-responsive-item">
+                                        <source src="{{ videoUrl }}opening.mp4" type="video/mp4">
+                                      </video>
+                                  </div>
+                              </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                              <div class="col-md-2 col-sm-12 col-xs-12 float_r" >
+                                  <button type="submit" [routerLink]="['/plan/step2']" class="btn btn-primary b_blue f18 w100"><b>Next</b></button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!--/Class -->
+</div>
+<!-- /page content -->

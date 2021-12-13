@@ -1,0 +1,76 @@
+<app-on-top-nav></app-on-top-nav>
+<app-sidenav></app-sidenav>
+<div class="right_col ml230" role="main" (click)="toggleClass()">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="x_panel">
+        <div class="x_title" style='margin-bottom:0px; padding-bottom:0px;'>
+          <h2 style="color: #73879C !important;" id='test'>Percent of open milestones on Plan<i class='fas fa-print' style='padding-left:10px;cursor:pointer;font-size:15px;' (click)='printDashboard();' matTooltip="{{ PrintToolTip }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"></i></h2>
+          <div class="clearfix"></div>
+        </div>
+        <div style='margin-bottom:10px;'>
+          <p style='margin-left:5px; color:#73879C;'>What Drivers should we focus on this week?</p>
+        </div>
+        <app-gauges [uID]='uID'></app-gauges>
+        <div class="x_content">
+          <div class="row">
+            <div fxFlex="100" fxLayout="column" class="example-container" style="height: auto!important;">
+              <div fxFlex fxLayout="row" fxLayoutAlign="start start">
+                <mat-tab-group dynamicHeight fxFlex="100" mat-stretch-tabs>
+                  <mat-tab>
+                    <div class='row'>
+                      <div class='col-md-6 col-sm-12 col-xs-12'>
+                        <app-dashboard-kpi></app-dashboard-kpi>
+                        <app-coach [uID]='uID' *ngIf='coachName'></app-coach>
+                        <app-issue class='x_panel' [data]='{"user":{"uID":uID}}' [userData]='issueData'></app-issue>
+                      </div>
+                      <div class='col-md-6 col-sm-12 col-xs-12'>
+                        <app-dashboard-milestone id='id_milestone' #milestone></app-dashboard-milestone>
+                      </div>
+                    </div>
+                    <div class='row' *ngIf="driverName!='You' && corporateKpiData?.length>0">
+                      <app-team-level-corporate></app-team-level-corporate>
+                    </div>
+                    <div class="row" *ngIf='driverName!="You" && teamLevelAllUserList?.length>0'>
+                      <app-team-level-all [uID]='uID' [driverID]='driverID'></app-team-level-all>
+                    </div>
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #template>  
+  <div class="modal-header">  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <h1>New Invitation</h1>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body">
+    <br>
+    <div class='padding-bottom' *ngFor='let d of userInviteData; let i of index;'>
+      <p style='width:100%; text-align: center;'><strong>{{ d.coach.name}} {{ d.coach.lname }}</strong> has invited you to join their team.</p> 
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class='col-lg-2 col-xl-2'>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+              <button type="submit" data-dismiss="modal" class="btn btn-success" (click)='sendNotificationResponse("Accepted")'><b>Accept</b></button>
+          </div>
+          <div class='col-sm-12 col-md-4 col-lg-4 col-xl-4'>
+            <button type="submit" data-dismiss="modal" class="btn btn-danger" (click)='sendNotificationResponse("Declined")'><b>Decline</b></button>
+          </div>
+      </div>
+        <div style='text-align:center; width:100%;margin-bottom:5px;cursor:pointer;'>
+            <a (click)='dismissNotification();'>postpone</a>
+        </div>
+    </div>  
+  </div>
+</ng-template> 

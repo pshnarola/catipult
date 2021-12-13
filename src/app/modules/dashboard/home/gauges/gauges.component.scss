@@ -1,0 +1,159 @@
+.cards {
+    width:1500px;
+    overflow: hidden;
+}
+.cardTitle{
+    font-size: 15px;
+    color: #73879C !important;
+    padding-top:.75em;
+} 
+
+.cardHeader{
+    position: absolute;
+    width:100%;
+    height:20%;
+    overflow: hidden;
+    top:0px;
+    left:0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.content > mat-card { 
+    width: 15em; 
+    height: 17em;
+    text-align: center;
+}
+
+@media (min-width: 1800px) {
+    .scroll{
+        visibility: hidden;
+        width:0;
+    }
+    .scroll-container{
+        width:0;
+    }
+}
+
+.content > mat-card { 
+    width: 14.5em; 
+    height: 17em;
+    text-align: center;
+}
+
+.content > mat-card-title {
+    font-size: 12px;
+}   
+
+.scrollable{
+    overflow: hidden;
+    height: 19em;
+} 
+
+.cardBody{
+    position: absolute;
+    top: 45%;
+    left: 0%;
+    width:100%;
+    text-align:center;
+    font-size:2em;
+    color:#73879C;
+}
+
+.cardSubBody{
+    position: absolute;
+    top: 60%;
+    left: 0%;
+    width:100%;
+    text-align:center;
+    font-size:1em;
+    color:#73879C;
+}
+
+.startingPoint{
+    position: absolute;
+    top: 83%;
+    left: 23%;
+}
+
+.endingPoint{
+    position: absolute;
+    top: 83%;
+    left: 64%;
+}
+
+.content > mat-card-content{
+    text-align: center;
+}
+
+.isActive {
+    border-bottom-style: solid;
+    border-width: 4px;
+    border-color: green !important;
+}
+
+.isInactive{
+    background-color: rbga(139,185,221,1) !important;
+    border-bottom-style: solid;
+    border-color: #1f2532;;
+}
+
+.startingPoint{
+    position: absolute;
+    top: 83%;
+    left: 23%;
+}
+
+.endingPoint{
+    position: absolute;
+    top: 83%;
+    left: 64%;
+}
+
+.mat-ink-bar{
+    height: 0px !important;
+}
+
+.driver{
+    width: 3em;
+    height: 3em;
+}
+
+.gauge{
+    padding-top: 1em;
+}
+
+.gaugeSpacer{
+    padding-top:1.5em;
+}
+
+.flex {
+    flex: 1 1 auto;
+}
+
+.scroll{
+    height: 17.1em;
+    margin-top:10px;
+    border-style:none;
+    border-radius: 3px;
+    .scroll-left{
+        border-style:none;
+    }
+    .scroll-right{
+        // margin-left:2px;
+        border-style:none;
+        height:17.5em;
+    }
+}
+
+.video{
+    color:rgb(225,225,225);
+    cursor: pointer;
+    // color:rgb(255,255,255);
+}
+
+.no-activity{
+    padding-top:50% !important;
+    font-size: 15px;
+    color: #73879C !important;
+}

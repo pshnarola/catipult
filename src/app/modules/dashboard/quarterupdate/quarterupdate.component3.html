@@ -1,0 +1,189 @@
+<div class="modal fade" id="invite_success_modal" tabindex="-1" role="dialog" aria-labelledby="invite_success_modal" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <button type="button" class="close"
+                  data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">
+                  <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+
+                  </div>
+              </h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <!-- <form role="form"> -->
+                  <form id="demo-form2"   method="post">
+
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                         Quarter Status Updated            </div>
+                    </div>
+                      <br>
+
+
+
+                      <!-- <div class="">
+                          <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_blue f18 w100"><b>Submit</b></button>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <button type="submit" class="btn btn-primary b_white c_blue f18 w100 br25"><b>Skip</b></button>
+                              </div>
+                          </div>
+                      </div>   -->
+                  </form>
+              <!-- </form> -->
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12 float_r p0">
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                      <button type="submit"  data-dismiss="modal"
+                       class="btn btn-primary b_blue f18 w100" (click)="confirm()"><b>Ok</b></button>
+
+                  </div>
+
+
+
+
+              </div>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>
+<button type="button" id="openModalButton3" style="display: none"  class="btn btn-xs btn-default command-edit mr5"  data-toggle="modal" data-target="#invite_success_modal"></button>
+<div class="row">
+  <table id="grey_datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap custtable" cellspacing="0" width="100%">
+      <thead>
+          <tr>
+              <!-- <th>Kpi.No.</th> -->
+              <th>KPI</th>
+              <th>Target</th>
+              <th>Unit</th>
+              <th>Achieved QTY</th>
+              <th>%</th>
+              <!-- <th>Due Date</th> -->
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let element of kpiData">
+          <td>{{element.objective}}</td>
+          <td>{{element.qty}}</td>
+          <td>{{element.unit}}</td>
+
+          <td><input type="text" name="target" min="0" max="{{element.qty}}" [(ngModel)]="element.aTarget"  class="form-control cform-control br0" placeholder="Achieve QTY"></td>
+          <td>{{ (element.aTarget/ element.qty) * 100}}</td>
+          <td>
+              <!-- <i class="material-icons" >
+                  edit
+                </i>
+                <i class="material-icons" (click)="delete(element)">
+                  delete
+                </i> -->
+                <!-- <button type="button" class="btn btn-xs btn-default command-view mr5"onclick=""><span class="glyphicon glyphicon-eye-open"></span></button> -->
+            <button type="button" class="btn btn-primary f18  b_blue command-edit"  data-toggle="modal" data-target="#invite_success_modal" data-toggle="modal" data-target="#invite_success_modal" (click)="save(element)">Update</button>
+
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <!-- <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+          <form id="demo-form2"   method="post">
+              <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <label class="control-label float_l c_label"> Quarter 2</label>
+                  </div>
+              </div>
+              <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                  <tbody>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Get up</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Brush teeth</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Take a shower</label>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </form>
+      </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12 form-group ">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+          <form id="demo-form2"   method="post">
+              <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <label class="control-label float_l c_label"> Quarter 3</label>
+                  </div>
+              </div>
+              <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                  <tbody>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Get up</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Brush teeth</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Take a shower</label>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </form>
+      </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12 form-group  pr0">
+      <div class="col-md-12 col-sm-12 col-xs-12 c_cell">
+          <form id="demo-form2"   method="post">
+              <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                      <label class="control-label float_l c_label"> Quarter 4</label>
+                  </div>
+              </div>
+              <table class="table dt-responsive nowrap grey_tr" cellspacing="0" width="100%">
+                  <tbody>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Get up</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Brush teeth</label>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <label class="control-label float_l c_label mt0">Take a shower</label>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </form>
+      </div>
+  </div> -->
+</div>

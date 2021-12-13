@@ -1,0 +1,21 @@
+@import 'material';
+@import 'main';
+@import 'utils';
+@import 'responsive';
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+// .container{
+//     margin-right: 0;
+//     margin-left: 0;
+// }
+
+// @media (min-width: 1200px){
+//     .container{
+//         max-width: 100%;
+//     }
+// }
+
+.standard-font {
+    color:#73879C !important;
+  }
