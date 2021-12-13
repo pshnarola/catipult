@@ -1,27 +1,27 @@
 <!-- top navigation -->
-<div class="top_nav ml230"> 
+<div class="top_nav ml230 nnavbar-header"> 
   <div class="nav_menu">
     <nav class='navigation'>
-      <div class="nav toggle nav-left">
+      <!-- <div class="nav toggle nav-left">
         <a id="menu_toggle" class='nav-bars' style='cursor:auto;'><i class="fa fa-bars" (click)="toggleClicked($event)" style='cursor:pointer;' ></i></a>
-    </div>
-    <div class="nav navbar-nav nav-center topNav">
-      <li class='nav-center-item'><a (click)='getConnected()' *ngIf='!isPortfolioAccount && !isCoached' style='cursor:pointer;'><i class='fas fa-user-tie' style='margin-right:.5em;'></i>Click to connect with a coach</a></li>
-      <!-- <li class='nav-center-item'><a *ngIf='isCoached'><i style='margin-right:.5em;'></i>Coach: {{ coachName }}<i class='fas fa-user-minus' style='margin-left:10px; cursor:pointer;color:red;font-size:1em;'(click)='showModal(removeCoachModal,"modal-sm");'></i></a></li> -->
-      <li class='nav-center-item'><a *ngIf='isCoached' (click)='showModal(removeCoachModal,"modal-sm");' style='cursor:pointer;'><i style='margin-right:.5em;'></i>Coach: {{ coachName }}</a></li>
-    </div>
+    </div> -->
+    <!-- <h1>World class company</h1> -->
       <ul class="nav navbar-nav nav-right">
         <div class='nav-right-item'>
+          <li class='nav-center-item' *ngIf='!isPortfolioAccount && !isCoached'><a (click)='getConnected()'  class="btn-coach" style='cursor:pointer;'><i class='fas fa-user-tie'></i>Click to connect with a coach</a></li>
+          <li class='nav-center-item' *ngIf='isCoached'><a (click)='showModal(removeCoachModal,"modal-sm");' class="btn-coach" style='cursor:pointer;'><i></i>Coach: {{ coachName }}</a></li>
           <li role="presentation" (click)="notify()" class='nav-notification'>
-            <a href="javascript:;" class='nav-notification-icon' data-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell" style='margin-right:15px; font-size:20px;'></i>
-              <span class="nav-notification-label" *ngIf='notificationCount>0'>{{ notificationCount }}</span>
-              <span class='nav-notification-label' style='background:gray !important;' *ngIf='notificationCount<1'>{{ notificationCount }}</span>
+            <a href="javascript:;" class='nav-notification-icon' data-toggle="dropdown" aria-expanded="false">
+              <img src="assets/images/onboarding/step1/notification-icon.svg" class="" />
+              <span class="nav-notification-label" *ngIf='notificationCount>0'></span>
+              <!-- <span class='nav-notification-label' style='background:gray !important;' *ngIf='notificationCount<1'>{{ notificationCount }}</span> -->
             </a>
           </li>
-          <li class="">
+          <li class="user-menu">
             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style='font-weight:500; font-size:15px;'>
-              <img src="{{ url }}" alt="" />{{ name }}
-              <span class=" fa fa-angle-down"></span>
+              <img src="{{ url }}" alt="" />
+              <!-- {{ name }} -->
+              <!-- <span class=" fa fa-angle-down"></span> -->
             </a>
             <ul class="dropdown-menu dropdown-usermenu" style='top:6%;'>
               <li>

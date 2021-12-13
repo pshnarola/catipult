@@ -22,8 +22,34 @@ import * as notification from 'src/app/shared/libraries/exports.library';
 })
 export class SidenavComponent implements OnInit {
   modalRef: BsModalRef;
+  myDashboard: boolean = false;
+  threeYearOutcome: boolean = false;
+  myCompany:boolean = false;
+  myMeeting:boolean = false;
+  portfolio:boolean = false;
+  tutorials:boolean = false;
+  currentRoute: string = "";
 
-  constructor(public router: Router, public dataservice: DataServiceService, public route: ActivatedRoute, private dataService: SharedDataService, private modalService: BsModalService, private sideNavDataService: SideNavDataService) { }
+  constructor(public router: Router, public dataservice: DataServiceService, public route: ActivatedRoute, private dataService: SharedDataService, private modalService: BsModalService, private sideNavDataService: SideNavDataService) {
+     console.log(': ===> this.router.url', );
+     this.resetAciveRoute();
+     this.currentRoute = this.router.url;
+     if(this.currentRoute === "/dashboard") {
+      this.myDashboard = true;
+     } else if(this.currentRoute === "/dash/outstatement") {
+      this.threeYearOutcome = true;
+     } else if(this.currentRoute === "/admin/companySetup") {
+      this.myCompany = true;
+     } else if(this.currentRoute === "/meeting/home") {
+      this.myMeeting = true;
+     } else if(this.currentRoute === "/portfolio") {
+      this.portfolio = true;
+     } else if(this.currentRoute === "/tutorials") {
+      this.tutorials = true;
+     }
+   }
+
+
 
   paramSubscription:Subscription;
   portfolioAccountSubscription:Subscription;
@@ -58,6 +84,14 @@ export class SidenavComponent implements OnInit {
 
   ngOnDestroy(){
     this.destroySubscriptions();
+  }
+
+  resetAciveRoute() {
+    this.myDashboard = false;
+    this.threeYearOutcome = false;
+    this.myCompany = false;
+    this.myMeeting = false;
+    this.tutorials = false;
   }
 
   setSubscriptions():void {
@@ -221,6 +255,28 @@ export class SidenavComponent implements OnInit {
 
   clearModal():void {
     this.featureDescription = '';
+  }
+
+  toggleClicked(event) {
+    var target = event.srcElement.id;
+    var body = $("body");
+    var menu = $("#sidebar-menu");
+
+    // toggle small or large menu
+    if (body.hasClass("nav-md")) {
+      menu.find("li.active ul").hide();
+      menu
+        .find("li.active")
+        .addClass("active-sm")
+        .removeClass("active");
+    } else {
+      menu.find("li.active-sm ul").show();
+      menu
+        .find("li.active-sm")
+        .addClass("active")
+        .removeClass("active-sm");
+    }
+    body.toggleClass("nav-md nav-sm");
   }
 }
 
