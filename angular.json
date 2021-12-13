@@ -31,7 +31,8 @@
             "styles": [
               "node_modules/jquery-bootstrap-scrolling-tabs/dist/jquery.scrolling-tabs.css",
               "node_modules/videogular2/fonts/videogular.css",
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery-bootstrap-scrolling-tabs/dist/jquery.scrolling-tabs.js"

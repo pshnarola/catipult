@@ -1,2 +1,141 @@
 /* You can add global styles to this file, and also import other style files */
 // @import '~swiper/dist/css/swiper.min.css';
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+
+// sidebar-css
+.nside-nav {
+    background: #043750;
+}
+.nav-md .container.body .col-md-3.left_col.nside-nav{
+    width: 256px;
+    justify-content: center;
+    padding: 0 20px;
+}
+.nside-nav .left_col {
+    background: transparent;
+}
+.nside-nav .navbar.nav_title {
+    padding: 0;
+    background: transparent;
+    margin: 0;
+    height: auto;
+    min-height: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+.nside-nav .navbar.nav_title a {
+    padding: 0 !important;
+    height: auto;
+    padding: 0 12px !important;
+}
+.nside-nav .navbar.nav_title a img {
+    max-width: 192px;
+    display: block;
+}
+.nside-nav .main_menu_side .menu_section .side-menu {
+    margin: 0;
+}
+.nside-nav .main_menu_side {
+    clear: both;
+}
+.nside-nav .menu_section .side-menu {
+    margin: 0;
+}
+.nside-nav .menu_section .side-menu li + li {
+    margin-top: 2px;
+}
+.nside-nav .menu_section .side-menu li a {
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 14px 16px;
+    border-radius: 4px;
+    position: relative;
+    padding-left: 48px;
+    letter-spacing: -0.01em;
+}
+.nside-nav .menu_section .side-menu li a i {
+    position: absolute;
+    left: 16px;
+    font-size: 16px;
+    text-align: center;
+    width: 18px;
+}
+.nside-nav .menu_section .side-menu li a:hover, 
+.nside-nav .menu_section .side-menu li a.active {
+    background: #FFFFFF !important;
+    color: #043750 !important;
+}
+.nside-nav .nside-toggle {
+    margin-bottom: 32px;
+    clear: both;
+}
+.nside-nav .nside-toggle a {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    height: 48px;
+    width: 48px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.nav-md .nside-nav .navbar.nav_title .navsm {
+    display: none;
+}
+.nav-sm .nside-nav .navbar.nav_title .navmd {
+    display: none;
+}
+.nav-sm .nside-nav .navbar.nav_title a{
+    padding: 0 4px !important;
+}
+.nav-sm .container.body .col-md-3.left_col.nside-nav {
+    padding: 0 20px !important;
+    width: 88px;
+}
+.nav-sm .nside-nav .navbar.nav_title a img {
+    max-width: 40px;
+}
+.nav-sm .nside-nav .menu_section .side-menu li a {
+    padding: 0;
+    font-size: 0 !important;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav-sm .nside-nav .menu_section .side-menu li a i {
+    position: initial;
+    margin: 0 !important;
+}
+.nav-sm .nside-nav .menu_section .side-menu li + li {
+    margin-top: 30px;
+}
+
+
+
+// header-css
+.main_container .nnavbar-header {
+    margin-left: 256px;
+}
+.nav-sm .main_container .nnavbar-header {
+    margin-left: 88px;
+}
+
+// sidebar-content-css
+.nav-md .container.body .nsidebar-content{
+    margin-left: 256px;
+}
+.nav-sm .container.body .nsidebar-content {
+    margin-left: 88px;
+}
