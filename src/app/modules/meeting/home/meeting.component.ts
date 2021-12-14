@@ -41,6 +41,12 @@ export class MeetingComponent implements OnInit,OnDestroy {
   constructor(private router: Router, private dataService: MeetingDataService, private modalService: BsModalService, private SharedDataService: SharedDataService,private formBuilder: FormBuilder
     ,private TeamLevelAllDataService: TeamLevelAllDataService,private DataServiceService: DataServiceService, private IssueDataService: IssueDataService) { }
 
+
+  // Tab  variable
+  rythm: boolean = true;
+  custom: boolean = false;
+  completedMeeting: boolean = false;
+
   meetingListSubscription:Subscription;
   timerSubscription:Subscription[] = [];
   dataSubscription:Subscription[] = [];
@@ -889,6 +895,22 @@ export class MeetingComponent implements OnInit,OnDestroy {
       } else {
         this.IssueDataService.getMeetingIssue(this.activeMeeting.meetingId);
       }
+  }
+
+  tabChange(tab){
+    if(tab === 'rhythm') {
+      this.rythm = true;
+      this.custom = false;
+      this.completedMeeting = false;
+    } else if(tab === 'custom') {
+      this.rythm = false;
+      this.custom = true;
+      this.completedMeeting = false;
+    } else {
+      this.rythm = false;
+      this.custom = false;
+      this.completedMeeting = true;
+    }
   }
 }
 

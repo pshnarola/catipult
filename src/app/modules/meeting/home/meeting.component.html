@@ -159,23 +159,31 @@
         </div>
       </div>
     </div>
-    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="displayMeetingList">
+
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="col-md-4 meeting-list">
         <div>
           <ul class="nav">
-            <li class="nav-item">
+            <li class="nav-item" (click)="tabChange('rhythm')">
               <a class="nav-link active" aria-current="page">Rhythm</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" (click)="tabChange('custom')">
               <a class="nav-link">Custom</a>
             </li>
+            <li class="nav-item" (click)="tabChange('completedMeeting')">
+              <a class="nav-link"><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a>
+            </li>
           </ul>
-          <a><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a>
+          
         </div>
-        <div>     
+        <div *ngIf="displayMeetingList && (rythm || custom)">     
           <h1>Let’s create a new meeting</h1>
           <p>Start with creating a meeting schedule!</p>
           <button *ngIf='!meetingIsLaunched' (click)='showModal(meetingNew,"modal-md");resetTimer();'><a><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a> Create New Meeting</button>
+        </div>
+        <div *ngIf="displayMeetingList && completedMeeting">     
+          <h1>No completed meetings</h1>
+          <p>Once you finish your first meeting, it will appear here!</p>
         </div>
       </div>
       <div class="col-md-8 meeting-preview">
