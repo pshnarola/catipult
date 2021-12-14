@@ -3,6 +3,7 @@
 
 // fonts
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 body {
   font-family: "Montserrat", sans-serif !important;
   background: #fff;
@@ -12,14 +13,17 @@ body {
 .nside-nav {
   background: #043750;
 }
+
 .nav-md .container.body .col-md-3.left_col.nside-nav {
   width: 256px;
   justify-content: center;
   padding: 0 20px;
 }
+
 .nside-nav .left_col {
   background: transparent;
 }
+
 .nside-nav .navbar.nav_title {
   padding: 0;
   background: transparent;
@@ -29,27 +33,34 @@ body {
   margin-top: 32px;
   margin-bottom: 32px;
 }
+
 .nside-nav .navbar.nav_title a {
   padding: 0 !important;
   height: auto;
   padding: 0 12px !important;
 }
+
 .nside-nav .navbar.nav_title a img {
   max-width: 192px;
   display: block;
 }
+
 .nside-nav .main_menu_side .menu_section .side-menu {
   margin: 0;
 }
+
 .nside-nav .main_menu_side {
   clear: both;
 }
+
 .nside-nav .menu_section .side-menu {
   margin: 0;
 }
-.nside-nav .menu_section .side-menu li + li {
+
+.nside-nav .menu_section .side-menu li+li {
   margin-top: 2px;
 }
+
 .nside-nav .menu_section .side-menu li a {
   margin: 0;
   font-style: normal;
@@ -62,6 +73,7 @@ body {
   padding-left: 48px;
   letter-spacing: -0.01em;
 }
+
 .nside-nav .menu_section .side-menu li a i {
   position: absolute;
   left: 16px;
@@ -69,15 +81,18 @@ body {
   text-align: center;
   width: 18px;
 }
+
 .nside-nav .menu_section .side-menu li a:hover,
 .nside-nav .menu_section .side-menu li a.active {
   background: #ffffff !important;
   color: #043750 !important;
 }
+
 .nside-nav .nside-toggle {
   margin-bottom: 32px;
   clear: both;
 }
+
 .nside-nav .nside-toggle a {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -88,22 +103,28 @@ body {
   justify-content: center;
   cursor: pointer;
 }
+
 .nav-md .nside-nav .navbar.nav_title .navsm {
   display: none;
 }
+
 .nav-sm .nside-nav .navbar.nav_title .navmd {
   display: none;
 }
+
 .nav-sm .nside-nav .navbar.nav_title a {
   padding: 0 4px !important;
 }
+
 .nav-sm .container.body .col-md-3.left_col.nside-nav {
   padding: 0 20px !important;
   width: 88px;
 }
+
 .nav-sm .nside-nav .navbar.nav_title a img {
   max-width: 40px;
 }
+
 .nav-sm .nside-nav .menu_section .side-menu li a {
   padding: 0;
   font-size: 0 !important;
@@ -114,25 +135,31 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .nav-sm .nside-nav .menu_section .side-menu li a i {
   position: initial;
   margin: 0 !important;
   font-size: 18px !important;
 }
-.nav-sm .nside-nav .menu_section .side-menu li + li {
+
+.nav-sm .nside-nav .menu_section .side-menu li+li {
   margin-top: 30px;
 }
+
 .nav-sm .nside-nav .nside-toggle a svg {
   transform: rotate(180deg);
 }
+
 .nnavbar-header .nav-right-item li.user-menu .dropdown-usermenu {
   top: 50px !important;
   right: 0;
   z-index: 1;
 }
+
 .nnavbar-header .nav-right-item li.user-menu {
   position: relative;
 }
+
 .nnavbar-header .nav-right-item li.user-menu .dropdown-usermenu li {
   margin: 0;
 }
@@ -141,21 +168,25 @@ body {
 .main_container .nnavbar-header {
   margin-left: 256px;
 }
+
 .nav-sm .main_container .nnavbar-header {
   margin-left: 88px;
 }
+
 .nnavbar-header .nav_menu {
   background: transparent;
   margin: 0;
   padding: 0 24px 0 24px;
   border: 0;
 }
+
 .nnavbar-header .nav_menu nav.navigation {
   border-bottom: 1px solid #dae3e8;
   margin-bottom: 0px;
   padding: 12px 0 15px;
   align-items: center;
 }
+
 .nnavbar-header .nav_menu nav.navigation h1 {
   margin: 0;
   font-style: normal;
@@ -164,6 +195,7 @@ body {
   line-height: 32px;
   color: #000000;
 }
+
 .nnavbar-header .btn-coach {
   background: #043750;
   border-radius: 100px;
@@ -174,24 +206,30 @@ body {
   line-height: 24px;
   display: inline-block;
 }
+
 .nnavbar-header .nav-right-item {
   width: 100% !important;
 }
+
 .nnavbar-header .btn-coach i {
   margin-right: 10px;
 }
+
 .nnavbar-header .nav-right-item li {
   margin: 0;
   display: inline-block;
 }
-.nnavbar-header .nav-right-item li + li {
+
+.nnavbar-header .nav-right-item li+li {
   margin-left: 25px;
 }
+
 .nnavbar-header .nav-notification a {
   position: relative;
   margin: 0;
   padding: 0;
 }
+
 .nnavbar-header .nav-notification a span {
   position: absolute !important;
   top: -3px !important;
@@ -201,7 +239,8 @@ body {
   height: 5px !important;
   left: auto !important;
 }
-.nnavbar-header .nav-right-item li.user-menu > a {
+
+.nnavbar-header .nav-right-item li.user-menu>a {
   width: 40px;
   height: 40px;
   display: flex;
@@ -210,7 +249,8 @@ body {
   border-radius: 4px;
   overflow: hidden;
 }
-.nnavbar-header .nav-right-item li.user-menu > a img {
+
+.nnavbar-header .nav-right-item li.user-menu>a img {
   margin: 0;
   width: 100%;
   height: auto;
@@ -221,16 +261,20 @@ body {
 .nav-md .container.body .nsidebar-content {
   margin-left: 256px;
 }
+
 .nav-sm .container.body .nsidebar-content {
   margin-left: 88px;
 }
+
 .nsidebar-content {
   clear: both;
   padding: 0 24px !important;
 }
+
 .nsidebar-content .row {
   margin: 0;
 }
+
 .nsidebar-content .row .x_panel {
   border: 0;
   padding: 0;
@@ -242,18 +286,22 @@ body {
   display: flex;
   flex-wrap: wrap;
   min-height: calc(100vh - 72px);
+
   .meeting-left {
     max-width: 320px;
     border-right: 1px solid #e3eff5;
     width: 100%;
   }
+
   .meeting-tab {
     display: flex;
     align-items: center;
+
     ul.nav {
       display: flex;
       align-items: center;
       border-bottom: 2px solid #e3eff5;
+
       li {
         a {
           font-style: normal;
@@ -266,8 +314,10 @@ body {
           padding: 12px 10px;
           text-align: center;
           position: relative;
+
           &.active {
             color: #000000;
+
             &:after {
               content: "";
               position: absolute;
@@ -281,10 +331,12 @@ body {
         }
       }
     }
-    > .nav-item {
+
+    >.nav-item {
       margin-left: 18px;
     }
   }
+
   .create-meeting-content {
     height: calc(100vh - 126px);
     display: flex;
@@ -292,6 +344,7 @@ body {
     text-align: center;
     width: 100%;
     justify-content: center;
+
     h1 {
       font-style: normal;
       font-weight: 500;
@@ -301,6 +354,7 @@ body {
       color: #000000;
       margin: 8px 0;
     }
+
     p {
       font-style: normal;
       font-weight: 500;
@@ -310,6 +364,7 @@ body {
       color: #575757;
       margin: 0 0 15px 0;
     }
+
     .btn.btn-rounded {
       margin: 0;
       width: 100%;
@@ -325,20 +380,24 @@ body {
       font-size: 13px;
       line-height: 24px;
       color: #00a9ff;
+
       i {
         margin-right: 10px;
       }
     }
   }
+
   .meeting-right {
     width: calc(100% - 320px);
     padding: 16px 0 0 16px;
+
     .create-meeting-text {
       min-height: calc(100vh - 98px);
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+
       h1 {
         font-style: normal;
         font-weight: 500;
@@ -348,6 +407,7 @@ body {
         color: #000000;
         margin: 8px 0;
       }
+
       p {
         font-style: normal;
         font-weight: 500;
@@ -361,6 +421,7 @@ body {
     }
   }
 }
+
 .add-agenda-btn a {
   font-style: normal;
   font-weight: 500;
@@ -371,18 +432,23 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
 }
+
 .add-agenda-btn a i {
   margin-right: 13px;
 }
+
 .agenda-wrapper .row {
   display: flex;
 }
+
 .agenda-wrapper .col-md-8 {
   border-left: 1px solid #e3eff5;
 }
-.agenda-wrapper .row + .row {
+
+.agenda-wrapper .row+.row {
   margin-top: 8px;
 }
+
 .agenda-wrapper div#timerDiv {
   max-height: 200px;
   min-height: 200px;
@@ -390,6 +456,7 @@ body {
   overflow-x: hidden;
   padding-top: 1px;
 }
+
 .agenda-wrapper div#timerDiv .row {
   align-items: center;
 }
@@ -404,6 +471,7 @@ body {
   align-items: center;
   padding: 30px 0;
 }
+
 .modal-content {
   background: #ffffff;
   border-radius: 16px;
@@ -412,11 +480,13 @@ body {
   overflow: hidden;
   width: 100%;
 }
+
 .modal-header {
   display: flex;
   align-items: center;
   padding: 0 0 12px 0;
   border-bottom: 1px solid #e3eff5;
+
   h4 {
     width: 80%;
     margin-right: auto;
@@ -427,6 +497,7 @@ body {
     letter-spacing: -0.01em;
     color: #000000;
   }
+
   button.close {
     margin: 0;
     font-size: 32px;
@@ -435,20 +506,25 @@ body {
     line-height: 15px;
   }
 }
+
 .modal-body {
   padding: 0;
 }
+
 .modal-content .mt-1 {
   margin-top: 14px;
 }
+
 .modal-content .mb-1 {
   margin-bottom: 14px;
 }
+
 .modal-div-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+
   h2 {
     margin: 0;
     font-style: normal;
@@ -459,6 +535,7 @@ body {
     color: #000000;
     font-family: "Montserrat", sans-serif !important;
   }
+
   h3 {
     font-style: normal;
     font-weight: 500 !important;
@@ -468,6 +545,7 @@ body {
     color: #575757;
     margin: 0;
   }
+
   h5 {
     font-weight: 500;
     font-size: 12px;
@@ -477,6 +555,7 @@ body {
     color: #c7301b;
   }
 }
+
 .modal-footer {
   padding: 0;
   padding-top: 16px;
@@ -493,9 +572,11 @@ body {
   margin: 0 0 4px 0 !important;
   display: block;
 }
+
 .form-group:last-child {
   margin: 0;
 }
+
 .form-control.nform-control {
   background: #ffffff;
   border: 1px solid #d4d4d4;
@@ -510,9 +591,11 @@ body {
   color: #000;
   min-height: 44px;
 }
+
 hr {
   border-top: 1px solid #dae3e8;
 }
+
 .btn.btn-primary {
   background: #043750;
   border-radius: 24px;
@@ -524,6 +607,7 @@ hr {
   color: #ffffff;
   margin: 0;
 }
+
 .btn.btn-secondary {
   font-style: normal;
   font-weight: bold;
@@ -536,7 +620,26 @@ hr {
   margin: 0;
   padding: 7px 16px;
 }
-button + button {
+
+button+button {
   margin: 0 !important;
   margin-left: 8px !important;
+}
+
+.createMeetingbtn {
+    padding: 6px 15px;
+    background: #ffffff;
+    border: 1px solid #00a9ff;
+    box-sizing: border-box;
+    border-radius: 100px;
+    height: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 24px;
+    color: #00a9ff;
+    margin: 5px 0px 0px 0px !important;
+  i {
+    margin-right: 10px;
+  }
 }

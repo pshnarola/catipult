@@ -43,7 +43,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
 
 
   // Tab  variable
-  rythm: boolean = true;
+  rhythm: boolean = true;
   custom: boolean = false;
   completedMeeting: boolean = false;
 
@@ -899,20 +899,18 @@ export class MeetingComponent implements OnInit,OnDestroy {
 
   tabChange(tab){
     if(tab === 'rhythm') {
-      this.rythm = true;
+      this.rhythm = true;
       this.custom = false;
       this.completedMeeting = false;
     } else if(tab === 'custom') {
-      this.rythm = false;
+      this.rhythm = false;
       this.custom = true;
       this.completedMeeting = false;
     } else {
-      this.rythm = false;
+      this.rhythm = false;
       this.custom = false;
       this.completedMeeting = true;
     }
-    console.log(': ===> 1111', 1111);
-    console.log(': ===> this.completedMeeting , this.custom , this.rythm', this.completedMeeting , this.custom , this.rythm);
   }
 }
 
