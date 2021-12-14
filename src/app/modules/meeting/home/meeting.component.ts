@@ -911,6 +911,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
       this.custom = false;
       this.completedMeeting = true;
     }
+    console.log(': ===> 1111', 1111);
+    console.log(': ===> this.completedMeeting , this.custom , this.rythm', this.completedMeeting , this.custom , this.rythm);
   }
 }
 
