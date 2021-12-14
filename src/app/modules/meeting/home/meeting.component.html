@@ -1,6 +1,6 @@
 <div class="right_col ml230 right_col nsidebar-content" role="main">
-  <div class="row">
-    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
+ <div class="row">
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!displayMeetingList">
       <div class="x_title" *ngIf='!meetingIsLaunched'>
         <h2 style="color: #73879C !important;width:auto !important;">My Meetings<i [ngClass]='displayMeetingList ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='setMeetingListDisplay();'></i></h2>
         <a matTooltip="Create new meeting" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' *ngIf='!meetingIsLaunched' (click)='showModal(meetingNew,"modal-md");resetTimer();'></i></a>
@@ -159,6 +159,30 @@
         </div>
       </div>
     </div>
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="displayMeetingList">
+      <div class="col-md-4 meeting-list">
+        <div>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page">Rhythm</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Custom</a>
+            </li>
+          </ul>
+          <a><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a>
+        </div>
+        <div>     
+          <h1>Let’s create a new meeting</h1>
+          <p>Start with creating a meeting schedule!</p>
+          <button *ngIf='!meetingIsLaunched' (click)='showModal(meetingNew,"modal-md");resetTimer();'><a><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a> Create New Meeting</button>
+        </div>
+      </div>
+      <div class="col-md-8 meeting-preview">
+        <h1>To see a Preview, please create your first meeting</h1>
+        <p>To create your first meeting, select a few teammates and add them to the schedule!</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -203,7 +227,7 @@
       </mat-form-field>
     </div>
     <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4' [ngClass]="{ 'is-not-visible': meetingEditMeetingFrequency!='Monthly' && meetingEditMeetingFrequency!='Weekly' }">
-      <div *ngIf='meetingEditMeetingFrequency!="Monthly" && meetingEditMeetingFrequency!="Weekly"'>
+      <div *ngIf='meetingEditMeetingFrequency && meetingEditMeetingFrequency!="Monthly" && meetingEditMeetingFrequency!="Weekly"'>
         <mat-form-field appearance='fill' style='width:100%;'>
           <mat-label>Day of the month</mat-label>
           <mat-select class='form-control' name='editMeetingDayOfMonth'>
