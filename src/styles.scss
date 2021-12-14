@@ -149,13 +149,13 @@ body{
 .nnavbar-header .nav_menu {
     background: transparent;
     margin: 0;
-    padding: 0 24px 0 32px;
+    padding: 0 24px 0 24px;
     border: 0;
 }
 .nnavbar-header .nav_menu nav.navigation {
     border-bottom: 1px solid #DAE3E8;
-    margin-bottom: 16px;
-    padding: 16px 0 15px;
+    margin-bottom: 0px;
+    padding: 12px 0 15px;
     align-items: center;
 }
 .nnavbar-header .nav_menu nav.navigation h1 {
@@ -225,4 +225,110 @@ body{
 }
 .nav-sm .container.body .nsidebar-content {
     margin-left: 88px;
+}
+.nsidebar-content{
+    clear: both;
+    padding: 0 24px !important;
+}
+.nsidebar-content .row {
+    margin: 0;
+}
+.nsidebar-content .row .x_panel {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+// meeting-page-css
+.meeting-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: calc(100vh - 72px);
+    .meeting-left {
+        max-width: 320px;
+        border-right: 1px solid #E3EFF5;
+        width: 100%;
+    }
+    .meeting-tab {
+        display: flex;
+        align-items: center;
+        ul.nav {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #E3EFF5;
+            li{
+                a{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 28px;
+                    letter-spacing: -0.01em;
+                    color: #808080;
+                    min-width: 128px;
+                    padding: 12px 10px;
+                    text-align: center;
+                    position: relative;
+                    &.active{
+                        color: #000000;
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            height: 4px;
+                            bottom: -2px;
+                            background: #00A9FF;
+                            left: 0;
+                            right: 0;
+                        }
+                    }
+                }
+            }
+        }
+        > .nav-item {
+            margin-left: 18px;
+        }
+    }
+    .create-meeting-content {
+        height: calc(100vh - 126px);
+        display: flex;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+        h1 {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 24px;
+            letter-spacing: -0.01em;
+            color: #000000;
+            margin: 8px 0;
+        }
+        p {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: center;
+            color: #575757;
+            margin: 0 0 15px 0;
+        }
+        .btn.btn-rounded {
+            margin: 0;
+            width: 100%;
+            padding: 6px 15px;
+            background: #FFFFFF;
+            border: 1px solid #00A9FF;
+            box-sizing: border-box;
+            border-radius: 100px;
+            margin: 0 !important;
+            height: auto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 24px;
+            color: #00A9FF;
+        }
+    }
 }

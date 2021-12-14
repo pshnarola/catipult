@@ -160,37 +160,200 @@
       </div>
     </div>
 
+    <!-- my code start -->
     <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="col-md-4 meeting-list">
-        <div>
-          <ul class="nav">
-            <li class="nav-item" (click)="tabChange('rhythm')">
-              <a class="nav-link active" aria-current="page">Rhythm</a>
-            </li>
-            <li class="nav-item" (click)="tabChange('custom')">
-              <a class="nav-link">Custom</a>
-            </li>
-            <li class="nav-item" (click)="tabChange('completedMeeting')">
-              <a class="nav-link"><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a>
-            </li>
-          </ul>
-          
+      <div class="meeting-wrapper">
+        <div class="meeting-left">
+          <div class="meeting-list">
+            <div class="meeting-tab">
+              <ul class="nav">
+                <li class="nav-item" (click)="tabChange('rhythm')">
+                  <a class="nav-link active" aria-current="page">Rhythm</a>
+                </li>
+                <li class="nav-item" (click)="tabChange('custom')">
+                  <a class="nav-link">Custom</a>
+                </li>
+              </ul> 
+              <div class="nav-item" (click)="tabChange('completedMeeting')">
+                <a class="nav-link"><img src="assets/images/meeting/clipboard-check.svg" /></a>
+                <!-- <a class="nav-link"><img src="assets/images/meeting/clipboard-check.svg" /></a> -->
+              </div>    
+            </div>
+            <div class="create-meeting-content" *ngIf="displayMeetingList && (rythm || custom)">  
+              <div>
+                <h1>Let’s create a new meeting</h1>
+                <p>Start with creating a meeting schedule!</p>
+                <button *ngIf='!meetingIsLaunched' (click)='showModal(meetingNew,"modal-md");resetTimer();' class="btn btn-rounded"><i class='fas fa-plus'></i> Create New Meeting</button>
+              </div>
+            </div>
+            <div class='col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3' *ngIf='!displayMeetingList && (rythm || custom)'>
+              <mat-card class="base-card" style='min-height:75px;padding:0px;color: #73879C;' *ngFor='let m of userMeetingData; let i = index'>
+                <mat-card-header>
+                  <mat-card-title class='meeting' style='font-size:15px !important;'>{{ m.meeting }}
+                    <a matTooltip="Edit meeting" matTooltipClass='toolTip' *ngIf='m.userRole.toLowerCase()=="host"' aria-label="Button that displays a tooltip when focused or hovered over"><i class='meeting-tools fas fa-edit' style='font-size:14px;padding-left:7px;cursor:pointer;' (click)='showModal(meetingEdit,"modal-md");editMeeting(m);' *ngIf='!meetingIsLaunched'></i></a>
+                    <a matTooltip="Delete meeting" matTooltipClass='toolTip' *ngIf='m.userRole.toLowerCase()=="host"' aria-label="Button that displays a tooltip when focused or hovered over"><i class='meeting-tools fas fa-times-circle' style='font-size:14px;padding-left:7px;cursor:pointer;color:red;' (click)='deleteMeeting(m);' *ngIf='!meetingIsLaunched'></i></a>
+                  </mat-card-title>
+                  <mat-card-subtitle style='font-size:12px;' *ngIf='m.meetingFrequency=="Weekly" && m.meetingInterval'>Recurring {{ m.meetingFrequency }} on {{ dayOfTheWeek[m.meetingInterval-1].dayOfWeek }}s at {{ m.meetingDate | date:'shortTime' }}</mat-card-subtitle>
+                  <mat-card-subtitle style='font-size:12px;' *ngIf='m.meetingFrequency=="Monthly" && m.meetingInterval'>Recurring {{ m.meetingFrequency }} on the {{ dayOfTheMonth[m.meetingInterval-1].display }} at {{ m.meetingDate | date:'shortTime' }}</mat-card-subtitle>
+                  <mat-card-subtitle style='font-size:12px;' *ngIf='m.meetingFrequency=="Not Recurring"'>Non Recurring meeting on {{ m.meetingDate | date: 'EEEE' }} {{ m.meetingDate | date: 'LLLL' }} {{ m.meetingDate | date: 'dd' }} at {{ m.meetingDate | date:'shortTime' }}</mat-card-subtitle>
+                  <mat-card-subtitle class='small-font start-meeting' (click)='launchMeeting(m);' *ngIf='!meetingIsLaunched && m.userRole=="Host"'>Launch Meeting</mat-card-subtitle>
+                  <mat-card-subtitle class='small-font preview-meeting' (click)='viewMeetingDetails(m);' *ngIf='!meetingIsLaunched'>Preview Meeting</mat-card-subtitle>
+                </mat-card-header>
+              </mat-card>  
+            </div>
+            <div *ngIf="displayMeetingList && completedMeeting">     
+              <h1>No completed meetings</h1>
+              <p>Once you finish your first meeting, it will appear here!</p>
+            </div>
+          </div>
         </div>
-        <div *ngIf="displayMeetingList && (rythm || custom)">     
-          <h1>Let’s create a new meeting</h1>
-          <p>Start with creating a meeting schedule!</p>
-          <button *ngIf='!meetingIsLaunched' (click)='showModal(meetingNew,"modal-md");resetTimer();'><a><i class='fas fa-plus' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' ></i></a> Create New Meeting</button>
-        </div>
-        <div *ngIf="displayMeetingList && completedMeeting">     
-          <h1>No completed meetings</h1>
-          <p>Once you finish your first meeting, it will appear here!</p>
+        <div class="meeting-right">
+          <div class="meeting-preview" *ngIf="displayMeetingList">
+            <h1>To see a Preview, please create your first meeting</h1>
+            <p>To create your first meeting, select a few teammates and add them to the schedule!</p>
+          </div>
+          <div class="meeting-preview" *ngIf="!displayMeetingList">
+            <app-meeting-preview class='col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9' [previewMeetingId]='previewMeetingId' *ngIf='meetingIsPreview'></app-meeting-preview>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf='meetingIsLaunched && !meetingIsPreview'>
+              <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
+                <div class="meeting-title">
+                  <h2>{{ activeMeetingName }}</h2>
+                  <h4 *ngIf='!meetingInProgress'>Meeting Lobby</h4>
+                  <h4 *ngIf='meetingInProgress'>MEETING IN PROGRESS</h4>
+                  <p class='small-font start-meeting' (click)='startMeeting(activeMeeting);' *ngIf='!meetingInProgress'>Start meeting</p>
+                  <p class='small-font stop-meeting' (click)='stopMeeting(activeMeeting);' *ngIf='meetingInProgress && !conclusionFinished'>Stop meeting</p>
+                  <p class='small-font stop-meeting' *ngIf='!meetingInProgress && !conclusionFinished && !activeTimer && !activeMeetingNotes && !activeMeetingScoreNotes' (click)='exitMeeting(activeMeeting);'>Exit meeting</p>
+                  <p *ngIf='activeTimer || activeMeetingNotes || activeMeetingScoreNotes'><strong>Avoid navigating away from the meeting while in progress, and remember to <a style='color:#73879C;cursor:pointer;text-decoration: underline;' (click)='showMeetingConclusion();'>conclude</a> the meeting to exit.</strong></p>
+                </div>
+                <hr>
+              </div>
+              <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 border-right-light'>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf='activeTimer'>
+                  <!-- Active Agenda -->
+                  <div class="col-xs-12-col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom-light" *ngIf='activeTimer'>
+                    <h2 style='text-align:center;'>Active Agenda Item</h2>
+                    <div style='text-align:center;font-size:18px;'>
+                      <a style='color:#73879C;'>{{ activeTimer.name }}</a>
+                    </div>
+                    <div style='text-align:center;font-size:18px;color:#73879C;'>
+                      <a [ngClass]="{'time-remaining-danger' : activeTimer.status == 'danger', 'time-remaining-warning' : activeTimer.status == 'warning','time-remaining-info': activeTimer.status == 'info' }"
+                      >{{ activeTimer.timeRemainingDisplay ? activeTimer.timeRemainingDisplay : activeTimer.display }}</a>  
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- Attendees -->
+                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 attendee-container'>
+                    <h2 style='cursor:pointer;' (click)='showAttendeeList();'>Attendee List<i [ngClass]='displayAttendeeList ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;'></i></h2>
+                    <div [ngClass]='displayAttendeeList ? "display-attendee-list" : "hide-attendee-list"' *ngIf='displayAttendeeList'>
+                      <ng-container *ngIf='activeMeeting && activeMeeting.attendees'>
+                        <div style='padding-left:10px;' *ngFor='let a of activeMeeting.attendees; let i = index'>
+                          <i class='fas fa-check-circle' style='color:green;padding-right:3px;cursor:pointer;' (click)='assignAttendee(a,i,"present");' *ngIf='!a.attendeeStatus || a.attendeeStatus=="present"'></i>
+                          <i class='fas fa-check-circle' style='color:lightgray;padding-right:3px;cursor:pointer;' (click)='assignAttendee(a,i,"present");' *ngIf='a.attendeeStatus && a.attendeeStatus!="present"'></i>
+                          <i class='fas fa-times-circle' style='color:red;cursor:pointer;padding-right: 5px;' (click)='assignAttendee(a,i,"not present");' *ngIf='!a.attendeeStatus || a.attendeeStatus=="not present"'></i>
+                          <i class='fas fa-times-circle' style='color:lightgray;cursor:pointer;padding-right: 5px;' (click)='assignAttendee(a,i,"not present");' *ngIf='a.attendeeStatus && a.attendeeStatus!="not present"'></i>
+                          <a class='agenda-item' [ngStyle]='{color: a.selected == true && meetingInProgress ? "red" : "#73879C", cursor: activeMeeting?.milestones ? "pointer" : "auto"}' (click)='getMilestoneData(a);'>{{ a.User.name }} {{ a.User.lname }}</a>
+                        </div>    
+                      </ng-container>
+                    </div>
+                  </div>
+                  <!-- Issues -->
+                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12' *ngIf='meetingInProgress'>
+                    <h2 style='cursor:pointer;width:fit-content;' (click)='getIssueData(activeMeeting.meetingId);' *ngIf='!activeMeeting.displayIssues'>Display Issues</h2>
+                    <h2 style='cursor:pointer;width:fit-content;' (click)='getIssueData(activeMeeting.meetingId);' *ngIf='activeMeeting.displayIssues'>Hide Issues<i class='fas fa-filter' [ngStyle]='{color: activeMeeting.activeUser?.filterIssues ? "#ff6767" : "#4da6ff" }' style='cursor:pointer;padding-left:10px;font-size:14px;color:#4da6ff;' matTooltip="Filter to issues owned by {{ activeMeeting.activeUser?.User.name }} {{ activeMeeting.activeUser?.User.lname }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over" *ngIf='activeMeeting.activeUser?.User' (click)='$event.stopPropagation();getUserIssue();'></i></h2>
+                  </div>
+                </div>
+                <div class="row">
+                  <!-- Agenda -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 agenda-container">
+                    <h2>Agenda<i [ngClass]='displayAgenda ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='showAgenda();'></i></h2>
+                    <div class='agenda'*ngFor='let t of timers; let i = index'>
+                      <div class='col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10' *ngIf='displayAgenda'>
+                        <a class='agenda-item'><i class='fas fa-asterisk' style='font-size:10px' *ngIf='activeTimer && t.name==activeTimer.name'></i>{{ t.name }}
+                          <i class='fas fa-play agenda-control' style='padding-left:10px;font-size:15px;color:green;' *ngIf='meetingInProgress' (click)='startAgendaItem(t,i);'></i>
+                          <i class='fas fa-stop agenda-control' style='padding-left:5px;font-size:15px;color:red;' *ngIf='meetingInProgress' (click)='pauseAgendaItem();'></i>
+                        </a>  
+                      </div>
+                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" style='text-align:right;' *ngIf='displayAgenda'>
+                        <a class='agenda-item' *ngIf='t.duration>=1'>{{ t.duration }}m</a>
+                        <a class='agenda-item' *ngIf='t.duration<1'>{{ t.duration*60 }}s</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Meeting Notes -->
+                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12' *ngIf='meetingInProgress'>
+                    <h2>Meeting Notes<i [ngClass]='displayMeetingNotes ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='showMeetingNotes();'></i></h2>
+                    <div *ngIf='displayMeetingNotes'>
+                      <angular-editor [(ngModel)]="activeMeetingNotes" [config]="config" name='nm_MeetingNotes' ngDefaultControl></angular-editor>
+                    </div>
+                  </div>  
+                  <!-- Conclude Meeting -->
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf='meetingInProgress'>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style='padding-left:0px;text-align:left;'>
+                      <h2>Conclude Meeting<i [ngClass]='displayMeetingConclusion ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='toggleMeetingConclusion();'></i></h2>
+                    </div>
+                    <div style='text-align:center;' *ngIf='displayMeetingConclusion'>
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
+                          <input type='text' style='font-size:18px;width:50px;text-align:center;' name='mtgScoreScore' [(ngModel)]='activeMeetingScore' disabled>
+                        </div>
+                      <a class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12' style='font-size:20px;color:#73879C;'><i class='fas fa-plus-circle' style='padding-right:10px;cursor:pointer;'(click)='incrementMeetingScore("up");'></i><i class='fas fa-minus-circle' style='cursor:pointer;' (click)='incrementMeetingScore("down");'></i></a>
+                      <button class='btn btn-primary' (click)='concludeMeeting(activeMeeting);' *ngIf='meetingInProgress'>Conclude Meeting</button>
+                        <angular-editor style='text-align:left;' [(ngModel)]="activeMeetingScoreNotes" [config]="config" name='nm_MtgScoreScoreNotes' ngDefaultControl></angular-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Milestone table -->
+              <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9'>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf='meetingInProgress'>
+                  <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12' style='padding-bottom:10px;' *ngIf='activeMeetingMilestoneData && activeMeetingDisplayMilestones && !activeMeeting.displayIssues'>
+                    <h2>Milestones</h2>
+                    <table mat-table  [dataSource]="activeMeetingMilestoneData" class="table" style='color:#73879C;'>
+                      <ng-container matColumnDef="ID">
+                        <th mat-header-cell *matHeaderCellDef>ID</th>
+                        <td mat-cell *matCellDef='let element; let i = index'><a style='color: #007bff; cursor: pointer;' data-toggle="modal" data-target="#edit_milestone1" (click)="milestoneEdit(editMilestone,'modal-md',element)">{{ i + 1 }} <i style='color:#73879C;font-size:10px;' [ngClass]="element.recurringFrequency ? 'fas fa-sync' : ''"></i></a></td>
+                      </ng-container>
+                      <ng-container matColumnDef="Driver">
+                        <th mat-header-cell *matHeaderCellDef>Driver</th>
+                        <td mat-cell *matCellDef="let element"> {{element.Driver}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="KPI">
+                        <th mat-header-cell *matHeaderCellDef>KPI</th>
+                        <td mat-cell *matCellDef="let element"> {{element.KPI}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Milestone">
+                        <th mat-header-cell *matHeaderCellDef>Milestone</th>
+                        <td mat-cell *matCellDef="let element"> {{element.Milestone}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Due Date">
+                        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+                        <td mat-cell *matCellDef="let element"> {{element['Due Date'] | date: 'MM/dd/yyyy' }} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Status">
+                        <th mat-header-cell *matHeaderCellDef>Status</th>
+                        <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="User">
+                        <th mat-header-cell *matHeaderCellDef>User</th>
+                        <td mat-cell *matCellDef="let element"> {{element.User}} <a style='padding-left:10px !important;font-size:15px !important;cursor:pointer;'  matTooltip="{{ element.note }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i style='padding-left:2px;color:#73879C;font-size:12px;' [ngClass]="element.note ? 'far fa-sticky-note' : ''"></i></a></td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="milestoneColumns"></tr>
+                      <tr mat-row *matRowDef="let element; columns: milestoneColumns;"></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9' style='padding-left:30px;padding-right:30px;'>
+                <app-issue *ngIf='meetingInProgress && activeMeeting.displayIssues' [data]='{"user":activeMeeting.activeUser,"meetingId":activeMeeting.meetingId}' [userData]='activeMeeting.activeUser?.filterIssues ? issueDataFiltered ? issueDataFiltered : [] : issueData ? issueData : []'></app-issue>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-8 meeting-preview">
-        <h1>To see a Preview, please create your first meeting</h1>
-        <p>To create your first meeting, select a few teammates and add them to the schedule!</p>
-      </div>
+      
+      
     </div>
+    <!-- my code end -->
   </div>
 </div>
 
