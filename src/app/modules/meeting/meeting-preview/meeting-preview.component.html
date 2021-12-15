@@ -4,24 +4,157 @@
   </div>
   <div class="right-div">
     <div class="button-wrapper">
-      <button class="btn btn-primary">Launch Meeting</button>
+      <button class="btn btn-primary">
+        <img src="assets/images/meeting/btn-arrow-icon.svg" />Launch Meeting
+      </button>
       <button class="btn btn-rounded">More Action</button>
     </div>
   </div>
 </div>
 <hr class="mt-1 mb-1" />
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="meeting-title">
-      <h2 *ngIf="meetingData">{{ meetingData.meetingName }}</h2>
-    </div>
-    <hr />
+<div class="meeting--title-header">
+  <div class="left-div">
+    <h2 *ngIf="meetingData">{{ meetingData.meetingName }}</h2>
+    <p>
+      <img src="assets/images/meeting/calendar.svg" />Rhythm Weekly ⋅ Every
+      Monday ⋅ 13:30 - 14:30 PM
+    </p>
   </div>
+</div>
+<hr class="mt-1 mb-0" />
+<div class="meeting-main-content">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="attendee-content mt-1">
+        <h3>
+          Attendee List
+        </h3>
+        <div class="attendee-list" *ngIf="meetingData">
+          <ul>
+            <li *ngFor="let a of meetingData.meetingUsers; let i = index">
+              <div class="attendee-img"></div>
+              <div class="attendee-name">
+                <a
+                  class="agenda-item"
+                  [ngStyle]="{
+                    color: a.selected == true ? 'red' : '#73879C',
+                    cursor:
+                      meetingData?.displayIssues ||
+                      meetingData?.displayMilestones
+                        ? 'pointer'
+                        : 'auto'
+                  }"
+                  (click)="setSelectedUser(a)"
+                  >{{ a.User.name }} {{ a.User.lname }}</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr class="mt-0 mb-0 mr--10 ml--10" />
+      <div class="agenda-content mt-1">
+        <h3>Agenda</h3>
+        <div class="agenda-list" *ngIf="meetingData && meetingData.timerData">
+          <ul>
+            <li *ngFor="let t of meetingData.timerData; let i = index">
+              <div class="agenda-img"></div>
+              <div class="agenda-name">
+                <p>
+                  <a class="agenda-item">{{ t.name }} </a>
+                </p>
+                <p>
+                  <a class="agenda-time" *ngIf="t.duration >= 1"
+                    >{{ t.duration }}m</a
+                  >
+                </p>
+                <p>
+                  <a class="agenda-time" *ngIf="t.duration < 1"
+                    >{{ t.duration * 60 }}s</a
+                  >
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="meeting-tab">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="active">KPI</a>
+          </li>
+          <li class="nav-item" (click)="getMilestoneData(previewMeetingId)">
+            <!-- *ngIf="!meetingData?.displayMilestones" -->
+            <a>Rocks / Milestone</a>
+          </li>
+          <li class="nav-item" (click)="getIssueData(previewMeetingId)">
+            <!-- *ngIf="!meetingData?.displayIssues" -->
+            <a>Issue</a>
+          </li>
+        </ul>
+      </div>
+      <div class="meeting-tab-content">
+        <div
+          class="tab-content"
+          *ngIf="
+            meetingData &&
+            meetingData?.displayMilestones &&
+            !meetingData?.displayIssues
+          "
+        >
+          <div class="milestones-content-wrapper">
+            <app-milestones
+              [data]="
+                meetingData.selectedUser?.filterMilestones
+                  ? milestoneDataFiltered
+                    ? milestoneDataFiltered
+                    : []
+                  : milestoneData
+                  ? milestoneData
+                  : []
+              "
+            ></app-milestones>
+          </div>
+        </div>
+        <div
+          class="tab-content"
+          *ngIf="
+            meetingData &&
+            meetingData?.displayIssues &&
+            !meetingData?.displayMilestones
+          "
+        >
+          <div class="issue-content-wrapper">
+            <app-issue
+              [data]="{
+                user: meetingData.selectedUser,
+                meetingId: previewMeetingId
+              }"
+              [userData]="
+                meetingData.selectedUser?.filterIssues
+                  ? issueDataFiltered
+                    ? issueDataFiltered
+                    : []
+                  : issueData
+                  ? issueData
+                  : []
+              "
+              [modify]="false"
+            ></app-issue>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
   <div
     class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 border-right-light"
   >
     <div class="row">
-      <!-- Attendees -->
       <div
         class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 attendee-container"
       >
@@ -31,6 +164,7 @@
             style="padding-left:5px;"
           ></i>
         </h2>
+
         <div>
           <ng-container *ngIf="meetingData">
             <div
@@ -53,7 +187,6 @@
           </ng-container>
         </div>
       </div>
-      <!-- Issues -->
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <h2
           style="cursor:pointer;width:fit-content;"
@@ -87,7 +220,6 @@
           ></i>
         </h2>
       </div>
-      <!-- Rocks -->
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <h2
           style="cursor:pointer;width:fit-content;"
@@ -125,7 +257,6 @@
       </div>
     </div>
     <div class="row">
-      <!-- Agenda -->
       <div
         class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 agenda-container"
       >
@@ -200,4 +331,4 @@
       "
     ></app-milestones>
   </div>
-</div>
+</div> -->
