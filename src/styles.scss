@@ -514,6 +514,9 @@ body {
     width: 50%;
     display: flex;
     justify-content: flex-end;
+    .dropdown {
+      margin-left: 8px;
+    }
   }
   h4 {
     font-weight: 500;
@@ -533,6 +536,46 @@ body {
     button + button {
       margin: 0 !important;
       margin-left: 8px !important;
+    }
+  }
+}
+.dropdown {
+  button {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-left: 15px;
+      transform: rotate(180deg);
+      margin-top: 2px;
+    }
+  }
+  &.open {
+    svg {
+      transform: none;
+    }
+  }
+  .dropdown-menu {
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgb(0 0 0 / 15%);
+    border-radius: 8px;
+    padding: 12px;
+    right: 0 !important;
+    left: auto;
+    border: 0;
+    margin: 4px 0 0 0;
+    li {
+      a {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 24px;
+        color: #34364b;
+        padding: 0;
+        background: transparent;
+        &.red {
+          color: #c7301b;
+        }
+      }
     }
   }
 }
@@ -885,13 +928,9 @@ button + button {
   line-height: 24px;
   color: #00a9ff;
   transition: all 0.3s;
+  min-height: 40px;
   i {
     margin-right: 10px;
-  }
-  &:hover {
-    background: #00a9ff;
-    color: #fff;
-    transition: all 0.3s;
   }
 }
 .custom-table {
