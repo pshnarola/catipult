@@ -82,16 +82,16 @@
     <div class="col-md-8">
       <div class="meeting-tab">
         <ul class="nav">
-          <li class="nav-item">
-            <a class="active">KPI</a>
+          <li class="nav-item" (click)="getKpiData(previewMeetingId)">
+            <a [ngClass]="{'active' : meetingData && meetingData.displayKPI}">KPI</a>
           </li>
           <li class="nav-item" (click)="getMilestoneData(previewMeetingId)">
             <!-- *ngIf="!meetingData?.displayMilestones" -->
-            <a>Rocks / Milestone</a>
+            <a [ngClass]="{'active' : meetingData && meetingData.displayMilestones}">Rocks / Milestone</a>
           </li>
           <li class="nav-item" (click)="getIssueData(previewMeetingId)">
             <!-- *ngIf="!meetingData?.displayIssues" -->
-            <a>Issue</a>
+            <a [ngClass]="{'active' : meetingData && meetingData.displayIssues}">Issue</a>
           </li>
         </ul>
       </div>
