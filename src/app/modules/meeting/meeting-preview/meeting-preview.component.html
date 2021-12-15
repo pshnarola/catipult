@@ -1,58 +1,203 @@
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
-      <div class="meeting-title">
-        <h2 *ngIf='meetingData'>{{ meetingData.meetingName }}</h2>
-        <h4>Meeting Preview</h4>
-      </div>
-      <hr>
+<div class="meeting-header">
+  <div class="left-div">
+    <h4>Meeting Preview</h4>
+  </div>
+  <div class="right-div">
+    <div class="button-wrapper">
+      <button class="btn btn-primary">Launch Meeting</button>
+      <button class="btn btn-rounded">More Action</button>
     </div>
-    <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 border-right-light'>
-      <div class="row">
-        <!-- Attendees -->
-        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 attendee-container'>
-          <h2>Attendee List<i class='fas fa-angle-down' style='padding-left:5px;'></i></h2>
-          <div>
-            <ng-container *ngIf='meetingData'>
-              <div style='padding-left:10px;' *ngFor='let a of meetingData.meetingUsers; let i = index'>
-                <a class='agenda-item' [ngStyle]='{color: a.selected == true ? "red" : "#73879C", cursor: meetingData?.displayIssues || meetingData?.displayMilestones ? "pointer" : "auto"}' (click)='setSelectedUser(a );'>{{ a.User.name }} {{ a.User.lname }}</a>
-              </div>    
-            </ng-container>
-          </div>
-        </div>
-        <!-- Issues -->
-        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
-          <h2 style='cursor:pointer;width:fit-content;' (click)='getIssueData(previewMeetingId);' *ngIf='!meetingData?.displayIssues'>Display Issues</h2>
-          <h2 style='cursor:pointer;width:fit-content;' (click)='getIssueData(previewMeetingId);' *ngIf='meetingData?.displayIssues'>Hide Issues<i class='fas fa-filter' [ngStyle]='{color: meetingData.selectedUser?.filterIssues ? "#ff6767" : "#4da6ff" }' style='cursor:pointer;padding-left:10px;font-size:14px;color:#4da6ff;' matTooltip="Filter to issues owned by {{ meetingData.selectedUser.User.name }} {{ meetingData.selectedUser.User.lname }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over" *ngIf='meetingData?.selectedUser' (click)='$event.stopPropagation();setFilter("issues");getUserIssue();'></i></h2>
-        </div>
-        <!-- Rocks -->
-        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
-          <h2 style='cursor:pointer;width:fit-content;' (click)='getMilestoneData(previewMeetingId);' *ngIf='!meetingData?.displayMilestones'>Display Rocks</h2>
-          <h2 style='cursor:pointer;width:fit-content;' (click)='getMilestoneData(previewMeetingId);' *ngIf='meetingData?.displayMilestones'>Hide Rocks<i class='fas fa-filter' [ngStyle]='{color: meetingData.selectedUser?.filterMilestones ? "#ff6767" : "#4da6ff" }' style='cursor:pointer;padding-left:10px;font-size:14px;color:#4da6ff;' matTooltip="Filter to milestones owned by {{ meetingData.selectedUser.User.name }} {{ meetingData.selectedUser.User.lname }}" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over" *ngIf='meetingData?.selectedUser' (click)='$event.stopPropagation();setFilter("milestones");getUserMilestone();'></i></h2>
-        </div>
-      </div>
-      <div class="row">
-        <!-- Agenda -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 agenda-container">
-          <h2>Agenda<i class='fas fa-angle-down' style='padding-left:5px;'></i></h2>
-          <ng-container *ngIf='meetingData && meetingData.timerData'>
-            <div class='agenda'*ngFor='let t of meetingData.timerData; let i = index'>
-                <div class='col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10'>
-                  <a class='agenda-item'>{{ t.name }}
-                  </a>  
-                </div>
-                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" style='text-align:right;'>
-                  <a class='agenda-item' *ngIf='t.duration>=1'>{{ t.duration }}m</a>
-                  <a class='agenda-item' *ngIf='t.duration<1'>{{ t.duration*60 }}s</a>
-                </div>
-              </div>
+  </div>
+</div>
+<hr class="mt-1 mb-1" />
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="meeting-title">
+      <h2 *ngIf="meetingData">{{ meetingData.meetingName }}</h2>
+    </div>
+    <hr />
+  </div>
+  <div
+    class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 border-right-light"
+  >
+    <div class="row">
+      <!-- Attendees -->
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 attendee-container"
+      >
+        <h2>
+          Attendee List<i
+            class="fas fa-angle-down"
+            style="padding-left:5px;"
+          ></i>
+        </h2>
+        <div>
+          <ng-container *ngIf="meetingData">
+            <div
+              style="padding-left:10px;"
+              *ngFor="let a of meetingData.meetingUsers; let i = index"
+            >
+              <a
+                class="agenda-item"
+                [ngStyle]="{
+                  color: a.selected == true ? 'red' : '#73879C',
+                  cursor:
+                    meetingData?.displayIssues || meetingData?.displayMilestones
+                      ? 'pointer'
+                      : 'auto'
+                }"
+                (click)="setSelectedUser(a)"
+                >{{ a.User.name }} {{ a.User.lname }}</a
+              >
+            </div>
           </ng-container>
         </div>
       </div>
+      <!-- Issues -->
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2
+          style="cursor:pointer;width:fit-content;"
+          (click)="getIssueData(previewMeetingId)"
+          *ngIf="!meetingData?.displayIssues"
+        >
+          Display Issues
+        </h2>
+        <h2
+          style="cursor:pointer;width:fit-content;"
+          (click)="getIssueData(previewMeetingId)"
+          *ngIf="meetingData?.displayIssues"
+        >
+          Hide Issues<i
+            class="fas fa-filter"
+            [ngStyle]="{
+              color: meetingData.selectedUser?.filterIssues
+                ? '#ff6767'
+                : '#4da6ff'
+            }"
+            style="cursor:pointer;padding-left:10px;font-size:14px;color:#4da6ff;"
+            matTooltip="Filter to issues owned by {{
+              meetingData.selectedUser.User.name
+            }} {{ meetingData.selectedUser.User.lname }}"
+            matTooltipClass="toolTip"
+            aria-label="Button that displays a tooltip when focused or hovered over"
+            *ngIf="meetingData?.selectedUser"
+            (click)="
+              $event.stopPropagation(); setFilter('issues'); getUserIssue()
+            "
+          ></i>
+        </h2>
+      </div>
+      <!-- Rocks -->
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2
+          style="cursor:pointer;width:fit-content;"
+          (click)="getMilestoneData(previewMeetingId)"
+          *ngIf="!meetingData?.displayMilestones"
+        >
+          Display Rocks
+        </h2>
+        <h2
+          style="cursor:pointer;width:fit-content;"
+          (click)="getMilestoneData(previewMeetingId)"
+          *ngIf="meetingData?.displayMilestones"
+        >
+          Hide Rocks<i
+            class="fas fa-filter"
+            [ngStyle]="{
+              color: meetingData.selectedUser?.filterMilestones
+                ? '#ff6767'
+                : '#4da6ff'
+            }"
+            style="cursor:pointer;padding-left:10px;font-size:14px;color:#4da6ff;"
+            matTooltip="Filter to milestones owned by {{
+              meetingData.selectedUser.User.name
+            }} {{ meetingData.selectedUser.User.lname }}"
+            matTooltipClass="toolTip"
+            aria-label="Button that displays a tooltip when focused or hovered over"
+            *ngIf="meetingData?.selectedUser"
+            (click)="
+              $event.stopPropagation();
+              setFilter('milestones');
+              getUserMilestone()
+            "
+          ></i>
+        </h2>
+      </div>
     </div>
-    <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9' style='padding-left:30px;padding-right:30px;' *ngIf='meetingData && meetingData?.displayIssues && !meetingData?.displayMilestones'>
-      <app-issue [data]='{"user":meetingData.selectedUser,"meetingId":previewMeetingId}' [userData]='meetingData.selectedUser?.filterIssues ? issueDataFiltered ? issueDataFiltered : [] : issueData ? issueData : []' [modify]='false'></app-issue>
+    <div class="row">
+      <!-- Agenda -->
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 agenda-container"
+      >
+        <h2>
+          Agenda<i class="fas fa-angle-down" style="padding-left:5px;"></i>
+        </h2>
+        <ng-container *ngIf="meetingData && meetingData.timerData">
+          <div
+            class="agenda"
+            *ngFor="let t of meetingData.timerData; let i = index"
+          >
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+              <a class="agenda-item">{{ t.name }} </a>
+            </div>
+            <div
+              class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2"
+              style="text-align:right;"
+            >
+              <a class="agenda-item" *ngIf="t.duration >= 1"
+                >{{ t.duration }}m</a
+              >
+              <a class="agenda-item" *ngIf="t.duration < 1"
+                >{{ t.duration * 60 }}s</a
+              >
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
-    <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9' style='padding-left:30px;padding-right:30px;' *ngIf='meetingData && meetingData?.displayMilestones && !meetingData?.displayIssues'>
-      <app-milestones [data]='meetingData.selectedUser?.filterMilestones ? milestoneDataFiltered ? milestoneDataFiltered : [] : milestoneData ? milestoneData : []'></app-milestones>
-    </div>
+  </div>
+  <div
+    class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9"
+    style="padding-left:30px;padding-right:30px;"
+    *ngIf="
+      meetingData &&
+      meetingData?.displayIssues &&
+      !meetingData?.displayMilestones
+    "
+  >
+    <app-issue
+      [data]="{ user: meetingData.selectedUser, meetingId: previewMeetingId }"
+      [userData]="
+        meetingData.selectedUser?.filterIssues
+          ? issueDataFiltered
+            ? issueDataFiltered
+            : []
+          : issueData
+          ? issueData
+          : []
+      "
+      [modify]="false"
+    ></app-issue>
+  </div>
+  <div
+    class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9"
+    style="padding-left:30px;padding-right:30px;"
+    *ngIf="
+      meetingData &&
+      meetingData?.displayMilestones &&
+      !meetingData?.displayIssues
+    "
+  >
+    <app-milestones
+      [data]="
+        meetingData.selectedUser?.filterMilestones
+          ? milestoneDataFiltered
+            ? milestoneDataFiltered
+            : []
+          : milestoneData
+          ? milestoneData
+          : []
+      "
+    ></app-milestones>
+  </div>
 </div>

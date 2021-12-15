@@ -11,18 +11,30 @@
             <div class="meeting-tab">
               <ul class="nav">
                 <li class="nav-item" (click)="tabChange('rhythm')">
-                  <a class="nav-link" aria-current="page" [ngClass]="{'active' : rhythm}">Rhythm</a>
+                  <a
+                    class="nav-link"
+                    aria-current="page"
+                    [ngClass]="{ active: rhythm }"
+                    >Rhythm</a
+                  >
                 </li>
                 <li class="nav-item" (click)="tabChange('custom')">
-                  <a class="nav-link" [ngClass]="{'active' : custom}">Custom</a>
+                  <a class="nav-link" [ngClass]="{ active: custom }">Custom</a>
                 </li>
               </ul>
               <div class="nav-item" (click)="tabChange('completedMeeting')">
-                <a class="nav-link" *ngIf="!completedMeeting"><img src="assets/images/meeting/clipboard-check.svg" /></a>
-                <a class="nav-link" *ngIf="completedMeeting"><img src="assets/images/meeting/clipboard-check-solid.svg" /></a>
+                <a class="nav-link" *ngIf="!completedMeeting"
+                  ><img src="assets/images/meeting/clipboard-check.svg"
+                /></a>
+                <a class="nav-link" *ngIf="completedMeeting"
+                  ><img src="assets/images/meeting/clipboard-check-solid.svg"
+                /></a>
               </div>
             </div>
-            <div class="create-meeting-content" *ngIf="!displayMeetingList && (rhythm || custom)">
+            <div
+              class="create-meeting-content"
+              *ngIf="!displayMeetingList && (rhythm || custom)"
+            >
               <div>
                 <h1>Let’s create a new meeting</h1>
                 <p>Start with creating a meeting schedule!</p>
@@ -35,61 +47,82 @@
                 </button>
               </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 col-xl-3" *ngIf="displayMeetingList && (rhythm || custom)">
-              <button *ngIf="!meetingIsLaunched" (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
-                class="btn btn-rounded createMeetingbtn">
-                <i class="fas fa-plus"></i> Create New Meeting
-              </button>
-              <mat-card class="base-card" style="min-height:75px;padding:0px;color: #73879C;"
-                *ngFor="let m of userMeetingData; let i = index">
-                <mat-card-header>
-                  <mat-card-title class="meeting" style="font-size:15px !important;">{{ m.meeting }}
-                    <!-- <a matTooltip="Edit meeting" matTooltipClass="toolTip" *ngIf="m.userRole.toLowerCase() == 'host'"
-                      aria-label="Button that displays a tooltip when focused or hovered over"><i
-                        class="meeting-tools fas fa-edit" style="font-size:14px;padding-left:7px;cursor:pointer;"
-                        (click)="
-                          showModal(meetingEdit, 'modal-md'); editMeeting(m)
+            <div
+              class="meeting-list-content-wrapper"
+              *ngIf="displayMeetingList && (rhythm || custom)"
+            >
+              <div class="meeting-list-content">
+                <button
+                  *ngIf="!meetingIsLaunched"
+                  (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
+                  class="btn btn-rounded createMeetingbtn"
+                >
+                  <i class="fas fa-plus"></i> Create New Meeting
+                </button>
+                <div class="meeting-list-item">
+                  <mat-card
+                    class="base-card"
+                    *ngFor="let m of userMeetingData; let i = index"
+                    (click)="viewMeetingDetails(m)"
+                  >
+                    <mat-card-header>
+                      <mat-card-title class="meeting"
+                        >{{ m.meeting }}
+                      </mat-card-title>
+                      <mat-card-subtitle
+                        *ngIf="
+                          m.meetingFrequency == 'Weekly' && m.meetingInterval
                         "
-                        *ngIf="!meetingIsLaunched"
-                      ></i
-                    ></a>
-                    <a
-                      matTooltip="Delete meeting"
-                      matTooltipClass="toolTip"
-                      *ngIf="m.userRole.toLowerCase() == 'host'"
-                      aria-label="Button that displays a tooltip when focused or hovered over"
-                      ><i
-                        class="meeting-tools fas fa-times-circle"
-                        style="font-size:14px;padding-left:7px;cursor:pointer;color:red;" (click)="deleteMeeting(m)"
-                        *ngIf="!meetingIsLaunched"></i></a> -->
-                  </mat-card-title>
-                  <mat-card-subtitle style="font-size:12px;"
-                    *ngIf="m.meetingFrequency == 'Weekly' && m.meetingInterval"><img src="assets/images/meeting/calendar.svg" /> {{ m.meetingFrequency }} - Every
-                    {{ dayOfTheWeek[m.meetingInterval - 1].dayOfWeek }} 
-                    </mat-card-subtitle>
-                    <mat-card-subtitle style="font-size:12px;"
-                    *ngIf="m.meetingFrequency == 'Weekly' && m.meetingInterval"><img src="assets/images/meeting/clock.svg" />  {{ m.meetingDate | date: "shortTime" }} 
-                    </mat-card-subtitle>
-                   
-                  <mat-card-subtitle style="font-size:12px;"
-                    *ngIf="m.meetingFrequency == 'Monthly' && m.meetingInterval"><img src="assets/images/meeting/calendar.svg" /> {{ m.meetingFrequency }} Every
-                    {{ dayOfTheMonth[m.meetingInterval - 1].display }} of the Month
-                    </mat-card-subtitle>
-                    <mat-card-subtitle style="font-size:12px;" *ngIf="m.meetingFrequency == 'Monthly' && m.meetingInterval"><img src="assets/images/meeting/clock.svg" /> 
-                      {{ m.meetingDate | date: "shortTime" }}
-                    </mat-card-subtitle>
-                  <mat-card-subtitle style="font-size:12px;" *ngIf="m.meetingFrequency == 'Not Recurring'">Non Recurring
-                    meeting on
-                    {{ m.meetingDate | date: "EEEE" }}
-                    {{ m.meetingDate | date: "LLLL" }}
-                    {{ m.meetingDate | date: "dd" }} at
-                    {{ m.meetingDate | date: "shortTime" }}</mat-card-subtitle>
-                  <!-- <mat-card-subtitle class="small-font start-meeting" (click)="launchMeeting(m)"
+                        ><img src="assets/images/meeting/calendar.svg" />
+                        {{ m.meetingFrequency }} - Every
+                        {{ dayOfTheWeek[m.meetingInterval - 1].dayOfWeek }}
+                      </mat-card-subtitle>
+                      <mat-card-subtitle
+                        style="font-size:12px;"
+                        *ngIf="
+                          m.meetingFrequency == 'Weekly' && m.meetingInterval
+                        "
+                        ><img src="assets/images/meeting/clock.svg" />
+                        {{ m.meetingDate | date: "shortTime" }}
+                      </mat-card-subtitle>
+
+                      <mat-card-subtitle
+                        style="font-size:12px;"
+                        *ngIf="
+                          m.meetingFrequency == 'Monthly' && m.meetingInterval
+                        "
+                        ><img src="assets/images/meeting/calendar.svg" />
+                        {{ m.meetingFrequency }} Every
+                        {{ dayOfTheMonth[m.meetingInterval - 1].display }} of
+                        the Month
+                      </mat-card-subtitle>
+                      <mat-card-subtitle
+                        style="font-size:12px;"
+                        *ngIf="
+                          m.meetingFrequency == 'Monthly' && m.meetingInterval
+                        "
+                        ><img src="assets/images/meeting/clock.svg" />
+                        {{ m.meetingDate | date: "shortTime" }}
+                      </mat-card-subtitle>
+                      <mat-card-subtitle
+                        style="font-size:12px;"
+                        *ngIf="m.meetingFrequency == 'Not Recurring'"
+                        >Non Recurring meeting on
+                        {{ m.meetingDate | date: "EEEE" }}
+                        {{ m.meetingDate | date: "LLLL" }}
+                        {{ m.meetingDate | date: "dd" }} at
+                        {{
+                          m.meetingDate | date: "shortTime"
+                        }}</mat-card-subtitle
+                      >
+                      <!-- <mat-card-subtitle class="small-font start-meeting" (click)="launchMeeting(m)"
                     *ngIf="!meetingIsLaunched && m.userRole == 'Host'">Launch Meeting</mat-card-subtitle>
                   <mat-card-subtitle class="small-font preview-meeting" (click)="viewMeetingDetails(m)"
                     *ngIf="!meetingIsLaunched">Preview Meeting</mat-card-subtitle> -->
-                </mat-card-header>
-              </mat-card>
+                    </mat-card-header>
+                  </mat-card>
+                </div>
+              </div>
             </div>
             <div class="create-meeting-content" *ngIf="completedMeeting">
               <div>
@@ -100,7 +133,10 @@
           </div>
         </div>
         <div class="meeting-right">
-          <div class="create-meeting-text" *ngIf="!displayMeetingList || completedMeeting">
+          <div
+            class="create-meeting-text"
+            *ngIf="!displayMeetingList || completedMeeting"
+          >
             <div>
               <h1>To see a Preview, please create your first meeting</h1>
               <p>
@@ -109,9 +145,8 @@
               </p>
             </div>
           </div>
-          <div class="meeting-preview" *ngIf="displayMeetingList">
+          <div class="meeting-list-of-preview" *ngIf="displayMeetingList">
             <app-meeting-preview
-              class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9"
               [previewMeetingId]="previewMeetingId"
               *ngIf="meetingIsPreview"
             ></app-meeting-preview>
