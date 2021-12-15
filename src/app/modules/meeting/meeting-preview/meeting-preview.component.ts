@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -14,6 +14,8 @@ import { IssueDataService } from '../../issue/data.service'
 export class MeetingPreviewComponent implements OnInit,OnDestroy {
 
   @Input() previewMeetingId:string;
+  @Input() userRole:string;
+  @Output() launchMeetingId = new EventEmitter<any>();
 
   constructor(private MeetingDataService: MeetingDataService, private IssueDataService: IssueDataService ) { }
 
@@ -37,6 +39,9 @@ export class MeetingPreviewComponent implements OnInit,OnDestroy {
       this.meetingData.selectedUser = null;
     }))
 
+    setTimeout(() => {
+      console.log(': ===> userRole', this.meetingData);
+    }, 500);
     this.MeetingDataService.getUserMeetingDataDetail(this.previewMeetingId);
 
     this.dataSubscription.push(this.IssueDataService.getMeetingIssueData.subscribe((data:any)=>{
@@ -118,4 +123,19 @@ export class MeetingPreviewComponent implements OnInit,OnDestroy {
     this.getUserMilestone();
   }
 
+  launchMeeting(meetingId:any){
+    console.log(': ===> meeting', meetingId);
+
+    var obj = { 
+                attendees: null,
+                meeting: this.meetingData.meetingName,
+                meetingDate: this.meetingData.meetingDate,
+                meetingFrequency: this.meetingData.meetingFrequency,
+                meetingId: meetingId,
+                meetingInterval: this.meetingData.meetingInterval,
+                timerData: this.meetingData.timerData,
+                userRole: this.userRole
+              }
+    this.launchMeetingId.emit(obj)
+  }
 }

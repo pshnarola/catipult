@@ -83,6 +83,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   previewMeetingName:string;
   previewTimers:any;
   previewMeetingId:string;
+  meetingUserId:string;
+  userRole:string;
+  
 
   uID:string = this.SharedDataService.getUserId();
   orgID:string = this.SharedDataService.getUserOrgId();
@@ -270,16 +273,19 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   launchMeeting(meeting:any):void {
+    console.log(': ===> meeting', meeting);
+    this.meetingUserId = "";
     this.meetingIsLaunched = true;
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
     this.meetingIsPreview = false;
     this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data=>{
       if(data){
+        console.log(': ===> data.payload[0]', data.payload[0]);
         this.activeMeeting = meeting;
         this.activeMeetingName = meeting.meeting;
         this.timers = meeting.timerData;
-        this.activeMeeting.attendees = data.payload[0].meetingUsers 
+        this.activeMeeting.attendees = data.payload[0].meetingUsers; 
         this.activeMeeting.displayIssues = false; 
         this.activeMeeting.activeUser = {};
       } else {
@@ -291,9 +297,12 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   viewMeetingDetails(meeting:any):void {
+    console.log(': ===> meeting', meeting);
     this.meetingIsPreview = true;
     this.displayMeetingList = true;
     this.previewMeetingId = meeting.meetingId;
+    this.meetingUserId = meeting.meetingUserId;
+    this.userRole = meeting.userRole;
     this.dataService.getUserMeetingDataDetail(meeting.meetingId);
   }
 
