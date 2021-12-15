@@ -98,6 +98,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
   userMeetingData:any;
   issueData:any = [];
   issueDataFiltered:any;
+  milestoneData: Array<boolean> = [];
+  milestoneDataFiltered: Array<boolean> = [];
 
   meetingEditMeeting:any = [];
   meetingEditCustomTimer:boolean = false;
@@ -279,6 +281,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
     this.meetingIsPreview = false;
+    this.previewMeetingId = meeting.meetingId;
     this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data=>{
       if(data){
         console.log(': ===> data.payload[0]', data.payload[0]);
@@ -286,7 +289,10 @@ export class MeetingComponent implements OnInit,OnDestroy {
         this.activeMeetingName = meeting.meeting;
         this.timers = meeting.timerData;
         this.activeMeeting.attendees = data.payload[0].meetingUsers; 
-        this.activeMeeting.displayIssues = false; 
+        this.activeMeeting.displayKPI = true;
+        this.activeMeeting.displayMilestones = false;
+        this.activeMeeting.displayIssues = false;
+        this.activeMeetingDisplayMilestones = false;
         this.activeMeeting.activeUser = {};
       } else {
         this.activeMeeting = null;
@@ -678,6 +684,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   getMilestoneData(a:any):void {
+    this.activeMeeting.displayMilestones = true;
+    this.activeMeeting.displayIssues = false;
+    this.activeMeeting.displayKPI = false;
     if(this.meetingInProgress){
       for(const u in this.activeMeeting.attendees){
         this.activeMeeting.attendees[u].selected = false;
@@ -687,6 +696,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
           }
         }
       }
+      console.log(': ===> !this.activeMeetingUid || this.activeMeetingUid!=a.uID', !this.activeMeetingUid || this.activeMeetingUid!=a.uID);
       if(!this.activeMeetingUid || this.activeMeetingUid!=a.uID){
         if (this.isApprovedUser(a.uID)){
           this.activeMeetingUid = a.uID;
@@ -710,7 +720,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   getIssueData(meetingId:string):void {
-    this.activeMeeting.displayIssues = !this.activeMeeting.displayIssues;
+    this.activeMeeting.displayIssues = true;
+    this.activeMeeting.displayMilestones = false;
+    this.activeMeeting.displayKPI = false;
     this.IssueDataService.getMeetingIssue(meetingId);
   }
 
@@ -729,6 +741,13 @@ export class MeetingComponent implements OnInit,OnDestroy {
       }
       this.activeMeetingScore+=1;
     }
+  }
+
+  getKpiData(meetingID: string): void {
+    console.log(': ===> this.activeMeeting', this.activeMeeting);
+    this.activeMeeting.displayKPI = true;
+    this.activeMeeting.displayMilestones = false;
+    this.activeMeeting.displayIssues = false;
   }
 
   resetTimer():void {

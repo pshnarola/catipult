@@ -1,0 +1,21 @@
+<div class="custom-table">
+    <div class="table-responsive">
+      <table mat-table [dataSource]="KPIData" class="table">
+        <ng-container matColumnDef="KPI">
+          <th mat-header-cell *matHeaderCellDef>KPI</th>
+          <td mat-cell *matCellDef="let element">{{ element.KPI }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Target">
+          <th mat-header-cell *matHeaderCellDef>Target</th>
+          <td mat-cell *matCellDef="let element">{{ element.Target }}</td>
+        </ng-container>
+        <ng-container matColumnDef="ReportFrequency">
+          <th mat-header-cell *matHeaderCellDef>Report Frequency</th>
+          <td mat-cell *matCellDef="let element">{{ element.ReportFrequency }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="KPIColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: KPIColumns"></tr>
+      </table>
+    </div>
+  </div>
+  

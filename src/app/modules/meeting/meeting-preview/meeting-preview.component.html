@@ -141,8 +141,20 @@
           class="tab-content"
           *ngIf="
             meetingData &&
+            meetingData?.displayKPI &&
+            !meetingData?.displayMilestones && !meetingData?.displayIssues
+          "
+        >
+          <div class="issue-content-wrapper">
+            <app-kpi></app-kpi>
+          </div>
+        </div>
+        <div
+          class="tab-content"
+          *ngIf="
+            meetingData &&
             meetingData?.displayMilestones &&
-            !meetingData?.displayIssues
+            !meetingData?.displayIssues && !meetingData?.displayKPI
           "
         >
           <div class="milestones-content-wrapper">
@@ -164,7 +176,7 @@
           *ngIf="
             meetingData &&
             meetingData?.displayIssues &&
-            !meetingData?.displayMilestones
+            !meetingData?.displayMilestones && !meetingData?.displayKPI
           "
         >
           <div class="issue-content-wrapper">
@@ -186,6 +198,7 @@
             ></app-issue>
           </div>
         </div>
+
       </div>
     </div>
   </div>
