@@ -607,10 +607,12 @@ body {
   }
 }
 .meeting-main-content {
-  .row {
+  > .row {
     display: flex;
     flex-wrap: wrap;
-    .col-md-8 {
+    position: relative;
+    min-height: calc(100vh - 240px);
+    > div:nth-child(2) {
       border-left: 1px solid #e3eff5;
     }
   }
@@ -723,6 +725,82 @@ body {
         + li {
           margin-top: 10px;
         }
+      }
+    }
+  }
+}
+.meeting-launch-wrapper {
+  padding: 16px 0 0 0;
+  display: block;
+  .meeting-header {
+    h4 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 28px;
+      line-height: 32px;
+      .back-arrow {
+        vertical-align: middle;
+        margin-right: 15px;
+      }
+    }
+  }
+  .start-metting-box {
+    background: #ffffff;
+    border: 1px solid #d1dadf;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 16px;
+    p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #575757;
+      margin: 0 0 16px 0;
+    }
+    button {
+      width: 100%;
+      img {
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+  .meeting-main-content {
+    > .row {
+      min-height: calc(100vh - 138px);
+    }
+  }
+  .meeting-start-popup-wrapper {
+    position: absolute;
+    left: 0;
+    right: -24px;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .meeting-start-popup-content {
+      background: #ffffff;
+      box-shadow: 0px 4px 12px rgb(0 0 0 / 12%);
+      border-radius: 12px;
+      padding: 16px 24px;
+      h3 {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.01em;
+        color: #000000;
+        margin: 0 0 8px 0;
+      }
+      p {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: #575757;
+        margin: 0;
       }
     }
   }
@@ -857,7 +935,51 @@ body {
   color: #000;
   min-height: 44px;
 }
-
+.custom-checkbox {
+  height: 15px;
+  margin-right: 10px;
+  label {
+    margin: 0 !important;
+    position: relative;
+    input[type="checkbox"] {
+      position: absolute;
+      width: 15px !important;
+      height: 15px !important;
+      margin: 0 !important;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      opacity: 0;
+      &:checked {
+        + span.checkmark {
+          border-color: #0f9e3f;
+          background: #0f9e3f;
+          &:after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 0px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+    span.checkmark {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 2px solid #a6a9bb;
+      border-radius: 2px;
+      position: relative;
+    }
+  }
+}
 hr {
   border-top: 1px solid #dae3e8;
 }
