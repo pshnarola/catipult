@@ -35,9 +35,11 @@
           </svg>
         </button>
         <ul class="dropdown-menu">
-          <li><a href="#">Edit Meeting</a></li>
+          <!-- (click)='showModal(meetingEdit,"modal-md") -->
+          <!-- (click)='deleteMeeting(m);' -->
+          <li (click)="manageMeeting('edit')"><a>Edit Meeting</a></li>
           <li><a href="#">Duplicate Meeting</a></li>
-          <li><a href="#" class="red">Delete</a></li>
+          <li (click)="manageMeeting('delete')"><a class="red">Delete</a></li>
         </ul>
       </div>
     </div>

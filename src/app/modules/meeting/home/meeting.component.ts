@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef,OnDestroy } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup,FormArray,FormBuilder } from '@angular/forms';
 
@@ -24,6 +24,8 @@ import * as notification from 'src/app/shared/libraries/exports.library';
 })
 
 export class MeetingComponent implements OnInit,OnDestroy {
+
+  @ViewChild('meetingEdit', { static: true }) meetingEdit: TemplateRef<any>;
 
   modalRef:BsModalRef;
   config: AngularEditorConfig = {
@@ -83,7 +85,6 @@ export class MeetingComponent implements OnInit,OnDestroy {
   previewMeetingName:string;
   previewTimers:any;
   previewMeetingId:string;
-  meetingUserId:string;
   userRole:string;
   
 
@@ -151,6 +152,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
   timerTimeRemainingInt:number;
 
   milestoneQuarterList:any;
+
+  selectedMeeting:any;
 
   frequency: RecurringFrequency[] = [
     { value: 'Not Recurring', viewValue: 'Not Recurring' },
@@ -276,7 +279,6 @@ export class MeetingComponent implements OnInit,OnDestroy {
 
   launchMeeting(meeting:any):void {
     console.log(': ===> meeting', meeting);
-    this.meetingUserId = "";
     this.meetingIsLaunched = true;
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
@@ -304,10 +306,10 @@ export class MeetingComponent implements OnInit,OnDestroy {
 
   viewMeetingDetails(meeting:any):void {
     console.log(': ===> meeting', meeting);
+    this.selectedMeeting = meeting;
     this.meetingIsPreview = true;
     this.displayMeetingList = true;
     this.previewMeetingId = meeting.meetingId;
-    this.meetingUserId = meeting.meetingUserId;
     this.userRole = meeting.userRole;
     this.dataService.getUserMeetingDataDetail(meeting.meetingId);
   }
@@ -423,7 +425,21 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.modalRef = this.modalService.show(  
       template,  
       Object.assign({}, { class: cls })  
-    ); 
+    );
+  }
+
+  manageMeeting(event:any) {
+    if(event === 'edit') {
+      this.showModal(this.meetingEdit, 'modal-md');
+      this.editMeeting(this.selectedMeeting);
+    } else if(event === 'delete') {
+      console.log(': ===> event d', event);
+      this.dataService.deleteUserMeeting(this.previewMeetingId);
+      setTimeout(() => {
+        this.previewMeetingId = "";
+      }, 1500);
+      this.timeoutList();
+    }
   }
 
   concludeMeeting(meeting:any):void {
@@ -450,10 +466,16 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.meetingInProgress = false;
     this.meetingIsLaunched = false;
     this.displayMeetingList = true;
+    this.meetingIsPreview = true;
     // this.activeMeetingDisplayIssues = false;
     this.stopMeeting(null);
     this.resetTimers(meetingData);
     this.resetMeetingData();
+    this.timeoutList();
+    setTimeout(() => {
+      console.log(': ===> this.previewMeetingId', this.previewMeetingId);
+      this.dataService.getUserMeetingDataDetail(this.previewMeetingId);
+    }, 1500);
   }
 
   updateMeetingData():void {
@@ -479,6 +501,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
 
     this.putUserMeetingSubscription = this.dataService.putUserMeetingData.pipe(take(1)).subscribe((data:any)=>{
       if(data){
+        console.log(': ===> data', data);
         notification.notification(data.status,data.msg,5000)
         if(data.status.toLowerCase() == 'success'){
           this.dataService.putMeetingUsers(body);
@@ -489,6 +512,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
     });
     this.dataService.putUserMeeting(body);
     this.timeoutList();
+    setTimeout(() => {
+      this.dataService.getUserMeetingDataDetail(this.previewMeetingId);
+    }, 1500);
   }
 
   goToMeetingArchive():void {

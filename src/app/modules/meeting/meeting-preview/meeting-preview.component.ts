@@ -16,6 +16,7 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
   @Input() previewMeetingId: string;
   @Input() userRole: string;
   @Output() launchMeetingId = new EventEmitter<any>();
+  @Output() meetingModify = new EventEmitter<any>();
 
   constructor(private MeetingDataService: MeetingDataService, private IssueDataService: IssueDataService) { }
 
@@ -143,4 +144,13 @@ export class MeetingPreviewComponent implements OnInit, OnDestroy {
     }
     this.launchMeetingId.emit(obj)
   }
+
+  manageMeeting(type: string) {
+    if(type === 'edit') {
+      this.meetingModify.emit('edit');
+    } else if('delete') {
+      this.meetingModify.emit('delete');
+    }
+  }
+
 }
