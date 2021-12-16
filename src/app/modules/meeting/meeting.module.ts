@@ -24,6 +24,7 @@ import { MeetingDetailComponent } from './meeting-archive/meeting-detail/meeting
 import { MeetingPreviewComponent } from './meeting-preview/meeting-preview.component';
 import { IssueModule } from '../issue/issue.module'
 import { MilestonesModule } from '../../shared/components/milestones/milestones.module';
+import { KpiModule } from '../../shared/components/kpi/kpi.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MilestonesModule } from '../../shared/components/milestones/milestones.
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     IssueModule,
-    MilestonesModule
+    MilestonesModule,
+    KpiModule
   ],
   providers: [SharedDataService, MeetingDataService, DataServiceService, TeamLevelAllDataService, IssueDataService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

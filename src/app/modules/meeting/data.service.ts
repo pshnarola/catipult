@@ -407,6 +407,7 @@ export class MeetingDataService implements OnDestroy{
                 data.push({
                   attendees:null,
                   meeting:response.payload[key].meeting.meetingName,
+                  meetingUserId:response.payload[key].meetingUserId,
                   meetingDate:response.payload[key].meeting.meetingDate,
                   meetingFrequency:response.payload[key].meeting.meetingFrequency,
                   meetingId:response.payload[key].meeting.meetingId,

@@ -41,6 +41,12 @@ export class MeetingComponent implements OnInit,OnDestroy {
   constructor(private router: Router, private dataService: MeetingDataService, private modalService: BsModalService, private SharedDataService: SharedDataService,private formBuilder: FormBuilder
     ,private TeamLevelAllDataService: TeamLevelAllDataService,private DataServiceService: DataServiceService, private IssueDataService: IssueDataService) { }
 
+
+  // Tab  variable
+  rhythm: boolean = true;
+  custom: boolean = false;
+  completedMeeting: boolean = false;
+
   meetingListSubscription:Subscription;
   timerSubscription:Subscription[] = [];
   dataSubscription:Subscription[] = [];
@@ -77,6 +83,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   previewMeetingName:string;
   previewTimers:any;
   previewMeetingId:string;
+  meetingUserId:string;
+  userRole:string;
+  
 
   uID:string = this.SharedDataService.getUserId();
   orgID:string = this.SharedDataService.getUserOrgId();
@@ -89,6 +98,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
   userMeetingData:any;
   issueData:any = [];
   issueDataFiltered:any;
+  milestoneData: Array<boolean> = [];
+  milestoneDataFiltered: Array<boolean> = [];
 
   meetingEditMeeting:any = [];
   meetingEditCustomTimer:boolean = false;
@@ -264,17 +275,24 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   launchMeeting(meeting:any):void {
+    console.log(': ===> meeting', meeting);
+    this.meetingUserId = "";
     this.meetingIsLaunched = true;
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
     this.meetingIsPreview = false;
+    this.previewMeetingId = meeting.meetingId;
     this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data=>{
       if(data){
+        console.log(': ===> data.payload[0]', data.payload[0]);
         this.activeMeeting = meeting;
         this.activeMeetingName = meeting.meeting;
         this.timers = meeting.timerData;
-        this.activeMeeting.attendees = data.payload[0].meetingUsers 
-        this.activeMeeting.displayIssues = false; 
+        this.activeMeeting.attendees = data.payload[0].meetingUsers; 
+        this.activeMeeting.displayKPI = true;
+        this.activeMeeting.displayMilestones = false;
+        this.activeMeeting.displayIssues = false;
+        this.activeMeetingDisplayMilestones = false;
         this.activeMeeting.activeUser = {};
       } else {
         this.activeMeeting = null;
@@ -285,9 +303,12 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   viewMeetingDetails(meeting:any):void {
+    console.log(': ===> meeting', meeting);
     this.meetingIsPreview = true;
     this.displayMeetingList = true;
     this.previewMeetingId = meeting.meetingId;
+    this.meetingUserId = meeting.meetingUserId;
+    this.userRole = meeting.userRole;
     this.dataService.getUserMeetingDataDetail(meeting.meetingId);
   }
 
@@ -360,6 +381,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   stopMeeting(meetingData:any):void {
+    console.log(': ===> here', 'vik stop');
     this.meetingInProgress = false;
     this.timerSubscription.forEach(s=>s.unsubscribe());
     this.timerSubscription = [];
@@ -588,8 +610,13 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.displayAttendeeList = !this.displayAttendeeList;
   }
 
-  assignAttendee(user:any,index:number,attendeeStatus:string):void {
-    this.activeMeeting.attendees[index].attendeeStatus = attendeeStatus
+  assignAttendee(user:any,index:number,attendeeStatus:any):void {
+    if(attendeeStatus.target.checked === true) {
+      attendeeStatus = 'present';
+    } else { 
+      attendeeStatus = 'not present';
+    }
+    this.activeMeeting.attendees[index].attendeeStatus = attendeeStatus;
     if(this.activeMeeting.meetingHistoryId){
       const userBody = { uID:this.activeMeeting.attendees[index].uID,meetingHistoryId:this.activeMeeting.meetingHistoryId,userStatus:attendeeStatus }
       this.dataService.postMeetingUserHistory(userBody);  
@@ -663,6 +690,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   getMilestoneData(a:any):void {
+    this.activeMeeting.displayMilestones = true;
+    this.activeMeeting.displayIssues = false;
+    this.activeMeeting.displayKPI = false;
     if(this.meetingInProgress){
       for(const u in this.activeMeeting.attendees){
         this.activeMeeting.attendees[u].selected = false;
@@ -672,6 +702,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
           }
         }
       }
+      console.log(': ===> !this.activeMeetingUid || this.activeMeetingUid!=a.uID', !this.activeMeetingUid || this.activeMeetingUid!=a.uID);
       if(!this.activeMeetingUid || this.activeMeetingUid!=a.uID){
         if (this.isApprovedUser(a.uID)){
           this.activeMeetingUid = a.uID;
@@ -695,7 +726,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   getIssueData(meetingId:string):void {
-    this.activeMeeting.displayIssues = !this.activeMeeting.displayIssues;
+    this.activeMeeting.displayIssues = true;
+    this.activeMeeting.displayMilestones = false;
+    this.activeMeeting.displayKPI = false;
     this.IssueDataService.getMeetingIssue(meetingId);
   }
 
@@ -714,6 +747,13 @@ export class MeetingComponent implements OnInit,OnDestroy {
       }
       this.activeMeetingScore+=1;
     }
+  }
+
+  getKpiData(meetingID: string): void {
+    console.log(': ===> this.activeMeeting', this.activeMeeting);
+    this.activeMeeting.displayKPI = true;
+    this.activeMeeting.displayMilestones = false;
+    this.activeMeeting.displayIssues = false;
   }
 
   resetTimer():void {
@@ -889,6 +929,22 @@ export class MeetingComponent implements OnInit,OnDestroy {
       } else {
         this.IssueDataService.getMeetingIssue(this.activeMeeting.meetingId);
       }
+  }
+
+  tabChange(tab){
+    if(tab === 'rhythm') {
+      this.rhythm = true;
+      this.custom = false;
+      this.completedMeeting = false;
+    } else if(tab === 'custom') {
+      this.rhythm = false;
+      this.custom = true;
+      this.completedMeeting = false;
+    } else {
+      this.rhythm = false;
+      this.custom = false;
+      this.completedMeeting = true;
+    }
   }
 }
 
