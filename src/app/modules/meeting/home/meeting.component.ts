@@ -381,6 +381,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
   }
 
   stopMeeting(meetingData:any):void {
+    console.log(': ===> here', 'vik stop');
     this.meetingInProgress = false;
     this.timerSubscription.forEach(s=>s.unsubscribe());
     this.timerSubscription = [];
@@ -609,8 +610,13 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.displayAttendeeList = !this.displayAttendeeList;
   }
 
-  assignAttendee(user:any,index:number,attendeeStatus:string):void {
-    this.activeMeeting.attendees[index].attendeeStatus = attendeeStatus
+  assignAttendee(user:any,index:number,attendeeStatus:any):void {
+    if(attendeeStatus.target.checked === true) {
+      attendeeStatus = 'present';
+    } else { 
+      attendeeStatus = 'not present';
+    }
+    this.activeMeeting.attendees[index].attendeeStatus = attendeeStatus;
     if(this.activeMeeting.meetingHistoryId){
       const userBody = { uID:this.activeMeeting.attendees[index].uID,meetingHistoryId:this.activeMeeting.meetingHistoryId,userStatus:attendeeStatus }
       this.dataService.postMeetingUserHistory(userBody);  
