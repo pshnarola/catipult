@@ -271,7 +271,7 @@ body {
   padding: 0 24px !important;
 }
 
-.nsidebar-content .row {
+.nsidebar-content > .row {
   margin: 0;
 }
 
@@ -912,6 +912,60 @@ body {
     }
   }
 }
+.meetings-detail {
+  margin: -16px 0 0 -16px;
+  > .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .complete-meeting-list {
+    height: 100%;
+    border-right: 1px solid #e3eff5;
+    h3 {
+      margin: 0 24px 8px;
+      padding: 18px 0;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      color: #000000;
+      text-align: center;
+      border-bottom: 1px solid #dae3e8;
+    }
+    .complete-meeting {
+      .card {
+        padding: 20px 15px 20px 26px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: #2d3944;
+        h5 {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          font-weight: 500 !important;
+          img {
+            margin-right: 10px;
+            margin-top: -2px;
+          }
+          + h5 {
+            margin-top: 15px;
+          }
+        }
+        + .card {
+          border-top: 1px solid #dae3e8;
+        }
+        &.active {
+          background: #f1faff;
+          box-shadow: inset 4px 0px 0px #00a9ff;
+        }
+      }
+    }
+  }
+}
+
 // modal-css
 .modal-dialog {
   width: 100%;
