@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { FormGroup,FormArray,FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators'
@@ -23,11 +23,11 @@ import * as notification from 'src/app/shared/libraries/exports.library';
   styleUrls: ['./meeting.component.scss']
 })
 
-export class MeetingComponent implements OnInit,OnDestroy {
+export class MeetingComponent implements OnInit, OnDestroy {
 
   @ViewChild('meetingEdit', { static: true }) meetingEdit: TemplateRef<any>;
 
-  modalRef:BsModalRef;
+  modalRef: BsModalRef;
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -40,8 +40,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
     toolbarHiddenButtons: [["bold"]],
   };
 
-  constructor(private router: Router, private dataService: MeetingDataService, private modalService: BsModalService, private SharedDataService: SharedDataService,private formBuilder: FormBuilder
-    ,private TeamLevelAllDataService: TeamLevelAllDataService,private DataServiceService: DataServiceService, private IssueDataService: IssueDataService) { }
+  constructor(private router: Router, private dataService: MeetingDataService, private modalService: BsModalService, private SharedDataService: SharedDataService, private formBuilder: FormBuilder
+    , private TeamLevelAllDataService: TeamLevelAllDataService, private DataServiceService: DataServiceService, private IssueDataService: IssueDataService) { }
 
 
   // Tab  variable
@@ -49,111 +49,113 @@ export class MeetingComponent implements OnInit,OnDestroy {
   custom: boolean = false;
   completedMeeting: boolean = false;
 
-  meetingListSubscription:Subscription;
-  timerSubscription:Subscription[] = [];
-  dataSubscription:Subscription[] = [];
-  orgUserListSubscription:Subscription;
-  meetingHistoryListSubscription:Subscription;
-  postUserMeetingSubscription:Subscription;
-  deleteMeetingUserSubscription:Subscription;
-  putUserMeetingSubscription:Subscription;
-  deleteUserMeetingSubscription:Subscription;
-  milestoneDataSubscription:Subscription;
-  postMeetingHistorySubscription:Subscription;
-  putMeetingHistorySubscription:Subscription;
+  meetingListSubscription: Subscription;
+  timerSubscription: Subscription[] = [];
+  dataSubscription: Subscription[] = [];
+  orgUserListSubscription: Subscription;
+  meetingHistoryListSubscription: Subscription;
+  postUserMeetingSubscription: Subscription;
+  deleteMeetingUserSubscription: Subscription;
+  putUserMeetingSubscription: Subscription;
+  deleteUserMeetingSubscription: Subscription;
+  milestoneDataSubscription: Subscription;
+  postMeetingHistorySubscription: Subscription;
+  putMeetingHistorySubscription: Subscription;
 
-  meetingInProgress:boolean = false;
-  meetingIsLaunched:boolean = false;
-  displayAttendeeList:boolean = true;
-  displayMeetingList:boolean = true;
-  displayMeetingConclusion:boolean = false;
-  displayAgenda:boolean = true;
-  displayMeetingNotes:boolean = false;
+  meetingInProgress: boolean = false;
+  meetingIsLaunched: boolean = false;
+  displayAttendeeList: boolean = true;
+  displayMeetingList: boolean = true;
+  displayMeetingConclusion: boolean = false;
+  displayAgenda: boolean = true;
+  displayMeetingNotes: boolean = false;
 
-  timerNewArr:any = [];
-  timerEditArr:any = [];
+  timerNewArr: any = [];
+  timerEditArr: any = [];
 
-  activeMeeting:any;
-  activeMeetingName:string;
-  activeMeetingNotes:string = null;
-  activeMeetingScore:number = 0;
-  activeMeetingScoreNotes:string = null;
-  activeMeetingUser:any = [];
+  activeMeeting: any;
+  activeMeetingName: string;
+  activeMeetingNotes: string = null;
+  activeMeetingScore: number = 0;
+  activeMeetingScoreNotes: string = null;
+  activeMeetingUser: any = [];
 
-  previewMeeting:boolean = false;
-  meetingIsPreview:boolean = false;
-  previewMeetingName:string;
-  previewTimers:any;
-  previewMeetingId:string;
-  userRole:string;
-  
+  previewMeeting: boolean = false;
+  meetingIsPreview: boolean = false;
+  previewMeetingName: string;
+  previewTimers: any;
+  previewMeetingId: string;
+  userRole: string;
 
-  uID:string = this.SharedDataService.getUserId();
-  orgID:string = this.SharedDataService.getUserOrgId();
-  
-  conclusionFinished:boolean = false;
 
-  meetingData:any;
-  meetingHistoryData:any;
-  orgUserList:any;
-  userMeetingData:any;
-  issueData:any = [];
-  issueDataFiltered:any;
+  uID: string = this.SharedDataService.getUserId();
+  orgID: string = this.SharedDataService.getUserOrgId();
+
+  conclusionFinished: boolean = false;
+
+  meetingData: any;
+  meetingHistoryData: any;
+  orgUserList: any;
+  userMeetingData: any;
+  issueData: any = [];
+  issueDataFiltered: any;
   milestoneData: Array<boolean> = [];
   milestoneDataFiltered: Array<boolean> = [];
 
-  meetingEditMeeting:any = [];
-  meetingEditCustomTimer:boolean = false;
-  meetingEditMeetingName:string;
-  meetingEditMeetingDate:Date;
-  meetingEditMeetingTime:String;
-  meetingEditMeetingFrequency:String;
-  meetingEditMeetingId:string;
-  meetingEditMeetingAttendees:any = [];
-  meetingEditMeetingInterval:number;
+  meetingEditMeeting: any = [];
+  meetingEditCustomTimer: boolean = false;
+  meetingEditMeetingName: string;
+  meetingEditMeetingDate: Date;
+  meetingEditMeetingTime: String;
+  meetingEditMeetingFrequency: String;
+  meetingEditMeetingId: string;
+  meetingEditMeetingAttendees: any = [];
+  meetingEditMeetingInterval: number;
 
-  meetingNewCustomTimer:boolean = false;
-  meetingNewMeetingName:string;
-  meetingNewMeetingDate:Date;
-  meetingNewMeetingTime:String;
-  meetingNewMeetingFrequency:String;
-  meetingNewMeetingAttendees:any = [this.uID]
-  meetingNewMeetingInterval:number;
+  meetingNewCustomTimer: boolean = false;
+  meetingNewMeetingName: string;
+  meetingNewMeetingDate: Date;
+  meetingNewMeetingTime: String;
+  meetingNewMeetingFrequency: String;
+  meetingNewMeetingAttendees: any = [this.uID]
+  meetingNewMeetingInterval: number;
 
-  activeMeetingAttendeeList:any;
-  activeMeetingMilestoneData:any;
-  activeMeetingDisplayMilestones:boolean;
+  activeMeetingAttendeeList: any;
+  activeMeetingMilestoneData: any;
+  activeMeetingDisplayMilestones: boolean;
   // activeMeetingDisplayIssues:boolean;
-  activeMeetingUid:string;
+  activeMeetingUid: string;
 
-  userAccessList:any = [];
-  activeTimer:any = null;
+  userAccessList: any = [];
+  activeTimer: any = null;
 
   // Milestone Edit //
-  milestoneDueDateEdit:string;
-  milestoneMilestoneEdit:string;
-  milestoneMileIdEdit:string;
-  milestoneStatusEdit:string;
-  MilestoneQsIdEdit:string;
-  milestoneNoteEdit:string;
-  editMilestoneKpiId:string;
-  milestoneAssignedEdit:string;
-  milestoneAssignedUidEdit:string;
-  milestoneRecurringFrequencyEdit:string;
-  milestoneRecurringEdit:boolean;
-  milestoneEditMilestone:any;
+  milestoneDueDateEdit: string;
+  milestoneMilestoneEdit: string;
+  milestoneMileIdEdit: string;
+  milestoneStatusEdit: string;
+  MilestoneQsIdEdit: string;
+  milestoneNoteEdit: string;
+  editMilestoneKpiId: string;
+  milestoneAssignedEdit: string;
+  milestoneAssignedUidEdit: string;
+  milestoneRecurringFrequencyEdit: string;
+  milestoneRecurringEdit: boolean;
+  milestoneEditMilestone: any;
 
-  milliseconds:number = 1000;
-  seconds:number = 60
-  minutes:number = 60;
-  hours:number = 24;
+  milliseconds: number = 1000;
+  seconds: number = 60
+  minutes: number = 60;
+  hours: number = 24;
 
-  timerCount:number = 1;
-  timerTimeRemainingInt:number;
+  timerCount: number = 1;
+  timerTimeRemainingInt: number;
 
-  milestoneQuarterList:any;
+  milestoneQuarterList: any;
 
-  selectedMeeting:any;
+  selectedMeeting: any;
+  play: boolean = true;
+  activeAgenda:number = 0;
 
   frequency: RecurringFrequency[] = [
     { value: 'Not Recurring', viewValue: 'Not Recurring' },
@@ -161,15 +163,15 @@ export class MeetingComponent implements OnInit,OnDestroy {
     { value: 'Monthly', viewValue: 'Monthly' },
   ];
 
-  timers:any = [
-    { name: 'You (Good News)', duration: 5, display:'5:00' },
-    { name: 'Milestones/Rocks', duration: 15, display:'15:00', artifacts:{ milestones: true } },
-    { name: 'Issues', duration: 5, display:'5:00' },
-    { name: 'Decisions', duration: 60, display:'60:00' },
-    { name: 'Conclusion', duration: 5, display:'5:00' }
+  timers: any = [
+    { name: 'You (Good News)', duration: 5, display: '5:00' },
+    { name: 'Milestones/Rocks', duration: 15, display: '15:00', artifacts: { milestones: true } },
+    { name: 'Issues', duration: 5, display: '5:00' },
+    { name: 'Decisions', duration: 60, display: '60:00' },
+    { name: 'Conclusion', duration: 5, display: '5:00' }
   ];
 
-  dayOfTheWeek:any = [
+  dayOfTheWeek: any = [
     { id: 1, dayOfWeek: 'Sunday' },
     { id: 2, dayOfWeek: 'Monday' },
     { id: 3, dayOfWeek: 'Tuesday' },
@@ -179,7 +181,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
     { id: 7, dayOfWeek: 'Saturday' },
   ]
 
-  dayOfTheMonth:any = [
+  dayOfTheMonth: any = [
     { id: 1, dayOfTheMonth: 1, display: '1st' },
     { id: 2, dayOfTheMonth: 2, display: '2nd' },
     { id: 3, dayOfTheMonth: 3, display: '3rd' },
@@ -213,7 +215,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
     { id: 31, dayOfTheMonth: 31, display: '31st' },
   ]
 
-  charp : Charp[] = [
+  charp: Charp[] = [
     { value: "C", viewValue: "Change" },
     { value: "H", viewValue: "Help" },
     { value: "A", viewValue: "Aware" },
@@ -221,20 +223,20 @@ export class MeetingComponent implements OnInit,OnDestroy {
     { value: "P", viewValue: "Plan" },
     { value: "D", viewValue: "Done" }
   ];
-  milestoneColumns:any = ['ID','Driver','KPI','Milestone','Due Date','Status','User'];
+  milestoneColumns: any = ['ID', 'Driver', 'KPI', 'Milestone', 'Due Date', 'Status', 'User'];
 
   ngOnInit() {
     this.setSubscriptions();
   }
 
-  setSubscriptions():void {
-    this.orgUserListSubscription = this.dataService.getOrganizationUserListData.subscribe(data=>{
+  setSubscriptions(): void {
+    this.orgUserListSubscription = this.dataService.getOrganizationUserListData.subscribe(data => {
       this.orgUserList = data;
     });
 
     this.dataService.getOrganizationUserList(this.orgID);
 
-    this.dataSubscription.push(this.TeamLevelAllDataService.dataAccessUserListdata.subscribe(data=>{
+    this.dataSubscription.push(this.TeamLevelAllDataService.dataAccessUserListdata.subscribe(data => {
       this.userAccessList = data;
     }))
 
@@ -244,53 +246,53 @@ export class MeetingComponent implements OnInit,OnDestroy {
       this.milestoneQuarterList = data;
     }));
 
-    this.dataSubscription.push(this.dataService.getMeetingUserData.subscribe(data=>{
+    this.dataSubscription.push(this.dataService.getMeetingUserData.subscribe(data => {
       this.userMeetingData = data;
     }));
 
     this.dataService.getUserMeetings(this.uID);
 
-    this.dataSubscription.push(this.IssueDataService.getMeetingIssueData.subscribe((data:any)=>{
-        this.issueData = data;
+    this.dataSubscription.push(this.IssueDataService.getMeetingIssueData.subscribe((data: any) => {
+      this.issueData = data;
     }));
 
-    this.dataSubscription.push(this.IssueDataService.getUserIssueData.subscribe((data:any)=>{
-        this.issueDataFiltered = data;
+    this.dataSubscription.push(this.IssueDataService.getUserIssueData.subscribe((data: any) => {
+      this.issueDataFiltered = data;
     }));
   }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
     this.destroySubscriptions();
   }
 
-  destroySubscriptions():void {
+  destroySubscriptions(): void {
     this.meetingListSubscription ? this.meetingListSubscription.unsubscribe() : null;
     this.meetingHistoryListSubscription ? this.meetingHistoryListSubscription.unsubscribe() : null;
     this.orgUserListSubscription ? this.orgUserListSubscription.unsubscribe() : null;
     this.deleteMeetingUserSubscription ? this.deleteMeetingUserSubscription.unsubscribe() : null;
-    this.timerSubscription.forEach(s=>s.unsubscribe());
-    this.dataSubscription.forEach(s=>s.unsubscribe());
+    this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
+    this.dataSubscription.forEach(s => s.unsubscribe(), this.play = false);
     this.postUserMeetingSubscription ? this.postUserMeetingSubscription.unsubscribe() : null;
     this.putUserMeetingSubscription ? this.putUserMeetingSubscription.unsubscribe() : null;
     this.deleteUserMeetingSubscription ? this.deleteUserMeetingSubscription.unsubscribe() : null;
     this.milestoneDataSubscription ? this.milestoneDataSubscription.unsubscribe() : null;
-    this.putMeetingHistorySubscription ? this.putMeetingHistorySubscription.unsubscribe(): null;
+    this.putMeetingHistorySubscription ? this.putMeetingHistorySubscription.unsubscribe() : null;
   }
 
-  launchMeeting(meeting:any):void {
+  launchMeeting(meeting: any): void {
     console.log(': ===> meeting', meeting);
     this.meetingIsLaunched = true;
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
     this.meetingIsPreview = false;
     this.previewMeetingId = meeting.meetingId;
-    this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data=>{
-      if(data){
+    this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data => {
+      if (data) {
         console.log(': ===> data.payload[0]', data.payload[0]);
         this.activeMeeting = meeting;
         this.activeMeetingName = meeting.meeting;
         this.timers = meeting.timerData;
-        this.activeMeeting.attendees = data.payload[0].meetingUsers; 
+        this.activeMeeting.attendees = data.payload[0].meetingUsers;
         this.activeMeeting.displayKPI = true;
         this.activeMeeting.displayMilestones = false;
         this.activeMeeting.displayIssues = false;
@@ -301,10 +303,10 @@ export class MeetingComponent implements OnInit,OnDestroy {
         this.activeMeetingName = null;
         this.timers = null;
       }
-      }))
+    }))
   }
 
-  viewMeetingDetails(meeting:any):void {
+  viewMeetingDetails(meeting: any): void {
     console.log(': ===> meeting', meeting);
     this.selectedMeeting = meeting;
     this.meetingIsPreview = true;
@@ -314,95 +316,104 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.dataService.getUserMeetingDataDetail(meeting.meetingId);
   }
 
-  startMeeting(meeting:any) {
-    var readyToStart:boolean = true;
-    var attendeesPresent:number = 0
-    var attendees:any = [];
+  startMeeting(meeting: any) {
+    var readyToStart: boolean = true;
+    var attendeesPresent: number = 0
+    var attendees: any = [];
 
-    for (const a in meeting.attendees){
-      if(!meeting.attendees[a].attendeeStatus){
+    for (const a in meeting.attendees) {
+      if (!meeting.attendees[a].attendeeStatus) {
         readyToStart = false;
-        notification.notification('Info','All users must be checked into the meeting before starting.',5000)
+        notification.notification('Info', 'All users must be checked into the meeting before starting.', 5000)
         return;
       }
     }
-    for (const a in meeting.attendees){
-      if (meeting.attendees[a].attendeeStatus=='present'){
-        attendeesPresent+=1;
+    for (const a in meeting.attendees) {
+      if (meeting.attendees[a].attendeeStatus == 'present') {
+        attendeesPresent += 1;
       }
     }
 
-    if (attendeesPresent<1){
+    if (attendeesPresent < 1) {
       readyToStart = false;
-      notification.notification('Info','At least one attendee must be present to start the meeting.',5000);
+      notification.notification('Info', 'At least one attendee must be present to start the meeting.', 5000);
       return;
     }
 
-    for (const d in this.timers){
-      if(this.timers[d].artifacts && this.timers[d].artifacts.milestones){
+    for (const d in this.timers) {
+      if (this.timers[d].artifacts && this.timers[d].artifacts.milestones) {
         this.activeMeeting.milestones = true
-        this.milestoneDataSubscription = this.dataService.userMilestoneData.subscribe((data:any)=>{
-          this.activeMeetingMilestoneData = data && data.length>0 ? this.isNotDone(data).sort((a,b)=>a["Due Date"].localeCompare(b["Due Date"])) : this.isNotDone(data);
+        this.milestoneDataSubscription = this.dataService.userMilestoneData.subscribe((data: any) => {
+          this.activeMeetingMilestoneData = data && data.length > 0 ? this.isNotDone(data).sort((a, b) => a["Due Date"].localeCompare(b["Due Date"])) : this.isNotDone(data);
         })
-      }  
+      }
     }
-    const meetingBody = { meetingId:meeting.meetingId,meetingName:meeting.meeting,meetingDate:Date.now(),uID:this.uID,timerData:meeting.timerData };
-    this.dataSubscription.push(this.dataService.postMeetingHistoryData.pipe(take(1)).subscribe((data:any)=>{
+    const meetingBody = { meetingId: meeting.meetingId, meetingName: meeting.meeting, meetingDate: Date.now(), uID: this.uID, timerData: meeting.timerData };
+    this.dataSubscription.push(this.dataService.postMeetingHistoryData.pipe(take(1)).subscribe((data: any) => {
       this.activeMeeting.meetingHistoryId = data.payload.meetingHistoryId;
       this.activeMeeting.meetingDate = data.payload.meetingDate;
-      if (data.payload.meetingHistoryId){
-        for (const u in this.activeMeeting.attendees){
-          attendees.push({ uID: this.activeMeeting.attendees[u].uID, userRole: this.activeMeeting.attendees[u].uID==this.uID ? 'Host' : 'Required', userStatus: this.activeMeeting.attendees[u].attendeeStatus });
+      if (data.payload.meetingHistoryId) {
+        for (const u in this.activeMeeting.attendees) {
+          attendees.push({ uID: this.activeMeeting.attendees[u].uID, userRole: this.activeMeeting.attendees[u].uID == this.uID ? 'Host' : 'Required', userStatus: this.activeMeeting.attendees[u].attendeeStatus });
         }
-        this.dataService.putMeetingUserHistory({ meetingHistoryId:data.payload.meetingHistoryId,attendees:attendees});
+        this.dataService.putMeetingUserHistory({ meetingHistoryId: data.payload.meetingHistoryId, attendees: attendees });
       }
     }));
     this.dataService.postMeetingHistory(meetingBody);
     this.meetingInProgress = true;
     this.displayAttendeeList = false;
-    this.startAgendaItem(null,0);
+    this.startAgendaItem(null, 0);
   }
 
-  startAgendaItem(agendaItem:any,i:number):void {
-    this.timerSubscription.forEach(s=>s.unsubscribe());
-    this.activeTimer = this.timers[i];
-    this.timers[i].durationSeconds = this.timers[i].timeRemaining ? this.timers[i].timeRemaining : this.timers[i].duration*this.minutes;
-    this.timers[i].timeRemaining = this.timers[i].durationSeconds;
-    this.timers[i].timeRemainingDisplay=+ this.timers[i].timeRemaining%60<10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
-    this.timerSubscription.push(interval(1000).subscribe(x=>{
-      this.timers[i].timeRemaining = Math.abs(this.timers[i].durationSeconds - x);
-      this.timers[i].timeRemainingDisplay = + this.timers[i].timeRemaining%60<10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
-      this.timers[i].timeRemainingDisplay = this.timers[i].durationSeconds<x ? '-' + this.timers[i].timeRemainingDisplay : this.timers[i].timeRemainingDisplay;
-      this.timers[i].status = this.timers[i].durationSeconds<x ? 'danger' : this.timers[i].timeRemaining < 6 ? 'danger' : this.timers[i].timeRemaining < 16 ? 'warning' : 'info';
-      this.activeTimer = this.timers[i];
-    }))
+  startAgendaItem(agendaItem: any, i: number): void {
+    if(this.activeAgenda !== i || !this.activeTimer) {
+      this.activeAgenda = i;
+      this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
+      this.timers[i].durationSeconds = this.timers[i].timeRemaining ? this.timers[i].timeRemaining : this.timers[i].duration * this.minutes;
+      this.timers[i].timeRemaining = this.timers[i].durationSeconds;
+      this.timers[i].timeRemainingDisplay = + this.timers[i].timeRemaining % 60 < 10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
+      this.timerSubscription.push(interval(1000).subscribe(x => {
+        if (this.timers[i].timeRemaining > 0) {
+          this.play = true;
+          this.timers[i].timeRemaining = this.timers[i].durationSeconds - x;
+          this.timers[i].timeRemainingDisplay = + this.timers[i].timeRemaining % 60 < 10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
+          this.timers[i].timeRemainingDisplay = this.timers[i].durationSeconds < x ? '-' + this.timers[i].timeRemainingDisplay : this.timers[i].timeRemainingDisplay;
+          this.timers[i].status = this.timers[i].durationSeconds < x ? 'danger' : this.timers[i].timeRemaining < 6 ? 'danger' : this.timers[i].timeRemaining < 16 ? 'warning' : 'info';
+          this.timers[i].progress = 100 - ((this.timers[i].timeRemaining * 100) / (this.timers[i].duration * this.minutes));
+          this.activeTimer = this.timers[i];
+        } else {
+          this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
+        }
+      }))
+    }
+
   }
 
-  pauseAgendaItem():void {
-    this.timerSubscription.forEach(s=>s.unsubscribe());
+  pauseAgendaItem(): void {
+    this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
   }
 
-  stopMeeting(meetingData:any):void {
+  stopMeeting(meetingData: any): void {
     console.log(': ===> here', 'vik stop');
     this.meetingInProgress = false;
-    this.timerSubscription.forEach(s=>s.unsubscribe());
+    this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
     this.timerSubscription = [];
     // this.displayMeetingList = true;
   }
 
-  resetTimers(meetingData:any):void {
-    if(this.activeMeeting && this.activeMeeting.timerData){
-      for (const t in this.activeMeeting.timerData){
+  resetTimers(meetingData: any): void {
+    if (this.activeMeeting && this.activeMeeting.timerData) {
+      for (const t in this.activeMeeting.timerData) {
         delete this.activeMeeting.timerData[t].timeRemaining;
         delete this.activeMeeting.timerData[t].timeRemainingDisplay;
-      }  
+      }
     }
   }
 
-  editMeeting(meeting:any):void {
+  editMeeting(meeting: any): void {
     this.meetingEditMeeting = meeting;
-    this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data=>{
-      if(data){
+    this.dataSubscription.push(this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data => {
+      if (data) {
         this.meetingEditMeetingName = meeting.meeting;
         this.meetingEditMeetingDate = meeting.meetingDate;
         this.meetingEditMeetingTime = meeting.meetingTime;
@@ -410,29 +421,53 @@ export class MeetingComponent implements OnInit,OnDestroy {
         this.meetingEditMeetingInterval = parseInt(meeting.meetingInterval);
         this.meetingEditMeetingId = meeting.meetingId;
         this.meetingEditMeetingAttendees = [];
-        for (const u in data.payload[0].meetingUsers){
+        for (const u in data.payload[0].meetingUsers) {
           this.meetingEditMeetingAttendees.push(
             data.payload[0].meetingUsers[u].uID
           )
         }
-        meeting.timerData && meeting.timerData.length>0 ? this.meetingEditCustomTimer = true : false;
-        this.timerEditArr = meeting.timerData;  
+        meeting.timerData && meeting.timerData.length > 0 ? this.meetingEditCustomTimer = true : false;
+        this.timerEditArr = meeting.timerData;
       }
     }))
   }
 
-  showModal(template: TemplateRef<any>,cls:any){
-    this.modalRef = this.modalService.show(  
-      template,  
-      Object.assign({}, { class: cls })  
+  showModal(template: TemplateRef<any>, cls: any) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: cls })
     );
   }
 
-  manageMeeting(event:any) {
-    if(event === 'edit') {
+  concludeMeetingModal(template: TemplateRef<any>, cls: any) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: cls })
+    );
+  }
+
+  meetingScore(score: any): void {
+    console.log(': ===> event', score );
+    // if (direction == 'down') {
+      if (score - 1 < 0) {
+        this.activeMeetingScore = 0;
+        notification.notification('Info', 'That must have been a tough meeting. The minimum score is 0, however.', 5000)
+        return;
+      }
+    // } else if (direction == 'up') {
+    //   if (this.activeMeetingScore + 1 > 10) {
+    //     notification.notification('Info', 'It sounds like you crushed it. We do limit the score to 10, however.', 5000)
+    //     return;
+    //   }
+    //   this.activeMeetingScore += 1;
+    // }
+  }
+
+  manageMeeting(event: any) {
+    if (event === 'edit') {
       this.showModal(this.meetingEdit, 'modal-md');
       this.editMeeting(this.selectedMeeting);
-    } else if(event === 'delete') {
+    } else if (event === 'delete') {
       console.log(': ===> event d', event);
       this.dataService.deleteUserMeeting(this.previewMeetingId);
       setTimeout(() => {
@@ -442,27 +477,29 @@ export class MeetingComponent implements OnInit,OnDestroy {
     }
   }
 
-  concludeMeeting(meeting:any):void {
-    if(!this.activeMeetingScore || (this.activeMeetingScore<8 && !this.activeMeetingScoreNotes)){
-      notification.notification('Error','Remember to score the meeting and enter notes if score is less than 8.',7000);
+  concludeMeeting(meeting: any): void {
+    if (!this.activeMeetingScore || (this.activeMeetingScore < 8 && !this.activeMeetingScoreNotes)) {
+      notification.notification('Error', 'Remember to score the meeting and enter notes if score is less than 8.', 7000);
       return;
     }
-    const meetingBody = { meetingHistoryId:meeting.meetingHistoryId,meetingId:meeting.meetingId,meetingName:meeting.meeting,meetingDate:meeting.meetingDate,uID:this.uID,timerData:meeting.timerData,meetingScore:this.activeMeetingScore,scoreNotes:this.activeMeetingScoreNotes,meetingNotes:this.activeMeetingNotes };
-    this.putMeetingHistorySubscription = this.dataService.putMeetingHistoryData.pipe(take(1)).subscribe((data:any)=>{
-      if(data && data.status=='Success'){
-        notification.notification('Success','You have successfully concluded the meeting. Nice work.',5000)
+    const meetingBody = { meetingHistoryId: meeting.meetingHistoryId, meetingId: meeting.meetingId, meetingName: meeting.meeting, meetingDate: meeting.meetingDate, uID: this.uID, timerData: meeting.timerData, meetingScore: this.activeMeetingScore, scoreNotes: this.activeMeetingScoreNotes, meetingNotes: this.activeMeetingNotes };
+    console.log(': ===> meetingBody', meetingBody);
+    this.putMeetingHistorySubscription = this.dataService.putMeetingHistoryData.pipe(take(1)).subscribe((data: any) => {
+      if (data && data.status == 'Success') {
+        notification.notification('Success', 'You have successfully concluded the meeting. Nice work.', 5000)
         this.meetingInProgress = false;
         this.meetingIsLaunched = false;
         this.stopMeeting(null);
         this.resetTimers(meeting);
         this.resetMeetingData();
+        this.modalRef.hide()
       }
     });
     this.dataService.putMeetingHistory(meetingBody);
     this.displayMeetingList = true;
   }
 
-  exitMeeting(meetingData:any):void {
+  exitMeeting(meetingData: any): void {
     this.meetingInProgress = false;
     this.meetingIsLaunched = false;
     this.displayMeetingList = true;
@@ -478,9 +515,9 @@ export class MeetingComponent implements OnInit,OnDestroy {
     }, 1500);
   }
 
-  updateMeetingData():void {
+  updateMeetingData(): void {
     var body: any = {};
-    var attendees:any = [];
+    var attendees: any = [];
 
     body = {
       meetingName: this.meetingEditMeetingName,
@@ -490,20 +527,20 @@ export class MeetingComponent implements OnInit,OnDestroy {
       meetingId: this.meetingEditMeetingId,
       timerData: this.meetingEditCustomTimer ? this.timerEditArr : this.timers
     }
-    for (const a in this.meetingEditMeetingAttendees){
-      if (this.meetingEditMeetingAttendees[a] == this.uID){
-        attendees.push({uID: this.meetingEditMeetingAttendees[a], userRole:'Host'})
+    for (const a in this.meetingEditMeetingAttendees) {
+      if (this.meetingEditMeetingAttendees[a] == this.uID) {
+        attendees.push({ uID: this.meetingEditMeetingAttendees[a], userRole: 'Host' })
       } else {
-        attendees.push({ uID: this.meetingEditMeetingAttendees[a], userRole:'Required'})
+        attendees.push({ uID: this.meetingEditMeetingAttendees[a], userRole: 'Required' })
       }
     }
     body.attendees = attendees;
 
-    this.putUserMeetingSubscription = this.dataService.putUserMeetingData.pipe(take(1)).subscribe((data:any)=>{
-      if(data){
+    this.putUserMeetingSubscription = this.dataService.putUserMeetingData.pipe(take(1)).subscribe((data: any) => {
+      if (data) {
         console.log(': ===> data', data);
-        notification.notification(data.status,data.msg,5000)
-        if(data.status.toLowerCase() == 'success'){
+        notification.notification(data.status, data.msg, 5000)
+        if (data.status.toLowerCase() == 'success') {
           this.dataService.putMeetingUsers(body);
           this.modalRef.hide();
           this.clearModal();
@@ -517,15 +554,15 @@ export class MeetingComponent implements OnInit,OnDestroy {
     }, 1500);
   }
 
-  goToMeetingArchive():void {
+  goToMeetingArchive(): void {
     this.router.navigateByUrl("/meeting/archive");
   }
 
-  createNewMeeting():void {
+  createNewMeeting(): void {
     var body: any = {}
-    var attendees:any = []
+    var attendees: any = []
 
-    if(this.meetingNewCustomTimer){
+    if (this.meetingNewCustomTimer) {
       this.timerNewArr[0].artifacts = { milestones: true }
     }
 
@@ -538,13 +575,13 @@ export class MeetingComponent implements OnInit,OnDestroy {
       timerData: this.meetingNewCustomTimer ? this.timerNewArr : this.timers
     }
 
-    this.postUserMeetingSubscription = this.dataService.postUserMeetingData.pipe(take(1)).subscribe((data:any)=>{
-      if(data){
-        notification.notification(data.status,data.msg,5000)
-        if(data.status.toLowerCase() == 'success'){
-          for (const u in this.meetingNewMeetingAttendees){
-            attendees.push({ uID: this.meetingNewMeetingAttendees[u], userRole: this.meetingNewMeetingAttendees[u]==this.uID ? 'Host' : 'Required' })
-          //   this.dataService.postMeetingUsers({ meetingName: data.payload.meetingName, meetingId: data.payload.meetingId, uID: this.meetingNewMeetingAttendees[u] });
+    this.postUserMeetingSubscription = this.dataService.postUserMeetingData.pipe(take(1)).subscribe((data: any) => {
+      if (data) {
+        notification.notification(data.status, data.msg, 5000)
+        if (data.status.toLowerCase() == 'success') {
+          for (const u in this.meetingNewMeetingAttendees) {
+            attendees.push({ uID: this.meetingNewMeetingAttendees[u], userRole: this.meetingNewMeetingAttendees[u] == this.uID ? 'Host' : 'Required' })
+            //   this.dataService.postMeetingUsers({ meetingName: data.payload.meetingName, meetingId: data.payload.meetingId, uID: this.meetingNewMeetingAttendees[u] });
           }
           this.dataService.putMeetingUsers({ meetingName: data.payload.meetingName, meetingId: data.payload.meetingId, attendees: attendees });
           this.modalRef.hide();
@@ -556,7 +593,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.timeoutList();
   }
 
-  clearModal():void {
+  clearModal(): void {
     this.meetingNewMeetingName = null;
     this.meetingNewMeetingFrequency = null;
     this.meetingNewMeetingDate = null;
@@ -565,7 +602,7 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.meetingNewCustomTimer = false;
   }
 
-  resetMeetingData():void {
+  resetMeetingData(): void {
     this.conclusionFinished = false;
     this.activeMeetingNotes = null;
     this.activeMeetingScore = 0;
@@ -574,24 +611,24 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.displayMeetingConclusion = false;
     this.displayMeetingNotes = false;
     this.activeMeetingMilestoneData = null;
-    for (const a in this.activeMeeting.attendees){
+    for (const a in this.activeMeeting.attendees) {
       delete this.activeMeeting.attendees[a].attendeeStatus
     }
     this.activeMeeting = null;
     this.milestoneDataSubscription ? this.milestoneDataSubscription.unsubscribe() : null;
   }
 
-  timeoutList():void {
+  timeoutList(): void {
     setTimeout(() => {
       this.dataService.getUserMeetings(this.uID);
     }, 1000);
   }
 
-  deleteMeeting(meeting:any):void {
-    this.deleteUserMeetingSubscription = this.dataService.deleteUserMeetingData.pipe(take(1)).subscribe((data:any)=>{
-      if(data){
-        notification.notification(data.status,data.msg,5000)
-        if(data.status.toLowerCase() == 'success'){
+  deleteMeeting(meeting: any): void {
+    this.deleteUserMeetingSubscription = this.dataService.deleteUserMeetingData.pipe(take(1)).subscribe((data: any) => {
+      if (data) {
+        notification.notification(data.status, data.msg, 5000)
+        if (data.status.toLowerCase() == 'success') {
           this.clearModal();
         }
       }
@@ -600,15 +637,15 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.timeoutList();
   }
 
-  setMeetingNewCustomTimer():void {
+  setMeetingNewCustomTimer(): void {
     this.meetingNewCustomTimer = !this.meetingNewCustomTimer;
   }
 
-  setMeetingEditCustomTimer(timerData:any):void {
+  setMeetingEditCustomTimer(timerData: any): void {
     this.meetingEditCustomTimer = !this.meetingEditCustomTimer;
   }
 
-  createTimer(data:any = null): FormGroup {
+  createTimer(data: any = null): FormGroup {
     return this.formBuilder.group({
       name: data.name ? data.name : '',
       duration: data.duration ? data.duration : 0,
@@ -616,79 +653,79 @@ export class MeetingComponent implements OnInit,OnDestroy {
     })
   }
 
-  addTimer(timerName:string,data:any = null):void {
-    if(timerName=='new'){
+  addTimer(timerName: string, data: any = null): void {
+    if (timerName == 'new') {
       this.timerNewArr.push(data);
-    }else if (timerName=='edit'){
+    } else if (timerName == 'edit') {
       this.timerEditArr.push(data);
     }
   }
 
-  removeTimer(timerName:string,i:any):void {
-    if(timerName=='new'){
-      this.timerNewArr.splice(i,1);
-    } else if (timerName=='edit'){
-      this.timerEditArr.splice(i,1);
+  removeTimer(timerName: string, i: any): void {
+    if (timerName == 'new') {
+      this.timerNewArr.splice(i, 1);
+    } else if (timerName == 'edit') {
+      this.timerEditArr.splice(i, 1);
     }
   }
 
-  showAttendeeList():void {
+  showAttendeeList(): void {
     this.displayAttendeeList = !this.displayAttendeeList;
   }
 
-  assignAttendee(user:any,index:number,attendeeStatus:any):void {
-    if(attendeeStatus.target.checked === true) {
+  assignAttendee(user: any, index: number, attendeeStatus: any): void {
+    if (attendeeStatus.target.checked === true) {
       attendeeStatus = 'present';
-    } else { 
+    } else {
       attendeeStatus = 'not present';
     }
     this.activeMeeting.attendees[index].attendeeStatus = attendeeStatus;
-    if(this.activeMeeting.meetingHistoryId){
-      const userBody = { uID:this.activeMeeting.attendees[index].uID,meetingHistoryId:this.activeMeeting.meetingHistoryId,userStatus:attendeeStatus }
-      this.dataService.postMeetingUserHistory(userBody);  
+    if (this.activeMeeting.meetingHistoryId) {
+      const userBody = { uID: this.activeMeeting.attendees[index].uID, meetingHistoryId: this.activeMeeting.meetingHistoryId, userStatus: attendeeStatus }
+      this.dataService.postMeetingUserHistory(userBody);
     }
   }
 
-  setTimerDisplay(timerName:string,i:any):void {
-    var minutes:number;
-    var seconds:number;
-    var secondDigit:string;
-    var minuteDigit:string;
+  setTimerDisplay(timerName: string, i: any): void {
+    var minutes: number;
+    var seconds: number;
+    var secondDigit: string;
+    var minuteDigit: string;
 
-    if(timerName=='new'){
-      seconds = (this.timerNewArr[i].duration*60)%60;
-      minutes = (this.timerNewArr[i].duration*60-seconds)/60;
-      secondDigit = seconds<10 ? '0' : '';
-      minuteDigit = minutes<10 ? '0' : '';
+    if (timerName == 'new') {
+      seconds = (this.timerNewArr[i].duration * 60) % 60;
+      minutes = (this.timerNewArr[i].duration * 60 - seconds) / 60;
+      secondDigit = seconds < 10 ? '0' : '';
+      minuteDigit = minutes < 10 ? '0' : '';
       this.timerNewArr[i].display = minuteDigit + (minutes).toString() + ':' + secondDigit + (seconds).toString();
-    } else if (timerName='edit'){
-      seconds = (this.timerEditArr[i].duration*60)%60;
-      minutes = (this.timerEditArr[i].duration*60-seconds)/60;
-      secondDigit = seconds<10 ? '0' : '';
-      minuteDigit = minutes<10 ? '0' : '';
+    } else if (timerName = 'edit') {
+      seconds = (this.timerEditArr[i].duration * 60) % 60;
+      minutes = (this.timerEditArr[i].duration * 60 - seconds) / 60;
+      secondDigit = seconds < 10 ? '0' : '';
+      minuteDigit = minutes < 10 ? '0' : '';
       this.timerEditArr[i].display = minuteDigit + (minutes).toString() + ':' + secondDigit + (seconds).toString();
     }
   }
 
-  updateMeetingScore():boolean {
+  updateMeetingScore(): boolean {
     this.modalRef.hide();
     this.stopMeeting(null);
     return true;
   }
 
-  setMeetingListDisplay():void {
+  setMeetingListDisplay(): void {
     this.displayMeetingList = !this.displayMeetingList;
     this.meetingIsPreview = false;
   }
 
-  showScoreNotes():void {
+  showScoreNotes(): void {
   }
 
-  notifyAttendee(user:any):void {
-    notification.notification('Info',`We're hoping to have this feature implemented soon.`,5000);
+  notifyAttendee(user: any): void {
+    notification.notification('Info', `We're hoping to have this feature implemented soon.`, 5000);
   }
 
-  clearNewMeetingFields():void {
+  clearNewMeetingFields(): void {
     this.meetingNewMeetingName = null;
     this.meetingNewMeetingFrequency = null;
     this.meetingNewMeetingDate = null;
@@ -698,16 +735,16 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.timerNewArr = [];
   }
 
-  clearMeetingInterval():void {
+  clearMeetingInterval(): void {
     this.meetingEditMeetingInterval = null;
   }
 
-  isNotDone(array){
+  isNotDone(array) {
 
-    var arr:any = [];
+    var arr: any = [];
 
-    Object.keys(array).forEach(function(i){
-      if (array[i].Status!="D"){
+    Object.keys(array).forEach(function (i) {
+      if (array[i].Status != "D") {
         arr.push(array[i]);
       }
     });
@@ -715,35 +752,35 @@ export class MeetingComponent implements OnInit,OnDestroy {
     return arr;
   }
 
-  getMilestoneData(a:any):void {
+  getMilestoneData(a: any): void {
     this.activeMeeting.displayMilestones = true;
     this.activeMeeting.displayIssues = false;
     this.activeMeeting.displayKPI = false;
-    if(this.meetingInProgress){
-      for(const u in this.activeMeeting.attendees){
+    if (this.meetingInProgress) {
+      for (const u in this.activeMeeting.attendees) {
         this.activeMeeting.attendees[u].selected = false;
-        if(a['uID']==this.activeMeeting.attendees[u].uID){
-          if(this.isApprovedUser(a.uID)){
-              this.activeMeeting.attendees[u].selected = true
+        if (a['uID'] == this.activeMeeting.attendees[u].uID) {
+          if (this.isApprovedUser(a.uID)) {
+            this.activeMeeting.attendees[u].selected = true
           }
         }
       }
-      console.log(': ===> !this.activeMeetingUid || this.activeMeetingUid!=a.uID', !this.activeMeetingUid || this.activeMeetingUid!=a.uID);
-      if(!this.activeMeetingUid || this.activeMeetingUid!=a.uID){
-        if (this.isApprovedUser(a.uID)){
+      console.log(': ===> !this.activeMeetingUid || this.activeMeetingUid!=a.uID', !this.activeMeetingUid || this.activeMeetingUid != a.uID);
+      if (!this.activeMeetingUid || this.activeMeetingUid != a.uID) {
+        if (this.isApprovedUser(a.uID)) {
           this.activeMeetingUid = a.uID;
           this.activeMeeting.activeUser = a;
           this.activeMeeting.activeUser.filterIssues = false;
           this.dataService.getUserMilestones(a.uID);
           this.activeMeetingDisplayMilestones = true;
         } else {
-          notification.notification('Info','You are not authorized to view this user\'s milestones.',5000);
-          this.activeMeeting.activeUser = null; 
+          notification.notification('Info', 'You are not authorized to view this user\'s milestones.', 5000);
+          this.activeMeeting.activeUser = null;
           this.activeMeeting.activeUser = null;
           this.activeMeetingUid = null;
           this.activeMeetingDisplayMilestones = false;
         }
-      }else{
+      } else {
         this.activeMeetingDisplayMilestones = !this.activeMeetingDisplayMilestones;
         this.activeMeeting.activeUser = null;
         this.activeMeetingUid = null;
@@ -751,27 +788,27 @@ export class MeetingComponent implements OnInit,OnDestroy {
     }
   }
 
-  getIssueData(meetingId:string):void {
+  getIssueData(meetingId: string): void {
     this.activeMeeting.displayIssues = true;
     this.activeMeeting.displayMilestones = false;
     this.activeMeeting.displayKPI = false;
     this.IssueDataService.getMeetingIssue(meetingId);
   }
 
-  incrementMeetingScore(direction:string): void {
-    
-    if(direction=='down'){
-      if(this.activeMeetingScore-1<0){
-        notification.notification('Info','That must have been a tough meeting. The minimum score is 0, however.',5000)
+  incrementMeetingScore(direction: string): void {
+
+    if (direction == 'down') {
+      if (this.activeMeetingScore - 1 < 0) {
+        notification.notification('Info', 'That must have been a tough meeting. The minimum score is 0, however.', 5000)
         return;
       }
-      this.activeMeetingScore-=1;
-    }else if (direction=='up'){
-      if(this.activeMeetingScore+1>10){
-        notification.notification('Info','It sounds like you crushed it. We do limit the score to 10, however.',5000)
+      this.activeMeetingScore -= 1;
+    } else if (direction == 'up') {
+      if (this.activeMeetingScore + 1 > 10) {
+        notification.notification('Info', 'It sounds like you crushed it. We do limit the score to 10, however.', 5000)
         return;
       }
-      this.activeMeetingScore+=1;
+      this.activeMeetingScore += 1;
     }
   }
 
@@ -782,45 +819,45 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.activeMeeting.displayIssues = false;
   }
 
-  resetTimer():void {
+  resetTimer(): void {
     this.timers = [
-      { name: 'You (Good News)', duration: 5, display:'5:00' },
-      { name: 'Milestones/Rocks', duration: 15, display:'15:00', artifacts:{ milestones: true } },
-      { name: 'Issues', duration: 5, display:'5:00' },
-      { name: 'Decisions', duration: 60, display:'60:00' },
-      { name: 'Conclusion', duration: 5, display:'5:00' }
-    ];  
+      { name: 'You (Good News)', duration: 5, display: '5:00' },
+      { name: 'Milestones/Rocks', duration: 15, display: '15:00', artifacts: { milestones: true } },
+      { name: 'Issues', duration: 5, display: '5:00' },
+      { name: 'Decisions', duration: 60, display: '60:00' },
+      { name: 'Conclusion', duration: 5, display: '5:00' }
+    ];
     this.meetingNewMeetingAttendees = [this.uID]
   }
 
-  isApprovedUser(uID:string):boolean {
-    for (const u in this.userAccessList){
-      if (this.userAccessList[u].uID == uID){
-        return true;        
-      } else if (this.uID == uID){
+  isApprovedUser(uID: string): boolean {
+    for (const u in this.userAccessList) {
+      if (this.userAccessList[u].uID == uID) {
+        return true;
+      } else if (this.uID == uID) {
         return true;
       }
     }
     return false;
   }
 
-  toggleMeetingConclusion():void {
+  toggleMeetingConclusion(): void {
     this.displayMeetingConclusion = !this.displayMeetingConclusion;
   }
 
-  showMeetingConclusion():void {
+  showMeetingConclusion(): void {
     this.displayMeetingConclusion = true;
   }
-  showAgenda():void {
+  showAgenda(): void {
     this.displayAgenda = !this.displayAgenda;
   }
 
-  showMeetingNotes():void {
+  showMeetingNotes(): void {
     this.displayMeetingNotes = !this.displayMeetingNotes;
   }
 
-  milestoneEdit(template: TemplateRef<any>,cls:any,element: any){
-    var body:any = {}
+  milestoneEdit(template: TemplateRef<any>, cls: any, element: any) {
+    var body: any = {}
 
     this.milestoneEditMilestone = element;
     this.milestoneMilestoneEdit = element.Milestone;
@@ -844,22 +881,22 @@ export class MeetingComponent implements OnInit,OnDestroy {
     body.isRecurring = element.recurringFrequency ? true : false;
     body.recurringFrequency = element.recurringFrequency;
     body.note = element.note;
-    this.showModal(template,cls);
+    this.showModal(template, cls);
   }
 
-  setMilestoneRecurringEdit():void {
+  setMilestoneRecurringEdit(): void {
     this.milestoneRecurringEdit = !this.milestoneRecurringEdit;
-    if(!this.milestoneRecurringEdit){
+    if (!this.milestoneRecurringEdit) {
       this.milestoneRecurringFrequencyEdit = null;
     }
   }
 
-  updateMilestoneData():void {
+  updateMilestoneData(): void {
 
     var milestoneData: any;
     var quarterData: any;
-    var frequency:object = {};
-    var uID:string;
+    var frequency: object = {};
+    var uID: string;
 
     uID = this.milestoneEditMilestone.uID
 
@@ -876,48 +913,48 @@ export class MeetingComponent implements OnInit,OnDestroy {
     quarterData = { qkaID: this.milestoneEditMilestone.qkaID }
     quarterData.uID = uID;
 
-    if(this.milestoneQuarterList && this.milestoneQuarterList.length<1){
-      this.dataSubscription.push(this.dataService.postQuarterSplitBulk({ uID: uID }).subscribe(()=>{
+    if (this.milestoneQuarterList && this.milestoneQuarterList.length < 1) {
+      this.dataSubscription.push(this.dataService.postQuarterSplitBulk({ uID: uID }).subscribe(() => {
         this.updateQuarterList();
       }));
     }
 
-    for (const q in this.milestoneQuarterList){
-      if(milestoneData.dueDate>=this.milestoneQuarterList[q].startDate && milestoneData.dueDate<=this.milestoneQuarterList[q].endDate){
+    for (const q in this.milestoneQuarterList) {
+      if (milestoneData.dueDate >= this.milestoneQuarterList[q].startDate && milestoneData.dueDate <= this.milestoneQuarterList[q].endDate) {
         quarterData.qsID = this.milestoneQuarterList[q].qsID
       }
     }
 
-    if(!quarterData.qsID){
+    if (!quarterData.qsID) {
       quarterData.qsID = this.milestoneQuarterList[0].qsID
     }
 
-    this.dataSubscription.push(this.dataService.updateMilestone(milestoneData).subscribe(()=>{
-      this.dataSubscription.push(this.dataService.updateMilestoneQuarter(quarterData).subscribe(()=>{
-        if(this.milestoneRecurringEdit&&this.milestoneStatusEdit=='D'){
-          if(this.milestoneRecurringFrequencyEdit=='Weekly'){
+    this.dataSubscription.push(this.dataService.updateMilestone(milestoneData).subscribe(() => {
+      this.dataSubscription.push(this.dataService.updateMilestoneQuarter(quarterData).subscribe(() => {
+        if (this.milestoneRecurringEdit && this.milestoneStatusEdit == 'D') {
+          if (this.milestoneRecurringFrequencyEdit == 'Weekly') {
             frequency['a'] = 'days';
             frequency['b'] = 7;
-            frequency = {days: 7};
-          } else if (this.milestoneRecurringFrequencyEdit=='Monthly'){
+            frequency = { days: 7 };
+          } else if (this.milestoneRecurringFrequencyEdit == 'Monthly') {
             frequency['a'] = 'months';
             frequency['b'] = 1;
-            frequency = {months: 1};
-          } else if (this.milestoneRecurringFrequencyEdit=='Quarterly'){
+            frequency = { months: 1 };
+          } else if (this.milestoneRecurringFrequencyEdit == 'Quarterly') {
             frequency['a'] = 'quarters';
             frequency['b'] = 1;
-            frequency = {quarters: 1};
-          } else if (this.milestoneRecurringFrequencyEdit=='Yearly'){
-            frequency['a']='years';
-            frequency['b']=1;
-            frequency = {years: 1}
+            frequency = { quarters: 1 };
+          } else if (this.milestoneRecurringFrequencyEdit == 'Yearly') {
+            frequency['a'] = 'years';
+            frequency['b'] = 1;
+            frequency = { years: 1 }
           }
-          this.createRecurringMilestone(milestoneData.achieveText,this.milestoneEditMilestone.kpiId,DateTime.fromISO(milestoneData.dueDate).plus(frequency).toISODate(),'P',uID,this.uID,milestoneData.recurringFrequency);
+          this.createRecurringMilestone(milestoneData.achieveText, this.milestoneEditMilestone.kpiId, DateTime.fromISO(milestoneData.dueDate).plus(frequency).toISODate(), 'P', uID, this.uID, milestoneData.recurringFrequency);
         }
         this.dataService.getUserMilestones(uID);
       }))
     }));
-    
+
     this.modalRef.hide();
   }
 
@@ -925,8 +962,8 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.DataServiceService.getQuarterList(this.milestoneEditMilestone.uID);
   }
 
-  createRecurringMilestone(achieveText:string,kpiID:string,dueDate:string,charpStatus:string,uID:string,superReferUserID:string,recurringFrequency:string):void {
-    var body:Object = {
+  createRecurringMilestone(achieveText: string, kpiID: string, dueDate: string, charpStatus: string, uID: string, superReferUserID: string, recurringFrequency: string): void {
+    var body: Object = {
       achieveText: achieveText,
       kpiID: kpiID,
       dueDate: dueDate,
@@ -936,10 +973,10 @@ export class MeetingComponent implements OnInit,OnDestroy {
       recurringFrequency: recurringFrequency
     }
 
-    this.dataSubscription.push(this.DataServiceService.postPortfolioMilestoneData.pipe(take(1)).subscribe((data:any) =>{
-      if(data){
-        notification.notification(data.status,data.msg,5000)
-        if(data.status.toLowerCase() == 'success'){
+    this.dataSubscription.push(this.DataServiceService.postPortfolioMilestoneData.pipe(take(1)).subscribe((data: any) => {
+      if (data) {
+        notification.notification(data.status, data.msg, 5000)
+        if (data.status.toLowerCase() == 'success') {
           this.modalRef.hide();
           this.clearModal();
         }
@@ -948,21 +985,21 @@ export class MeetingComponent implements OnInit,OnDestroy {
     this.DataServiceService.postPortfolioMilestone(body);
   }
 
-  getUserIssue():void {
-      this.activeMeeting.activeUser.filterIssues = !this.activeMeeting.activeUser.filterIssues
-      if(this.activeMeeting.activeUser.filterIssues){
-        this.IssueDataService.getMeetingUserIssue(this.activeMeeting.activeUser.uID);
-      } else {
-        this.IssueDataService.getMeetingIssue(this.activeMeeting.meetingId);
-      }
+  getUserIssue(): void {
+    this.activeMeeting.activeUser.filterIssues = !this.activeMeeting.activeUser.filterIssues
+    if (this.activeMeeting.activeUser.filterIssues) {
+      this.IssueDataService.getMeetingUserIssue(this.activeMeeting.activeUser.uID);
+    } else {
+      this.IssueDataService.getMeetingIssue(this.activeMeeting.meetingId);
+    }
   }
 
-  tabChange(tab){
-    if(tab === 'rhythm') {
+  tabChange(tab) {
+    if (tab === 'rhythm') {
       this.rhythm = true;
       this.custom = false;
       this.completedMeeting = false;
-    } else if(tab === 'custom') {
+    } else if (tab === 'custom') {
       this.rhythm = false;
       this.custom = true;
       this.completedMeeting = false;

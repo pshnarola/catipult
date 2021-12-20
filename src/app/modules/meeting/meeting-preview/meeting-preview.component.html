@@ -66,21 +66,23 @@
         <div class="attendee-list" *ngIf="meetingData">
           <ul>
             <li *ngFor="let a of meetingData.meetingUsers; let i = index">
-              <div class="attendee-img"></div>
-              <div class="attendee-name">
-                <a
-                  class="agenda-item"
-                  [ngStyle]="{
-                    color: a.selected == true ? 'red' : '#73879C',
-                    cursor:
-                      meetingData?.displayIssues ||
-                      meetingData?.displayMilestones
-                        ? 'pointer'
-                        : 'auto'
-                  }"
-                  (click)="setSelectedUser(a)"
-                  >{{ a.User.name }} {{ a.User.lname }}</a
-                >
+              <div class="agenda-info">
+                <div class="attendee-img"></div>
+                <div class="attendee-name">
+                  <a
+                    class="agenda-item"
+                    [ngStyle]="{
+                      color: a.selected == true ? 'red' : '#73879C',
+                      cursor:
+                        meetingData?.displayIssues ||
+                        meetingData?.displayMilestones
+                          ? 'pointer'
+                          : 'auto'
+                    }"
+                    (click)="setSelectedUser(a)"
+                    >{{ a.User.name }} {{ a.User.lname }}</a
+                  >
+                </div>
               </div>
             </li>
           </ul>
@@ -92,21 +94,23 @@
         <div class="agenda-list" *ngIf="meetingData && meetingData.timerData">
           <ul>
             <li *ngFor="let t of meetingData.timerData; let i = index">
-              <div class="agenda-img"></div>
-              <div class="agenda-name">
-                <p>
-                  <a class="agenda-item">{{ t.name }} </a>
-                </p>
-                <p>
-                  <a class="agenda-time" *ngIf="t.duration >= 1"
-                    >{{ t.duration }}m</a
-                  >
-                </p>
-                <p>
-                  <a class="agenda-time" *ngIf="t.duration < 1"
-                    >{{ t.duration * 60 }}s</a
-                  >
-                </p>
+              <div class="agenda-info">
+                <div class="agenda-img"></div>
+                <div class="agenda-name">
+                  <p>
+                    <a class="agenda-item">{{ t.name }} </a>
+                  </p>
+                  <p>
+                    <a class="agenda-time" *ngIf="t.duration >= 1"
+                      >{{ t.duration }}m</a
+                    >
+                  </p>
+                  <p>
+                    <a class="agenda-time" *ngIf="t.duration < 1"
+                      >{{ t.duration * 60 }}s</a
+                    >
+                  </p>
+                </div>
               </div>
             </li>
           </ul>

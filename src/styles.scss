@@ -694,36 +694,42 @@ body {
       li {
         display: flex;
         align-items: center;
-        .agenda-img {
-          box-sizing: border-box;
-          width: 28px;
-          height: 28px;
-          background: #e3eff5;
-          border-radius: 100px;
-          margin-right: 12px;
-          min-width: 28px;
-        }
-        .agenda-name {
-          p {
-            margin: 0;
+        .agenda-info {
+          display: contents;
+          .agenda-img {
+            box-sizing: border-box;
+            width: 28px;
+            height: 28px;
+            background: #e3eff5;
+            border-radius: 100px;
+            margin-right: 12px;
+            min-width: 28px;
           }
-          a {
-            font-style: normal;
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 15px;
-            color: #000000 !important;
-            &.agenda-time {
+          .agenda-name {
+            p {
+              margin: 0;
+            }
+            a {
               font-style: normal;
               font-weight: 500;
               font-size: 12px;
-              line-height: 20px;
-              color: #575757 !important;
+              line-height: 15px;
+              color: #000000 !important;
+              &.agenda-time {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 20px;
+                color: #575757 !important;
+              }
             }
           }
-        }
-        + li {
-          margin-top: 10px;
+          a.active {
+            color: #0C6BAF !important;
+          }
+          + li {
+            margin-top: 10px;
+          }
         }
       }
     }
@@ -1195,4 +1201,10 @@ button + button {
       }
     }
   }
+}
+
+
+// mat-progress bar
+.mat-progress-bar .mat-progress-bar-fill::after {
+  background-color: #00a9ff;
 }
