@@ -231,7 +231,164 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-8"></div>
+                <div class="col-md-8">
+                  <div class="meeting-summary">
+                    <div class="meeting-summary-title">
+                      <h3>
+                        <img src="assets/images/meeting/calendar.svg" />November
+                        12, 2021
+                      </h3>
+                      <h3>
+                        <img src="assets/images/meeting/clock.svg" />13:30 -
+                        14:26 ⋅ held 56:24
+                      </h3>
+                    </div>
+                    <hr class="mt-0 mb-0 ml--10" />
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="attendee-content mt-1">
+                          <h3>
+                            Attendee List
+                          </h3>
+                          <div class="attendee-list">
+                            <ul
+                              *ngIf="activeMeeting && activeMeeting.attendees"
+                            >
+                              <li
+                                *ngFor="
+                                  let a of activeMeeting.attendees;
+                                  let i = index
+                                "
+                              >
+                                <div class="custom-checkbox">
+                                  <label>
+                                    <input
+                                      type="checkbox"
+                                      (change)="assignAttendee(a, i, $event)"
+                                    />
+                                    <span class="checkmark"></span>
+                                  </label>
+                                </div>
+                                <div class="attendee-img"></div>
+                                <div
+                                  class="attendee-name"
+                                  (click)="getMilestoneData(a)"
+                                >
+                                  <a class="agenda-item"
+                                    >{{ a.User.name }} {{ a.User.lname }}</a
+                                  >
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <hr class="mt-1 mb-1 ml--10 mr--10" />
+                        <div class="agenda-content">
+                          <h3>Agenda</h3>
+                          <div class="agenda-list" *ngIf="displayAgenda">
+                            <ul>
+                              <li *ngFor="let t of timers; let i = index">
+                                <div
+                                  class="agenda-info"
+                                  *ngIf="meetingInProgress"
+                                  (click)="startAgendaItem(t, i)"
+                                >
+                                  <div class="agenda-img"></div>
+                                  <div class="agenda-name">
+                                    <p>
+                                      <a
+                                        class="agenda-item"
+                                        [ngClass]="{
+                                          active:
+                                            activeTimer &&
+                                            t.name == activeTimer.name
+                                        }"
+                                        >{{ t.name }}
+                                      </a>
+                                    </p>
+                                    <p>
+                                      <a
+                                        class="agenda-time"
+                                        *ngIf="t.duration >= 1"
+                                        >{{ t.duration }}m</a
+                                      >
+                                    </p>
+                                    <p>
+                                      <a
+                                        class="agenda-time"
+                                        *ngIf="t.duration < 1"
+                                        >{{ t.duration * 60 }}s</a
+                                      >
+                                    </p>
+                                  </div>
+                                  <div class="check-circle" *ngIf="i === 0">
+                                    <svg
+                                      width="24"
+                                      height="25"
+                                      viewBox="0 0 24 25"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M11.9999 22.1C17.3018 22.1 21.5999 17.802 21.5999 12.5C21.5999 7.19809 17.3018 2.90002 11.9999 2.90002C6.69797 2.90002 2.3999 7.19809 2.3999 12.5C2.3999 17.802 6.69797 22.1 11.9999 22.1ZM16.4484 10.9486C16.9171 10.4799 16.9171 9.72012 16.4484 9.2515C15.9798 8.78287 15.22 8.78287 14.7514 9.2515L10.7999 13.203L9.24843 11.6515C8.7798 11.1829 8.02 11.1829 7.55137 11.6515C7.08275 12.1201 7.08275 12.8799 7.55137 13.3486L9.95137 15.7486C10.42 16.2172 11.1798 16.2172 11.6484 15.7486L16.4484 10.9486Z"
+                                        fill="#0F9E3F"
+                                      />
+                                    </svg>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="about-meeting">
+                          <div class="meeting-score">
+                            <h3>Meeting Score:</h3>
+                            <h6>4/10</h6>
+                          </div>
+                          <div class="meeting-conclusion">
+                            <div class="form-group">
+                              <label>Meeting Conclusion</label>
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est laborum.
+                              </p>
+                            </div>
+                          </div>
+                          <hr class="mr--10 ml--10 mt-0 mb-0" />
+                          <div class="meeting-notes-wrap">
+                            <div class="form-group">
+                              <label>Meeting Conclusion</label>
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut
+                                enim ad minim veniam, quis nostrud exercitation
+                                ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa
+                                qui officia deserunt mollit anim id est laborum.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
