@@ -155,7 +155,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
 
   selectedMeeting: any;
   play: boolean = true;
-  activeAgenda:number = 0;
+  activeAgenda: number = null;
 
   frequency: RecurringFrequency[] = [
     { value: 'Not Recurring', viewValue: 'Not Recurring' },
@@ -366,7 +366,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   startAgendaItem(agendaItem: any, i: number): void {
-    if(this.activeAgenda !== i || !this.activeTimer) {
+    if (this.activeAgenda !== i) {
       this.activeAgenda = i;
       this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
       this.timers[i].durationSeconds = this.timers[i].timeRemaining ? this.timers[i].timeRemaining : this.timers[i].duration * this.minutes;
@@ -387,6 +387,27 @@ export class MeetingComponent implements OnInit, OnDestroy {
       }))
     }
 
+  }
+
+  startAgendaItemFromButton(agendaItem: any, i: number): void {
+      this.activeAgenda = i;
+      this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
+      this.timers[i].durationSeconds = this.timers[i].timeRemaining ? this.timers[i].timeRemaining : this.timers[i].duration * this.minutes;
+      this.timers[i].timeRemaining = this.timers[i].durationSeconds;
+      this.timers[i].timeRemainingDisplay = + this.timers[i].timeRemaining % 60 < 10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
+      this.timerSubscription.push(interval(1000).subscribe(x => {
+        if (this.timers[i].timeRemaining > 0) {
+          this.play = true;
+          this.timers[i].timeRemaining = this.timers[i].durationSeconds - x;
+          this.timers[i].timeRemainingDisplay = + this.timers[i].timeRemaining % 60 < 10 ? ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':0' + (this.timers[i].timeRemaining) % 60 : ('00' + parseInt(((this.timers[i].timeRemaining) / 60).toString()).toString()).slice(-2) + ':' + (this.timers[i].timeRemaining) % 60;
+          this.timers[i].timeRemainingDisplay = this.timers[i].durationSeconds < x ? '-' + this.timers[i].timeRemainingDisplay : this.timers[i].timeRemainingDisplay;
+          this.timers[i].status = this.timers[i].durationSeconds < x ? 'danger' : this.timers[i].timeRemaining < 6 ? 'danger' : this.timers[i].timeRemaining < 16 ? 'warning' : 'info';
+          this.timers[i].progress = 100 - ((this.timers[i].timeRemaining * 100) / (this.timers[i].duration * this.minutes));
+          this.activeTimer = this.timers[i];
+        } else {
+          this.timerSubscription.forEach(s => s.unsubscribe(), this.play = false);
+        }
+      }))
   }
 
   pauseAgendaItem(): void {
@@ -444,23 +465,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
       template,
       Object.assign({}, { class: cls })
     );
-  }
-
-  meetingScore(score: any): void {
-    console.log(': ===> event', score );
-    // if (direction == 'down') {
-      if (score - 1 < 0) {
-        this.activeMeetingScore = 0;
-        notification.notification('Info', 'That must have been a tough meeting. The minimum score is 0, however.', 5000)
-        return;
-      }
-    // } else if (direction == 'up') {
-    //   if (this.activeMeetingScore + 1 > 10) {
-    //     notification.notification('Info', 'It sounds like you crushed it. We do limit the score to 10, however.', 5000)
-    //     return;
-    //   }
-    //   this.activeMeetingScore += 1;
-    // }
   }
 
   manageMeeting(event: any) {
