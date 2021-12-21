@@ -725,7 +725,7 @@ body {
             }
           }
           a.active {
-            color: #0C6BAF !important;
+            color: #0c6baf !important;
           }
           + li {
             margin-top: 10px;
@@ -962,6 +962,39 @@ body {
           box-shadow: inset 4px 0px 0px #00a9ff;
         }
       }
+    }
+  }
+}
+.conclusion-modal-body {
+  .increment-div {
+    display: flex;
+    align-items: center;
+    a {
+      i {
+        font-size: 24px;
+        color: #043750;
+      }
+    }
+    .form-control.nform-control {
+      margin: 0 10px;
+      max-width: 100%;
+      text-align: center !important;
+      width: auto;
+      padding: 16px 5px !important;
+      font-style: normal !important;
+      font-weight: 300 !important;
+      font-size: 42px !important;
+      line-height: 48px;
+      letter-spacing: -0.01em;
+      color: #87919c;
+      max-width: 72px;
+    }
+  }
+  .form-group {
+    .input-label {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 28px;
     }
   }
 }
@@ -1256,7 +1289,6 @@ button + button {
     }
   }
 }
-
 
 // mat-progress bar
 .mat-progress-bar .mat-progress-bar-fill::after {
