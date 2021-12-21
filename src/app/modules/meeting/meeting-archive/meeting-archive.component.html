@@ -158,12 +158,11 @@
                   <a
                     class="nav-link"
                     aria-current="page"
-                    [ngClass]="{ active: rhythm }"
                     >Rhythm</a
                   >
                 </li>
                 <li class="nav-item" (click)="tabChange('custom')">
-                  <a class="nav-link" [ngClass]="{ active: custom }">Custom</a>
+                  <a class="nav-link">Custom</a>
                 </li>
               </ul>
               <div class="nav-item">
@@ -352,22 +351,6 @@
                                         >{{ a.display }}m</a
                                       >
                                     </p>
-                                  </div>
-                                  <div class="check-circle" *ngIf="i === 0">
-                                    <svg
-                                      width="24"
-                                      height="25"
-                                      viewBox="0 0 24 25"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
-                                        d="M11.9999 22.1C17.3018 22.1 21.5999 17.802 21.5999 12.5C21.5999 7.19809 17.3018 2.90002 11.9999 2.90002C6.69797 2.90002 2.3999 7.19809 2.3999 12.5C2.3999 17.802 6.69797 22.1 11.9999 22.1ZM16.4484 10.9486C16.9171 10.4799 16.9171 9.72012 16.4484 9.2515C15.9798 8.78287 15.22 8.78287 14.7514 9.2515L10.7999 13.203L9.24843 11.6515C8.7798 11.1829 8.02 11.1829 7.55137 11.6515C7.08275 12.1201 7.08275 12.8799 7.55137 13.3486L9.95137 15.7486C10.42 16.2172 11.1798 16.2172 11.6484 15.7486L16.4484 10.9486Z"
-                                        fill="#0F9E3F"
-                                      />
-                                    </svg>
                                   </div>
                                 </div>
                               </li>
