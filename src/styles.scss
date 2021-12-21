@@ -368,6 +368,18 @@ body {
   }
   .meeting-list-content-wrapper {
     .meeting-list-content {
+      > h3 {
+        margin: 0 0 0;
+        padding: 12px 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 24px;
+        letter-spacing: -0.01em;
+        color: #000000;
+        text-align: left;
+        border-bottom: 1px solid #dae3e8;
+      }
       .createMeetingbtn {
         width: 100%;
         margin: 12px 0 !important;
