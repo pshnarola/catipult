@@ -46,9 +46,32 @@
 <div class="meeting--title-header">
   <div class="left-div">
     <h2 *ngIf="meetingData">{{ meetingData.meetingName }}</h2>
-    <p>
-      <img src="assets/images/meeting/calendar.svg" />Rhythm Weekly ⋅ Every
-      Monday ⋅ 13:30 - 14:30 PM
+    <p
+      *ngIf="
+        meetingData &&
+        meetingData.meetingFrequency === 'Weekly' &&
+        meetingData.meetingInterval
+      "
+    >
+      <img src="assets/images/meeting/calendar.svg" />{{
+        meetingData.meetingFrequency
+      }}
+      - Every {{ dayOfTheWeek[meetingData.meetingInterval - 1].dayOfWeek }}
+      {{ meetingData.meetingDate | date: "shortTime" }}
+    </p>
+    <p
+      *ngIf="
+        meetingData &&
+        meetingData.meetingFrequency === 'Monthly' &&
+        meetingData.meetingInterval
+      "
+    >
+      <img src="assets/images/meeting/calendar.svg" />{{
+        meetingData.meetingFrequency
+      }}
+      Every {{ dayOfTheMonth[meetingData.meetingInterval - 1].display }} of the
+      Month
+      {{ meetingData.meetingDate | date: "shortTime" }}
     </p>
   </div>
 </div>

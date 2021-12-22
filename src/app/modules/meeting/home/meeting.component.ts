@@ -45,6 +45,9 @@ export class MeetingComponent implements OnInit, OnDestroy {
     toolbarHiddenButtons: [["bold"]]
   };
 
+  dayOfWeek: string = "";
+  dayOfMonth: string = "";
+
   constructor(
     private router: Router,
     private dataService: MeetingDataService,
@@ -637,6 +640,12 @@ export class MeetingComponent implements OnInit, OnDestroy {
           this.meetingEditMeetingInterval = parseInt(meeting.meetingInterval);
           this.meetingEditMeetingId = meeting.meetingId;
           this.meetingEditMeetingAttendees = [];
+
+          if (meeting.meetingFrequency === "Monthly") {
+            this.selectDayOfMonth(parseInt(meeting.meetingInterval));
+          } else if (meeting.meetingFrequency === "Weekly") {
+            this.selectDayOfWeek(parseInt(meeting.meetingInterval));
+          }
           for (const u in data.payload[0].meetingUsers) {
             this.meetingEditMeetingAttendees.push(
               data.payload[0].meetingUsers[u].uID
@@ -794,8 +803,10 @@ export class MeetingComponent implements OnInit, OnDestroy {
   createNewMeeting(): void {
     var body: any = {};
     var attendees: any = [];
+    console.log(this.timerNewArr);
 
-    if (this.meetingNewCustomTimer) {
+    if (this.timerNewArr && this.timerNewArr.length > 0) {
+      this.meetingNewCustomTimer = true;
       this.timerNewArr[0].artifacts = { milestones: true };
     }
 
@@ -831,6 +842,8 @@ export class MeetingComponent implements OnInit, OnDestroy {
             });
             this.modalRef.hide();
             this.clearNewMeetingFields();
+            this.dayOfWeek = "";
+            this.dayOfMonth = "";
           }
         }
       });
@@ -1345,6 +1358,48 @@ export class MeetingComponent implements OnInit, OnDestroy {
       this.custom = true;
       this.completedMeeting = false;
       this.setSubscriptions();
+    }
+  }
+
+  selectFrequency(value, type) {
+    if (type === "edit") {
+      this.meetingEditMeetingFrequency = value;
+      if (this.meetingEditMeetingInterval && value === "Monthly") {
+        this.selectDayOfMonth(this.meetingEditMeetingInterval, type);
+      } else if (this.meetingEditMeetingInterval && value === "Weekly") {
+        this.selectDayOfWeek(this.meetingEditMeetingInterval, type);
+      }
+    } else {
+      this.meetingNewMeetingFrequency = value;
+      if (this.meetingNewMeetingInterval && value === "Monthly") {
+        this.selectDayOfMonth(this.meetingNewMeetingInterval, type);
+      } else if (this.meetingNewMeetingInterval && value === "Weekly") {
+        this.selectDayOfWeek(this.meetingNewMeetingInterval, type);
+      }
+    }
+  }
+
+  selectDayOfWeek(id, type) {
+    if (type === "edit") {
+      let result = this.dayOfTheWeek.find(x => x.id === id);
+      this.dayOfWeek = result.dayOfWeek;
+      this.meetingEditMeetingInterval = id;
+    } else {
+      let result = this.dayOfTheWeek.find(x => x.id === id);
+      this.dayOfWeek = result.dayOfWeek;
+      this.meetingNewMeetingInterval = id;
+    }
+  }
+
+  selectDayOfMonth(id, type) {
+    if (type === "edit") {
+      let result = this.dayOfTheMonth.find(x => x.id === id);
+      this.dayOfMonth = result.dayOfTheMonth;
+      this.meetingEditMeetingInterval = id;
+    } else {
+      let result = this.dayOfTheMonth.find(x => x.id === id);
+      this.dayOfMonth = result.dayOfTheMonth;
+      this.meetingNewMeetingInterval = id;
     }
   }
 }

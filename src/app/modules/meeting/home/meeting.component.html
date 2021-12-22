@@ -669,7 +669,7 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
           <div class="form-group">
             <label class="input-label">Frequency</label>
-            <select
+            <!-- <select
               [(ngModel)]="meetingEditMeetingFrequency"
               name="editMeetingFrequency"
               (selectionChange)="clearMeetingInterval()"
@@ -678,7 +678,30 @@
               <option *ngFor="let f of frequency" [value]="f.value">{{
                 f.viewValue
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ meetingEditMeetingFrequency }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let f of frequency">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectFrequency(f.value, 'edit')"
+                      >{{ f.viewValue }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -687,7 +710,7 @@
         >
           <div class="form-group">
             <label class="input-label">Day of Week</label>
-            <select
+            <!-- <select
               [(ngModel)]="meetingEditMeetingInterval"
               name="editMeetingDayOfWeek"
               class="form-control nform-control"
@@ -695,7 +718,30 @@
               <option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
                 d.dayOfWeek
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ dayOfWeek }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let d of dayOfTheWeek">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectDayOfWeek(d.id, 'edit')"
+                      >{{ d.dayOfWeek }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -704,7 +750,7 @@
         >
           <div class="form-group">
             <label class="input-label">Day of the month</label>
-            <select
+            <!-- <select
               [(ngModel)]="meetingEditMeetingInterval"
               [(ngModel)]="meetingEditMeetingInterval"
               name="editMeetingDayOfMonth"
@@ -713,7 +759,30 @@
               <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
                 d.dayOfTheMonth
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ dayOfMonth }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let d of dayOfTheMonth">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectDayOfMonth(d.id, 'edit')"
+                      >{{ d.dayOfTheMonth }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -827,7 +896,7 @@
             <h2>Participants</h2>
           </div>
           <div>
-            <mat-form-field appearance="fill" style="width:100%;">
+            <!-- <mat-form-field appearance="fill" style="width:100%;">
               <mat-label>Participants</mat-label>
               <mat-select
                 class="form-control"
@@ -842,7 +911,22 @@
                   >{{ u.name }} {{ u.lname }}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
+            <div class="form-group">
+              <!-- <label class="input-label">Participants</label> -->
+              <select
+                [(ngModel)]="meetingEditMeetingAttendees"
+                name="editMeetingAttendees"
+                class="form-control nform-control"
+              >
+                <option
+                  [disabled]="u.uID == uID"
+                  *ngFor="let u of orgUserList"
+                  [value]="u.uID"
+                  >{{ u.name }} {{ u.lname }}</option
+                >
+              </select>
+            </div>
           </div>
         </div>
         <div class="col-md-8">
@@ -856,54 +940,19 @@
           <div>
             <div class="row">
               <div class="col-md-6">
-                <div class="add-agenda-btn" *ngIf="meetingEditCustomTimer">
+                <!-- *ngIf="meetingEditCustomTimer" -->
+                <div class="add-agenda-btn">
                   <a
                     (click)="
-                      addTimer('new', { name: '', duration: 0, display: '' })
+                      addTimer('edit', { name: '', duration: 0, display: '' })
                     "
                     ><i class="fas fa-plus"></i>Add New Agenda</a
                   >
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="custom-agenda">
-                  <p>Custom Agenda</p>
-                  <div
-                    class="row"
-                    [ngClass]="
-                      meetingEditCustomTimer
-                        ? 'isCustomTimer'
-                        : 'isNotCustomTimer'
-                    "
-                    style="border-style:solid;border-width:2px;height:30px;margin-left:0px !important;margin-top:5px;max-width:75px;cursor:pointer;"
-                    (click)="setMeetingEditCustomTimer(null)"
-                  >
-                    <div *ngIf="meetingEditCustomTimer" style="height:100%;">
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="vertical-align:middle;padding-top:2px;color:#337ab7"
-                      ></div>
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="background-color:#337ab7;height:100%;"
-                      ></div>
-                    </div>
-                    <div *ngIf="!meetingEditCustomTimer" style="height:100%;">
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="background-color:#666666;height:100%;"
-                      ></div>
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-
-            <div id="timerDiv" *ngIf="meetingEditCustomTimer">
+            <!-- *ngIf="meetingEditCustomTimer" -->
+            <div id="timerDiv">
               <div
                 class="row align-items-center"
                 *ngFor="let t of timerEditArr; let i = index"
@@ -1001,7 +1050,7 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
           <div class="form-group">
             <label class="input-label">Frequency</label>
-            <select
+            <!-- <select
               name="newMeetingFrequency"
               [(ngModel)]="meetingNewMeetingFrequency"
               class="form-control nform-control"
@@ -1009,7 +1058,30 @@
               <option *ngFor="let f of frequency" [value]="f.value">{{
                 f.viewValue
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ meetingNewMeetingFrequency }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let f of frequency">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectFrequency(f.value, 'add')"
+                      >{{ f.viewValue }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -1018,7 +1090,7 @@
         >
           <div class="form-group">
             <label class="input-label">Day of the week</label>
-            <select
+            <!-- <select
               [(ngModel)]="meetingNewMeetingInterval"
               name="newMeetingDayOfWeek"
               class="form-control nform-control"
@@ -1026,7 +1098,30 @@
               <option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
                 d.dayOfWeek
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ dayOfWeek }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let d of dayOfTheWeek">
+                    <a
+                      class="dropdown-item"
+                      (click)="selectDayOfWeek(d.id, 'add')"
+                      >{{ d.dayOfWeek }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -1044,7 +1139,7 @@
                 d.dayOfTheMonth
               }}</mat-option>
             </mat-select> -->
-            <select
+            <!-- <select
               [(ngModel)]="meetingNewMeetingInterval"
               name="newMeetingDayOfMonth"
               class="form-control nform-control"
@@ -1052,7 +1147,28 @@
               <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
                 d.dayOfTheMonth
               }}</option>
-            </select>
+            </select> -->
+            <div class="dropdown-select">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ dayOfMonth }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let d of dayOfTheMonth">
+                    <a class="dropdown-item" (click)="selectDayOfMonth(d.id)">{{
+                      d.dayOfTheMonth
+                    }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- <input
               class="form-control nform-control"
               [owlDateTimeTrigger]="dt3"
@@ -1175,7 +1291,7 @@
           </div>
           <div>
             <div class="form-group">
-              <label class="input-label">Participants</label>
+              <!-- <label class="input-label">Participants</label> -->
               <select
                 [(ngModel)]="meetingNewMeetingAttendees"
                 name="NewMeetingAttendees"
@@ -1201,7 +1317,8 @@
           <div>
             <div class="row">
               <div class="col-md-6">
-                <div class="add-agenda-btn" *ngIf="meetingNewCustomTimer">
+                <!-- *ngIf="meetingNewCustomTimer" -->
+                <div class="add-agenda-btn">
                   <a
                     (click)="
                       addTimer('new', { name: '', duration: 0, display: '' })
@@ -1210,46 +1327,10 @@
                   >
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="custom-agenda">
-                  <p>Custom Agenda</p>
-                  <div
-                    class="row"
-                    [ngClass]="
-                      meetingNewCustomTimer
-                        ? 'isCustomTimer'
-                        : 'isNotCustomTimer'
-                    "
-                    style="border-style:solid;border-width:2px;height:30px;margin-left:0px !important;margin-top:5px;max-width:75px;cursor:pointer;"
-                    (click)="setMeetingNewCustomTimer()"
-                  >
-                    <div *ngIf="meetingNewCustomTimer" style="height:100%;">
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="vertical-align:middle;padding-top:2px;color:#337ab7"
-                      ></div>
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="background-color:#337ab7;height:100%;"
-                      ></div>
-                    </div>
-                    <div *ngIf="!meetingNewCustomTimer" style="height:100%;">
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="background-color:#666666;height:100%;"
-                      ></div>
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                        style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-
-          <div id="timerDiv" *ngIf="meetingNewCustomTimer">
+          <!-- *ngIf="meetingNewCustomTimer" -->
+          <div id="timerDiv">
             <div
               class="row align-items-center"
               *ngFor="let t of timerNewArr; let i = index"
