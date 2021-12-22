@@ -286,6 +286,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   min-height: calc(100vh - 72px);
+  .meeting-list-item {
+    max-height: calc(100vh - 190px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
   .meeting-left {
     max-width: 320px;
@@ -498,6 +503,25 @@ body {
 
 .agenda-wrapper .col-md-8 {
   border-left: 1px solid #e3eff5;
+  .custom-agenda {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: -6px;
+    justify-content: flex-end;
+    padding-right: 10px;
+    p {
+      margin: 0 10px 0px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 24px;
+      color: #0c6baf;
+      display: inline-block;
+      margin-bottom: 0 !important;
+    }
+  }
 }
 
 .agenda-wrapper .row + .row {
@@ -623,7 +647,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    min-height: calc(100vh - 240px);
+    min-height: calc(100vh - 228px);
     > div:nth-child(2) {
       border-left: 1px solid #e3eff5;
     }
@@ -644,6 +668,8 @@ body {
 }
 .attendee-content {
   padding-bottom: 16px;
+  // min-height: 45%;
+  // max-height: 45%;
   h3 {
     font-style: normal;
     font-weight: 500;
@@ -654,6 +680,8 @@ body {
     margin: 0 0 12px 0;
   }
   .attendee-list {
+    max-height: calc(100vh - 670px);
+    overflow: auto;
     ul {
       margin: 0;
       list-style: none;
@@ -661,6 +689,10 @@ body {
       li {
         display: flex;
         align-items: center;
+        .agenda-info {
+          display: flex;
+          align-items: center;
+        }
         .attendee-img {
           border: 2px solid #ffffff;
           box-sizing: border-box;
@@ -689,6 +721,8 @@ body {
 }
 .agenda-content {
   padding-bottom: 16px;
+  // min-height: 45%;
+  // max-height: 45%;
   h3 {
     font-style: normal;
     font-weight: 500;
@@ -699,6 +733,8 @@ body {
     margin: 0 0 12px 0;
   }
   .agenda-list {
+    max-height: calc(100vh - 670px);
+    overflow: auto;
     ul {
       margin: 0;
       list-style: none;
@@ -791,7 +827,7 @@ body {
   .meeting-start-popup-wrapper {
     position: absolute;
     left: 0;
-    right: -24px;
+    right: -14px;
     top: 0;
     bottom: 0;
     z-index: 1;
@@ -848,6 +884,10 @@ body {
     .agenda-content {
       border-bottom: 1px solid #e3eff5;
       margin-bottom: 14px;
+      .agenda-list {
+        max-height: calc(100vh - 730px);
+        min-height: calc(100vh - 730px);
+      }
     }
     button {
       width: 100%;
@@ -947,6 +987,9 @@ body {
       border-bottom: 1px solid #dae3e8;
     }
     .complete-meeting {
+      max-height: calc(100vh - 142px);
+      overflow-y: auto;
+      overflow-x: hidden;
       .card {
         padding: 20px 15px 20px 26px;
         font-style: normal;
@@ -1001,6 +1044,7 @@ body {
       letter-spacing: -0.01em;
       color: #87919c;
       max-width: 72px;
+      min-width: 72px;
     }
   }
   .form-group {
@@ -1018,6 +1062,16 @@ body {
     height: calc(100vh - 137px);
     display: flex;
     flex-wrap: wrap;
+  }
+  .attendee-content {
+    .attendee-list {
+      max-height: calc(100vh - 610px);
+    }
+  }
+  .agenda-content {
+    .agenda-list {
+      max-height: calc(100vh - 610px);
+    }
   }
   .meeting-summary-title {
     display: flex;
@@ -1093,10 +1147,141 @@ body {
     letter-spacing: -0.01em;
     color: #575757;
     margin: 0;
+    max-height: calc(100vh - 630px);
+    min-height: calc(100vh - 630px);
+    overflow: auto;
   }
   .meeting-conclusion,
   .meeting-notes-wrap {
     padding: 16px 0px;
+  }
+}
+owl-date-time-container {
+  width: auto !important;
+  min-width: 300px !important;
+  background: #ffffff !important;
+  box-shadow: 0px 4px 12px rgb(0 0 0 / 15%) !important;
+  border-radius: 8px;
+  overflow: hidden;
+  owl-date-time-timer {
+    padding: 0 !important;
+    height: 6em !important;
+    owl-date-time-timer-box {
+      margin: 0 10px;
+    }
+    .owl-dt-control-button {
+      font-size: 16px;
+      padding: 5px 0;
+      color: #043750 !important;
+    }
+    label {
+      margin-top: 0px !important;
+    }
+    .owl-dt-timer-input {
+      width: 40px !important;
+      height: 40px !important;
+      padding: 0 !important;
+      font-size: 20px !important;
+      border-color: #043750 !important;
+      color: #043750 !important;
+    }
+    .owl-dt-timer-hour12 {
+      margin: 0 16px 0 5px;
+      .owl-dt-timer-hour12-box {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        font-size: 20px !important;
+        border-color: #043750 !important;
+        color: #043750 !important;
+        margin: 0px 0 0 0 !important;
+        span {
+          color: #043750 !important;
+          font-weight: bold;
+          font-size: 20px;
+          background: transparent !important;
+        }
+        &:hover {
+          color: #043750 !important;
+        }
+      }
+    }
+    .owl-dt-timer-divider {
+      left: -16px;
+      &:before {
+        top: 43%;
+        background: #043750;
+      }
+      &:after {
+        background: #043750;
+      }
+    }
+  }
+  .owl-dt-container-control-button {
+    background: #d4d4d4;
+    margin: 0 !important;
+    border: 0 !important;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+    color: #575757;
+    + .owl-dt-container-control-button {
+      background: #043750;
+      color: #fff;
+    }
+  }
+  owl-date-time-calendar {
+    height: auto !important;
+    .owl-dt-control-period-button {
+      span {
+        background: transparent !important;
+        font-style: normal !important;
+        font-weight: 500 !important;
+        font-size: 16px !important;
+        line-height: 15px !important;
+        color: #0e0e24 !important;
+      }
+    }
+    .owl-dt-calendar-table {
+      .owl-dt-calendar-header {
+        th {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #565c75;
+          font-family: "Montserrat", sans-serif !important;
+          text-align: center;
+        }
+      }
+      .owl-dt-calendar-cell {
+        padding: 2px 0 !important;
+        height: auto !important;
+      }
+      .owl-dt-calendar-cell-content {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px !important;
+        line-height: 15px !important;
+        color: #34364b !important;
+        font-family: "Montserrat", sans-serif !important;
+        position: initial !important;
+        min-height: 32px;
+        &.owl-dt-calendar-cell-today {
+          border-radius: 0;
+          background: #ffffff;
+          border: 1px solid #00a9ff !important;
+          box-sizing: border-box;
+          border-radius: 6px;
+          box-shadow: 0 0 0px 4px #00a9ff40;
+        }
+        &.owl-dt-calendar-cell-out {
+          opacity: 1 !important;
+          color: #a6a9bb !important;
+        }
+      }
+    }
   }
 }
 

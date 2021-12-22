@@ -626,12 +626,13 @@
     </div>
   </div>
 </div>
-<div class="row" *ngIf="completedMeeting">
+<div *ngIf="completedMeeting">
   <app-meeting-archive (activeTab)="getActiveTab($event)"></app-meeting-archive>
 </div>
 
 <ng-template #meetingEdit>
   <div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel">Edit Meeting</h4>
     <button
       type="button"
       class="close"
@@ -641,273 +642,304 @@
     >
       <span aria-hidden="true">×</span>
     </button>
-    <h4 class="modal-title" id="myModalLabel">
-      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
-        <h2>Edit Meeting</h2>
-      </div>
-    </h4>
   </div>
-  <div class="modal-body" style="overflow:auto;">
-    <div class="padding-bottom">
-      <span class="">Name</span>
-      <input
-        id="edit_MeetingName"
-        type="text"
-        class="form-control"
-        placeholder="Executive Leadership Team"
-        name="editMeetingName"
-        [(ngModel)]="meetingEditMeetingName"
-      />
-    </div>
-    <div class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-      <mat-form-field appearance="fill" style="width:100%;">
-        <mat-label>Frequency</mat-label>
-        <mat-select
-          class="form-control"
-          [(ngModel)]="meetingEditMeetingFrequency"
-          name="editMeetingFrequency"
-          (selectionChange)="clearMeetingInterval()"
-        >
-          <mat-option *ngFor="let f of frequency" [value]="f.value">{{
-            f.viewValue
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div
-      class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-      *ngIf="meetingEditMeetingFrequency == 'Weekly'"
-    >
-      <mat-form-field appearance="fill" style="width:100%;">
-        <mat-label>Day of the week</mat-label>
-        <mat-select
-          class="form-control"
-          [(ngModel)]="meetingEditMeetingInterval"
-          name="editMeetingDayOfWeek"
-        >
-          <mat-option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
-            d.dayOfWeek
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div
-      class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-      *ngIf="meetingEditMeetingFrequency == 'Monthly'"
-    >
-      <mat-form-field appearance="fill" style="width:100%;">
-        <mat-label>Day of the month</mat-label>
-        <mat-select
-          class="form-control"
-          [(ngModel)]="meetingEditMeetingInterval"
-          name="editMeetingDayOfMonth"
-        >
-          <mat-option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
-            d.dayOfTheMonth
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div
-      class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-      [ngClass]="{
-        'is-not-visible':
-          meetingEditMeetingFrequency != 'Monthly' &&
-          meetingEditMeetingFrequency != 'Weekly'
-      }"
-    >
-      <div
-        *ngIf="
-          meetingEditMeetingFrequency &&
-          meetingEditMeetingFrequency != 'Monthly' &&
-          meetingEditMeetingFrequency != 'Weekly'
-        "
-      >
-        <mat-form-field appearance="fill" style="width:100%;">
-          <mat-label>Day of the month</mat-label>
-          <mat-select class="form-control" name="editMeetingDayOfMonth">
-          </mat-select>
-        </mat-form-field>
+  <div class="modal-body">
+    <div class="mt-1">
+      <div class="form-group">
+        <!-- <label class="input-label">Name</label> -->
+        <input
+          id="edit_MeetingName"
+          type="text"
+          class="form-control nform-control"
+          placeholder="Meeting Title"
+          name="editMeetingName"
+          [(ngModel)]="meetingEditMeetingName"
+        />
       </div>
     </div>
-    <div
-      class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-      *ngIf="
-        meetingEditMeetingFrequency == 'Monthly' ||
-        meetingEditMeetingFrequency == 'Weekly'
-      "
-    >
-      <span class="">Time</span>
-      <input
-        class="form-control"
-        [owlDateTimeTrigger]="dt4"
-        [owlDateTime]="dt4"
-        [(ngModel)]="meetingEditMeetingDate"
-        id="edit_MeetingTime"
-        name="editMeetingTime"
-        [value]="meetingEditMeetingDate"
-      />
-      <owl-date-time
-        hour12Timer="true"
-        [pickerType]="'timer'"
-        #dt4
-      ></owl-date-time>
-    </div>
-    <div
-      class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-      *ngIf="meetingEditMeetingFrequency == 'Not Recurring'"
-    >
-      <span class="">Time</span>
-      <input
-        class="form-control"
-        [owlDateTimeTrigger]="dt"
-        [owlDateTime]="dt"
-        [(ngModel)]="meetingEditMeetingDate"
-        id="edit_MeetingTime"
-        name="editMeetingTime"
-        [value]="meetingEditMeetingDate"
-      />
-      <owl-date-time hour12Timer="true" #dt></owl-date-time>
-    </div>
-    <div
-      class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-      *ngIf="
-        meetingEditMeetingFrequency == 'Weekly' &&
-        meetingEditMeetingInterval &&
-        meetingEditMeetingDate
-      "
-    >
-      Recurring {{ meetingEditMeetingFrequency }} on
-      {{ dayOfTheWeek[meetingEditMeetingInterval - 1].dayOfWeek }}s at
-      {{ meetingEditMeetingDate | date: "shortTime" }}
-    </div>
-    <div
-      class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-      *ngIf="
-        meetingEditMeetingFrequency == 'Monthly' &&
-        meetingEditMeetingInterval &&
-        meetingEditMeetingDate
-      "
-    >
-      Recurring {{ meetingEditMeetingFrequency }} on the
-      {{ dayOfTheMonth[meetingEditMeetingInterval - 1].display }} at
-      {{ meetingEditMeetingDate | date: "shortTime" }}
-    </div>
-    <div
-      class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-      *ngIf="
-        meetingEditMeetingFrequency == 'Not Recurring' && meetingEditMeetingDate
-      "
-    >
-      Non Recurring meeting on {{ meetingEditMeetingDate | date: "EEEE" }}
-      {{ meetingEditMeetingDate | date: "LLLL" }}
-      {{ meetingEditMeetingDate | date: "dd" }} at
-      {{ meetingEditMeetingDate | date: "shortTime" }}
-    </div>
-    <div class="padding-bottom">
-      <mat-form-field appearance="fill" style="width:100%;">
-        <mat-label>Participants</mat-label>
-        <mat-select
-          class="form-control"
-          [(ngModel)]="meetingEditMeetingAttendees"
-          name="editMeetingAttendees"
-          multiple
-        >
-          <mat-option
-            [disabled]="u.uID == uID"
-            *ngFor="let u of orgUserList"
-            [value]="u.uID"
-            >{{ u.name }} {{ u.lname }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12" style="padding-left:0px;">
-      <p>Custom Agenda</p>
-      <div
-        class="row"
-        [ngClass]="
-          meetingEditCustomTimer ? 'isCustomTimer' : 'isNotCustomTimer'
-        "
-        style="border-style:solid;border-width:2px;height:30px;margin-left:0px !important;margin-top:5px;max-width:75px;cursor:pointer;"
-        (click)="setMeetingEditCustomTimer(null)"
-      >
-        <div *ngIf="meetingEditCustomTimer" style="height:100%;">
-          <div
-            class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-            style="vertical-align:middle;padding-top:2px;color:#337ab7"
-          ></div>
-          <div
-            class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-            style="background-color:#337ab7;height:100%;"
-          ></div>
-        </div>
-        <div *ngIf="!meetingEditCustomTimer" style="height:100%;">
-          <div
-            class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-            style="background-color:#666666;height:100%;"
-          ></div>
-          <div
-            class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-            style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
-          ></div>
+    <hr class="mt-1 mb-1" />
+    <div class="meeting-time">
+      <div class="modal-div-title">
+        <h2>Meeting Time</h2>
+        <div>
+          <h3>Timezone : GMT+00:00</h3>
         </div>
       </div>
-    </div>
-    <div
-      class="col-sm-12 col-md-6 col-lg-9 col-lg-9"
-      *ngIf="meetingEditCustomTimer"
-      id="timerDiv"
-    >
-      <a
-        >Add Agenda Item<i
-          class="fas fa-plus-circle"
-          style="color:green;cursor:pointer;padding-left:5px;"
-          (click)="addTimer('edit', { name: '', duration: 0, display: '0:00' })"
-        ></i
-      ></a>
-      <br />
-      <div class="row" *ngFor="let t of timerEditArr; let i = index">
-        <mat-form-field
-          appearance="fill"
-          class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6"
-          style="font-size:12px;"
-        >
-          <mat-label style="font-size:15px !important;">Agenda Item</mat-label>
-          <input
-            name="editTimerName"
-            matInput
-            placeholder="Name: Item A"
-            style="border-bottom:black;border-bottom-width:1px;border-bottom-style: solid;"
-            [(ngModel)]="timerEditArr[i].name"
-          />
-        </mat-form-field>
-        <mat-form-field
-          appearance="fill"
-          class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5"
-          style="font-size:12px;"
-        >
-          <mat-label style="font-size:15px !important;"
-            >Duration (in minutes)</mat-label
-          >
-          <input
-            name="editTimerDuration"
-            matInput
-            placeholder="Duration: 30"
-            style="border-bottom:black;border-bottom-width:1px;border-bottom-style: solid;"
-            [(ngModel)]="timerEditArr[i].duration"
-            (change)="setTimerDisplay('edit', i)"
-          />
-        </mat-form-field>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+          <div class="form-group">
+            <label class="input-label">Frequency</label>
+            <select
+              [(ngModel)]="meetingEditMeetingFrequency"
+              name="editMeetingFrequency"
+              (selectionChange)="clearMeetingInterval()"
+              class="form-control nform-control"
+            >
+              <option *ngFor="let f of frequency" [value]="f.value">{{
+                f.viewValue
+              }}</option>
+            </select>
+          </div>
+        </div>
         <div
-          class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"
-          style="padding-top:18px;"
+          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Weekly'"
         >
-          <i
-            class="fas fa-times-circle"
-            style="color:red;cursor:pointer"
-            (click)="removeTimer('edit', i)"
-          ></i>
+          <div class="form-group">
+            <label class="input-label">Day of Week</label>
+            <select
+              [(ngModel)]="meetingEditMeetingInterval"
+              name="editMeetingDayOfWeek"
+              class="form-control nform-control"
+            >
+              <option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
+                d.dayOfWeek
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Monthly'"
+        >
+          <div class="form-group">
+            <label class="input-label">Day of the month</label>
+            <select
+              [(ngModel)]="meetingEditMeetingInterval"
+              [(ngModel)]="meetingEditMeetingInterval"
+              name="editMeetingDayOfMonth"
+              class="form-control nform-control"
+            >
+              <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
+                d.dayOfTheMonth
+              }}</option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          [ngClass]="{
+            'is-not-visible':
+              meetingEditMeetingFrequency != 'Monthly' &&
+              meetingEditMeetingFrequency != 'Weekly'
+          }"
+        >
+          <div
+            *ngIf="
+              meetingEditMeetingFrequency &&
+              meetingEditMeetingFrequency != 'Monthly' &&
+              meetingEditMeetingFrequency != 'Weekly'
+            "
+          >
+            <div class="form-group">
+              <label class="input-label">Day of the month</label>
+              <select
+                name="editMeetingDayOfMonth"
+                class="form-control nform-control"
+              >
+              </select>
+            </div>
+          </div>
+        </div>
+        <div
+          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="
+            meetingEditMeetingFrequency == 'Monthly' ||
+            meetingEditMeetingFrequency == 'Weekly'
+          "
+        >
+          <span class="">Time</span>
+          <input
+            class="form-control nform-control"
+            [owlDateTimeTrigger]="dt4"
+            [owlDateTime]="dt4"
+            [(ngModel)]="meetingEditMeetingDate"
+            id="edit_MeetingTime"
+            name="editMeetingTime"
+            [value]="meetingEditMeetingDate"
+          />
+          <owl-date-time
+            hour12Timer="true"
+            [pickerType]="'timer'"
+            #dt4
+          ></owl-date-time>
+        </div>
+        <div
+          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Not Recurring'"
+        >
+          <span class="">Time</span>
+          <input
+            class="form-control nform-control"
+            [owlDateTimeTrigger]="dt"
+            [owlDateTime]="dt"
+            [(ngModel)]="meetingEditMeetingDate"
+            id="edit_MeetingTime"
+            name="editMeetingTime"
+            [value]="meetingEditMeetingDate"
+          />
+          <owl-date-time hour12Timer="true" #dt></owl-date-time>
+        </div>
+        <div
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+          *ngIf="
+            meetingEditMeetingFrequency == 'Weekly' &&
+            meetingEditMeetingInterval &&
+            meetingEditMeetingDate
+          "
+        >
+          Recurring {{ meetingEditMeetingFrequency }} on
+          {{ dayOfTheWeek[meetingEditMeetingInterval - 1].dayOfWeek }}s at
+          {{ meetingEditMeetingDate | date: "shortTime" }}
+        </div>
+        <div
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+          *ngIf="
+            meetingEditMeetingFrequency == 'Monthly' &&
+            meetingEditMeetingInterval &&
+            meetingEditMeetingDate
+          "
+        >
+          Recurring {{ meetingEditMeetingFrequency }} on the
+          {{ dayOfTheMonth[meetingEditMeetingInterval - 1].display }} at
+          {{ meetingEditMeetingDate | date: "shortTime" }}
+        </div>
+        <div
+          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
+          *ngIf="
+            meetingEditMeetingFrequency == 'Not Recurring' &&
+            meetingEditMeetingDate
+          "
+        >
+          Non Recurring meeting on {{ meetingEditMeetingDate | date: "EEEE" }}
+          {{ meetingEditMeetingDate | date: "LLLL" }}
+          {{ meetingEditMeetingDate | date: "dd" }} at
+          {{ meetingEditMeetingDate | date: "shortTime" }}
+        </div>
+      </div>
+    </div>
+    <hr class="mt-1 mb-1" />
+
+    <div class="agenda-wrapper">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="modal-div-title">
+            <h2>Participants</h2>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" style="width:100%;">
+              <mat-label>Participants</mat-label>
+              <mat-select
+                class="form-control"
+                [(ngModel)]="meetingEditMeetingAttendees"
+                name="editMeetingAttendees"
+                multiple
+              >
+                <mat-option
+                  [disabled]="u.uID == uID"
+                  *ngFor="let u of orgUserList"
+                  [value]="u.uID"
+                  >{{ u.name }} {{ u.lname }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="modal-div-title">
+            <h2>Agenda</h2>
+            <div>
+              <h5>Reset to Default</h5>
+            </div>
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="add-agenda-btn" *ngIf="meetingEditCustomTimer">
+                  <a
+                    (click)="
+                      addTimer('new', { name: '', duration: 0, display: '' })
+                    "
+                    ><i class="fas fa-plus"></i>Add New Agenda</a
+                  >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="custom-agenda">
+                  <p>Custom Agenda</p>
+                  <div
+                    class="row"
+                    [ngClass]="
+                      meetingEditCustomTimer
+                        ? 'isCustomTimer'
+                        : 'isNotCustomTimer'
+                    "
+                    style="border-style:solid;border-width:2px;height:30px;margin-left:0px !important;margin-top:5px;max-width:75px;cursor:pointer;"
+                    (click)="setMeetingEditCustomTimer(null)"
+                  >
+                    <div *ngIf="meetingEditCustomTimer" style="height:100%;">
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="vertical-align:middle;padding-top:2px;color:#337ab7"
+                      ></div>
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="background-color:#337ab7;height:100%;"
+                      ></div>
+                    </div>
+                    <div *ngIf="!meetingEditCustomTimer" style="height:100%;">
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="background-color:#666666;height:100%;"
+                      ></div>
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="timerDiv" *ngIf="meetingEditCustomTimer">
+              <div
+                class="row align-items-center"
+                *ngFor="let t of timerEditArr; let i = index"
+              >
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <input
+                      matInput
+                      class="form-control nform-control"
+                      name="editTimerName"
+                      placeholder="Name: Item A"
+                      [(ngModel)]="timerEditArr[i].name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <input
+                      name="editTimerDuration"
+                      class="form-control nform-control"
+                      matInput
+                      placeholder="Duration: 30"
+                      [(ngModel)]="timerEditArr[i].duration"
+                      (change)="setTimerDisplay('edit', i)"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 text-center">
+                  <img
+                    (click)="removeTimer('edit', i)"
+                    src="assets/images/meeting/x.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -951,7 +983,7 @@
           id="new_MeetingName"
           type="text"
           class="form-control nform-control"
-          placeholder="Executive Leadership Team"
+          placeholder="Meeting Title"
           name="newMeetingName"
           [(ngModel)]="meetingNewMeetingName"
         />
@@ -1003,7 +1035,25 @@
         >
           <div class="form-group">
             <label class="input-label">Day of the month</label>
-            <input
+            <!-- <mat-select
+              class="form-control"
+              [(ngModel)]="meetingNewMeetingInterval"
+              name="newMeetingDayOfMonth"
+            >
+              <mat-option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
+                d.dayOfTheMonth
+              }}</mat-option>
+            </mat-select> -->
+            <select
+              [(ngModel)]="meetingNewMeetingInterval"
+              name="newMeetingDayOfMonth"
+              class="form-control nform-control"
+            >
+              <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
+                d.dayOfTheMonth
+              }}</option>
+            </select>
+            <!-- <input
               class="form-control nform-control"
               [owlDateTimeTrigger]="dt3"
               [owlDateTime]="dt3"
@@ -1011,7 +1061,7 @@
               name="newMeetingDayOfMonth"
               [value]="meetingNewMeetingInterval"
             />
-            <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+            <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time> -->
           </div>
         </div>
         <div
@@ -1149,49 +1199,90 @@
             </div>
           </div>
           <div>
-            <div class="add-agenda-btn">
-              <a
-                (click)="
-                  addTimer('new', { name: '', duration: 0, display: '' })
-                "
-                ><i class="fas fa-plus"></i>Add New Agenda</a
-              >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="add-agenda-btn" *ngIf="meetingNewCustomTimer">
+                  <a
+                    (click)="
+                      addTimer('new', { name: '', duration: 0, display: '' })
+                    "
+                    ><i class="fas fa-plus"></i>Add New Agenda</a
+                  >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="custom-agenda">
+                  <p>Custom Agenda</p>
+                  <div
+                    class="row"
+                    [ngClass]="
+                      meetingNewCustomTimer
+                        ? 'isCustomTimer'
+                        : 'isNotCustomTimer'
+                    "
+                    style="border-style:solid;border-width:2px;height:30px;margin-left:0px !important;margin-top:5px;max-width:75px;cursor:pointer;"
+                    (click)="setMeetingNewCustomTimer()"
+                  >
+                    <div *ngIf="meetingNewCustomTimer" style="height:100%;">
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="vertical-align:middle;padding-top:2px;color:#337ab7"
+                      ></div>
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="background-color:#337ab7;height:100%;"
+                      ></div>
+                    </div>
+                    <div *ngIf="!meetingNewCustomTimer" style="height:100%;">
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="background-color:#666666;height:100%;"
+                      ></div>
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                        style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div id="timerDiv">
-              <div
-                class="row align-items-center"
-                *ngFor="let t of timerNewArr; let i = index"
-              >
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <input
-                      name="newTimerName"
-                      class="form-control nform-control"
-                      matInput
-                      placeholder="Name: Item 1"
-                      [(ngModel)]="timerNewArr[i].name"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-5">
-                  <div class="form-group">
-                    <input
-                      type="number"
-                      class="form-control nform-control"
-                      name="newTimerDuration"
-                      matInput
-                      placeholder="Duration: 300"
-                      [(ngModel)]="timerNewArr[i].duration"
-                      (change)="setTimerDisplay('new', i)"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-2 text-center">
-                  <img
-                    (click)="removeTimer('new', i)"
-                    src="assets/images/meeting/x.svg"
+          </div>
+
+          <div id="timerDiv" *ngIf="meetingNewCustomTimer">
+            <div
+              class="row align-items-center"
+              *ngFor="let t of timerNewArr; let i = index"
+            >
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    name="newTimerName"
+                    class="form-control nform-control"
+                    matInput
+                    placeholder="Name: Item 1"
+                    [(ngModel)]="timerNewArr[i].name"
                   />
                 </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control nform-control"
+                    name="newTimerDuration"
+                    matInput
+                    placeholder="Duration: 300"
+                    [(ngModel)]="timerNewArr[i].duration"
+                    (change)="setTimerDisplay('new', i)"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2 text-center">
+                <img
+                  (click)="removeTimer('new', i)"
+                  src="assets/images/meeting/x.svg"
+                />
               </div>
             </div>
           </div>
@@ -1421,14 +1512,18 @@
         <a (click)="incrementMeetingScore('down')">
           <i class="fas fa-minus-circle"></i
         ></a>
-        <input
+        <!-- <input
           type="number"
           class="form-control nform-control"
           placeholder="0"
           name="mtgScoreScore"
           [(ngModel)]="activeMeetingScore"
           disabled
-        />
+          hidden
+        /> -->
+        <div class="form-control nform-control">
+          {{ activeMeetingScore }}
+        </div>
         <a (click)="incrementMeetingScore('up')"
           ><i class="fas fa-plus-circle"></i
         ></a>
