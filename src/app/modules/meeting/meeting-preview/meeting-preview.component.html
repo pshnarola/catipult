@@ -35,9 +35,8 @@
           </svg>
         </button>
         <ul class="dropdown-menu">
-          <li><a href="#">Edit Meeting</a></li>
-          <li><a href="#">Duplicate Meeting</a></li>
-          <li><a href="#" class="red">Delete</a></li>
+          <li (click)="manageMeeting('edit')"><a>Edit Meeting</a></li>
+          <li (click)="manageMeeting('delete')"><a class="red">Delete</a></li>
         </ul>
       </div>
     </div>
@@ -47,9 +46,32 @@
 <div class="meeting--title-header">
   <div class="left-div">
     <h2 *ngIf="meetingData">{{ meetingData.meetingName }}</h2>
-    <p>
-      <img src="assets/images/meeting/calendar.svg" />Rhythm Weekly ⋅ Every
-      Monday ⋅ 13:30 - 14:30 PM
+    <p
+      *ngIf="
+        meetingData &&
+        meetingData.meetingFrequency === 'Weekly' &&
+        meetingData.meetingInterval
+      "
+    >
+      <img src="assets/images/meeting/calendar.svg" />{{
+        meetingData.meetingFrequency
+      }}
+      - Every {{ dayOfTheWeek[meetingData.meetingInterval - 1].dayOfWeek }}
+      {{ meetingData.meetingDate | date: "shortTime" }}
+    </p>
+    <p
+      *ngIf="
+        meetingData &&
+        meetingData.meetingFrequency === 'Monthly' &&
+        meetingData.meetingInterval
+      "
+    >
+      <img src="assets/images/meeting/calendar.svg" />{{
+        meetingData.meetingFrequency
+      }}
+      Every {{ dayOfTheMonth[meetingData.meetingInterval - 1].display }} of the
+      Month
+      {{ meetingData.meetingDate | date: "shortTime" }}
     </p>
   </div>
 </div>
@@ -64,21 +86,23 @@
         <div class="attendee-list" *ngIf="meetingData">
           <ul>
             <li *ngFor="let a of meetingData.meetingUsers; let i = index">
-              <div class="attendee-img"></div>
-              <div class="attendee-name">
-                <a
-                  class="agenda-item"
-                  [ngStyle]="{
-                    color: a.selected == true ? 'red' : '#73879C',
-                    cursor:
-                      meetingData?.displayIssues ||
-                      meetingData?.displayMilestones
-                        ? 'pointer'
-                        : 'auto'
-                  }"
-                  (click)="setSelectedUser(a)"
-                  >{{ a.User.name }} {{ a.User.lname }}</a
-                >
+              <div class="agenda-info">
+                <div class="attendee-img"></div>
+                <div class="attendee-name">
+                  <a
+                    class="agenda-item"
+                    [ngStyle]="{
+                      color: a.selected == true ? 'red' : '#73879C',
+                      cursor:
+                        meetingData?.displayIssues ||
+                        meetingData?.displayMilestones
+                          ? 'pointer'
+                          : 'auto'
+                    }"
+                    (click)="setSelectedUser(a)"
+                    >{{ a.User.name }} {{ a.User.lname }}</a
+                  >
+                </div>
               </div>
             </li>
           </ul>
@@ -90,21 +114,23 @@
         <div class="agenda-list" *ngIf="meetingData && meetingData.timerData">
           <ul>
             <li *ngFor="let t of meetingData.timerData; let i = index">
-              <div class="agenda-img"></div>
-              <div class="agenda-name">
-                <p>
-                  <a class="agenda-item">{{ t.name }} </a>
-                </p>
-                <p>
-                  <a class="agenda-time" *ngIf="t.duration >= 1"
-                    >{{ t.duration }}m</a
-                  >
-                </p>
-                <p>
-                  <a class="agenda-time" *ngIf="t.duration < 1"
-                    >{{ t.duration * 60 }}s</a
-                  >
-                </p>
+              <div class="agenda-info">
+                <div class="agenda-img"></div>
+                <div class="agenda-name">
+                  <p>
+                    <a class="agenda-item">{{ t.name }} </a>
+                  </p>
+                  <p>
+                    <a class="agenda-time" *ngIf="t.duration >= 1"
+                      >{{ t.duration }}m</a
+                    >
+                  </p>
+                  <p>
+                    <a class="agenda-time" *ngIf="t.duration < 1"
+                      >{{ t.duration * 60 }}s</a
+                    >
+                  </p>
+                </div>
               </div>
             </li>
           </ul>
@@ -142,7 +168,8 @@
           *ngIf="
             meetingData &&
             meetingData?.displayKPI &&
-            !meetingData?.displayMilestones && !meetingData?.displayIssues
+            !meetingData?.displayMilestones &&
+            !meetingData?.displayIssues
           "
         >
           <div class="issue-content-wrapper">
@@ -154,7 +181,8 @@
           *ngIf="
             meetingData &&
             meetingData?.displayMilestones &&
-            !meetingData?.displayIssues && !meetingData?.displayKPI
+            !meetingData?.displayIssues &&
+            !meetingData?.displayKPI
           "
         >
           <div class="milestones-content-wrapper">
@@ -176,7 +204,8 @@
           *ngIf="
             meetingData &&
             meetingData?.displayIssues &&
-            !meetingData?.displayMilestones && !meetingData?.displayKPI
+            !meetingData?.displayMilestones &&
+            !meetingData?.displayKPI
           "
         >
           <div class="issue-content-wrapper">
@@ -198,7 +227,6 @@
             ></app-issue>
           </div>
         </div>
-
       </div>
     </div>
   </div>
