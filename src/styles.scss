@@ -822,6 +822,25 @@ body {
   .meeting-main-content {
     > .row {
       min-height: calc(100vh - 138px);
+      > .col-md-3 {
+        display: flex;
+        flex-wrap: wrap;
+        height: calc(100vh - 138px);
+        .meeting-progress-wrap {
+          height: calc(69% - 32px);
+          width: 100%;
+          .agenda-content {
+            height: calc(100% - 179px);
+          }
+          + .attendee-content {
+            height: calc(31% - 31px);
+            width: 100%;
+          }
+          + hr {
+            width: 100%;
+          }
+        }
+      }
     }
   }
   .meeting-start-popup-wrapper {
@@ -885,12 +904,12 @@ body {
       border-bottom: 1px solid #e3eff5;
       margin-bottom: 14px;
       .agenda-list {
-        max-height: calc(100vh - 562px);
+        max-height: 100%;
       }
     }
     + .attendee-content {
       .attendee-list {
-        max-height: calc(100vh - 640px);
+        max-height: 100%;
       }
     }
     button {
@@ -909,16 +928,16 @@ body {
       svg {
         vertical-align: middle;
       }
-      span{
-        &:first-child{
+      span {
+        &:first-child {
           min-width: 50px;
           text-align: left;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           min-width: 30px;
           text-align: center;
         }
-        &:last-child{
+        &:last-child {
           min-width: 50px;
           text-align: right;
         }
