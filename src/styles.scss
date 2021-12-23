@@ -396,7 +396,8 @@ body {
         border-radius: 0;
         background: #fff !important;
         box-shadow: none !important;
-        border: 0;
+        border-bottom: 1px solid #e3eff5;
+        cursor: pointer;
         &.active {
           background: #f1faff !important;
           box-shadow: inset 4px 0px 0px #00a9ff !important;
