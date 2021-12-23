@@ -680,7 +680,6 @@ body {
     margin: 0 0 12px 0;
   }
   .attendee-list {
-    max-height: calc(100vh - 555px);
     overflow: auto;
     ul {
       margin: 0;
@@ -733,7 +732,6 @@ body {
     margin: 0 0 12px 0;
   }
   .agenda-list {
-    max-height: calc(100vh - 555px);
     overflow: auto;
     ul {
       margin: 0;
@@ -822,6 +820,40 @@ body {
   .meeting-main-content {
     > .row {
       min-height: calc(100vh - 138px);
+      > .col-md-3 {
+        height: calc(100vh - 138px);
+        .meeting-progress-wrap {
+          height: calc(69% - 32px);
+          width: 100%;
+          .agenda-content {
+            height: calc(100% - 179px);
+          }
+          + .attendee-content {
+            height: calc(31% - 31px);
+            width: 100%;
+            + hr {
+              display: none;
+            }
+          }
+        }
+        .start-metting-box {
+          height: 20%;
+          + .attendee-content {
+            height: 36.5%;
+            .attendee-list {
+              max-height: calc(100% - 34px);
+            }
+            + hr {
+              + .agenda-content {
+                height: 36.5%;
+                .agenda-list {
+                  max-height: calc(100% - 34px);
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
   .meeting-start-popup-wrapper {
@@ -885,12 +917,12 @@ body {
       border-bottom: 1px solid #e3eff5;
       margin-bottom: 14px;
       .agenda-list {
-        max-height: calc(100vh - 562px);
+        max-height: 100%;
       }
     }
     + .attendee-content {
       .attendee-list {
-        max-height: calc(100vh - 640px);
+        max-height: 100%;
       }
     }
     button {
@@ -909,16 +941,16 @@ body {
       svg {
         vertical-align: middle;
       }
-      span{
-        &:first-child{
+      span {
+        &:first-child {
           min-width: 50px;
           text-align: left;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           min-width: 30px;
           text-align: center;
         }
-        &:last-child{
+        &:last-child {
           min-width: 50px;
           text-align: right;
         }
@@ -1081,16 +1113,6 @@ body {
     display: flex;
     flex-wrap: wrap;
   }
-  .attendee-content {
-    .attendee-list {
-      max-height: calc(100vh - 520px);
-    }
-  }
-  .agenda-content {
-    .agenda-list {
-      max-height: calc(100vh - 520px);
-    }
-  }
   .meeting-summary-title {
     display: flex;
     flex-wrap: wrap;
@@ -1165,8 +1187,6 @@ body {
     letter-spacing: -0.01em;
     color: #575757;
     margin: 0;
-    max-height: calc(100vh - 550px);
-    min-height: calc(100vh - 550px);
     overflow: auto;
   }
   .meeting-conclusion,
@@ -1297,6 +1317,69 @@ owl-date-time-container {
         &.owl-dt-calendar-cell-out {
           opacity: 1 !important;
           color: #a6a9bb !important;
+        }
+      }
+    }
+  }
+}
+.meeting-preview-screen {
+  height: calc(100vh - 228px);
+  .attendee-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .attendee-list {
+      height: calc(100% - 32px);
+    }
+  }
+  .agenda-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .agenda-list {
+      height: calc(100% - 32px);
+    }
+  }
+}
+.meeting-summary-list-screen {
+  height: calc(100vh - 137px);
+  .attendee-content {
+    height: 100%;
+    max-height: calc(50% - 28px);
+    padding-bottom: 0;
+    .attendee-list {
+      height: calc(100% - 32px);
+    }
+  }
+  .agenda-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .agenda-list {
+      height: calc(100% - 32px);
+    }
+  }
+}
+.meeting-summary-detail-screen {
+  height: calc(100vh - 137px);
+  .about-meeting {
+    height: 100%;
+    .meeting-conclusion {
+      height: 100%;
+      max-height: calc(50% - 32px);
+      .form-group {
+        height: 100%;
+        p {
+          height: 100%;
+          max-height: calc(100% - 28px);
+        }
+      }
+    }
+    .meeting-notes-wrap {
+      height: 100%;
+      max-height: calc(50% - 32px);
+      .form-group {
+        height: 100%;
+        p {
+          height: 100%;
+          max-height: calc(100% - 28px);
         }
       }
     }

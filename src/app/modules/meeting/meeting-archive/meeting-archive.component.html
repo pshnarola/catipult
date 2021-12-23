@@ -167,7 +167,10 @@
                 /></a>
               </div>
             </div>
-            <div class="create-meeting-content" *ngIf="meetingHistoryData && meetingHistoryData.length <= 0">
+            <div
+              class="create-meeting-content"
+              *ngIf="meetingHistoryData && meetingHistoryData.length <= 0"
+            >
               <div>
                 <h1>No completed meetings</h1>
                 <p>Once you finish your first meeting, it will appear here!</p>
@@ -175,7 +178,11 @@
             </div>
             <div
               class="meeting-list-content-wrapper"
-              *ngIf="displayMeetingHistory && meetingHistoryData && meetingHistoryData.length > 0"
+              *ngIf="
+                displayMeetingHistory &&
+                meetingHistoryData &&
+                meetingHistoryData.length > 0
+              "
             >
               <div class="meeting-list-content">
                 <h3>Completed Meeting</h3>
@@ -296,7 +303,7 @@
                     </div>
                     <hr class="mt-0 mb-0 ml--10" />
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-5 meeting-summary-list-screen">
                         <div class="attendee-content mt-1">
                           <h3>
                             Attendee List
@@ -354,7 +361,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-7">
+                      <div class="col-md-7 meeting-summary-detail-screen">
                         <div class="about-meeting">
                           <div class="meeting-score">
                             <h3>Meeting Score:</h3>
