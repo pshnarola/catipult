@@ -994,20 +994,17 @@
     </div>
   </div>
   <div class="modal-footer">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="">
-          <button
-            type="submit"
-            data-dismiss="modal"
-            class="btn btn-primary"
-            (click)="updateMeetingData()"
-          >
-            <b>Save</b>
-          </button>
-        </div>
-      </div>
-    </div>
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide();">
+      <b>Cancel</b>
+    </button>
+    <button
+      type="submit"
+      data-dismiss="modal"
+      class="btn btn-primary"
+      (click)="updateMeetingData()"
+    >
+      <b>Save</b>
+    </button>
   </div>
 </ng-template>
 
@@ -1372,7 +1369,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-secondary">
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide(); clearNewMeetingFields()">
       <b>Cancel</b>
     </button>
     <button
