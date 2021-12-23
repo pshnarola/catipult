@@ -642,9 +642,9 @@ export class MeetingComponent implements OnInit, OnDestroy {
           this.meetingEditMeetingAttendees = [];
 
           if (meeting.meetingFrequency === "Monthly") {
-            this.selectDayOfMonth(parseInt(meeting.meetingInterval));
+            this.selectDayOfMonth(parseInt(meeting.meetingInterval), 'edit');
           } else if (meeting.meetingFrequency === "Weekly") {
-            this.selectDayOfWeek(parseInt(meeting.meetingInterval));
+            this.selectDayOfWeek(parseInt(meeting.meetingInterval), 'edit');
           }
           for (const u in data.payload[0].meetingUsers) {
             this.meetingEditMeetingAttendees.push(
