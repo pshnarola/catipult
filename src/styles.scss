@@ -885,8 +885,12 @@ body {
       border-bottom: 1px solid #e3eff5;
       margin-bottom: 14px;
       .agenda-list {
-        max-height: calc(100vh - 730px);
-        min-height: calc(100vh - 730px);
+        max-height: calc(100vh - 562px);
+      }
+    }
+    + .attendee-content {
+      .attendee-list {
+        max-height: calc(100vh - 640px);
       }
     }
     button {
@@ -904,6 +908,20 @@ body {
       color: #575757;
       svg {
         vertical-align: middle;
+      }
+      span{
+        &:first-child{
+          min-width: 50px;
+          text-align: left;
+        }
+        &:nth-child(2){
+          min-width: 30px;
+          text-align: center;
+        }
+        &:last-child{
+          min-width: 50px;
+          text-align: right;
+        }
       }
     }
     .check-circle {
@@ -1065,12 +1083,12 @@ body {
   }
   .attendee-content {
     .attendee-list {
-      max-height: calc(100vh - 610px);
+      max-height: calc(100vh - 520px);
     }
   }
   .agenda-content {
     .agenda-list {
-      max-height: calc(100vh - 610px);
+      max-height: calc(100vh - 520px);
     }
   }
   .meeting-summary-title {
@@ -1147,8 +1165,8 @@ body {
     letter-spacing: -0.01em;
     color: #575757;
     margin: 0;
-    max-height: calc(100vh - 630px);
-    min-height: calc(100vh - 630px);
+    max-height: calc(100vh - 550px);
+    min-height: calc(100vh - 550px);
     overflow: auto;
   }
   .meeting-conclusion,
