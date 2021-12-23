@@ -338,7 +338,8 @@ export class MeetingDataService implements OnDestroy{
           meetingName: response.payload[d].meetingName,
           meetingFrequency: response.payload[d].meetingFrequency,
           isActive: !response.payload[d].deactivationDate ? true : false,
-          meetingHistory: response.payload[d].meetingHistories
+          meetingHistory: response.payload[d].meetingHistories,
+          deactivationDate:response.payload[d].deactivationDate
         })
       }
       this.getMeetingHistoryDataSource.next(data);

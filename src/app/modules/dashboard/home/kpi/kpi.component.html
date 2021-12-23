@@ -4,12 +4,26 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-            <h2 style="color: #73879C !important;">Your Scorecard for {{ driverName }}</h2>
+            <h2 style="color: #73879C !important;">
+              Your Scorecard for {{ driverName }}
+            </h2>
           </div>
-          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1" style="padding-top:5px;">
-            <a class="nav navbar-center" style="color:green;cursor:pointer;" *ngIf="driverName != 'You' && isUserSharingAccess" (click)="showModal(editShareKpi, 'modal-sm')"><strong>SHARING</strong></a>
+          <div
+            class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1"
+            style="padding-top:5px;"
+          >
+            <a
+              class="nav navbar-center"
+              style="color:green;cursor:pointer;"
+              *ngIf="driverName != 'You' && isUserSharingAccess"
+              (click)="showModal(editShareKpi, 'modal-sm')"
+              ><strong>SHARING</strong></a
+            >
           </div>
-          <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5" style='padding-right:0px;'>
+          <div
+            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5"
+            style="padding-right:0px;"
+          >
             <ul class="nav navbar-right panel_toolbox ctoolbox">
               <li>
                 <a
@@ -50,8 +64,11 @@
         </div>
       </div>
     </div>
-    <div style='margin-bottom:25px;'>
-      <a style='margin-left:5px; color:#73879C;'>What do we have to achieve and on what frequency to hit our objective?</a>
+    <div style="margin-bottom:25px;">
+      <a style="margin-left:5px; color:#73879C;"
+        >What do we have to achieve and on what frequency to hit our
+        objective?</a
+      >
     </div>
     <div class="table-responsive">
       <table
@@ -95,7 +112,11 @@
                 }}</strong></a
               >
             </td>
-            <td><a [class.font-red]="item.achieveQty<item.qty">{{ item.objective }}</a></td>
+            <td>
+              <a [class.font-red]="item.achieveQty < item.qty">{{
+                item.objective
+              }}</a>
+            </td>
             <td>{{ item.qty | number }}</td>
             <td>{{ item.unit }}</td>
             <td>{{ item.achieveQty | number }}</td>
@@ -278,18 +299,52 @@
         />
       </div>
     </div>
-    <p *ngIf="userRole === 'admin' && driverName != 'You'" style="text-align:left;">
+    <p
+      *ngIf="userRole === 'admin' && driverName != 'You'"
+      style="text-align:left;"
+    >
       Corporate KPI
-      <a style="padding-left:10px;"><i class="fas fa-info-circle" style="color:#666666" mat-raised-button matTooltip="Corporate KPIs can be seen from the dashboard of all employees in an organization." matTooltipClass="toolTip" aria-label="Button that displays a tooltip when focused or hovered over"></i></a>
+      <a style="padding-left:10px;"
+        ><i
+          class="fas fa-info-circle"
+          style="color:#666666"
+          mat-raised-button
+          matTooltip="Corporate KPIs can be seen from the dashboard of all employees in an organization."
+          matTooltipClass="toolTip"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+        ></i
+      ></a>
     </p>
-    <div *ngIf="userRole === 'admin' && driverName != 'You'" class="row" [ngClass]="editKpiIsCorporate ? 'isCorporate' : 'isNotCorporate'" style="border-style:solid;border-width:2px;height:30px;width:80px;margin-left:10px;margin-bottom:10px;margin-top:5px;" (click)="setKpiCorporateEdit()">
+    <div
+      *ngIf="userRole === 'admin' && driverName != 'You'"
+      class="row"
+      [ngClass]="editKpiIsCorporate ? 'isCorporate' : 'isNotCorporate'"
+      style="border-style:solid;border-width:2px;height:30px;width:80px;margin-left:10px;margin-bottom:10px;margin-top:5px;"
+      (click)="setKpiCorporateEdit()"
+    >
       <div *ngIf="editKpiIsCorporate" style="height:100%;">
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-8" style="vertical-align:middle;padding-top:2px;color:#337ab7">Yes</div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-4" style="background-color:#337ab7;height:100%;"></div>
+        <div
+          class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-8"
+          style="vertical-align:middle;padding-top:2px;color:#337ab7"
+        >
+          Yes
+        </div>
+        <div
+          class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-4"
+          style="background-color:#337ab7;height:100%;"
+        ></div>
       </div>
       <div *ngIf="!editKpiIsCorporate" style="height:100%;">
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-4" style="background-color:#666666;height:100%;"></div>
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-8" style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;">No</div>
+        <div
+          class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-4"
+          style="background-color:#666666;height:100%;"
+        ></div>
+        <div
+          class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-lg-8"
+          style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
+        >
+          No
+        </div>
       </div>
     </div>
   </div>
@@ -297,10 +352,21 @@
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="">
-          <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updateKpiData()">
+          <button
+            type="submit"
+            data-dismiss="modal"
+            class="btn btn-primary"
+            (click)="updateKpiData()"
+          >
             <b>Save</b>
           </button>
-          <button type="submit" data-dismiss="modal" class="btn btn-danger" style="margin-left:0px !important;" (click)="modalRef.hide(); showModal(deleteKpiTemplate, 'modal-sm')">
+          <button
+            type="submit"
+            data-dismiss="modal"
+            class="btn btn-danger"
+            style="margin-left:0px !important;"
+            (click)="modalRef.hide(); showModal(deleteKpiTemplate, 'modal-sm')"
+          >
             <b>Delete</b>
           </button>
         </div>
