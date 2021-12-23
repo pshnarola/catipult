@@ -167,7 +167,7 @@
                 /></a>
               </div>
             </div>
-            <div class="create-meeting-content" *ngIf="!displayMeetingHistory">
+            <div class="create-meeting-content" *ngIf="meetingHistoryData && meetingHistoryData.length <= 0">
               <div>
                 <h1>No completed meetings</h1>
                 <p>Once you finish your first meeting, it will appear here!</p>
@@ -175,7 +175,7 @@
             </div>
             <div
               class="meeting-list-content-wrapper"
-              *ngIf="displayMeetingHistory"
+              *ngIf="displayMeetingHistory && meetingHistoryData && meetingHistoryData.length > 0"
             >
               <div class="meeting-list-content">
                 <h3>Completed Meeting</h3>
