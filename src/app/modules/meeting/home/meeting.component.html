@@ -120,6 +120,38 @@
                             m.meetingDate | date: "shortTime"
                           }}</mat-card-subtitle
                         >
+                        <div class="meeting-attendee">
+                          <div class="icon-wrap">
+                            <img src="assets/images/meeting/attendee.svg" />
+                          </div>
+                          <div class="attendees">
+                            <h6>6 Attendee:</h6>
+                            <ul>
+                              <li>
+                                <div class="attendee-profile">
+                                  <img
+                                    src="http://localhost:4200/assets/img.jpg"
+                                  />
+                                </div>
+                              </li>
+                              <li>
+                                <div class="attendee-profile">
+                                  <img
+                                    src="http://localhost:4200/assets/img.jpg"
+                                  />
+                                </div>
+                              </li>
+                              <li>
+                                <div class="attendee-profile">
+                                  <img
+                                    src="http://localhost:4200/assets/img.jpg"
+                                  />
+                                </div>
+                              </li>
+                              <li>+1 More</li>
+                            </ul>
+                          </div>
+                        </div>
                       </mat-card-header>
                     </mat-card>
                   </div>
@@ -994,7 +1026,12 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide();">
+    <button
+      type="submit"
+      data-dismiss="modal"
+      class="btn btn-secondary"
+      (click)="modalRef.hide()"
+    >
       <b>Cancel</b>
     </button>
     <button
@@ -1369,7 +1406,12 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide(); clearNewMeetingFields()">
+    <button
+      type="submit"
+      data-dismiss="modal"
+      class="btn btn-secondary"
+      (click)="modalRef.hide(); clearNewMeetingFields()"
+    >
       <b>Cancel</b>
     </button>
     <button
