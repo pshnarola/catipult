@@ -396,7 +396,8 @@ body {
         border-radius: 0;
         background: #fff !important;
         box-shadow: none !important;
-        border: 0;
+        border-bottom: 1px solid #e3eff5;
+        cursor: pointer;
         &.active {
           background: #f1faff !important;
           box-shadow: inset 4px 0px 0px #00a9ff !important;
@@ -438,6 +439,54 @@ body {
               }
               + .mat-card-subtitle {
                 margin-top: 17px;
+              }
+            }
+          }
+          .meeting-attendee {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            .icon-wrap {
+              margin: -2px 10px 0 0;
+            }
+            .attendees {
+              h6 {
+                margin: 0;
+                font-style: normal;
+                font-weight: 500 !important;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: -0.01em;
+                color: #0a1015;
+                margin-bottom: 4px;
+              }
+              ul {
+                padding: 0;
+                list-style: none;
+                display: flex;
+                margin: 0;
+                align-items: center;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 20px;
+                letter-spacing: -0.01em;
+                color: #0071c4;
+
+                .attendee-profile {
+                  border: 2px solid #ffffff;
+                  box-sizing: border-box;
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 100px;
+                  overflow: hidden;
+                  img {
+                    width: 100%;
+                  }
+                }
+                li {
+                  margin-right: 4px;
+                }
               }
             }
           }
