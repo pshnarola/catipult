@@ -1196,7 +1196,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let d of dayOfTheMonth">
-                    <a class="dropdown-item" (click)="selectDayOfMonth(d.id)">{{
+                    <a class="dropdown-item" (click)="selectDayOfMonth(d.id, 'add')">{{
                       d.dayOfTheMonth
                     }}</a>
                   </div>
