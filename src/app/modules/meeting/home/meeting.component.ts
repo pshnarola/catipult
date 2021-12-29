@@ -4,7 +4,9 @@ import {
   TemplateRef,
   OnDestroy,
   ViewChild,
-  ElementRef
+  ElementRef,
+  AfterViewInit,
+  ViewChildren
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormGroup, FormArray, FormBuilder } from "@angular/forms";
@@ -23,6 +25,8 @@ import { DataServiceService } from "src/app/modules/dashboard/services/data-serv
 import { IssueDataService } from "../../issue/data.service";
 
 import * as notification from "src/app/shared/libraries/exports.library";
+import { RESOURCE_CACHE_PROVIDER } from "@angular/platform-browser-dynamic";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-meeting",
@@ -31,7 +35,7 @@ import * as notification from "src/app/shared/libraries/exports.library";
 })
 export class MeetingComponent implements OnInit, OnDestroy {
   @ViewChild("meetingEdit", { static: true }) meetingEdit: TemplateRef<any>;
-
+  @ViewChild('auto', {static:true}) auto:ElementRef<HTMLInputElement>;
   modalRef: BsModalRef;
   config: AngularEditorConfig = {
     editable: true,
@@ -47,6 +51,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
 
   dayOfWeek: string = "";
   dayOfMonth: string = "";
+  keyword = 'name';
 
   constructor(
     private router: Router,
@@ -109,7 +114,9 @@ export class MeetingComponent implements OnInit, OnDestroy {
 
   meetingData: any;
   meetingHistoryData: any;
-  orgUserList: any;
+  orgUserList: any = [];
+  suggestOrgUserList: any = [];
+  selectedParticipants: any = [];
   userMeetingData: any;
   issueData: any = [];
   issueDataFiltered: any;
@@ -132,6 +139,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
   meetingNewMeetingTime: String;
   meetingNewMeetingFrequency: String;
   meetingNewMeetingAttendees: any = [this.uID];
+  AutoSuggestParticipant:any;
   meetingNewMeetingInterval: number;
 
   activeMeetingAttendeeList: any;
@@ -258,8 +266,18 @@ export class MeetingComponent implements OnInit, OnDestroy {
 
   setSubscriptions(): void {
     this.orgUserListSubscription = this.dataService.getOrganizationUserListData.subscribe(
-      data => {
+      (data:any) => {
         this.orgUserList = data;
+        this.selectedParticipants = [];
+        this.suggestOrgUserList = [];
+        console.log(': ===> 1', 1);
+        data.map(res => {
+          console.log(': ===> 1', this.selectedParticipants);
+          if(res.uID === this.uID){
+            this.selectedParticipants.push({uID: res.uID, name:`${res.name} ${res.lname}`});
+          }
+          this.suggestOrgUserList.push({uID: res.uID, name:`${res.name} ${res.lname}`});
+        });
       }
     );
 
@@ -641,6 +659,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
           this.meetingEditMeetingId = meeting.meetingId;
           this.meetingEditMeetingAttendees = [];
 
+
           if (meeting.meetingFrequency === "Monthly") {
             this.selectDayOfMonth(parseInt(meeting.meetingInterval), 'edit');
           } else if (meeting.meetingFrequency === "Weekly") {
@@ -655,9 +674,22 @@ export class MeetingComponent implements OnInit, OnDestroy {
             ? (this.meetingEditCustomTimer = true)
             : false;
           this.timerEditArr = meeting.timerData;
+
+          this.getEditParticipant();
         }
       })
     );
+  }
+
+  getEditParticipant() {
+    this.selectedParticipants = [];
+    this.meetingEditMeetingAttendees.map(id => {
+      this.orgUserList.map(res => {
+        if(res.uID === id){
+          this.selectedParticipants.push({uID: res.uID, name:`${res.name} ${res.lname}`});
+        }
+      });
+    })
   }
 
   showModal(template: TemplateRef<any>, cls: any) {
@@ -818,6 +850,8 @@ export class MeetingComponent implements OnInit, OnDestroy {
       uID: this.uID,
       timerData: this.meetingNewCustomTimer ? this.timerNewArr : this.timers
     };
+
+    console.log(': ===> ', this.meetingNewMeetingAttendees);
 
     this.postUserMeetingSubscription = this.dataService.postUserMeetingData
       .pipe(take(1))
@@ -1008,10 +1042,26 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.meetingNewMeetingName = null;
     this.meetingNewMeetingFrequency = null;
     this.meetingNewMeetingDate = null;
+    this.selectedParticipants = [];
     this.meetingNewMeetingAttendees = [this.uID];
     this.meetingNewMeetingInterval = null;
     this.meetingNewCustomTimer = false;
     this.timerNewArr = [];
+    setTimeout(() => {
+      this.setSubscriptions(); 
+    }, 1000);
+  }
+
+  clearEditMeetingFields():void {
+    this.meetingEditMeetingName = null;
+    this.selectedParticipants = [];
+    this.meetingEditMeetingDate = null;
+    this.meetingEditMeetingFrequency = null;
+    this.meetingEditMeetingAttendees = [];
+    this.meetingEditMeetingInterval = null;
+    this.meetingEditCustomTimer = false;
+    this.setSubscriptions();
+
   }
 
   clearMeetingInterval(): void {
@@ -1402,6 +1452,41 @@ export class MeetingComponent implements OnInit, OnDestroy {
       this.meetingNewMeetingInterval = id;
     }
   }
+
+  onSelect(selected,type){
+    if(type === 'add') {
+      if(!this.meetingNewMeetingAttendees.includes(selected.item.uID)) {
+        this.meetingNewMeetingAttendees.push(selected.item.uID);
+        this.selectedParticipants.push(selected.item);
+      }
+      this.AutoSuggestParticipant = "";
+    } 
+
+    if(type === 'edit') {
+      console.log(': ===> selected.item.uID', selected.item.uID);
+      if(!this.meetingEditMeetingAttendees.includes(selected.item.uID)) {
+        this.meetingEditMeetingAttendees.push(selected.item.uID);
+        this.selectedParticipants.push(selected.item);
+      }
+      this.AutoSuggestParticipant = "";
+    }
+    
+  }
+
+  removeParticipant(uID, type) {
+    if(type === 'add') {
+      this.meetingNewMeetingAttendees = this.meetingNewMeetingAttendees.filter(item => item !== uID);
+    this.selectedParticipants = this.selectedParticipants.filter(item => item.uID !== uID);
+    }
+
+    if(type === 'edit') {
+      this.meetingEditMeetingAttendees = this.meetingEditMeetingAttendees.filter(item => item !== uID);
+      this.selectedParticipants = this.selectedParticipants.filter(item => item.uID !== uID);
+    }
+    
+  }
+  
+
 }
 
 export interface RecurringFrequency {

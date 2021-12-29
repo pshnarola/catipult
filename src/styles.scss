@@ -319,6 +319,7 @@ a {
           padding: 12px 10px;
           text-align: center;
           position: relative;
+          white-space: nowrap;
 
           &.active {
             color: #000000;
@@ -395,7 +396,8 @@ a {
         border-radius: 0;
         background: #fff !important;
         box-shadow: none !important;
-        border: 0;
+        border-bottom: 1px solid #e3eff5;
+        cursor: pointer;
         &.active {
           background: #f1faff !important;
           box-shadow: inset 4px 0px 0px #00a9ff !important;
@@ -437,6 +439,54 @@ a {
               }
               + .mat-card-subtitle {
                 margin-top: 17px;
+              }
+            }
+          }
+          .meeting-attendee {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            .icon-wrap {
+              margin: -2px 10px 0 0;
+            }
+            .attendees {
+              h6 {
+                margin: 0;
+                font-style: normal;
+                font-weight: 500 !important;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: -0.01em;
+                color: #0a1015;
+                margin-bottom: 4px;
+              }
+              ul {
+                padding: 0;
+                list-style: none;
+                display: flex;
+                margin: 0;
+                align-items: center;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 20px;
+                letter-spacing: -0.01em;
+                color: #0071c4;
+
+                .attendee-profile {
+                  border: 2px solid #ffffff;
+                  box-sizing: border-box;
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 100px;
+                  overflow: hidden;
+                  img {
+                    width: 100%;
+                  }
+                }
+                li {
+                  margin-right: 4px;
+                }
               }
             }
           }
@@ -499,6 +549,65 @@ a {
 .agenda-wrapper .row {
   display: flex;
 }
+
+.agenda-wrapper .row .col-md-4 {
+  typeahead-container ul.dropdown-menu {
+    position: relative;
+    max-height: 200px;
+  }
+  .participants-list {
+    width: auto !important;
+  }
+  .attendee-list {
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 196px;
+    margin-top: 5px;
+    ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+      li {
+        justify-content: space-between;
+        padding-right: 5px;
+        display: flex;
+        align-items: center;
+        .xBtn{
+          cursor: pointer;
+        }
+        .agenda-info {
+          display: flex;
+          align-items: center;
+        }
+        .attendee-img {
+          border: 2px solid #ffffff;
+          box-sizing: border-box;
+          width: 32px;
+          height: 32px;
+          background: #cdc8c8;
+          border-radius: 100px;
+          margin-right: 8px;
+          min-width: 32px;
+        }
+        .attendee-name {
+          a {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            color: #000000 !important;
+          }
+        }
+        + li {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+
 
 .agenda-wrapper .col-md-8 {
   border-left: 1px solid #e3eff5;
@@ -679,7 +788,6 @@ a {
     margin: 0 0 12px 0;
   }
   .attendee-list {
-    max-height: calc(100vh - 555px);
     overflow: auto;
     ul {
       margin: 0;
@@ -732,7 +840,6 @@ a {
     margin: 0 0 12px 0;
   }
   .agenda-list {
-    max-height: calc(100vh - 555px);
     overflow: auto;
     ul {
       margin: 0;
@@ -821,6 +928,40 @@ a {
   .meeting-main-content {
     > .row {
       min-height: calc(100vh - 138px);
+      > .col-md-3 {
+        height: calc(100vh - 138px);
+        .meeting-progress-wrap {
+          height: calc(69% - 32px);
+          width: 100%;
+          .agenda-content {
+            height: calc(100% - 179px);
+          }
+          + .attendee-content {
+            height: calc(31% - 31px);
+            width: 100%;
+            + hr {
+              display: none;
+            }
+          }
+        }
+        .start-metting-box {
+          height: 20%;
+          + .attendee-content {
+            height: 36.5%;
+            .attendee-list {
+              max-height: calc(100% - 34px);
+            }
+            + hr {
+              + .agenda-content {
+                height: 36.5%;
+                .agenda-list {
+                  max-height: calc(100% - 34px);
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
   .meeting-start-popup-wrapper {
@@ -884,12 +1025,12 @@ a {
       border-bottom: 1px solid #e3eff5;
       margin-bottom: 14px;
       .agenda-list {
-        max-height: calc(100vh - 562px);
+        max-height: 100%;
       }
     }
     + .attendee-content {
       .attendee-list {
-        max-height: calc(100vh - 640px);
+        max-height: 100%;
       }
     }
     button {
@@ -1080,16 +1221,6 @@ a {
     display: flex;
     flex-wrap: wrap;
   }
-  .attendee-content {
-    .attendee-list {
-      max-height: calc(100vh - 520px);
-    }
-  }
-  .agenda-content {
-    .agenda-list {
-      max-height: calc(100vh - 520px);
-    }
-  }
   .meeting-summary-title {
     display: flex;
     flex-wrap: wrap;
@@ -1164,8 +1295,6 @@ a {
     letter-spacing: -0.01em;
     color: #575757;
     margin: 0;
-    max-height: calc(100vh - 550px);
-    min-height: calc(100vh - 550px);
     overflow: auto;
   }
   .meeting-conclusion,
@@ -1296,6 +1425,69 @@ owl-date-time-container {
         &.owl-dt-calendar-cell-out {
           opacity: 1 !important;
           color: #a6a9bb !important;
+        }
+      }
+    }
+  }
+}
+.meeting-preview-screen {
+  height: calc(100vh - 228px);
+  .attendee-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .attendee-list {
+      height: calc(100% - 32px);
+    }
+  }
+  .agenda-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .agenda-list {
+      height: calc(100% - 32px);
+    }
+  }
+}
+.meeting-summary-list-screen {
+  height: calc(100vh - 137px);
+  .attendee-content {
+    height: 100%;
+    max-height: calc(50% - 28px);
+    padding-bottom: 0;
+    .attendee-list {
+      height: calc(100% - 32px);
+    }
+  }
+  .agenda-content {
+    height: 100%;
+    max-height: calc(50% - 15px);
+    .agenda-list {
+      height: calc(100% - 32px);
+    }
+  }
+}
+.meeting-summary-detail-screen {
+  height: calc(100vh - 137px);
+  .about-meeting {
+    height: 100%;
+    .meeting-conclusion {
+      height: 100%;
+      max-height: calc(50% - 32px);
+      .form-group {
+        height: 100%;
+        p {
+          height: 100%;
+          max-height: calc(100% - 28px);
+        }
+      }
+    }
+    .meeting-notes-wrap {
+      height: 100%;
+      max-height: calc(50% - 32px);
+      .form-group {
+        height: 100%;
+        p {
+          height: 100%;
+          max-height: calc(100% - 28px);
         }
       }
     }
@@ -2147,4 +2339,49 @@ button + button {
 // mat-progress bar
 .mat-progress-bar .mat-progress-bar-fill::after {
   background-color: #00a9ff;
+}
+
+// responsive-css
+@media (max-width: 1366px) {
+  .meeting-wrapper {
+    .meeting-tab {
+      ul.nav {
+        li {
+          a {
+            min-width: 90px;
+            font-size: 15px;
+          }
+        }
+      }
+    }
+    .meeting-left {
+      max-width: 250px;
+      padding-right: 10px;
+      .meeting-list-content-wrapper {
+        .meeting-list-content {
+          mat-card {
+            min-width: auto;
+            padding: 15px 15px;
+          }
+        }
+      }
+    }
+    .meeting-right {
+      width: calc(100% - 250px);
+    }
+  }
+  .meeting-launch-wrapper {
+    .meeting-header {
+      h4 {
+        font-size: 18px;
+        .back-arrow {
+          position: relative;
+          top: 3px;
+        }
+      }
+    }
+  }
+  .btn.btn-primary {
+    font-size: 10px;
+  }
 }
