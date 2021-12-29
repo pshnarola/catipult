@@ -378,7 +378,8 @@
 <!-- # KPI New # -->
 <!-- ########### -->
 <ng-template #kpiNew>
-  <div class="modal-header">
+  <div class="modal-header mb-1">
+    <h4 class="modal-title" id="myModalLabel">Add New KPI</h4>
     <button
       type="button"
       class="close"
@@ -388,85 +389,78 @@
     >
       <span aria-hidden="true">×</span>
     </button>
-    <h4 class="modal-title" id="myModalLabel">
-      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
-        <h2>Add New KPI</h2>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 mb-1">
+        <div class="form-group">
+          <label class="input-label">Driver</label>
+          <select
+            [(ngModel)]="newTaskDriver"
+            name="kpiDriver"
+            class="form-control nform-control"
+          >
+            <option *ngFor="let d of driverList" [value]="d.driverID">{{
+              d.driverName
+            }}</option>
+          </select>
+        </div>
       </div>
-    </h4>
-  </div>
-  <div class="modal-body row">
-    <div
-      class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-      style="text-align:center;"
-    >
-      <div><i class="fas fa-chart-bar" style="font-size:40px;"></i></div>
+      <div class="col-md-6 mb-1">
+        <div class="form-group">
+          <label class="input-label">KPI</label>
+          <input
+            id="new_KpiObjective"
+            name="kpiObjective"
+            type="text"
+            class="form-control nform-control"
+            placeholder="Example: Working out"
+            name="kpiObjective"
+            [(ngModel)]="newKpiObjective"
+          />
+        </div>
+      </div>
+      <div class="col-md-6 mb-1">
+        <div class="form-group">
+          <label class="input-label">Target</label>
+          <input
+            id="new_KpiReportTarget"
+            name="target"
+            class="form-control nform-control"
+            placeholder="Example: 50000"
+            name="kpiTarget"
+            [(ngModel)]="newKpiReportTarget"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="input-label">Frequency</label>
+          <select
+            [(ngModel)]="newKpiReportingFrequency"
+            name="kpiFrequency"
+            class="form-control nform-control"
+          >
+            <option *ngFor="let f of frequency" [value]="f.value">{{
+              f.viewValue
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="input-label">First Reporting Period</label>
+          <input
+            type="date"
+            class="form-control nform-control"
+            style="line-height:normal !important;padding-bottom:9px;"
+            placeholder="mm-dd-yyyy"
+            name="kpiReportingPeriod"
+            [(ngModel)]="newKpiReportingPeriod"
+          />
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="modal-footer">
-    <mat-form-field appearance="fill" style="width:100%;">
-      <mat-label>Driver</mat-label>
-      <mat-select
-        class="form-control"
-        [(ngModel)]="newTaskDriver"
-        name="kpiDriver"
-      >
-        <mat-option *ngFor="let d of driverList" [value]="d.driverID">{{
-          d.driverName
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="input-box padding-bottom">
-      <span class="">KPI</span>
-      <input
-        id="new_KpiObjective"
-        name="kpiObjective"
-        type="text"
-        class="form-control"
-        placeholder="Example: Working out"
-        name="kpiObjective"
-        [(ngModel)]="newKpiObjective"
-      />
-    </div>
-    <div class="input-box padding-bottom">
-      <span class="">Target</span>
-      <input
-        id="new_KpiReportTarget"
-        name="target"
-        class="form-control"
-        placeholder="Example: 50000"
-        name="kpiTarget"
-        [(ngModel)]="newKpiReportTarget"
-      />
-    </div>
-    <div class="input-box padding-bottom">
-      <span>Frequency</span>
-      <mat-select
-        class="form-control"
-        [(ngModel)]="newKpiReportingFrequency"
-        name="kpiFrequency"
-      >
-        <mat-option *ngFor="let f of frequency" [value]="f.value">{{
-          f.viewValue
-        }}</mat-option>
-      </mat-select>
-    </div>
-    <div class="input-box padding-bottom">
-      <span class="">First Reporting Period</span>
-      <!-- <input [matDatepicker]="myDatepicker">
-      <mat-datepicker #myDatepicker></mat-datepicker> -->
-      <input
-        type="date"
-        class="form-control"
-        style="line-height:normal !important;padding-bottom:9px;"
-        placeholder="mm-dd-yyyy"
-        name="kpiReportingPeriod"
-        [(ngModel)]="newKpiReportingPeriod"
-      />
-    </div>
-    <!-- <div class='input-box padding-bottom'>
-      <span class="">Unit Type</span>
-      <input id='edit_KpiUnit' type="text" name="unit" class="form-control" placeholder="Example: dollar" name='kpiUnit' [(ngModel)]='newKpiUnit'>  
-    </div> -->
     <p
       *ngIf="userRole === 'admin' && driverName != 'You'"
       style="text-align:left;"
@@ -515,11 +509,14 @@
         </div>
       </div>
     </div>
-    <div class="padding-top">
-      <button class="form-control btn btn-primary" (click)="createNewKpi()">
-        Add
-      </button>
-    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary">
+      <b>Back to Report Detail</b>
+    </button>
+    <button class="btn btn-primary" (click)="createNewKpi()">
+      Add New KPI
+    </button>
   </div>
 </ng-template>
 
