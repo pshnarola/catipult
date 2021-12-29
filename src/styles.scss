@@ -551,6 +551,65 @@ body {
   display: flex;
 }
 
+.agenda-wrapper .row .col-md-4 {
+  typeahead-container ul.dropdown-menu {
+    position: relative;
+    max-height: 200px;
+  }
+  .participants-list {
+    width: auto !important;
+  }
+  .attendee-list {
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 196px;
+    margin-top: 5px;
+    ul {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+      li {
+        justify-content: space-between;
+        padding-right: 5px;
+        display: flex;
+        align-items: center;
+        .xBtn{
+          cursor: pointer;
+        }
+        .agenda-info {
+          display: flex;
+          align-items: center;
+        }
+        .attendee-img {
+          border: 2px solid #ffffff;
+          box-sizing: border-box;
+          width: 32px;
+          height: 32px;
+          background: #cdc8c8;
+          border-radius: 100px;
+          margin-right: 8px;
+          min-width: 32px;
+        }
+        .attendee-name {
+          a {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            color: #000000 !important;
+          }
+        }
+        + li {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+
 .agenda-wrapper .col-md-8 {
   border-left: 1px solid #e3eff5;
   .custom-agenda {

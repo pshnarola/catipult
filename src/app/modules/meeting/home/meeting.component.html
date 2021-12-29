@@ -1,125 +1,80 @@
-<div
-  class="right_col ml230 right_col nsidebar-content"
-  role="main"
-  *ngIf="!completedMeeting"
->
+<div class="right_col ml230 right_col nsidebar-content" role="main" *ngIf="!completedMeeting">
   <div class="row">
     <!-- my code start -->
-    <div
-      class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12"
-      *ngIf="!meetingIsLaunched"
-    >
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="!meetingIsLaunched">
       <div class="meeting-wrapper">
         <div class="meeting-left">
           <div class="meeting-list">
             <div class="meeting-tab">
               <ul class="nav">
                 <li class="nav-item" (click)="tabChange('rhythm')">
-                  <a
-                    class="nav-link"
-                    aria-current="page"
-                    [ngClass]="{ active: rhythm }"
-                    >Rhythm</a
-                  >
+                  <a class="nav-link" aria-current="page" [ngClass]="{ active: rhythm }">Rhythm</a>
                 </li>
                 <li class="nav-item" (click)="tabChange('custom')">
                   <a class="nav-link" [ngClass]="{ active: custom }">Custom</a>
                 </li>
               </ul>
               <div class="nav-item" (click)="tabChange('completedMeeting')">
-                <a class="nav-link"
-                  ><img src="assets/images/meeting/clipboard-check.svg"
-                /></a>
+                <a class="nav-link"><img src="assets/images/meeting/clipboard-check.svg" /></a>
               </div>
             </div>
-            <div
-              class="create-meeting-content"
-              *ngIf="
+            <div class="create-meeting-content" *ngIf="
                 !displayMeetingList && !userMeetingData && (rhythm || custom)
-              "
-            >
+              ">
               <div>
                 <h1>Let’s create a new meeting</h1>
                 <p>Start with creating a meeting schedule!</p>
-                <button
-                  *ngIf="!meetingIsLaunched"
-                  (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
-                  class="btn btn-rounded"
-                >
+                <button *ngIf="!meetingIsLaunched" (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
+                  class="btn btn-rounded">
                   <i class="fas fa-plus"></i> Create New Meeting
                 </button>
               </div>
             </div>
-            <div
-              class="meeting-list-content-wrapper"
-              *ngIf="displayMeetingList && (rhythm || custom)"
-            >
+            <div class="meeting-list-content-wrapper" *ngIf="displayMeetingList && (rhythm || custom)">
               <div class="meeting-list-content">
-                <button
-                  *ngIf="!meetingIsLaunched"
-                  (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
-                  class="btn btn-rounded createMeetingbtn"
-                >
+                <button *ngIf="!meetingIsLaunched" (click)="showModal(meetingNew, 'modal-md'); resetTimer()"
+                  class="btn btn-rounded createMeetingbtn">
                   <i class="fas fa-plus"></i> Create New Meeting
                 </button>
                 <div class="meeting-list-item">
                   <div *ngFor="let m of userMeetingData; let i = index">
-                    <mat-card
-                      class="base-card"
-                      (click)="viewMeetingDetails(m)"
-                      [ngClass]="{ active: m.meetingId === previewMeetingId }"
-                      *ngIf="!meetingIsLaunched"
-                    >
+                    <mat-card class="base-card" (click)="viewMeetingDetails(m)"
+                      [ngClass]="{ active: m.meetingId === previewMeetingId }" *ngIf="!meetingIsLaunched">
                       <mat-card-header>
-                        <mat-card-title class="meeting"
-                          >{{ m.meeting }}
+                        <mat-card-title class="meeting">{{ m.meeting }}
                         </mat-card-title>
-                        <mat-card-subtitle
-                          *ngIf="
+                        <mat-card-subtitle *ngIf="
                             m.meetingFrequency == 'Weekly' && m.meetingInterval
-                          "
-                          ><img src="assets/images/meeting/calendar.svg" />
+                          "><img src="assets/images/meeting/calendar.svg" />
                           {{ m.meetingFrequency }} - Every
                           {{ dayOfTheWeek[m.meetingInterval - 1].dayOfWeek }}
                         </mat-card-subtitle>
-                        <mat-card-subtitle
-                          style="font-size:12px;"
-                          *ngIf="
+                        <mat-card-subtitle style="font-size:12px;" *ngIf="
                             m.meetingFrequency == 'Weekly' && m.meetingInterval
-                          "
-                          ><img src="assets/images/meeting/clock.svg" />
+                          "><img src="assets/images/meeting/clock.svg" />
                           {{ m.meetingDate | date: "shortTime" }}
                         </mat-card-subtitle>
 
-                        <mat-card-subtitle
-                          style="font-size:12px;"
-                          *ngIf="
+                        <mat-card-subtitle style="font-size:12px;" *ngIf="
                             m.meetingFrequency == 'Monthly' && m.meetingInterval
-                          "
-                          ><img src="assets/images/meeting/calendar.svg" />
+                          "><img src="assets/images/meeting/calendar.svg" />
                           {{ m.meetingFrequency }} Every
                           {{ dayOfTheMonth[m.meetingInterval - 1].display }} of
                           the Month
                         </mat-card-subtitle>
-                        <mat-card-subtitle
-                          style="font-size:12px;"
-                          *ngIf="
+                        <mat-card-subtitle style="font-size:12px;" *ngIf="
                             m.meetingFrequency == 'Monthly' && m.meetingInterval
-                          "
-                          ><img src="assets/images/meeting/clock.svg" />
+                          "><img src="assets/images/meeting/clock.svg" />
                           {{ m.meetingDate | date: "shortTime" }}
                         </mat-card-subtitle>
-                        <mat-card-subtitle
-                          style="font-size:12px;"
-                          *ngIf="m.meetingFrequency == 'Not Recurring'"
-                          >Non Recurring meeting on
+                        <mat-card-subtitle style="font-size:12px;" *ngIf="m.meetingFrequency == 'Not Recurring'">Non
+                          Recurring meeting on
                           {{ m.meetingDate | date: "EEEE" }}
                           {{ m.meetingDate | date: "LLLL" }}
                           {{ m.meetingDate | date: "dd" }} at
                           {{
                             m.meetingDate | date: "shortTime"
-                          }}</mat-card-subtitle
-                        >
+                          }}</mat-card-subtitle>
                         <div class="meeting-attendee">
                           <div class="icon-wrap">
                             <img src="assets/images/meeting/attendee.svg" />
@@ -129,23 +84,17 @@
                             <ul>
                               <li>
                                 <div class="attendee-profile">
-                                  <img
-                                    src="assets/img.jpg"
-                                  />
+                                  <img src="assets/img.jpg" />
                                 </div>
                               </li>
                               <li>
                                 <div class="attendee-profile">
-                                  <img
-                                    src="assets/img.jpg"
-                                  />
+                                  <img src="assets/img.jpg" />
                                 </div>
                               </li>
                               <li>
                                 <div class="attendee-profile">
-                                  <img
-                                    src="assets/img.jpg"
-                                  />
+                                  <img src="assets/img.jpg" />
                                 </div>
                               </li>
                               <li>+1 More</li>
@@ -161,10 +110,7 @@
           </div>
         </div>
         <div class="meeting-right">
-          <div
-            class="create-meeting-text"
-            *ngIf="!displayMeetingList || !previewMeetingId"
-          >
+          <div class="create-meeting-text" *ngIf="!displayMeetingList || !previewMeetingId">
             <div>
               <h1>To see a Preview, please create your first meeting</h1>
               <p>
@@ -173,17 +119,9 @@
               </p>
             </div>
           </div>
-          <div
-            class="meeting-list-of-preview"
-            *ngIf="displayMeetingList && previewMeetingId"
-          >
-            <app-meeting-preview
-              [previewMeetingId]="previewMeetingId"
-              [userRole]="userRole"
-              *ngIf="meetingIsPreview"
-              (launchMeetingId)="launchMeeting($event)"
-              (meetingModify)="manageMeeting($event)"
-            ></app-meeting-preview>
+          <div class="meeting-list-of-preview" *ngIf="displayMeetingList && previewMeetingId">
+            <app-meeting-preview [previewMeetingId]="previewMeetingId" [userRole]="userRole" *ngIf="meetingIsPreview"
+              (launchMeetingId)="launchMeeting($event)" (meetingModify)="manageMeeting($event)"></app-meeting-preview>
           </div>
         </div>
       </div>
@@ -195,22 +133,10 @@
             <div class="left-div">
               <h4>
                 <a class="back-arrow" (click)="exitMeeting(activeMeeting)">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10 19L3 12M3 12L10 5M3 12L21 12"
-                      stroke="#474F59"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg> </a
-                >Launch Meeting: Title for this Meeting
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 19L3 12M3 12L10 5M3 12L21 12" stroke="#474F59" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg> </a>Launch Meeting: Title for this Meeting
               </h4>
             </div>
           </div>
@@ -223,31 +149,19 @@
                     <div class="form-group">
                       <h5>
                         <span>
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                               d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z"
-                              fill="#575757"
-                            />
-                            <path
-                              d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z"
-                              fill="#575757"
-                            />
+                              fill="#575757" />
+                            <path d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z"
+                              fill="#575757" />
                           </svg>
                         </span>
                         Meeting Notes
                       </h5>
-                      <textarea
-                        placeholder="Put some notes for everything necessary on the meeting"
-                        rows="10"
-                        [(ngModel)]="activeMeetingNotes"
-                        name="nm_MeetingNotes"
-                      ></textarea>
+                      <textarea placeholder="Put some notes for everything necessary on the meeting" rows="10"
+                        [(ngModel)]="activeMeetingNotes" name="nm_MeetingNotes"></textarea>
                     </div>
                   </div>
                   <button class="btn btn-primary" (click)="showMeetingNotes()">
@@ -259,18 +173,12 @@
                     Before start the meeting, please checklist arrived attendant
                     to list attendance attendance
                   </p>
-                  <button
-                    class="btn btn-primary"
-                    (click)="startMeeting(activeMeeting)"
-                  >
+                  <button class="btn btn-primary" (click)="startMeeting(activeMeeting)">
                     <img src="assets/images/meeting/btn-arrow-icon.svg" />Start
                     Meeting
                   </button>
                 </div>
-                <div
-                  class="meeting-progress-wrap mt-1"
-                  *ngIf="meetingInProgress"
-                >
+                <div class="meeting-progress-wrap mt-1" *ngIf="meetingInProgress">
                   <h3>Agenda</h3>
                   <div class="meeting-progress">
                     <h4>Milestone/Rocks</h4>
@@ -283,39 +191,19 @@
                           : "00:00"
                       }}</span>
                       <span>
-                        <svg
-                          width="33"
-                          height="32"
-                          viewBox="0 0 33 32"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          *ngIf="!play"
-                          (click)="
+                        <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          *ngIf="!play" (click)="
                             startAgendaItemFromButton(null, activeAgenda)
-                          "
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                          ">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M16.5002 28.7999C23.5694 28.7999 29.3002 23.0692 29.3002 16C29.3002 8.93071 23.5694 3.19995 16.5002 3.19995C9.43095 3.19995 3.7002 8.93071 3.7002 16C3.7002 23.0692 9.43095 28.7999 16.5002 28.7999ZM15.7877 11.4687C15.2967 11.1414 14.6655 11.1108 14.1452 11.3893C13.625 11.6677 13.3002 12.2099 13.3002 12.8V19.2C13.3002 19.79 13.625 20.3322 14.1452 20.6106C14.6655 20.8891 15.2967 20.8585 15.7877 20.5312L20.5877 17.3312C21.0328 17.0345 21.3002 16.5349 21.3002 16C21.3002 15.465 21.0328 14.9654 20.5877 14.6687L15.7877 11.4687Z"
-                            fill="#00A9FF"
-                          />
+                            fill="#00A9FF" />
                         </svg>
-                        <svg
-                          width="32"
-                          height="32"
-                          viewBox="0 0 48 48"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          *ngIf="play"
-                          (click)="pauseAgendaItem()"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
+                          *ngIf="play" (click)="pauseAgendaItem()">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm-2 28h-4V16h4v16zm8 0h-4V16h4v16z"
-                            fill="#00A9FF"
-                          />
+                            fill="#00A9FF" />
                         </svg>
                       </span>
                       <span>{{
@@ -324,61 +212,39 @@
                           : "00:00"
                       }}</span>
                     </div>
-                    <mat-progress-bar
-                      mode="determinate"
-                      [value]="
+                    <mat-progress-bar mode="determinate" [value]="
                         activeTimer && activeTimer.progress
                           ? activeTimer.progress
                           : 0
-                      "
-                    ></mat-progress-bar>
+                      "></mat-progress-bar>
                   </div>
                   <div class="agenda-content mt-1">
                     <div class="agenda-list" *ngIf="displayAgenda">
                       <ul>
                         <li *ngFor="let t of timers; let i = index">
-                          <div
-                            class="agenda-info"
-                            *ngIf="meetingInProgress"
-                            (click)="startAgendaItem(t, i)"
-                          >
+                          <div class="agenda-info" *ngIf="meetingInProgress" (click)="startAgendaItem(t, i)">
                             <div class="agenda-img"></div>
                             <div class="agenda-name">
                               <p>
-                                <a
-                                  class="agenda-item"
-                                  [ngClass]="{
+                                <a class="agenda-item" [ngClass]="{
                                     active:
                                       activeTimer && t.name == activeTimer.name
-                                  }"
-                                  >{{ t.name }}
+                                  }">{{ t.name }}
                                 </a>
                               </p>
                               <p>
-                                <a class="agenda-time" *ngIf="t.duration >= 1"
-                                  >{{ t.duration }}m</a
-                                >
+                                <a class="agenda-time" *ngIf="t.duration >= 1">{{ t.duration }}m</a>
                               </p>
                               <p>
-                                <a class="agenda-time" *ngIf="t.duration < 1"
-                                  >{{ t.duration * 60 }}s</a
-                                >
+                                <a class="agenda-time" *ngIf="t.duration < 1">{{ t.duration * 60 }}s</a>
                               </p>
                             </div>
                             <div class="check-circle" *ngIf="i === 0">
-                              <svg
-                                width="24"
-                                height="25"
-                                viewBox="0 0 24 25"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
+                              <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M11.9999 22.1C17.3018 22.1 21.5999 17.802 21.5999 12.5C21.5999 7.19809 17.3018 2.90002 11.9999 2.90002C6.69797 2.90002 2.3999 7.19809 2.3999 12.5C2.3999 17.802 6.69797 22.1 11.9999 22.1ZM16.4484 10.9486C16.9171 10.4799 16.9171 9.72012 16.4484 9.2515C15.9798 8.78287 15.22 8.78287 14.7514 9.2515L10.7999 13.203L9.24843 11.6515C8.7798 11.1829 8.02 11.1829 7.55137 11.6515C7.08275 12.1201 7.08275 12.8799 7.55137 13.3486L9.95137 15.7486C10.42 16.2172 11.1798 16.2172 11.6484 15.7486L16.4484 10.9486Z"
-                                  fill="#0F9E3F"
-                                />
+                                  fill="#0F9E3F" />
                               </svg>
                             </div>
                           </div>
@@ -386,12 +252,9 @@
                       </ul>
                     </div>
                   </div>
-                  <button
-                    class="btn btn-primary"
-                    (click)="
+                  <button class="btn btn-primary" (click)="
                       concludeMeetingModal(conclusionMeeting, 'modal-sm')
-                    "
-                  >
+                    ">
                     Finish and Conclude Meeting
                   </button>
                 </div>
@@ -401,26 +264,16 @@
                   </h3>
                   <div class="attendee-list">
                     <ul *ngIf="activeMeeting && activeMeeting.attendees">
-                      <li
-                        *ngFor="let a of activeMeeting.attendees; let i = index"
-                      >
+                      <li *ngFor="let a of activeMeeting.attendees; let i = index">
                         <div class="custom-checkbox">
                           <label>
-                            <input
-                              type="checkbox"
-                              (change)="assignAttendee(a, i, $event)"
-                            />
+                            <input type="checkbox" (change)="assignAttendee(a, i, $event)" />
                             <span class="checkmark"></span>
                           </label>
                         </div>
                         <div class="attendee-img"></div>
-                        <div
-                          class="attendee-name"
-                          (click)="getMilestoneData(a)"
-                        >
-                          <a class="agenda-item"
-                            >{{ a.User.name }} {{ a.User.lname }}</a
-                          >
+                        <div class="attendee-name" (click)="getMilestoneData(a)">
+                          <a class="agenda-item">{{ a.User.name }} {{ a.User.lname }}</a>
                         </div>
                       </li>
                     </ul>
@@ -439,14 +292,10 @@
                               <a class="agenda-item">{{ t.name }} </a>
                             </p>
                             <p>
-                              <a class="agenda-time" *ngIf="t.duration >= 1"
-                                >{{ t.duration }}m</a
-                              >
+                              <a class="agenda-time" *ngIf="t.duration >= 1">{{ t.duration }}m</a>
                             </p>
                             <p>
-                              <a class="agenda-time" *ngIf="t.duration < 1"
-                                >{{ t.duration * 60 }}s</a
-                              >
+                              <a class="agenda-time" *ngIf="t.duration < 1">{{ t.duration * 60 }}s</a>
                             </p>
                           </div>
                         </div>
@@ -459,98 +308,61 @@
                 <div class="meeting-tab">
                   <ul class="nav">
                     <!--  -->
-                    <li
-                      class="nav-item"
-                      (click)="getKpiData(activeMeeting.meetingId)"
-                    >
-                      <a
-                        [ngClass]="{
+                    <li class="nav-item" (click)="getKpiData(activeMeeting.meetingId)">
+                      <a [ngClass]="{
                           active: activeMeeting && activeMeeting.displayKPI
-                        }"
-                        >KPI</a
-                      >
+                        }">KPI</a>
                     </li>
                     <!--  -->
-                    <li
-                      class="nav-item"
-                      (click)="getMilestoneData(activeMeeting.meetingId)"
-                    >
-                      <a
-                        [ngClass]="{
+                    <li class="nav-item" (click)="getMilestoneData(activeMeeting.meetingId)">
+                      <a [ngClass]="{
                           active:
                             activeMeeting && activeMeeting.displayMilestones
-                        }"
-                        >Rocks / Milestone</a
-                      >
+                        }">Rocks / Milestone</a>
                     </li>
                     <!--  -->
-                    <li
-                      class="nav-item"
-                      (click)="getIssueData(activeMeeting.meetingId)"
-                    >
-                      <a
-                        [ngClass]="{
+                    <li class="nav-item" (click)="getIssueData(activeMeeting.meetingId)">
+                      <a [ngClass]="{
                           active: activeMeeting && activeMeeting.displayIssues
-                        }"
-                        >Issue</a
-                      >
+                        }">Issue</a>
                     </li>
                   </ul>
                 </div>
                 <div class="meeting-tab-content">
-                  <div
-                    class="tab-content"
-                    *ngIf="
+                  <div class="tab-content" *ngIf="
                       activeMeeting &&
                       activeMeeting?.displayKPI &&
                       !activeMeeting?.displayMilestones &&
                       !activeMeeting?.displayIssues
-                    "
-                  >
+                    ">
                     <div class="issue-content-wrapper">
                       <app-kpi></app-kpi>
                     </div>
                   </div>
-                  <div
-                    class="tab-content"
-                    *ngIf="
+                  <div class="tab-content" *ngIf="
                       activeMeeting &&
                       activeMeeting?.displayMilestones &&
                       !activeMeeting?.displayIssues &&
                       !activeMeeting?.displayKPI
-                    "
-                  >
+                    ">
                     <div class="milestones-content-wrapper">
-                      <table
-                        mat-table
-                        [dataSource]="activeMeetingMilestoneData"
-                        class="table"
-                        style="color:#73879C;"
-                      >
+                      <table mat-table [dataSource]="activeMeetingMilestoneData" class="table" style="color:#73879C;">
                         <ng-container matColumnDef="ID">
                           <th mat-header-cell *matHeaderCellDef>ID</th>
                           <td mat-cell *matCellDef="let element; let i = index">
-                            <a
-                              style="color: #007bff; cursor: pointer;"
-                              data-toggle="modal"
-                              data-target="#edit_milestone1"
-                              (click)="
+                            <a style="color: #007bff; cursor: pointer;" data-toggle="modal"
+                              data-target="#edit_milestone1" (click)="
                                 milestoneEdit(
                                   editMilestone,
                                   'modal-md',
                                   element
                                 )
-                              "
-                              >{{ i + 1 }}
-                              <i
-                                style="color:#73879C;font-size:10px;"
-                                [ngClass]="
+                              ">{{ i + 1 }}
+                              <i style="color:#73879C;font-size:10px;" [ngClass]="
                                   element.recurringFrequency
                                     ? 'fas fa-sync'
                                     : ''
-                                "
-                              ></i
-                            ></a>
+                                "></i></a>
                           </td>
                         </ng-container>
                         <ng-container matColumnDef="Driver">
@@ -587,48 +399,30 @@
                           <th mat-header-cell *matHeaderCellDef>User</th>
                           <td mat-cell *matCellDef="let element">
                             {{ element.User }}
-                            <a
-                              style="padding-left:10px !important;font-size:15px !important;cursor:pointer;"
-                              matTooltip="{{ element.note }}"
-                              matTooltipClass="toolTip"
-                              aria-label="Button that displays a tooltip when focused or hovered over"
-                              ><i
-                                style="padding-left:2px;color:#73879C;font-size:12px;"
-                                [ngClass]="
+                            <a style="padding-left:10px !important;font-size:15px !important;cursor:pointer;"
+                              matTooltip="{{ element.note }}" matTooltipClass="toolTip"
+                              aria-label="Button that displays a tooltip when focused or hovered over"><i
+                                style="padding-left:2px;color:#73879C;font-size:12px;" [ngClass]="
                                   element.note ? 'far fa-sticky-note' : ''
-                                "
-                              ></i
-                            ></a>
+                                "></i></a>
                           </td>
                         </ng-container>
-                        <tr
-                          mat-header-row
-                          *matHeaderRowDef="milestoneColumns"
-                        ></tr>
-                        <tr
-                          mat-row
-                          *matRowDef="let element; columns: milestoneColumns"
-                        ></tr>
+                        <tr mat-header-row *matHeaderRowDef="milestoneColumns"></tr>
+                        <tr mat-row *matRowDef="let element; columns: milestoneColumns"></tr>
                       </table>
                     </div>
                   </div>
-                  <div
-                    class="tab-content"
-                    *ngIf="
+                  <div class="tab-content" *ngIf="
                       activeMeeting &&
                       activeMeeting?.displayIssues &&
                       !activeMeeting?.displayMilestones &&
                       !activeMeeting?.displayKPI
-                    "
-                  >
+                    ">
                     <div class="issue-content-wrapper">
-                      <app-issue
-                        *ngIf="meetingInProgress && activeMeeting.displayIssues"
-                        [data]="{
+                      <app-issue *ngIf="meetingInProgress && activeMeeting.displayIssues" [data]="{
                           user: activeMeeting.activeUser,
                           meetingId: activeMeeting.meetingId
-                        }"
-                        [userData]="
+                        }" [userData]="
                           activeMeeting.activeUser?.filterIssues
                             ? issueDataFiltered
                               ? issueDataFiltered
@@ -636,15 +430,11 @@
                             : issueData
                             ? issueData
                             : []
-                        "
-                      ></app-issue>
+                        "></app-issue>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="meeting-start-popup-wrapper"
-                  *ngIf="!meetingInProgress"
-                >
+                <div class="meeting-start-popup-wrapper" *ngIf="!meetingInProgress">
                   <div class="meeting-start-popup-content">
                     <h3>Start the Meeting First!</h3>
                     <p>This will be active when you start the meeting</p>
@@ -665,28 +455,15 @@
 <ng-template #meetingEdit>
   <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel">Edit Meeting</h4>
-    <button
-      type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide();clearEditMeetingFields()">
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="mt-1">
       <div class="form-group">
-        <!-- <label class="input-label">Name</label> -->
-        <input
-          id="edit_MeetingName"
-          type="text"
-          class="form-control nform-control"
-          placeholder="Meeting Title"
-          name="editMeetingName"
-          [(ngModel)]="meetingEditMeetingName"
-        />
+        <input id="edit_MeetingName" type="text" class="form-control nform-control" placeholder="Meeting Title"
+          name="editMeetingName" [(ngModel)]="meetingEditMeetingName" />
       </div>
     </div>
     <hr class="mt-1 mb-1" />
@@ -701,217 +478,116 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
           <div class="form-group">
             <label class="input-label">Frequency</label>
-            <!-- <select
-              [(ngModel)]="meetingEditMeetingFrequency"
-              name="editMeetingFrequency"
-              (selectionChange)="clearMeetingInterval()"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let f of frequency" [value]="f.value">{{
-                f.viewValue
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ meetingEditMeetingFrequency }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let f of frequency">
-                    <a
-                      class="dropdown-item"
-                      (click)="selectFrequency(f.value, 'edit')"
-                      >{{ f.viewValue }}</a
-                    >
+                    <a class="dropdown-item" (click)="selectFrequency(f.value, 'edit')">{{ f.viewValue }}</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingEditMeetingFrequency == 'Weekly'"
-        >
+        <div class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Weekly'">
           <div class="form-group">
             <label class="input-label">Day of Week</label>
-            <!-- <select
-              [(ngModel)]="meetingEditMeetingInterval"
-              name="editMeetingDayOfWeek"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
-                d.dayOfWeek
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ dayOfWeek }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let d of dayOfTheWeek">
-                    <a
-                      class="dropdown-item"
-                      (click)="selectDayOfWeek(d.id, 'edit')"
-                      >{{ d.dayOfWeek }}</a
-                    >
+                    <a class="dropdown-item" (click)="selectDayOfWeek(d.id, 'edit')">{{ d.dayOfWeek }}</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingEditMeetingFrequency == 'Monthly'"
-        >
+        <div class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Monthly'">
           <div class="form-group">
             <label class="input-label">Day of the month</label>
-            <!-- <select
-              [(ngModel)]="meetingEditMeetingInterval"
-              [(ngModel)]="meetingEditMeetingInterval"
-              name="editMeetingDayOfMonth"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
-                d.dayOfTheMonth
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ dayOfMonth }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let d of dayOfTheMonth">
-                    <a
-                      class="dropdown-item"
-                      (click)="selectDayOfMonth(d.id, 'edit')"
-                      >{{ d.dayOfTheMonth }}</a
-                    >
+                    <a class="dropdown-item" (click)="selectDayOfMonth(d.id, 'edit')">{{ d.dayOfTheMonth }}</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          [ngClass]="{
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" [ngClass]="{
             'is-not-visible':
               meetingEditMeetingFrequency != 'Monthly' &&
               meetingEditMeetingFrequency != 'Weekly'
-          }"
-        >
-          <div
-            *ngIf="
+          }">
+          <div *ngIf="
               meetingEditMeetingFrequency &&
               meetingEditMeetingFrequency != 'Monthly' &&
               meetingEditMeetingFrequency != 'Weekly'
-            "
-          >
+            ">
             <div class="form-group">
               <label class="input-label">Day of the month</label>
-              <select
-                name="editMeetingDayOfMonth"
-                class="form-control nform-control"
-              >
+              <select name="editMeetingDayOfMonth" class="form-control nform-control">
               </select>
             </div>
           </div>
         </div>
-        <div
-          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="
+        <div class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngIf="
             meetingEditMeetingFrequency == 'Monthly' ||
             meetingEditMeetingFrequency == 'Weekly'
-          "
-        >
+          ">
           <span class="">Time</span>
-          <input
-            class="form-control nform-control"
-            [owlDateTimeTrigger]="dt4"
-            [owlDateTime]="dt4"
-            [(ngModel)]="meetingEditMeetingDate"
-            id="edit_MeetingTime"
-            name="editMeetingTime"
-            [value]="meetingEditMeetingDate"
-          />
-          <owl-date-time
-            hour12Timer="true"
-            [pickerType]="'timer'"
-            #dt4
-          ></owl-date-time>
+          <input class="form-control nform-control" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4"
+            [(ngModel)]="meetingEditMeetingDate" id="edit_MeetingTime" name="editMeetingTime"
+            [value]="meetingEditMeetingDate" />
+          <owl-date-time hour12Timer="true" [pickerType]="'timer'" #dt4></owl-date-time>
         </div>
-        <div
-          class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingEditMeetingFrequency == 'Not Recurring'"
-        >
+        <div class="padding-bottom col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingEditMeetingFrequency == 'Not Recurring'">
           <span class="">Time</span>
-          <input
-            class="form-control nform-control"
-            [owlDateTimeTrigger]="dt"
-            [owlDateTime]="dt"
-            [(ngModel)]="meetingEditMeetingDate"
-            id="edit_MeetingTime"
-            name="editMeetingTime"
-            [value]="meetingEditMeetingDate"
-          />
+          <input class="form-control nform-control" [owlDateTimeTrigger]="dt" [owlDateTime]="dt"
+            [(ngModel)]="meetingEditMeetingDate" id="edit_MeetingTime" name="editMeetingTime"
+            [value]="meetingEditMeetingDate" />
           <owl-date-time hour12Timer="true" #dt></owl-date-time>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingEditMeetingFrequency == 'Weekly' &&
             meetingEditMeetingInterval &&
             meetingEditMeetingDate
-          "
-        >
+          ">
           Recurring {{ meetingEditMeetingFrequency }} on
           {{ dayOfTheWeek[meetingEditMeetingInterval - 1].dayOfWeek }}s at
           {{ meetingEditMeetingDate | date: "shortTime" }}
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingEditMeetingFrequency == 'Monthly' &&
             meetingEditMeetingInterval &&
             meetingEditMeetingDate
-          "
-        >
+          ">
           Recurring {{ meetingEditMeetingFrequency }} on the
           {{ dayOfTheMonth[meetingEditMeetingInterval - 1].display }} at
           {{ meetingEditMeetingDate | date: "shortTime" }}
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingEditMeetingFrequency == 'Not Recurring' &&
             meetingEditMeetingDate
-          "
-        >
+          ">
           Non Recurring meeting on {{ meetingEditMeetingDate | date: "EEEE" }}
           {{ meetingEditMeetingDate | date: "LLLL" }}
           {{ meetingEditMeetingDate | date: "dd" }} at
@@ -928,36 +604,29 @@
             <h2>Participants</h2>
           </div>
           <div>
-            <!-- <mat-form-field appearance="fill" style="width:100%;">
-              <mat-label>Participants</mat-label>
-              <mat-select
-                class="form-control"
-                [(ngModel)]="meetingEditMeetingAttendees"
-                name="editMeetingAttendees"
-                multiple
-              >
-                <mat-option
-                  [disabled]="u.uID == uID"
-                  *ngFor="let u of orgUserList"
-                  [value]="u.uID"
-                  >{{ u.name }} {{ u.lname }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field> -->
             <div class="form-group">
-              <!-- <label class="input-label">Participants</label> -->
-              <select
-                [(ngModel)]="meetingEditMeetingAttendees"
-                name="editMeetingAttendees"
-                class="form-control nform-control"
-              >
-                <option
-                  [disabled]="u.uID == uID"
-                  *ngFor="let u of orgUserList"
-                  [value]="u.uID"
-                  >{{ u.name }} {{ u.lname }}</option
-                >
-              </select>
+              <!-- <select [(ngModel)]="meetingEditMeetingAttendees" name="editMeetingAttendees"
+                class="form-control nform-control">
+                <option [disabled]="u.uID == uID" *ngFor="let u of orgUserList" [value]="u.uID">{{ u.name }}
+                  {{ u.lname }}</option>
+              </select> -->
+
+              <input class="form-control nform-control" [(ngModel)]="AutoSuggestParticipant"
+                [typeahead]="suggestOrgUserList" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
+                [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelect($event, 'edit')" />
+              <div class="attendee-list">
+                <ul>
+                  <li *ngFor="let participant of selectedParticipants; let i = index">
+                    <div class="agenda-info">
+                      <div class="attendee-img"></div>
+                      <div class="attendee-name">
+                        <a class="agenda-item">{{participant.name}}</a>
+                      </div>
+                    </div>
+                    <div class="xBtn" *ngIf="participant.uID !== uID" (click)="removeParticipant(participant.uID, 'edit')">X</div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -972,51 +641,30 @@
           <div>
             <div class="row">
               <div class="col-md-6">
-                <!-- *ngIf="meetingEditCustomTimer" -->
                 <div class="add-agenda-btn">
-                  <a
-                    (click)="
+                  <a (click)="
                       addTimer('edit', { name: '', duration: 0, display: '' })
-                    "
-                    ><i class="fas fa-plus"></i>Add New Agenda</a
-                  >
+                    "><i class="fas fa-plus"></i>Add New Agenda</a>
                 </div>
               </div>
             </div>
-            <!-- *ngIf="meetingEditCustomTimer" -->
             <div id="timerDiv">
-              <div
-                class="row align-items-center"
-                *ngFor="let t of timerEditArr; let i = index"
-              >
+              <div class="row align-items-center" *ngFor="let t of timerEditArr; let i = index">
                 <div class="col-md-5">
                   <div class="form-group">
-                    <input
-                      matInput
-                      class="form-control nform-control"
-                      name="editTimerName"
-                      placeholder="Name: Item A"
-                      [(ngModel)]="timerEditArr[i].name"
-                    />
+                    <input matInput class="form-control nform-control" name="editTimerName" placeholder="Name: Item A"
+                      [(ngModel)]="timerEditArr[i].name" />
                   </div>
                 </div>
                 <div class="col-md-5">
                   <div class="form-group">
-                    <input
-                      name="editTimerDuration"
-                      class="form-control nform-control"
-                      matInput
-                      placeholder="Duration: 30"
-                      [(ngModel)]="timerEditArr[i].duration"
-                      (change)="setTimerDisplay('edit', i)"
-                    />
+                    <input name="editTimerDuration" class="form-control nform-control" matInput
+                      placeholder="Duration: 30" [(ngModel)]="timerEditArr[i].duration"
+                      (change)="setTimerDisplay('edit', i)" />
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <img
-                    (click)="removeTimer('edit', i)"
-                    src="assets/images/meeting/x.svg"
-                  />
+                  <img (click)="removeTimer('edit', i)" src="assets/images/meeting/x.svg" />
                 </div>
               </div>
             </div>
@@ -1026,20 +674,10 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="submit"
-      data-dismiss="modal"
-      class="btn btn-secondary"
-      (click)="modalRef.hide()"
-    >
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide();clearEditMeetingFields()">
       <b>Cancel</b>
     </button>
-    <button
-      type="submit"
-      data-dismiss="modal"
-      class="btn btn-primary"
-      (click)="updateMeetingData()"
-    >
+    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updateMeetingData()">
       <b>Save</b>
     </button>
   </div>
@@ -1048,28 +686,16 @@
 <ng-template #meetingNew>
   <div class="modal-header">
     <h4 class="modal-title" id="myModalLabel">Create new meeting</h4>
-    <button
-      type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
-      (click)="modalRef.hide(); clearNewMeetingFields()"
-    >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+      (click)="modalRef.hide(); clearNewMeetingFields()">
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="mt-1">
       <div class="form-group">
-        <!-- <label class="input-label">Name</label> -->
-        <input
-          id="new_MeetingName"
-          type="text"
-          class="form-control nform-control"
-          placeholder="Meeting Title"
-          name="newMeetingName"
-          [(ngModel)]="meetingNewMeetingName"
-        />
+        <input id="new_MeetingName" type="text" class="form-control nform-control" placeholder="Meeting Title"
+          name="newMeetingName" [(ngModel)]="meetingNewMeetingName" />
       </div>
     </div>
     <hr class="mt-1 mb-1" />
@@ -1084,114 +710,46 @@
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
           <div class="form-group">
             <label class="input-label">Frequency</label>
-            <!-- <select
-              name="newMeetingFrequency"
-              [(ngModel)]="meetingNewMeetingFrequency"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let f of frequency" [value]="f.value">{{
-                f.viewValue
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ meetingNewMeetingFrequency }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let f of frequency">
-                    <a
-                      class="dropdown-item"
-                      (click)="selectFrequency(f.value, 'add')"
-                      >{{ f.viewValue }}</a
-                    >
+                    <a class="dropdown-item" (click)="selectFrequency(f.value, 'add')">{{ f.viewValue }}</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingNewMeetingFrequency == 'Weekly'"
-        >
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngIf="meetingNewMeetingFrequency == 'Weekly'">
           <div class="form-group">
             <label class="input-label">Day of the week</label>
-            <!-- <select
-              [(ngModel)]="meetingNewMeetingInterval"
-              name="newMeetingDayOfWeek"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let d of dayOfTheWeek" [value]="d.id">{{
-                d.dayOfWeek
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ dayOfWeek }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div *ngFor="let d of dayOfTheWeek">
-                    <a
-                      class="dropdown-item"
-                      (click)="selectDayOfWeek(d.id, 'add')"
-                      >{{ d.dayOfWeek }}</a
-                    >
+                    <a class="dropdown-item" (click)="selectDayOfWeek(d.id, 'add')">{{ d.dayOfWeek }}</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingNewMeetingFrequency == 'Monthly'"
-        >
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngIf="meetingNewMeetingFrequency == 'Monthly'">
           <div class="form-group">
             <label class="input-label">Day of the month</label>
-            <!-- <mat-select
-              class="form-control"
-              [(ngModel)]="meetingNewMeetingInterval"
-              name="newMeetingDayOfMonth"
-            >
-              <mat-option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
-                d.dayOfTheMonth
-              }}</mat-option>
-            </mat-select> -->
-            <!-- <select
-              [(ngModel)]="meetingNewMeetingInterval"
-              name="newMeetingDayOfMonth"
-              class="form-control nform-control"
-            >
-              <option *ngFor="let d of dayOfTheMonth" [value]="d.id">{{
-                d.dayOfTheMonth
-              }}</option>
-            </select> -->
             <div class="dropdown-select">
               <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ dayOfMonth }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -1203,31 +761,17 @@
                 </div>
               </div>
             </div>
-            <!-- <input
-              class="form-control nform-control"
-              [owlDateTimeTrigger]="dt3"
-              [owlDateTime]="dt3"
-              [(ngModel)]="meetingNewMeetingInterval"
-              name="newMeetingDayOfMonth"
-              [value]="meetingNewMeetingInterval"
-            />
-            <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time> -->
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          [ngClass]="{
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" [ngClass]="{
             'is-not-visible':
               meetingNewMeetingFrequency != 'Monthly' &&
               meetingNewMeetingFrequency != 'Weekly'
-          }"
-        >
-          <div
-            *ngIf="
+          }">
+          <div *ngIf="
               meetingNewMeetingFrequency != 'Monthly' &&
               meetingNewMeetingFrequency != 'Weekly'
-            "
-          >
+            ">
             <mat-form-field appearance="fill" style="width:100%;">
               <mat-label>Day of the month</mat-label>
               <mat-select class="form-control" name="newMeetingDayOfMonth">
@@ -1235,80 +779,50 @@
             </mat-form-field>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngIf="
             meetingNewMeetingFrequency == 'Monthly' ||
             meetingNewMeetingFrequency == 'Weekly'
-          "
-        >
+          ">
           <div class="form-group">
             <label class="input-label">Time</label>
-            <input
-              class="form-control nform-control"
-              [owlDateTimeTrigger]="dt4"
-              [owlDateTime]="dt4"
-              [(ngModel)]="meetingNewMeetingDate"
-              id="new_MeetingTime"
-              name="newMeetingTime"
-              [value]="meetingNewMeetingDate"
-            />
-            <owl-date-time
-              hour12Timer="true"
-              [pickerType]="'timer'"
-              #dt4
-            ></owl-date-time>
+            <input class="form-control nform-control" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4"
+              [(ngModel)]="meetingNewMeetingDate" id="new_MeetingTime" name="newMeetingTime"
+              [value]="meetingNewMeetingDate" />
+            <owl-date-time hour12Timer="true" [pickerType]="'timer'" #dt4></owl-date-time>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
-          *ngIf="meetingNewMeetingFrequency == 'Not Recurring'"
-        >
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4"
+          *ngIf="meetingNewMeetingFrequency == 'Not Recurring'">
           <div class="form-group">
             <label class="input-label">Time</label>
-            <input
-              class="form-control nform-control"
-              [owlDateTimeTrigger]="dt"
-              [owlDateTime]="dt"
-              [(ngModel)]="meetingNewMeetingDate"
-              id="new_MeetingTime"
-              name="newMeetingTime"
-              [value]="meetingNewMeetingDate"
-            />
+            <input class="form-control nform-control" [owlDateTimeTrigger]="dt" [owlDateTime]="dt"
+              [(ngModel)]="meetingNewMeetingDate" id="new_MeetingTime" name="newMeetingTime"
+              [value]="meetingNewMeetingDate" />
             <owl-date-time hour12Timer="true" #dt></owl-date-time>
           </div>
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingNewMeetingFrequency == 'Weekly' &&
             meetingNewMeetingInterval &&
             meetingNewMeetingDate
-          "
-        >
+          ">
           Recurring {{ meetingNewMeetingFrequency }} on
           {{ dayOfTheWeek[meetingNewMeetingInterval - 1].dayOfWeek }}s at
           {{ meetingNewMeetingDate | date: "shortTime" }}
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingNewMeetingFrequency == 'Monthly' &&
             meetingNewMeetingInterval &&
             meetingNewMeetingDate
-          "
-        >
+          ">
           Recurring {{ meetingNewMeetingFrequency }} on the
           {{ dayOfTheMonth[meetingNewMeetingInterval - 1].display }} at
           {{ meetingNewMeetingDate | date: "shortTime" }}
         </div>
-        <div
-          class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"
-          *ngIf="
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="
             meetingNewMeetingFrequency == 'Not Recurring' &&
             meetingNewMeetingDate
-          "
-        >
+          ">
           Non Recurring meeting on {{ meetingNewMeetingDate | date: "EEEE" }}
           {{ meetingNewMeetingDate | date: "LLLL" }}
           {{ meetingNewMeetingDate | date: "dd" }} at
@@ -1325,19 +839,22 @@
           </div>
           <div>
             <div class="form-group">
-              <!-- <label class="input-label">Participants</label> -->
-              <select
-                [(ngModel)]="meetingNewMeetingAttendees"
-                name="NewMeetingAttendees"
-                class="form-control nform-control"
-              >
-                <option
-                  [disabled]="u.uID == uID"
-                  *ngFor="let u of orgUserList"
-                  [value]="u.uID"
-                  >{{ u.name }} {{ u.lname }}</option
-                >
-              </select>
+              <input class="form-control nform-control" [(ngModel)]="AutoSuggestParticipant"
+                [typeahead]="suggestOrgUserList" typeaheadOptionField="name" [typeaheadOptionsLimit]="7"
+                [typeaheadMinLength]="0" (typeaheadOnSelect)="onSelect($event, 'add')" />
+              <div class="attendee-list">
+                <ul>
+                  <li *ngFor="let participant of selectedParticipants; let i = index">
+                    <div class="agenda-info">
+                      <div class="attendee-img"></div>
+                      <div class="attendee-name">
+                        <a class="agenda-item">{{participant.name}}</a>
+                      </div>
+                    </div>
+                    <div class="xBtn" *ngIf="participant.uID !== uID" (click)="removeParticipant(participant.uID, 'add')">X</div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -1351,53 +868,31 @@
           <div>
             <div class="row">
               <div class="col-md-6">
-                <!-- *ngIf="meetingNewCustomTimer" -->
                 <div class="add-agenda-btn">
-                  <a
-                    (click)="
+                  <a (click)="
                       addTimer('new', { name: '', duration: 0, display: '' })
-                    "
-                    ><i class="fas fa-plus"></i>Add New Agenda</a
-                  >
+                    "><i class="fas fa-plus"></i>Add New Agenda</a>
                 </div>
               </div>
             </div>
           </div>
-          <!-- *ngIf="meetingNewCustomTimer" -->
           <div id="timerDiv">
-            <div
-              class="row align-items-center"
-              *ngFor="let t of timerNewArr; let i = index"
-            >
+            <div class="row align-items-center" *ngFor="let t of timerNewArr; let i = index">
               <div class="col-md-5">
                 <div class="form-group">
-                  <input
-                    name="newTimerName"
-                    class="form-control nform-control"
-                    matInput
-                    placeholder="Name: Item 1"
-                    [(ngModel)]="timerNewArr[i].name"
-                  />
+                  <input name="newTimerName" class="form-control nform-control" matInput placeholder="Name: Item 1"
+                    [(ngModel)]="timerNewArr[i].name" />
                 </div>
               </div>
               <div class="col-md-5">
                 <div class="form-group">
-                  <input
-                    type="number"
-                    class="form-control nform-control"
-                    name="newTimerDuration"
-                    matInput
-                    placeholder="Duration: 300"
-                    [(ngModel)]="timerNewArr[i].duration"
-                    (change)="setTimerDisplay('new', i)"
-                  />
+                  <input type="number" class="form-control nform-control" name="newTimerDuration" matInput
+                    placeholder="Duration: 300" [(ngModel)]="timerNewArr[i].duration"
+                    (change)="setTimerDisplay('new', i)" />
                 </div>
               </div>
               <div class="col-md-2 text-center">
-                <img
-                  (click)="removeTimer('new', i)"
-                  src="assets/images/meeting/x.svg"
-                />
+                <img (click)="removeTimer('new', i)" src="assets/images/meeting/x.svg" />
               </div>
             </div>
           </div>
@@ -1406,20 +901,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="submit"
-      data-dismiss="modal"
-      class="btn btn-secondary"
-      (click)="modalRef.hide(); clearNewMeetingFields()"
-    >
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary"
+      (click)="modalRef.hide(); clearNewMeetingFields()">
       <b>Cancel</b>
     </button>
-    <button
-      type="submit"
-      data-dismiss="modal"
-      class="btn btn-primary"
-      (click)="createNewMeeting()"
-    >
+    <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="createNewMeeting()">
       <b>Create new meeting</b>
     </button>
   </div>
@@ -1427,13 +913,7 @@
 
 <ng-template #editMilestone>
   <div class="modal-header">
-    <button
-      type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">×</span>
     </button>
     <h4 class="modal-title" id="myModalLabel">
@@ -1448,39 +928,21 @@
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <span class="">Milestone</span>
-          <input
-            name="kpiObjective"
-            type="text"
-            class="form-control"
-            style="padding-bottom:10px;"
-            placeholder="Example: Working out"
-            name="milestone"
-            [(ngModel)]="milestoneMilestoneEdit"
-          />
+          <input name="kpiObjective" type="text" class="form-control" style="padding-bottom:10px;"
+            placeholder="Example: Working out" name="milestone" [(ngModel)]="milestoneMilestoneEdit" />
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <span class="">Due Date</span>
-          <input
-            name="qty"
-            type="date"
-            class="form-control"
-            style="line-height:normal !important;padding-bottom:9px;"
-            placeholder="mm-dd-yyyy"
-            name="milestoneDueDate"
-            [(ngModel)]="milestoneDueDateEdit"
-            (change)="updateQuarterList()"
-          />
+          <input name="qty" type="date" class="form-control" style="line-height:normal !important;padding-bottom:9px;"
+            placeholder="mm-dd-yyyy" name="milestoneDueDate" [(ngModel)]="milestoneDueDateEdit"
+            (change)="updateQuarterList()" />
         </div>
       </div>
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <mat-form-field appearance="fill" style="width:100%;">
             <mat-label>Status</mat-label>
-            <mat-select
-              class="form-control"
-              [(ngModel)]="milestoneStatusEdit"
-              name="milestoneStatus"
-            >
+            <mat-select class="form-control" [(ngModel)]="milestoneStatusEdit" name="milestoneStatus">
               <mat-option *ngFor="let c of charp" [value]="c.value">{{
                 c.viewValue
               }}</mat-option>
@@ -1490,13 +952,8 @@
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <mat-form-field appearance="fill" style="width:100%;">
             <mat-label>Assigned</mat-label>
-            <mat-select
-              class="form-control"
-              [(ngModel)]="milestoneAssignedUidEdit"
-              name="milestoneAssigned"
-              (selectionChange)="updateQuarterList()"
-              disabled
-            >
+            <mat-select class="form-control" [(ngModel)]="milestoneAssignedUidEdit" name="milestoneAssigned"
+              (selectionChange)="updateQuarterList()" disabled>
               <mat-option [value]="milestoneEditMilestone.uID">{{
                 milestoneEditMilestone.User
               }}</mat-option>
@@ -1508,48 +965,31 @@
         <div class="col-xl-6 col-lg-6" style="padding-left:1px !important;">
           <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
             Recurring
-            <div
-              class="row"
-              [ngClass]="
+            <div class="row" [ngClass]="
                 milestoneRecurringEdit ? 'isRecurring' : 'isNotRecurring'
               "
               style="border-style:solid;border-width:2px;height:30px;margin-left:10px;margin-bottom:10px;margin-top:5px;max-width:75px;cursor:pointer;"
-              (click)="setMilestoneRecurringEdit()"
-            >
+              (click)="setMilestoneRecurringEdit()">
               <div *ngIf="milestoneRecurringEdit" style="height:100%;">
-                <div
-                  class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                  style="vertical-align:middle;padding-top:2px;color:#337ab7"
-                ></div>
-                <div
-                  class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                  style="background-color:#337ab7;height:100%;"
-                ></div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                  style="vertical-align:middle;padding-top:2px;color:#337ab7"></div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6" style="background-color:#337ab7;height:100%;">
+                </div>
               </div>
               <div *ngIf="!milestoneRecurringEdit" style="height:100%;">
-                <div
-                  class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                  style="background-color:#666666;height:100%;"
-                ></div>
-                <div
-                  class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
-                  style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"
-                ></div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6" style="background-color:#666666;height:100%;">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6"
+                  style="vertical-align:middle;padding-top:2px;color:#666666;text-align:right;"></div>
               </div>
             </div>
           </div>
-          <div
-            class="col-xl-7 col-lg-7 col-md-6 col-sm-12"
-            style="padding-right:0px !important;"
-          >
+          <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12" style="padding-right:0px !important;">
             <div *ngIf="milestoneRecurringEdit">
               <mat-form-field appearance="fill" style="width:100%;">
                 <mat-label>Frequency</mat-label>
-                <mat-select
-                  class="form-control"
-                  [(ngModel)]="milestoneRecurringFrequencyEdit"
-                  name="milestoneRecurringFrequency"
-                >
+                <mat-select class="form-control" [(ngModel)]="milestoneRecurringFrequencyEdit"
+                  name="milestoneRecurringFrequency">
                   <mat-option *ngFor="let f of frequency" [value]="f.value">{{
                     f.viewValue
                   }}</mat-option>
@@ -1560,15 +1000,8 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
           Comments
-          <textarea
-            name="milestoneEditNote"
-            id="id_MilestoneEditNote"
-            [(ngModel)]="milestoneNoteEdit"
-            cols="30"
-            rows="2"
-            class=""
-            style="width:100%;margin-top:5px;border-color:#d9d9d9 !important;"
-          ></textarea>
+          <textarea name="milestoneEditNote" id="id_MilestoneEditNote" [(ngModel)]="milestoneNoteEdit" cols="30"
+            rows="2" class="" style="width:100%;margin-top:5px;border-color:#d9d9d9 !important;"></textarea>
         </div>
       </div>
     </div>
@@ -1577,30 +1010,18 @@
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="">
-          <button
-            type="submit"
-            data-dismiss="modal"
-            class="btn btn-primary"
-            *ngIf="
+          <button type="submit" data-dismiss="modal" class="btn btn-primary" *ngIf="
               !milestoneAssignedEdit ||
               !milestoneDueDateEdit ||
               !milestoneMilestoneEdit
-            "
-            disabled
-          >
+            " disabled>
             <b>Update</b>
           </button>
-          <button
-            type="submit"
-            data-dismiss="modal"
-            class="btn btn-primary"
-            (click)="updateMilestoneData()"
-            *ngIf="
+          <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="updateMilestoneData()" *ngIf="
               milestoneAssignedEdit &&
               milestoneDueDateEdit &&
               milestoneMilestoneEdit
-            "
-          >
+            ">
             <b>Update</b>
           </button>
           <!-- <button type="submit" data-dismiss="modal" class="btn btn-danger" style='margin-left:0px !important;' (click)='modalRef.hide();showModal(deleteMilestoneTemplate,"modal-sm");'><b>Delete</b></button> -->
@@ -1615,13 +1036,7 @@
     <h4 class="modal-title" id="myModalLabel">
       Meeting Conclusion
     </h4>
-    <button
-      type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">×</span>
     </button>
   </div>
@@ -1630,8 +1045,7 @@
       <label class="input-label">Meeting Score ( out of 10 )</label>
       <div class="increment-div">
         <a (click)="incrementMeetingScore('down')">
-          <i class="fas fa-minus-circle"></i
-        ></a>
+          <i class="fas fa-minus-circle"></i></a>
         <!-- <input
           type="number"
           class="form-control nform-control"
@@ -1644,32 +1058,19 @@
         <div class="form-control nform-control">
           {{ activeMeetingScore }}
         </div>
-        <a (click)="incrementMeetingScore('up')"
-          ><i class="fas fa-plus-circle"></i
-        ></a>
+        <a (click)="incrementMeetingScore('up')"><i class="fas fa-plus-circle"></i></a>
       </div>
     </div>
     <hr class="mt-1 mb-1" />
     <div class="form-group">
       <label class="input-label">Meeting Conclusion</label>
-      <textarea
-        [(ngModel)]="activeMeetingScoreNotes"
-        name="nm_MtgScoreScoreNotes"
-        cols="30"
-        rows="10"
-        class="form-control nform-control"
-        placeholder="Write the conclusion you get from this meeting"
-      ></textarea>
+      <textarea [(ngModel)]="activeMeetingScoreNotes" name="nm_MtgScoreScoreNotes" cols="30" rows="10"
+        class="form-control nform-control" placeholder="Write the conclusion you get from this meeting"></textarea>
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="submit"
-      data-dismiss="modal"
-      class="btn btn-primary"
-      *ngIf="meetingInProgress"
-      (click)="concludeMeeting(activeMeeting)"
-    >
+    <button type="submit" data-dismiss="modal" class="btn btn-primary" *ngIf="meetingInProgress"
+      (click)="concludeMeeting(activeMeeting)">
       <b>Save and Finish</b>
     </button>
   </div>
