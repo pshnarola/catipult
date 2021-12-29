@@ -25,6 +25,7 @@ import { MeetingPreviewComponent } from './meeting-preview/meeting-preview.compo
 import { IssueModule } from '../issue/issue.module'
 import { MilestonesModule } from '../../shared/components/milestones/milestones.module';
 import { KpiModule } from '../../shared/components/kpi/kpi.module';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { KpiModule } from '../../shared/components/kpi/kpi.module';
     OwlNativeDateTimeModule,
     IssueModule,
     MilestonesModule,
-    KpiModule
+    KpiModule,
+    TypeaheadModule.forRoot()
   ],
   providers: [SharedDataService, MeetingDataService, DataServiceService, TeamLevelAllDataService, IssueDataService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
