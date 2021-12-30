@@ -342,9 +342,14 @@
                           <h3>Agenda</h3>
                           <div class="agenda-list">
                             <ul>
-                              <li *ngFor="let a of activeMeetingData.timerData">
+                              <li
+                                *ngFor="
+                                  let a of activeMeetingData.timerData;
+                                  let i = index
+                                "
+                              >
                                 <div class="agenda-info">
-                                  <div class="agenda-img"></div>
+                                  <div class="agenda-img">{{ i + 1 }}</div>
                                   <div class="agenda-name">
                                     <p>
                                       <a class="agenda-item">{{ a.name }} </a>
@@ -384,7 +389,7 @@
                           <hr class="mr--10 ml--10 mt-0 mb-0" />
                           <div class="meeting-notes-wrap">
                             <div class="form-group">
-                              <label>Meeting Conclusion</label>
+                              <label>Meeting Notes</label>
                               <p>
                                 {{ activeMeetingData.meetingNotes }}
                               </p>
