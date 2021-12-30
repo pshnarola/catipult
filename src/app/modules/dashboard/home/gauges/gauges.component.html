@@ -10,10 +10,11 @@
           <h3 *ngIf="dashStatus">
             {{ you && you.driverName ? you.driverName : "" }}
           </h3>
-          <h4 *ngIf="!you || !you.total || you.total - you.dCount == 0">
+          <h5 *ngIf="!you || !you.total || you.total - you.dCount == 0">
             No Activity
-          </h4>
-          <h4 *ngIf="dashStatus">
+          </h5>
+          
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':you.pCount / (you.total - you.dCount) < .36 ? '#AE1905' : you.pCount / (you.total - you.dCount) < .51 ? '#DC4614' : you.pCount / (you.total - you.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{ you.pCount / (you.total - you.dCount) | percent }}
           </h4>
         </mat-card>
@@ -38,7 +39,7 @@
           >
             No Activity
           </h5>
-          <h4 *ngIf="dashStatus">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':leadership.pCount / (leadership.total - leadership.dCount) < .36 ? '#AE1905' : leadership.pCount / (leadership.total - leadership.dCount) < .51 ? '#DC4614' : leadership.pCount / (leadership.total - leadership.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{
               leadership.pCount / (leadership.total - leadership.dCount)
                 | percent
@@ -64,11 +65,11 @@
           >
             No Activity
           </h5>
-          <h5 *ngIf="dashStatus" class="cardBody">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':employees.pCount / (employees.total - employees.dCount) < .36 ? '#AE1905' : employees.pCount / (employees.total - employees.dCount) < .51 ? '#DC4614' : employees.pCount / (employees.total - employees.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{
               employees.pCount / (employees.total - employees.dCount) | percent
             }}
-          </h5>
+          </h4>
         </mat-card>
       </div>
       <div
@@ -89,11 +90,11 @@
           >
             No Activity
           </h5>
-          <h5 *ngIf="dashStatus" class="cardBody">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':customers.pCount / (customers.total - customers.dCount) < .36 ? '#AE1905' : customers.pCount / (customers.total - customers.dCount) < .51 ? '#DC4614' : customers.pCount / (customers.total - customers.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{
               customers.pCount / (customers.total - customers.dCount) | percent
             }}
-          </h5>
+          </h4>
         </mat-card>
       </div>
       <div
@@ -123,12 +124,12 @@
           >
             No Activity
           </h5>
-          <h5 *ngIf="dashStatus" class="cardBody">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':financialPartners.pCount / (financialPartners.total - financialPartners.dCount) < .36 ? '#AE1905' : financialPartners.pCount / (financialPartners.total - financialPartners.dCount) < .51 ? '#DC4614' : financialPartners.pCount / (financialPartners.total - financialPartners.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{
               financialPartners.pCount /
                 (financialPartners.total - financialPartners.dCount) | percent
             }}
-          </h5>
+          </h4>
         </mat-card>
       </div>
       <div
@@ -143,9 +144,9 @@
           <h5 *ngIf="!cash || !cash.total || cash.total - cash.dCount == 0">
             No Activity
           </h5>
-          <h5 *ngIf="dashStatus" class="cardBody">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':cash.pCount / (cash.total - cash.dCount) < .36 ? '#AE1905' : cash.pCount / (cash.total - cash.dCount) < .51 ? '#DC4614' : cash.pCount / (cash.total - cash.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{ cash.pCount / (cash.total - cash.dCount) | percent }}
-          </h5>
+          </h4>
         </mat-card>
       </div>
       <div
@@ -164,9 +165,9 @@
           >
             No Activity
           </h5>
-          <h5 *ngIf="dashStatus" class="cardBody">
+          <h4 *ngIf="dashStatus" [ngStyle]="{'color':growth.pCount / (growth.total - growth.dCount) < .36 ? '#AE1905' : growth.pCount / (growth.total - growth.dCount) < .51 ? '#DC4614' : growth.pCount / (growth.total - growth.dCount) <.91 ? '#0C5292' : '#0C924A' }">
             {{ growth.pCount / (growth.total - growth.dCount) | percent }}
-          </h5>
+          </h4>
         </mat-card>
       </div>
     </div>
@@ -543,7 +544,7 @@
           </a>
         </div>
       </div>
-      <div class="livestream-wrapper">
+      <!-- <div class="livestream-wrapper">
         <h3>Summit Livestream</h3>
         <div class="video-wrapper"></div>
         <div class="stream-footer">
@@ -555,7 +556,7 @@
           </div>
           <span class="warning-tag">Video</span>
         </div>
-      </div>
+      </div> -->
       <div class="livestream-wrapper mt-1">
         <h3>Dashboard Issue Test - 1</h3>
         <div class="milestone-wrapper">
@@ -569,7 +570,7 @@
               Karen Smith
             </div>
           </div>
-          <span class="warning-tag">Video</span>
+          <span class="warning-tag">Help</span>
         </div>
       </div>
       <div class="livestream-wrapper mt-1">

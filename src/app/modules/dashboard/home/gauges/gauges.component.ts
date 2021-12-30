@@ -88,10 +88,9 @@ export class GaugesComponent implements OnInit {
         this.financialPartners = data[4];
         this.cash = data[5];
         this.growth = data[6];
-
-        Object.keys(data).forEach(function(i){
-          this.getChart(data[i].pCount,data[i].total-data[i].dCount,data[i].driverName);
-        },this);  
+        // Object.keys(data).forEach(function(i){
+        //   this.getChart(data[i].pCount,data[i].total-data[i].dCount,data[i].driverName);
+        // },this);  
 
     });  
 
@@ -119,39 +118,39 @@ export class GaugesComponent implements OnInit {
     this.driverDataSubscription ? this.driverDataSubscription.unsubscribe() : null;
   }
 
-  getChart(achieved:number, total:number, label: string):void {
+  // getChart(achieved:number, total:number, label: string):void {
     
-    document.getElementById(`chart-${label}`).innerHTML=`<canvas id="myChart-${label}" width="100" height="100"></canvas>`;
+  //   document.getElementById(`chart-${label}`).innerHTML=`<canvas id="myChart-${label}" width="100" height="100"></canvas>`;
 
-    this.canvas = document.getElementById(`myChart-${label}`);
-    this.ctx = this.canvas.getContext('2d');
+  //   this.canvas = document.getElementById(`myChart-${label}`);
+  //   this.ctx = this.canvas.getContext('2d');
 
 
-    this.myChart = new Chart(this.ctx, {
-      type: 'doughnut',
-      data: {
-          labels: ['Plan','Other'],
-          datasets: [{
-              label: label,
-              data: [achieved,total-achieved],
-              backgroundColor: [
-                  achieved/total < .36 ? '#FA3E4B' : achieved/total < .51 ? '#FE9801' : achieved/total<.91 ? '#FFE75E' : '#28DF99'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        rotation: .75 * Math.PI,
-        circumference: 1.5 * Math.PI,
-        cutoutPercentage: 85
-      }
-    });
-  }
+  //   this.myChart = new Chart(this.ctx, {
+  //     type: 'doughnut',
+  //     data: {
+  //         labels: ['Plan','Other'],
+  //         datasets: [{
+  //             label: label,
+  //             data: [achieved,total-achieved],
+  //             backgroundColor: [
+  //                 achieved/total < .36 ? '#FA3E4B' : achieved/total < .51 ? '#FE9801' : achieved/total<.91 ? '#FFE75E' : '#28DF99'
+  //             ],
+  //             borderWidth: 1
+  //         }]
+  //     },
+  //     options: {
+  //       legend: {
+  //         display: false
+  //       },
+  //       responsive: true,
+  //       maintainAspectRatio: true,
+  //       rotation: .75 * Math.PI,
+  //       circumference: 1.5 * Math.PI,
+  //       cutoutPercentage: 85
+  //     }
+  //   });
+  // }
 
   setCardToggle():void{
 
