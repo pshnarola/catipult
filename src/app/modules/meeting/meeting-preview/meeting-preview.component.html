@@ -115,7 +115,7 @@
           <ul>
             <li *ngFor="let t of meetingData.timerData; let i = index">
               <div class="agenda-info">
-                <div class="agenda-img"></div>
+                <div class="agenda-img">{{ i + 1 }}</div>
                 <div class="agenda-name">
                   <p>
                     <a class="agenda-item">{{ t.name }} </a>

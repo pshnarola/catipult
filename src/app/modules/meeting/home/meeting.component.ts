@@ -1081,45 +1081,45 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   getMilestoneData(a: any): void {
-    this.activeMeeting.displayMilestones = true;
-    this.activeMeeting.displayIssues = false;
-    this.activeMeeting.displayKPI = false;
-    if (this.meetingInProgress) {
-      for (const u in this.activeMeeting.attendees) {
-        this.activeMeeting.attendees[u].selected = false;
-        if (a["uID"] == this.activeMeeting.attendees[u].uID) {
-          if (this.isApprovedUser(a.uID)) {
-            this.activeMeeting.attendees[u].selected = true;
+    if(a === null) {
+      this.activeMeeting.displayMilestones = true;
+      this.activeMeeting.displayIssues = false;
+      this.activeMeeting.displayKPI = false;
+    } else {
+      if (this.meetingInProgress) {
+        for (const u in this.activeMeeting.attendees) {
+          this.activeMeeting.attendees[u].selected = false;
+          if (a["uID"] == this.activeMeeting.attendees[u].uID) {
+            if (this.isApprovedUser(a.uID)) {
+              this.activeMeeting.attendees[u].selected = true;
+            }
           }
         }
-      }
-      console.log(
-        ": ===> !this.activeMeetingUid || this.activeMeetingUid!=a.uID",
-        !this.activeMeetingUid || this.activeMeetingUid != a.uID
-      );
-      if (!this.activeMeetingUid || this.activeMeetingUid != a.uID) {
-        if (this.isApprovedUser(a.uID)) {
-          this.activeMeetingUid = a.uID;
-          this.activeMeeting.activeUser = a;
-          this.activeMeeting.activeUser.filterIssues = false;
-          this.dataService.getUserMilestones(a.uID);
-          this.activeMeetingDisplayMilestones = true;
+  
+        if (!this.activeMeetingUid || this.activeMeetingUid != a.uID) {
+          if (this.isApprovedUser(a.uID)) {
+            this.activeMeetingUid = a.uID;
+            this.activeMeeting.activeUser = a;
+            this.activeMeeting.activeUser.filterIssues = false;
+            this.dataService.getUserMilestones(a.uID);
+            this.activeMeetingDisplayMilestones = true;
+          } else {
+            notification.notification(
+              "Info",
+              "You are not authorized to view this user's milestones.",
+              5000
+            );
+            this.activeMeeting.activeUser = null;
+            this.activeMeeting.activeUser = null;
+            this.activeMeetingUid = null;
+            this.activeMeetingDisplayMilestones = false;
+          }
         } else {
-          notification.notification(
-            "Info",
-            "You are not authorized to view this user's milestones.",
-            5000
-          );
-          this.activeMeeting.activeUser = null;
+          this.activeMeetingDisplayMilestones = !this
+            .activeMeetingDisplayMilestones;
           this.activeMeeting.activeUser = null;
           this.activeMeetingUid = null;
-          this.activeMeetingDisplayMilestones = false;
         }
-      } else {
-        this.activeMeetingDisplayMilestones = !this
-          .activeMeetingDisplayMilestones;
-        this.activeMeeting.activeUser = null;
-        this.activeMeetingUid = null;
       }
     }
   }
