@@ -1404,20 +1404,35 @@ export class DataServiceService {
     this.apiService.get(url).subscribe(
       response => {
         this.kpiMilestones = [];
-        for (const key in response.kpis) {
+        for (const key in response.payload[0]) {
           this.kpiMilestones.push({
-            objective: response.kpis[key].objective,
-            qty: response.kpis[key].qty,
-            unit: response.kpis[key].unit,
-            achieveQty: response.kpis[key].achieveQty,
-            Milestones: response.kpis[key].Milestones,
+            objective: response.payload[0][key].objective,
+            qty: response.payload[0][key].qty,
+            unit: response.payload[0][key].unit,
+            achieveQty: response.payload[0][key].achieveQty,
+            Milestones: response.payload[0][key].Milestones,
             cinput: false,
-            kpiID: response.kpis[key].kpiID,
-            isCorporateKpi: response.kpis[key].isCorporateKpi
+            kpiID: response.payload[0][key].kpiID,
+            isCorporateKpi: response.payload[0][key].isCorporateKpi,
+            isDelegated: response.payload[0][key].KpiDelegates.length > 0 ? true : false
           });
-          this.getKpiHistory(response.kpis[key].kpiID);
+          this.getKpiHistory(response.payload[0][key].kpiID);
         }
 
+        for (const key in response.payload[1]) {
+          this.kpiMilestones.push({
+            objective: response.payload[1][key].objective,
+            qty: response.payload[1][key].qty,
+            unit: response.payload[1][key].unit,
+            achieveQty: response.payload[1][key].achieveQty,
+            Milestones: response.payload[1][key].Milestones,
+            cinput: false,
+            kpiID: response.payload[1][key].kpiID,
+            isCorporateKpi: response.payload[1][key].isCorporateKpi,
+            isDelegated: true
+          });
+          this.getKpiHistory(response.payload[1][key].kpiID);
+        }
         this.mileStonedataSource.next(this.kpiMilestones);
       },
       error => {
