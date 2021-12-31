@@ -405,8 +405,9 @@ export class MeetingDataService implements OnDestroy{
     var data:any = [];
     this.dataSubscription.push(this.apiService.get(`/v1/meetingUser?uID=${uID}`).subscribe(response => {
           for (const key in response.payload) {
+              // console.log(': ===> response.payload[key].meeting.meetingUsers', response.payload[key].meeting);
                 data.push({
-                  attendees:null,
+                  attendees:response.payload[key].meeting.meetingUsers,
                   meeting:response.payload[key].meeting.meetingName,
                   meetingUserId:response.payload[key].meetingUserId,
                   meetingDate:response.payload[key].meeting.meetingDate,
