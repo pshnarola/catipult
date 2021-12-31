@@ -1974,6 +1974,9 @@ button + button {
     }
   }
 }
+.feedback-wrapper{
+  margin-bottom: 20px;
+}
 .card-header {
   display: flex;
   align-items: center;
@@ -2012,6 +2015,12 @@ button + button {
         color: #474f59;
       }
     }
+    .open {
+      background: #ffffff;
+      border: 1px solid #00a9ff;
+      box-sizing: border-box;
+      border-radius: 6px;
+    }
   }
 }
 .collapse-card {
@@ -2019,6 +2028,7 @@ button + button {
     border: 1px solid #dae3e8;
     padding: 0px;
     border-radius: 12px;
+    margin-bottom: 5px;
     table {
       width: 100%;
       thead {
@@ -2221,6 +2231,11 @@ button + button {
       border-radius: 100px;
     }
   }
+}
+.issue-card{
+  overflow: auto;
+  max-height: 290px;
+  padding: 0px 3px 0px 0px;
 }
 .livestream-wrapper {
   border: 1px solid #dae3e8;

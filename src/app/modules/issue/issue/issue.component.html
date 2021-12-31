@@ -1,4 +1,4 @@
-<div class="icon-grid">
+<!-- <div class="icon-grid">
   <i
     class="fas fa-plus"
     style="color: #1f2532;cursor:pointer;padding-right:5px;"
@@ -39,8 +39,8 @@
       style="padding-left:5px;cursor:pointer; color: #1f2532;"
     ></i
   ></a>
-</div>
-<div class="custom-table">
+</div> -->
+<!-- <div class="custom-table">
   <div class="table-responsive">
     <table
       mat-table
@@ -98,6 +98,111 @@
       <tr mat-header-row *matHeaderRowDef="issueColumns"></tr>
       <tr mat-row *matRowDef="let element; columns: issueColumns"></tr>
     </table>
+  </div>
+</div> -->
+
+
+<div class="feedback-wrapper">
+  <div class="card-header">
+    <div class="title-wraper">
+      <h4 _ngcontent-ykl-c5="">Issue To Disscuss</h4>
+    </div>
+    <div class="action-wrap">
+      <a class="add-btn" (click)="showModal(t_newIssue, 'modal-sm'); initializeNewIssue()">
+        <svg _ngcontent-pbd-c5="" fill="none" height="25" viewBox="0 0 24 25" width="24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-pbd-c5=""
+            d="M12 9.5V12.5M12 12.5V15.5M12 12.5H15M12 12.5H9M21 12.5C21 17.4706 16.9706 21.5 12 21.5C7.02944 21.5 3 17.4706 3 12.5C3 7.52944 7.02944 3.5 12 3.5C16.9706 3.5 21 7.52944 21 12.5Z"
+            stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </a>
+      <a class="filter-btn ml-15" (click)="showIssueArchive(!displayIssueArchive)">
+        <svg _ngcontent-dkb-c5="" fill="none" height="24" viewBox="0 0 24 24" width="24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-dkb-c5=""
+            d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V6.58579C21 6.851 20.8946 7.10536 20.7071 7.29289L14.2929 13.7071C14.1054 13.8946 14 14.149 14 14.4142V17L10 21V14.4142C10 14.149 9.89464 13.8946 9.70711 13.7071L3.29289 7.29289C3.10536 7.10536 3 6.851 3 6.58579V4Z"
+            stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="issue-card">
+    <div class="livestream-wrapper mt-1" *ngFor="let issue of issueDataActive; let i = index">
+      <h3>{{issue.issueName}}</h3>
+      <div class="milestone-wrapper">
+        <span>Milestone:</span>
+        <span>Q3 Strategic Marketing</span>
+      </div>
+      <div class="stream-footer">
+        <div class="user-description">
+          <div class="user-detail">
+            <div class="user-img"></div>
+            {{issue.User.name}} {{issue.User.lname}}
+          </div>
+        </div>
+        <span class="warning-tag">{{issue.issueStatus === 'C' ? "Change" : issue.issueStatus === 'H' ? "Help" : issue.issueStatus === 'A' ? "Aware" : issue.issueStatus === 'R' ? "Redirect" : issue.issueStatus === 'P' ? "Planning"  : issue.issueStatus === 'D' ? "Done" : "" }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="feedback-wrapper">
+  <div class="card-header">
+    <div class="title-wraper">
+      <h4 _ngcontent-ykl-c5="">45-Day Action Items</h4>
+    </div>
+    <div class="action-wrap">
+      <a class="add-btn">
+        <svg _ngcontent-pbd-c5="" fill="none" height="25" viewBox="0 0 24 25" width="24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-pbd-c5=""
+            d="M12 9.5V12.5M12 12.5V15.5M12 12.5H15M12 12.5H9M21 12.5C21 17.4706 16.9706 21.5 12 21.5C7.02944 21.5 3 17.4706 3 12.5C3 7.52944 7.02944 3.5 12 3.5C16.9706 3.5 21 7.52944 21 12.5Z"
+            stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </a>
+      <a class="filter-btn ml-15">
+        <svg _ngcontent-dkb-c5="" fill="none" height="24" viewBox="0 0 24 24" width="24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path _ngcontent-dkb-c5=""
+            d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V6.58579C21 6.851 20.8946 7.10536 20.7071 7.29289L14.2929 13.7071C14.1054 13.8946 14 14.149 14 14.4142V17L10 21V14.4142C10 14.149 9.89464 13.8946 9.70711 13.7071L3.29289 7.29289C3.10536 7.10536 3 6.851 3 6.58579V4Z"
+            stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="issue-card">
+    <div class="livestream-wrapper mt-1">
+      <h3>Dashboard Issue Test - 1</h3>
+      <div class="milestone-wrapper">
+        <span>Milestone:</span>
+        <span>Q3 Strategic Marketing</span>
+      </div>
+      <div class="stream-footer">
+        <div class="user-description">
+          <div class="user-detail">
+            <div class="user-img"></div>
+            Karen Smith
+          </div>
+        </div>
+        <span class="warning-tag">Help</span>
+      </div>
+    </div>
+    <div class="livestream-wrapper mt-1">
+      <h3>LDP Participation</h3>
+      <div class="milestone-wrapper">
+        <span>Milestone:</span>
+        <span>Q3 Strategic Marketing</span>
+      </div>
+      <div class="stream-footer">
+        <div class="user-description">
+          <div class="user-detail">
+            <div class="user-img"></div>
+            Karen Smith
+          </div>
+        </div>
+        <span class="warning-tag">Help</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -250,3 +355,5 @@
     </div>
   </div>
 </ng-template>
+
+

@@ -15,6 +15,7 @@ import { DateTime } from "luxon";
 })
 export class KpiDashboardComponent implements OnInit {
   modalRef: BsModalRef;
+  isActive:boolean = false;
 
   // Data Subscriptions
   milestoneDataSubscription: Subscription;
@@ -478,6 +479,22 @@ export class KpiDashboardComponent implements OnInit {
     this.editKpiReportTarget = latestReport.budgetAmount;
     this.editKpiReportActual = 0;
   }
+
+  expand(index) {
+    this.kpiMileData[index].isActive = !this.kpiMileData[index].isActive;
+  }
+
+  expandAll() {
+    console.log(': ===> 122', 122);
+    if(this.isActive) {
+      this.isActive = false;
+      this.kpiMileData.map(item => item.isActive = false );
+    } else {
+      this.isActive = true;
+      this.kpiMileData.map(item => item.isActive = true );
+    }
+  }
+
 }
 
 export interface ReportingFrequency {

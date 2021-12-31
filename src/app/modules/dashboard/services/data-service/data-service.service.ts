@@ -1414,7 +1414,8 @@ export class DataServiceService {
             cinput: false,
             kpiID: response.payload[0][key].kpiID,
             isCorporateKpi: response.payload[0][key].isCorporateKpi,
-            isDelegated: response.payload[0][key].KpiDelegates.length > 0 ? true : false
+            isDelegated: response.payload[0][key].KpiDelegates.length > 0 ? true : false,
+            isActive: false
           });
           this.getKpiHistory(response.payload[0][key].kpiID);
         }
