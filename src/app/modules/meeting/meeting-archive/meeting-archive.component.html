@@ -1,48 +1,410 @@
-<div class="right_col ml230" role="main">
-    <div class="row">
-        <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="x_title">
-            <h2 style="color: #73879C !important;width:auto !important;">Meeting Archive<i [ngClass]='displayMeetingHistory ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='setMeetingArchiveDisplay();'></i></h2>
-            <a matTooltip="Show active meetings" matTooltipClass='toolTip' aria-label="Button that displays a tooltip when focused or hovered over"><i class='fas fa-box-open' style='color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;' (click)='goToActiveMeetings();'></i></a>
-            <div class="clearfix"></div>
-            </div>
-            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4' *ngIf='displayMeetingHistory'>
-                <mat-card class="base-card" style='min-height:50px;color: #73879C;' *ngFor='let m of meetingHistoryData; let i = index'>
-                    <mat-card-header class=''>
-                        <mat-card-title class='meeting' style='margin:0px; font-size:15px !important;'>{{ m.meetingName }} ({{ m.meetingHistory.length }})<i [ngClass]='meetingHistoryData && meetingHistoryData?.length>0 && meetingHistoryData[i].display=="expanded" ? "fas fa-angle-down" : "fas fa-angle-right"' style='padding-left:5px;cursor:pointer;' (click)='expandMeeting(i);'></i>
-                        </mat-card-title>
-                        
-                    </mat-card-header>
-                    <mat-card-content class='' style='padding-bottom:10px !important;' *ngIf='meetingHistoryData && meetingHistoryData?.length>0 && meetingHistoryData[i].display=="expanded"'>
-                        <div class="container">
-                            <div>
-                                <mat-card class="all-user-card" style='min-width:70px;' *ngFor='let h of m.meetingHistory; let j = index'>
-                                    <mat-card-header>
-                                        <mat-card-title class='portfolio-group-title standard-font meeting' style='margin-left:0px !important;font-size:1.1em;cursor:pointer;' (click)='showMeetingDetail(h);'>{{ h.meetingDate | date: 'MMM d, y, h:mm a' }}
-                                            <i class='meeting-item fas fa-times-circle' style='color:red; padding-left:5px !important;' (click)='$event.stopPropagation();deleteMeetingPrompt(i,j);' *ngIf='h.userRole=="Host"'></i>
-                                            <mat-card-subtitle class='' style='padding-top:10px!important;' *ngIf='h.deleteStatus || h.deleteStatus==""' (click)='$event.stopPropagation();'>
-                                                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
-                                                    <mat-form-field appearance = 'fill' style='font-size:12px;width'>
-                                                        <input name='editDeleteStatus' matInput style='border-bottom:rgb(200,200,200);border-bottom-width:1px;border-bottom-style: solid;' [(ngModel)]='h.deleteStatus' placeholder='delete'>
-                                                    </mat-form-field>    
-                                                </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                                                    <button class='btn btn-primary' *ngIf='!h.deleteStatus || h.deleteStatus.toLowerCase()!="delete"' disabled>Delete</button>
-                                                    <button class='btn btn-primary' (click)='deleteMeeting(h);' *ngIf='h.deleteStatus.toLowerCase()=="delete"'>Delete</button>  
-                                                </div>
-                                            </mat-card-subtitle>
-                                        </mat-card-title>
-                                    </mat-card-header>
-                                </mat-card>
-                            </div>    
+<!-- <div class="right_col ml230" role="main">
+  <div class="row">
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="x_title">
+        <h2 style="color: #73879C !important;width:auto !important;">
+          Meeting Archive<i
+            [ngClass]="
+              displayMeetingHistory ? 'fas fa-angle-down' : 'fas fa-angle-right'
+            "
+            style="padding-left:5px;cursor:pointer;"
+            (click)="setMeetingArchiveDisplay()"
+          ></i>
+        </h2>
+        <a
+          matTooltip="Show active meetings"
+          matTooltipClass="toolTip"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          ><i
+            class="fas fa-box-open"
+            style="color: #73879C;padding-left:15px;padding-top:5px;cursor:pointer;"
+            (click)="goToActiveMeetings()"
+          ></i
+        ></a>
+        <div class="clearfix"></div>
+      </div>
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4"
+        *ngIf="displayMeetingHistory"
+      >
+        <mat-card
+          class="base-card"
+          style="min-height:50px;color: #73879C;"
+          *ngFor="let m of meetingHistoryData; let i = index"
+        >
+          <mat-card-header class="">
+            <mat-card-title
+              class="meeting"
+              style="margin:0px; font-size:15px !important;"
+              >{{ m.meetingName }} ({{ m.meetingHistory.length }})<i
+                [ngClass]="
+                  meetingHistoryData &&
+                  meetingHistoryData?.length > 0 &&
+                  meetingHistoryData[i].display == 'expanded'
+                    ? 'fas fa-angle-down'
+                    : 'fas fa-angle-right'
+                "
+                style="padding-left:5px;cursor:pointer;"
+                (click)="expandMeeting(i)"
+              ></i>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content
+            class=""
+            style="padding-bottom:10px !important;"
+            *ngIf="
+              meetingHistoryData &&
+              meetingHistoryData?.length > 0 &&
+              meetingHistoryData[i].display == 'expanded'
+            "
+          >
+            <div class="container">
+              <div>
+                <mat-card
+                  class="all-user-card"
+                  style="min-width:70px;"
+                  *ngFor="let h of m.meetingHistory; let j = index"
+                >
+                  <mat-card-header>
+                    <mat-card-title
+                      class="portfolio-group-title standard-font meeting"
+                      style="margin-left:0px !important;font-size:1.1em;cursor:pointer;"
+                      (click)="showMeetingDetail(h)"
+                      >{{ h.meetingDate | date: "MMM d, y, h:mm a" }}
+                      {{ h.userRole }}
+                      <i
+                        class="meeting-item fas fa-times-circle"
+                        style="color:red; padding-left:5px !important;"
+                        (click)="
+                          $event.stopPropagation(); deleteMeetingPrompt(i, j)
+                        "
+                        *ngIf="h.userRole == 'Host'"
+                      ></i>
+                      <mat-card-subtitle
+                        class=""
+                        style="padding-top:10px!important;"
+                        *ngIf="h.deleteStatus || h.deleteStatus == ''"
+                        (click)="$event.stopPropagation()"
+                      >
+                        <div
+                          class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
+                        >
+                          <mat-form-field
+                            appearance="fill"
+                            style="font-size:12px;width"
+                          >
+                            <input
+                              name="editDeleteStatus"
+                              matInput
+                              style="border-bottom:rgb(200,200,200);border-bottom-width:1px;border-bottom-style: solid;"
+                              [(ngModel)]="h.deleteStatus"
+                              placeholder="delete"
+                            />
+                          </mat-form-field>
                         </div>
-                    </mat-card-content>
+                        <div
+                          class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
+                        >
+                          <button
+                            class="btn btn-primary"
+                            *ngIf="
+                              !h.deleteStatus ||
+                              h.deleteStatus.toLowerCase() != 'delete'
+                            "
+                            disabled
+                          >
+                            Delete
+                          </button>
+                          <button
+                            class="btn btn-primary"
+                            (click)="deleteMeeting(h)"
+                            *ngIf="h.deleteStatus.toLowerCase() == 'delete'"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </mat-card-subtitle>
+                    </mat-card-title>
+                  </mat-card-header>
                 </mat-card>
+              </div>
             </div>
-            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8' style='padding-top:25px;' *ngIf='displayMeetingDetail'>
-            <hr>
-                <app-meeting-detail [meetingData]='activeMeetingData'></app-meeting-detail>
-            </div>
-        </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div
+        class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8"
+        style="padding-top:25px;"
+        *ngIf="displayMeetingDetail"
+      >
+        <hr />
+        <app-meeting-detail
+          [meetingData]="activeMeetingData"
+        ></app-meeting-detail>
+      </div>
     </div>
+  </div>
+</div> -->
+
+<div class="right_col ml230 right_col nsidebar-content" role="main">
+  <div class="row">
+    <div class="x_panel col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="meeting-wrapper">
+        <div class="meeting-left">
+          <div class="meeting-list">
+            <div class="meeting-tab">
+              <ul class="nav">
+                <li class="nav-item" (click)="tabChange('rhythm')">
+                  <a class="nav-link" aria-current="page">Rhythm</a>
+                </li>
+                <li class="nav-item" (click)="tabChange('custom')">
+                  <a class="nav-link">Custom</a>
+                </li>
+              </ul>
+              <div class="nav-item">
+                <a class="nav-link"
+                  ><img src="assets/images/meeting/clipboard-check-solid.svg"
+                /></a>
+              </div>
+            </div>
+            <div
+              class="create-meeting-content"
+              *ngIf="meetingHistoryData && meetingHistoryData.length <= 0"
+            >
+              <div>
+                <h1>No completed meetings</h1>
+                <p>Once you finish your first meeting, it will appear here!</p>
+              </div>
+            </div>
+            <div
+              class="meeting-list-content-wrapper"
+              *ngIf="
+                displayMeetingHistory &&
+                meetingHistoryData &&
+                meetingHistoryData.length > 0
+              "
+            >
+              <div class="meeting-list-content">
+                <h3>Completed Meeting</h3>
+                <div class="meeting-list-item">
+                  <div *ngFor="let m of meetingHistoryData; let i = index">
+                    <mat-card
+                      class="base-card"
+                      (click)="getMeetingHistory(m.meetingId)"
+                      [ngClass]="{ active: m.meetingId === selectedMeetingId }"
+                    >
+                      <mat-card-header>
+                        <mat-card-title class="meeting"
+                          >{{ m.meetingName }} - {{ m.meetingHistory.length }}
+                        </mat-card-title>
+                        <mat-card-subtitle style="font-size:12px;"
+                          ><img src="assets/images/meeting/calendar.svg" />
+                          {{ m.meetingFrequency }}
+                        </mat-card-subtitle>
+                        <mat-card-subtitle style="font-size:12px;"
+                          ><img src="assets/images/meeting/clock.svg" />
+                          13:30 - 14:30 ⋅ 1 hour (static)
+                        </mat-card-subtitle>
+                      </mat-card-header>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="meeting-right">
+          <div class="create-meeting-text" *ngIf="!selectedMeetingId">
+            <div>
+              <h1>To see a Preview, please create your first meeting</h1>
+              <p>
+                To create your first meeting, select a few teammates and add
+                them to the schedule!
+              </p>
+            </div>
+          </div>
+
+          <div class="meeting-list-of-preview" *ngIf="selectedMeetingId">
+            <div class="meetings-detail">
+              <div class="row">
+                <div class="col-md-4" *ngIf="meetingHistory">
+                  <div class="complete-meeting-list">
+                    <h3>
+                      {{ meetingHistory.meetingName }} -
+                      {{ meetingHistory.meetingHistory.length }}
+                    </h3>
+                    <div
+                      class="complete-meeting"
+                      *ngIf="
+                        meetingHistory &&
+                        meetingHistory['meetingHistory'].length > 0
+                      "
+                    >
+                      <div
+                        class="card"
+                        *ngFor="
+                          let d of meetingHistory['meetingHistory'];
+                          let i = index
+                        "
+                        (click)="showMeetingDetail(d)"
+                        [ngClass]="{
+                          active:
+                            selectedMeetingHistoryId === d.meetingHistoryId
+                        }"
+                      >
+                        <h5>
+                          <img src="assets/images/meeting/calendar.svg" />{{
+                            d.meetingDate | date: "MMM d, y"
+                          }}
+                        </h5>
+                        <h5>
+                          <img
+                            _ngcontent-ouw-c7=""
+                            src="assets/images/meeting/clock.svg"
+                          />{{ d.meetingDate | date: "shortTime" }}
+                        </h5>
+                        <h5>
+                          <img
+                            _ngcontent-ouw-c7=""
+                            src="assets/images/meeting/attendant.svg"
+                          />Attendant:
+                          {{ getPresentUser(d.meetingUserHistories) }}/{{
+                            d.meetingUserHistories.length
+                          }}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-md-8 create-meeting-text"
+                  *ngIf="!displayMeetingDetail && !activeMeetingData"
+                >
+                  <div>
+                    <h1>To see a Preview, please select meeting from list.</h1>
+                  </div>
+                </div>
+                <div
+                  class="col-md-8"
+                  *ngIf="displayMeetingDetail && activeMeetingData"
+                >
+                  <div class="meeting-summary">
+                    <div class="meeting-summary-title">
+                      <h3>
+                        <img src="assets/images/meeting/calendar.svg" />{{
+                          activeMeetingData.meetingDate | date: "MMM d, y"
+                        }}
+                      </h3>
+                      <h3>
+                        <img src="assets/images/meeting/clock.svg" />{{
+                          activeMeetingData.meetingDate | date: "shortTime"
+                        }}
+                      </h3>
+                    </div>
+                    <hr class="mt-0 mb-0 ml--10" />
+                    <div class="row">
+                      <div class="col-md-5 meeting-summary-list-screen">
+                        <div class="attendee-content mt-1">
+                          <h3>
+                            Attendee List
+                          </h3>
+                          <div class="attendee-list">
+                            <ul>
+                              <li
+                                *ngFor="
+                                  let p of activeMeetingData.meetingUserHistories
+                                "
+                              >
+                                <div class="custom-checkbox">
+                                  <label>
+                                    <i
+                                      [ngClass]="
+                                        p.userStatus == 'present'
+                                          ? 'fas fa-check-circle green'
+                                          : 'fas fa-times-circle red'
+                                      "
+                                      style="padding-right:5px;"
+                                    ></i>
+                                  </label>
+                                </div>
+                                <div class="attendee-img"></div>
+                                <div class="attendee-name">
+                                  <a class="agenda-item"
+                                    >{{ p.User.name }} {{ p.User.lname }}</a
+                                  >
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <hr class="mt-1 mb-1 ml--10 mr--10" />
+                        <div class="agenda-content">
+                          <h3>Agenda</h3>
+                          <div class="agenda-list">
+                            <ul>
+                              <li
+                                *ngFor="
+                                  let a of activeMeetingData.timerData;
+                                  let i = index
+                                "
+                              >
+                                <div class="agenda-info">
+                                  <div class="agenda-img">{{ i + 1 }}</div>
+                                  <div class="agenda-name">
+                                    <p>
+                                      <a class="agenda-item">{{ a.name }} </a>
+                                    </p>
+                                    <p>
+                                      <a class="agenda-time"
+                                        >{{ a.display }}m</a
+                                      >
+                                    </p>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-7 meeting-summary-detail-screen">
+                        <div class="about-meeting">
+                          <div class="meeting-score">
+                            <h3>Meeting Score:</h3>
+                            <h6>
+                              {{
+                                activeMeetingData.meetingScore
+                                  ? activeMeetingData.meetingScore
+                                  : 0
+                              }}/10
+                            </h6>
+                          </div>
+                          <div class="meeting-conclusion">
+                            <div class="form-group">
+                              <label>Meeting Conclusion</label>
+                              <p>
+                                {{ activeMeetingData.scoreNotes }}
+                              </p>
+                            </div>
+                          </div>
+                          <hr class="mr--10 ml--10 mt-0 mb-0" />
+                          <div class="meeting-notes-wrap">
+                            <div class="form-group">
+                              <label>Meeting Notes</label>
+                              <p>
+                                {{ activeMeetingData.meetingNotes }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

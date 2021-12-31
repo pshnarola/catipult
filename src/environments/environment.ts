@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: "https://api.catipult.ai/api", // prod API on TMD Hosting
-  apiUrl:'https://test-api.catipult.ai/api', // test AWS api CDN, SSL 
+  apiUrl: "https://api.catipult.ai/api", // prod API on TMD Hosting
+  // apiUrl:'https://test-api.catipult.ai/api', // test AWS api CDN, SSL 
   imgUrl: "https://api.catipult.ai/",
   // videoUrl:'https://s3.amazonaws.com/catipult.ai.assets/videos/',
   videoUrl:'https://d3dbf8p1iggu5z.cloudfront.net/videos/',

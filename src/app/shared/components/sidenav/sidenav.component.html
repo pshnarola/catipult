@@ -1,14 +1,37 @@
-<div class="col-md-3 left_col menu_fixed w230 scrollbar">
+<div class="col-md-3 left_col menu_fixed w230 scrollbar nside-nav">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
       <a class="site_title p10">
-        <img src="assets/images/onboarding/step1/left-logo.png" class="img-responsive navmd" />
-        <span></span>
+        <img
+          src="assets/images/onboarding/step1/left-logo.png"
+          class="img-responsive navmd"
+        />
+        <img
+          src="assets/images/onboarding/step1/logo-icon.svg"
+          class="img-responsive navsm"
+        />
       </a>
     </div>
-    <div class="clearfix"></div>
+    <div class="nside-toggle">
+      <a id="menu_toggle" (click)="toggleClicked($event)">
+        <svg
+          width="20"
+          height="18"
+          viewBox="0 0 20 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M1.6 0.600005C2.26274 0.600005 2.8 1.13726 2.8 1.80001L2.8 16.2C2.8 16.8628 2.26274 17.4 1.6 17.4C0.937257 17.4 0.399999 16.8628 0.399999 16.2L0.4 1.80001C0.4 1.13726 0.937258 0.600005 1.6 0.600005ZM10.8485 4.55148C11.3172 5.02011 11.3172 5.7799 10.8485 6.24853L9.29706 7.80001L18.4 7.80001C19.0627 7.80001 19.6 8.33726 19.6 9.00001C19.6 9.66275 19.0627 10.2 18.4 10.2L9.29705 10.2L10.8485 11.7515C11.3172 12.2201 11.3172 12.9799 10.8485 13.4485C10.3799 13.9172 9.6201 13.9172 9.15147 13.4485L5.55147 9.84853C5.32643 9.62349 5.2 9.31827 5.2 9.00001C5.2 8.68175 5.32643 8.37652 5.55147 8.15148L9.15147 4.55148C9.6201 4.08285 10.3799 4.08285 10.8485 4.55148Z"
+            fill="white"
+          />
+        </svg>
+      </a>
+    </div>
     <!-- menu profile quick info -->
-    <div class="profile">
+    <!-- <div class="profile">
       <div class="profile_pic">
         <img src="{{ url }}" alt="" class="img-circle profile_img" />
       </div>
@@ -16,55 +39,175 @@
         <span>Welcome</span>
         <h2>{{ name }}</h2>
       </div>
-    </div>
+    </div> -->
     <!-- /menu profile quick info -->
-    <br />
     <!-- sidebar menu -->
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
       <div class="menu_section">
-        <div class="clearfix"></div>
         <ul class="nav side-menu">
-          <li><a id="dashboard" (click)="dash();" class='nav-link'><i class="fa fa-home"></i>My Dashboard</a></li>
-          <li><a id="reviewQuestions" (click)="rvQuestion();" class='nav-link'><i class="fas fa-comment-alt" style='font-weight: 400;'></i>Review Questions</a></li>
-          <li><a id="outcomeStatement" (click)="outStatement();" class='nav-link'><i class="fas fa-file-alt" style='font-weight: 400;'></i>Three Year Outcome</a></li>
-          <li><a id="companySetUp" (click)='goToCompanySetup();' class='nav-link'><i class="fas fa-house-user"></i>My Company</a></li>
-          <li><a id="meetings" *ngIf='organizationData && organizationData.features && organizationData.features.meetings && organizationData.features.meetings=="enabled"' (click)='goToMeetings();' class='nav-link'><i class="fas fa-users"></i>My Meetings</a></li>
-          <li><a id='portfolioView' (click)='showPortfolioView();' class='nav-link' *ngIf='isPortfolioAccount'><i class='fas fa-city'></i>Coaching Portfolio</a></li>
-          <li><a id='tutorials' (click)='goToTutorials();' class='nav-link'><i class="fas fa-video"></i>Tutorials</a></li>
-          <li><a id='featureRequest' (click)='showModal(suggestionModal,"modal-sm");' class='nav-link'><i class='fas fa-bullhorn'></i>Feature Request</a></li>
-          <li><a (click)='goToUrl("https://catipult.ai/blog/category/resources/");' class='nav-link'><i class='fas fa-blog'></i>catipult.ai Blog</a></li>
-          <li><a class='versionColor' style='cursor: default !important;'>Version: {{ version }}</a></li>
+          <li>
+            <a
+              id="dashboard"
+              (click)="dash()"
+              class="nav-link"
+              [ngClass]="{ active: myDashboard }"
+              ><i class="fa fa-home"></i>My Dashboard</a
+            >
+          </li>
+          <li>
+            <a id="reviewQuestions" (click)="rvQuestion()" class="nav-link"
+              ><i class="fas fa-comment-alt" style="font-weight: 400;"></i
+              >Review Questions</a
+            >
+          </li>
+          <li>
+            <a
+              id="outcomeStatement"
+              (click)="outStatement()"
+              class="nav-link"
+              [ngClass]="{ active: threeYearOutcome }"
+              ><i class="fas fa-file-alt" style="font-weight: 400;"></i>Three
+              Year Outcome</a
+            >
+          </li>
+          <li>
+            <a
+              id="companySetUp"
+              (click)="goToCompanySetup()"
+              class="nav-link"
+              [ngClass]="{ active: myCompany }"
+              ><i class="fas fa-house-user"></i>My Company</a
+            >
+          </li>
+          <!-- <li><a id="meetings" *ngIf='organizationData && organizationData.features && organizationData.features.meetings && organizationData.features.meetings=="enabled"' (click)='goToMeetings();' class='nav-link'><i class="fas fa-users"></i>My Meetings</a></li> -->
+          <li>
+            <a
+              id="meetings"
+              (click)="goToMeetings()"
+              class="nav-link"
+              [ngClass]="{ active: myMeeting }"
+              ><i class="fas fa-users"></i>My Meetings</a
+            >
+          </li>
+          <li>
+            <a
+              id="portfolioView"
+              (click)="showPortfolioView()"
+              class="nav-link"
+              *ngIf="isPortfolioAccount"
+              [ngClass]="{ active: portfolio }"
+              ><i class="fas fa-city"></i>Coaching Portfolio</a
+            >
+          </li>
+          <li>
+            <a
+              id="tutorials"
+              (click)="goToTutorials()"
+              class="nav-link"
+              [ngClass]="{ active: tutorials }"
+              ><i class="fas fa-video"></i>Tutorials</a
+            >
+          </li>
+          <li>
+            <a
+              id="featureRequest"
+              (click)="showModal(suggestionModal, 'modal-sm')"
+              class="nav-link"
+              ><i class="fas fa-bullhorn"></i>Feature Request</a
+            >
+          </li>
+          <li>
+            <a
+              (click)="goToUrl('https://catipult.ai/blog/category/resources/')"
+              class="nav-link"
+              ><i class="fas fa-blog"></i>catipult.ai Blog</a
+            >
+          </li>
+          <!-- <li><a class='versionColor' style='cursor: default !important;'>Version: {{ version }}</a></li> -->
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #suggestionModal>  
-  <div class="modal-header" style='padding-bottom:0 !important;'>  
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
-      <span aria-hidden="true">×</span>  
-    </button>  
+<ng-template #suggestionModal>
+  <div class="modal-header" style="padding-bottom:0 !important;">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
     <h4 class="modal-title">
       <div class="col-md-12 col-sm-12 col-xs-12 text_center">
-          <h1 style='font-size:25px; font-weight:500 !important;'>Feature Suggestion</h1>
+        <h1 style="font-size:25px; font-weight:500 !important;">
+          Feature Suggestion
+        </h1>
       </div>
     </h4>
-  </div>  
-  <div class="modal-body col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <mat-form-field appearance='fill' style='width:100%;'>
-      <mat-label style='font-size:17px; font-weight:500;'>Type</mat-label>
-      <mat-select class='form-control' [(ngModel)]='featureType' name='featureRequestType' style='height:auto !important; color: #73879C !important;'>
-        <mat-option *ngFor='let f of featureTypeList' [value]='f.value'>{{ f.viewValue }}</mat-option>
-      </mat-select>
-    </mat-form-field>  
-    <label for='newSuggestion'>Description <a *ngIf='featureDescription'><a [ngStyle]="{'color': featureDescription.length>255 ? 'red' : '#73879C'}">{{ featureDescription.length }}</a>/255</a></label>
-    <textarea name="featureRequestDescription" id="newSuggestion" cols="30" rows="6" style='width:100% !important; border-color: #d9d9d9 !important; font-size: 14px !important;' [(ngModel)]='featureDescription'></textarea>
   </div>
-  <div class="modal-footer" style='padding-left: 10px !important; padding-right: 10px !important;'>
-      <div class="col-md-12 col-sm-12 col-xs-12" style='padding:0 !important;'>
-        <button *ngIf='featureDescription && featureDescription.length<=255' type="submit" data-dismiss="modal" class="btn btn-primary" style='width:100%;' (click)='submitSuggestion();'><b>Submit</b></button>
-        <button *ngIf='!featureDescription || featureDescription.length>255' type="submit" data-dismiss="modal" class="btn btn-primary" style='width:100%;' disabled><b>Submit</b></button>
-      </div>
-  </div> 
-</ng-template> 
+  <div class="modal-body col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <mat-form-field appearance="fill" style="width:100%;">
+      <mat-label style="font-size:17px; font-weight:500;">Type</mat-label>
+      <mat-select
+        class="form-control"
+        [(ngModel)]="featureType"
+        name="featureRequestType"
+        style="height:auto !important; color: #73879C !important;"
+      >
+        <mat-option *ngFor="let f of featureTypeList" [value]="f.value">{{
+          f.viewValue
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label for="newSuggestion"
+      >Description
+      <a *ngIf="featureDescription"
+        ><a
+          [ngStyle]="{
+            color: featureDescription.length > 255 ? 'red' : '#73879C'
+          }"
+          >{{ featureDescription.length }}</a
+        >/255</a
+      ></label
+    >
+    <textarea
+      name="featureRequestDescription"
+      id="newSuggestion"
+      cols="30"
+      rows="6"
+      style="width:100% !important; border-color: #d9d9d9 !important; font-size: 14px !important;"
+      [(ngModel)]="featureDescription"
+    ></textarea>
+  </div>
+  <div
+    class="modal-footer"
+    style="padding-left: 10px !important; padding-right: 10px !important;"
+  >
+    <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0 !important;">
+      <button
+        *ngIf="featureDescription && featureDescription.length <= 255"
+        type="submit"
+        data-dismiss="modal"
+        class="btn btn-primary"
+        style="width:100%;"
+        (click)="submitSuggestion()"
+      >
+        <b>Submit</b>
+      </button>
+      <button
+        *ngIf="!featureDescription || featureDescription.length > 255"
+        type="submit"
+        data-dismiss="modal"
+        class="btn btn-primary"
+        style="width:100%;"
+        disabled
+      >
+        <b>Submit</b>
+      </button>
+    </div>
+  </div>
+</ng-template>

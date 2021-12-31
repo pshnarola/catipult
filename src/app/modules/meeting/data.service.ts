@@ -338,7 +338,8 @@ export class MeetingDataService implements OnDestroy{
           meetingName: response.payload[d].meetingName,
           meetingFrequency: response.payload[d].meetingFrequency,
           isActive: !response.payload[d].deactivationDate ? true : false,
-          meetingHistory: response.payload[d].meetingHistories
+          meetingHistory: response.payload[d].meetingHistories,
+          deactivationDate:response.payload[d].deactivationDate
         })
       }
       this.getMeetingHistoryDataSource.next(data);
@@ -404,9 +405,11 @@ export class MeetingDataService implements OnDestroy{
     var data:any = [];
     this.dataSubscription.push(this.apiService.get(`/v1/meetingUser?uID=${uID}`).subscribe(response => {
           for (const key in response.payload) {
+              // console.log(': ===> response.payload[key].meeting.meetingUsers', response.payload[key].meeting);
                 data.push({
-                  attendees:null,
+                  attendees:response.payload[key].meeting.meetingUsers,
                   meeting:response.payload[key].meeting.meetingName,
+                  meetingUserId:response.payload[key].meetingUserId,
                   meetingDate:response.payload[key].meeting.meetingDate,
                   meetingFrequency:response.payload[key].meeting.meetingFrequency,
                   meetingId:response.payload[key].meeting.meetingId,
