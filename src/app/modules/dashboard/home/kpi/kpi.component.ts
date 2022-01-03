@@ -222,6 +222,7 @@ export class KpiDashboardComponent implements OnInit {
 
     this.milestoneDataSubscription = this.dataservice.milestonedata.subscribe(
       data => {
+        this.isActive = false;
         this.kpiMileData = data;
         if (this.kpiMileData != null) {
           this.kpiMileData.forEach((element, id) => {});
@@ -481,6 +482,9 @@ export class KpiDashboardComponent implements OnInit {
   }
 
   expand(index) {
+    if(this.kpiMileData[index].isActive) {
+      this.isActive = false;
+    }
     this.kpiMileData[index].isActive = !this.kpiMileData[index].isActive;
   }
 

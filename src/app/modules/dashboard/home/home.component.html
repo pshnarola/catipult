@@ -76,126 +76,7 @@
       </div>
     </div>
     <hr class="mt-1 mb-0" />
-    <div class="team-wrapper">
-      <div class="row">
-        <div class="col-md-4 col-lg-3">
-          <div class="team-member-list">
-            <h2>Team Targets & Performance</h2>
-            <ul>
-              <li class="active">
-                <div class="member-img"></div>
-                <div class="member-details">
-                  <h4>Raj Jordan Acme, Inc.</h4>
-                  <h5>5 Member</h5>
-                </div>
-              </li>
-              <li>
-                <div class="member-img"></div>
-                <div class="member-details">
-                  <h4>Raj Jordan Acme, Inc.</h4>
-                  <h5>5 Member</h5>
-                </div>
-              </li>
-              <li>
-                <div class="member-img"></div>
-                <div class="member-details">
-                  <h4>Raj Jordan Acme, Inc.</h4>
-                  <h5>5 Member</h5>
-                </div>
-              </li>
-              <li>
-                <div class="member-img"></div>
-                <div class="member-details">
-                  <h4>Raj Jordan Acme, Inc.</h4>
-                  <h5>5 Member</h5>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-8 col-lg-9">
-          <div class="team-membe-list-details">
-            <h2>Raj Jordan Acme, Inc.</h2>
-            <div class="custom-table">
-              <div class="table-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>
-                        <div>ID</div>
-                      </th>
-                      <th>
-                        <div>Target</div>
-                      </th>
-                      <th>
-                        <div>Unit</div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div>(1/6)</div>
-                      </td>
-                      <td>
-                        <div>8 / 10<span class="company-tag">80%</span></div>
-                      </td>
-                      <td>
-                        <div>Tunes</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div>KPI (1/6)</div>
-                      </td>
-                      <td>
-                        <div>8 / 10<span class="company-tag">80%</span></div>
-                      </td>
-                      <td>
-                        <div>Tunes</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div>KPI (1/6)</div>
-                      </td>
-                      <td>
-                        <div>8 / 10<span class="issue-tag">80%</span></div>
-                      </td>
-                      <td>
-                        <div>Tunes</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div>KPI (1/6)</div>
-                      </td>
-                      <td>
-                        <div>8 / 10<span class="company-tag">80%</span></div>
-                      </td>
-                      <td>
-                        <div>Tunes</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div>KPI (1/6)</div>
-                      </td>
-                      <td>
-                        <div>8 / 10<span class="green-tag">80%</span></div>
-                      </td>
-                      <td>
-                        <div>Tunes</div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-team-level-all *ngIf="driverName != 'You' && teamLevelAllUserList?.length > 0" [uID]="uID" [driverID]="driverID"></app-team-level-all>
     <div class="x_content">
       <div class="row">
         <div fxFlex="100" fxLayout="column" class="example-container" style="height: auto!important;">
@@ -205,21 +86,21 @@
                 <div class="row">
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <!-- <app-dashboard-kpi></app-dashboard-kpi> -->
-                    <app-coach [uID]="uID" *ngIf="coachName"></app-coach>
+                    <!-- <app-coach [uID]="uID" *ngIf="coachName"></app-coach> -->
                     <!-- <app-issue class="x_panel" [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue> -->
                   </div>
-                  <div class="col-md-6 col-sm-12 col-xs-12">
+                  <!-- <div class="col-md-6 col-sm-12 col-xs-12">
                     <app-dashboard-milestone id="id_milestone" #milestone></app-dashboard-milestone>
-                  </div>
+                  </div> -->
                 </div>
-                <div class="row" *ngIf="driverName != 'You' && corporateKpiData?.length > 0">
+                <!-- <div class="row" *ngIf="driverName != 'You' && corporateKpiData?.length > 0">
                   <app-team-level-corporate></app-team-level-corporate>
-                </div>
-                <div class="row" *ngIf="
+                </div> -->
+                <!-- <div class="row" *ngIf="
                     driverName != 'You' && teamLevelAllUserList?.length > 0
                   ">
                   <app-team-level-all [uID]="uID" [driverID]="driverID"></app-team-level-all>
-                </div>
+                </div> -->
               </mat-tab>
             </mat-tab-group>
           </div>

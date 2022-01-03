@@ -107,6 +107,7 @@ export class TeamLevelAllComponent implements OnInit {
 
     this.userKpiAllSubscription = this.dataService.userKpiData.subscribe(data => {
       this.kpiData = data;
+      console.log(': ===> this.kpiData', this.kpiData);
     });
 
     this.organizationUserListSubscription = this.dataService.dataAccessUserListdata.subscribe(data=>{

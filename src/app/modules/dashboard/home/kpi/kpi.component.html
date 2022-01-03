@@ -160,8 +160,8 @@
             stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </a>
-      <div class="dropdown">
-        <button class="btn btn-rounded" data-toggle="dropdown" type="button" (click)="expandAll()">
+      <div class="dropdown" [ngClass]="isActive ? 'active' : ''">
+        <button class="btn btn-rounded" type="button" (click)="expandAll()">
           Show: All
           <svg width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -218,7 +218,7 @@
         </thead>
         <tbody>
           <tr>
-            <td colspan="5">
+            <td colspan="5" *ngIf="item.Milestones.length > 0">
               <table>
                 <tr *ngFor="let milestone of item.Milestones; let i = index">
                   <td>
@@ -245,6 +245,9 @@
                   </td>
                 </tr>
               </table>
+            </td>
+            <td colspan="5" *ngIf="item.Milestones.length <= 0" class="noDataRow">
+              No Data Found..!
             </td>
           </tr>
         </tbody>
