@@ -2004,6 +2004,59 @@ button + button {
       margin: 0;
     }
   }
+  .direct-reports {
+    .dropdown-toggle {
+      background: #ffffff;
+      border: 1px solid #d4d4d4;
+      box-sizing: border-box;
+      border-radius: 6px;
+      padding: 10px 10px;
+      font-style: normal;
+      font-weight: 500 !important;
+      font-size: 16px;
+      line-height: 22px;
+      letter-spacing: -0.01em;
+      color: #000;
+      min-height: 44px;
+      box-shadow: none;
+    }
+    .dropdown-toggle::after {
+      display: inline-block;
+      margin-left: 1.255em;
+      vertical-align: 0.255em;
+      content: "";
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-bottom: 0;
+      border-left: 0.3em solid transparent;
+    }
+    .dropdown-menu {
+      max-height: 436%;
+      left: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      .dropdown-item {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 24px;
+        color: #2d3944;
+        display: block;
+        &:hover {
+          color: #043750;
+        }
+        img{
+          border: 2px solid #ffffff;
+          width: 28px;
+          height: 28px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 12px;
+          border-radius: 100px;
+        }
+      }
+    }
+  }
   .action-wrap {
     display: flex;
     align-items: center;
@@ -2047,6 +2100,23 @@ button + button {
     table {
       width: 100%;
       thead {
+        .item-qty div {
+          width: 140px;
+          margin: auto;
+          justify-content: space-between;
+          padding-left: 10px;;
+         }
+        .kpi-time div {
+          width: 115px;
+          margin: auto;
+          text-align: center;
+          padding-left: 10px;
+         justify-content: center;
+        }
+        .kpi-filter {
+          width: 108px !important;
+          margin: auto;
+        }
         th {
           font-style: normal;
           font-weight: 500;
@@ -2059,6 +2129,9 @@ button + button {
             width: 65%;
             padding-left: 16px;
           }
+          
+
+          
           + th {
             > div {
               border-left: 1px solid #dae3e8;
@@ -2085,6 +2158,10 @@ button + button {
             justify-content: space-between;
             align-items: center;
           }
+         
+          
+
+
         }
       }
       tbody {
@@ -2100,22 +2177,30 @@ button + button {
             font-size: 12px;
             line-height: 15px;
             color: #474f59;
-            padding: 16px 16px 15px 0;
+            padding: 16px 5px 16px 0px;
             border-bottom: 1px solid #dae3e8;
             &:first-child {
-              width: 65%;
+              width: 60%;
               padding-left: 0;
             }
             &:last-child {
               padding-right: 0;
             }
-            + td {
+
+            + td {              
               > div {
                 padding-left: 16px;
                 position: relative;
               }
+              .due-date{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+              }
             }
             .issue-tag {
+              text-align: center;
               background: #ffeed6;
               border-radius: 4px;
               font-style: normal;
@@ -2126,6 +2211,8 @@ button + button {
               display: inline-block;
               padding: 2px 8px;
               margin-right: 8px;
+              max-width: 90px;
+              width: 100%;
             }
             .user-description {
               display: flex;
@@ -2160,6 +2247,7 @@ button + button {
         }
       }
     }
+
     .reports-row {
       padding: 16px;
       .reports-item {

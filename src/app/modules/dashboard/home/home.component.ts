@@ -512,11 +512,11 @@ export class HomeComponent implements OnInit {
     // this.dataservice.setActiveUid(uId);
   }
 
-  toggleClass() {
-    const body = document.getElementsByTagName("body")[0];
-    body.classList.remove("nav-sm");
-    body.classList.add("nav-md");
-  }
+  // toggleClass() {
+  //   const body = document.getElementsByTagName("body")[0];
+  //   body.classList.remove("nav-sm");
+  //   body.classList.add("nav-md");
+  // }
 
   getPassedData(ev) {
   }

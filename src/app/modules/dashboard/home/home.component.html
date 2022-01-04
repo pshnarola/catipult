@@ -1,6 +1,6 @@
 <app-on-top-nav></app-on-top-nav>
 <app-sidenav></app-sidenav>
-<div class="right_col ml230 nsidebar-content" role="main" (click)="toggleClass()">
+<div class="right_col ml230 nsidebar-content" role="main">
   <div class="dashboard-wrapper mt-1">
     <div class="meeting-header mb-1">
       <h4 id="test">
@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-md-8 col-lg-9">
         <app-dashboard-kpi></app-dashboard-kpi>
-        <div class="collapse-card">
+        <!-- <div class="collapse-card">
           <div class="card-header">
             <div class="title-wraper">
               <h4>Direct Reports</h4>
@@ -69,15 +69,15 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-md-4 col-lg-3">
         <app-issue [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue>
       </div>
     </div>
     <hr class="mt-1 mb-0" />
-    <app-team-level-all *ngIf="driverName != 'You' && teamLevelAllUserList?.length > 0" [uID]="uID" [driverID]="driverID"></app-team-level-all>
-    <div class="x_content">
+    <!-- <app-team-level-all *ngIf="driverName != 'You' && teamLevelAllUserList?.length > 0" [uID]="uID" [driverID]="driverID"></app-team-level-all> -->
+    <!-- <div class="x_content">
       <div class="row">
         <div fxFlex="100" fxLayout="column" class="example-container" style="height: auto!important;">
           <div fxFlex fxLayout="row" fxLayoutAlign="start start">
@@ -85,28 +85,28 @@
               <mat-tab>
                 <div class="row">
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                    <!-- <app-dashboard-kpi></app-dashboard-kpi> -->
-                    <!-- <app-coach [uID]="uID" *ngIf="coachName"></app-coach> -->
-                    <!-- <app-issue class="x_panel" [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue> -->
+                    <app-dashboard-kpi></app-dashboard-kpi>
+                    <app-coach [uID]="uID" *ngIf="coachName"></app-coach>
+                    <app-issue class="x_panel" [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue>
                   </div>
-                  <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                     <app-dashboard-milestone id="id_milestone" #milestone></app-dashboard-milestone>
-                  </div> -->
+                  </div>
                 </div>
-                <!-- <div class="row" *ngIf="driverName != 'You' && corporateKpiData?.length > 0">
+                <div class="row" *ngIf="driverName != 'You' && corporateKpiData?.length > 0">
                   <app-team-level-corporate></app-team-level-corporate>
-                </div> -->
-                <!-- <div class="row" *ngIf="
+                </div>
+                <div class="row" *ngIf="
                     driverName != 'You' && teamLevelAllUserList?.length > 0
                   ">
                   <app-team-level-all [uID]="uID" [driverID]="driverID"></app-team-level-all>
-                </div> -->
+                </div>
               </mat-tab>
             </mat-tab-group>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <ng-template #template>
     <div class="modal-header">
