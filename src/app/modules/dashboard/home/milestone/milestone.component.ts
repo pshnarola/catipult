@@ -309,7 +309,6 @@ export class MilestoneDashboardComponent implements OnInit {
     this.dataservice.getUserKpiMilestone(this.uID,driverID ? driverID : this.driverID);
   }
 
-
   getUserData(): void{
 
     this.dataservice.getAllDeptUsers();

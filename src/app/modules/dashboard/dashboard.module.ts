@@ -46,7 +46,9 @@ import { TeamLevelAllDataService } from "src/app/modules/dashboard/home/team-lev
 import { ProfileDataService } from "src/app/modules/dashboard/profile/data.service";
 import { PortfolioDataService } from "src/app/modules/dashboard/home/portfolio/data.service";
 import { IssueModule } from '../issue/issue.module'
-import { IssueDataService } from '../issue/data.service'
+import { IssueDataService } from '../issue/data.service';
+import { DayActionItemComponent } from './home/day-action-item/day-action-item.component';
+import { IssueListComponent } from './home/issue-list/issue-list.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { IssueDataService } from '../issue/data.service'
     PortfolioTeamLevelCorporateComponent,
     CoachComponent,
     TeamLevelCorporateComponent,
-    TeamLevelAllComponent
+    TeamLevelAllComponent,
+    DayActionItemComponent,
+    IssueListComponent
   ],
   imports: [
     CommonModule,

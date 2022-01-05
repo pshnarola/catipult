@@ -657,6 +657,9 @@ export class DataServiceService {
           achieveText: response.nList[key].Milestone
             ? response.nList[key].Milestone.achieveText
             : "",
+          charpStatus: response.nList[key].Milestone
+            ? response.nList[key].Milestone.charpStatus
+            : "",
           createdAt: response.nList[key].createdAt,
           dueDate: response.nList[key].dueDate,
           mileID: response.nList[key].mileID,
@@ -665,6 +668,7 @@ export class DataServiceService {
               ? response.nList[key].Milestone.Kpi.driverID
               : ""
             : "",
+          user: response.nList[key].User,
           isRead: response.nList[key].isRead
         });
       }

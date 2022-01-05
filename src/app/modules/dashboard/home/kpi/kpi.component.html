@@ -219,15 +219,17 @@
               {{item.objective}}<span class="company-tag" *ngIf="item.isCorporateKpi">Corporate</span>
             </th>
             <th class="item-qty">
-              <div>{{item.achieveQty}} / {{item.qty}}<span
-                  class="company-tag">{{item.achieveQty / item.qty *100 | number : '1.2-2'}}%</span></div>
+              <div>{{item.achieveQty}} / {{item.qty}}
+                <span *ngIf="item.qty == 0" class="company-tag" [ngStyle]="{'color':'#AE1905', 'background':'#FFE5E5'}">{{ 000 | number : '1.2-2'}}%</span>
+                <span *ngIf="item.qty > 0" class="company-tag" [ngStyle]="{'color':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#AE1905' : ((item.achieveQty / item.qty) *100) <= 50 ? '#DC4614' : ((item.achieveQty / item.qty) *100) <= 80 ? '#0C5292' : '#0C924A', 'background':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#FFE5E5' : ((item.achieveQty / item.qty) *100) <= 50 ? '#FFEED6' : ((item.achieveQty / item.qty) *100) <= 80 ? '#E5F6FF' : '#E8FFE5' }">{{((item.achieveQty / item.qty) *100) | number : '1.2-2'}}%</span>
+                </div>
             </th>
             <th class="kpi-time">
               <div>{{item.unit}}</div>
             </th>
             <th class="kpi-filter">
               <div class="action">
-                <a _ngcontent-evc-c5="" class="add-btn">
+                <a _ngcontent-evc-c5="" class="add-btn" (click)='$event.stopPropagation();showModal(newMilestone,"modal-md");refreshKpiData(null);SetInitialValue(item.kpiID);'>
                   <svg _ngcontent-evc-c5="" fill="none" height="25" viewBox="0 0 24 25" width="24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path _ngcontent-evc-c5=""
@@ -235,13 +237,13 @@
                       stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                   </svg>
                 </a>
-                <a _ngcontent-evc-c5="" class="filter-btn">
+                <!-- <a _ngcontent-evc-c5="" class="filter-btn">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M3 4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V6.58579C21 6.851 20.8946 7.10536 20.7071 7.29289L14.2929 13.7071C14.1054 13.8946 14 14.149 14 14.4142V17L10 21V14.4142C10 14.149 9.89464 13.8946 9.70711 13.7071L3.29289 7.29289C3.10536 7.10536 3 6.851 3 6.58579V4Z"
                       stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                </a>
+                </a> -->
                 <a class="btn-collapse" (click)="expand(i)">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -638,6 +640,116 @@
         <button class="btn btn-primary" (click)="updateShareKpi()" *ngIf="editKpiShareUser">
           Update status
         </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #newMilestone>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Add New Milestone</h2></div>
+    </h4>
+  </div>  
+  <div class="modal-body row">
+    <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12' style='text-align:center;'>
+      <div *ngIf="newElement!='milestone'">
+        <div><i class="fas fa-compass" style='font-size:40px;'></i></div>
+      </div>
+    </div>
+  </div>
+  <!-- Milestone -->
+  <div class='modal-footer'>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Driver</mat-label>
+            <mat-select class='form-control' [(ngModel)]='newTaskDriver' name='milestoneDriver' (selectionChange)='refreshKpiData($event.value);' disabled>
+              <mat-option *ngFor='let d of driverList' [value]='d.driverID'>{{ d.driverName }}</mat-option>
+            </mat-select>
+          </mat-form-field>      
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>KPI</mat-label>
+            <mat-select class='form-control' [(ngModel)]='newTaskKpi' name='assignmentKpi' disabled>
+              <mat-option *ngFor='let k of kpiList' [value]='k.kpiID'>{{ k.objective }}</mat-option>
+            </mat-select>
+          </mat-form-field>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <div class='input-box padding-bottom left-align' style='text-align:left !important;'>
+            <span>Milestone</span>
+            <input name='kpiObjective' type="text" class="form-control" placeholder="Example: Working out" name='milestone' [(ngModel)]='newMilestoneMilestone'>    
+          </div>    
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <div class='input-box padding-bottom' style='text-align:left !important;'>
+            <span class="">Due Date</span>
+            <input name="milestoneDueDate" type='date' class="form-control" style='line-height:normal !important;' name='milestoneDueDate' placeholder = 'mm-dd-yyyy' [(ngModel)]='newMilestoneDueDate'>  
+          </div>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Status</mat-label>
+            <mat-select class='form-control' [(ngModel)]="newTaskStatus" name='milestoneStatus'>
+              <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>
+            </mat-select>  
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Assigned</mat-label>
+            <mat-select class='form-control' [(ngModel)]="newMilestoneAssigned" name='milestoneAssigned' multiple>
+              <mat-option *ngFor="let u of userList" [value]="u.uId ? u.uId : u.uID">{{ u.name + ' ' + u.lname }}</mat-option>
+            </mat-select>  
+          </mat-form-field>
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col-xl-6 col-lg-6" style='padding-left:1px !important;'>
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+            <p style='text-align:left;'>Recurring</p>
+            <div class='row' [ngClass]="milestoneRecurringNew?'isRecurring':'isNotRecurring'" style='border-style:solid;border-width:2px;height:30px;max-width:75px;margin-left:10px;margin-bottom:10px;margin-top:5px;' (click)='setMilestoneRecurringNew();'>
+              <div *ngIf='milestoneRecurringNew' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#337ab7'></div>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#337ab7;height:100%;'>
+              </div>  
+              </div>
+              <div *ngIf='!milestoneRecurringNew' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#666666;height:100%;'></div>  
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#666666;text-align:right;'></div>
+            </div>
+            </div>  
+          </div>
+          <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12" style='padding-right:0px !important;'>
+            <div *ngIf='milestoneRecurringNew' style='text-align:left;'>
+              <mat-form-field appearance='fill' style='width:100%;'>
+                <mat-label>Frequency</mat-label>
+                <mat-select class='form-control' [(ngModel)]="milestoneRecurringFrequencyNew" name='milestoneRecurringFrequencyNew'>
+                  <mat-option *ngFor="let f of frequency" [value]="f.value">{{ f.viewValue }}</mat-option>
+                </mat-select>  
+              </mat-form-field>
+  
+            </div>  
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12" style='text-align:left;padding-left:0px;padding-right:0px;padding-bottom:15px'>
+        Comments
+      <textarea name="newMilestoneNote" id="id_NewMilestoneNote" [(ngModel)]='newMilestoneNote'cols="30" rows="2" class='' style='width:100%;margin-top:5px;border-color:#d9d9d9 !important;'></textarea>
+      </div>
+      <div>
+        <button class='btn btn-primary' *ngIf='!newMilestoneAssigned || !newTaskKpi || !newMilestoneMilestone || !newMilestoneDueDate' disabled>Add {{ newElement }}</button>
+        <button class='btn btn-primary' (click)='createNewMilestone();' *ngIf='newMilestoneAssigned && newTaskKpi && newMilestoneMilestone && newMilestoneDueDate'>Add {{ newElement }}</button>
       </div>
     </div>
   </div>
