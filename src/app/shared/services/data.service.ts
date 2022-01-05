@@ -1,6 +1,6 @@
 
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { HttpServiceService } from 'src/app/core/http-service/http-service.service';
 export interface User {
   email: any;
@@ -18,6 +18,7 @@ export class SharedDataService {
   // Temporarily stores data from dialogs
   dialogData: any;
   bill: any = null;
+  users: any = null;
   routeData: any = null;
   kpislist: any = null;
   statement: any = null;
@@ -25,6 +26,12 @@ export class SharedDataService {
 
   private routedataSource = new BehaviorSubject<any>(this.routeData);
   routeUrldata = this.routedataSource.asObservable();
+
+  private usersdataSource = new BehaviorSubject<any>(this.users);
+  usersdata = this.usersdataSource.asObservable();
+
+  private userDataSource = new Subject();
+  userData = this.userDataSource.asObservable();
 
   private billdataSource = new BehaviorSubject<any>(this.bill);
   billdata = this.billdataSource.asObservable();
@@ -192,6 +199,28 @@ deleteKpi(kpiID:any){
 }
 addKpi(kpi) {
   this.kpis.push(kpi);
+}
+
+getAllUsers(orgID: any) {
+  this.apiService.get("/v1/getUserAll?orgID=" + orgID).subscribe(response => {
+    this.users = [];
+  // tslint:disable-next-line:forin
+    for (const key in response.users) {
+      if (response.users[key].Role) {
+        this.users.push({
+          email: response.users[key].email,
+          roleName: response.users[key].Role.roleName,
+          leval: response.users[key].Role.leval,
+          uId: response.users[key].uID,
+          name: response.users[key].name,
+          lname: response.users[key].lname,
+          deptName: response.users[key].Role.Department.deptName ? response.users[key].Role.Department.deptName : ""
+        });
+      }
+    }
+    this.usersdataSource.next(this.users);
+    this.userDataSource.next(this.users);
+  });
 }
 }
 
