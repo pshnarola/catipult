@@ -300,8 +300,13 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.dataSubscription.push(
       this.dataService.getMeetingUserData.subscribe(data => {
         this.userMeetingData = data;
+        console.log(': ===> "vik here"', "vik here");
+        if(!this.previewMeetingId && this.userMeetingData.length > 0) {
+          this.viewMeetingDetails(this.userMeetingData[0]);
+        }
       })
     );
+
 
     this.dataService.getUserMeetings(this.uID);
 
@@ -712,10 +717,14 @@ export class MeetingComponent implements OnInit, OnDestroy {
       this.editMeeting(this.selectedMeeting);
     } else if (event === "delete") {
       console.log(": ===> event d", event);
-      this.dataService.deleteUserMeeting(this.previewMeetingId);
-      setTimeout(() => {
-        this.previewMeetingId = "";
-      }, 1500);
+      this.dataService.deleteUserMeeting(this.previewMeetingId).subscribe(result => {
+        console.log(': ===> result', result);
+        if(result.status == "Success") {
+          this.previewMeetingId = "";
+        }
+      });
+      // setTimeout(() => {
+      // }, 1500);
       this.timeoutList();
     }
   }

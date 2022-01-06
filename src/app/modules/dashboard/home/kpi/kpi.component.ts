@@ -17,9 +17,12 @@ import { DataService } from "src/app/modules/account/services/data.service";
 export class KpiDashboardComponent implements OnInit {
   modalRef: BsModalRef;
   isActive:boolean = false;
+  selectedMember:string = "Select Member";
+  memberList:any;
 
   // Data Subscriptions
   milestoneDataSubscription: Subscription;
+  driverIsChangedSubscription: Subscription;
   driverIdSubscription: Subscription;
   driverListSubscription: Subscription;
   userKpiSubscription: Subscription;
@@ -123,6 +126,7 @@ export class KpiDashboardComponent implements OnInit {
   ];
 
   userList:any
+
   users: any;
   user: User[] = []
 
@@ -251,6 +255,7 @@ export class KpiDashboardComponent implements OnInit {
     this.dataservice.driversdata.subscribe(data => {
       if (data) {
         this.driverData = data;
+        console.log(': ===> "call driver"', "call driver");
         this.setDriverImg();
       }
     });
@@ -259,8 +264,18 @@ export class KpiDashboardComponent implements OnInit {
       data => {
         this.isActive = false;
         this.kpiMileData = data;
+        console.log(': ===> "call kpi"', "call kpi");
+        
         if (this.kpiMileData != null) {
           this.kpiMileData.forEach((element, id) => {});
+        }
+      }
+    );
+
+    this.driverIsChangedSubscription = this.dataservice.driverIsChanged.subscribe(
+      data => {
+        if (data === true) {
+          this.selectedMember = "Select Member";
         }
       }
     );
@@ -328,6 +343,11 @@ export class KpiDashboardComponent implements OnInit {
     } else {
       this.users = null;
     }
+
+    this.organizationUserListSubscription = this.DataService.dataAccessUserListdata.subscribe(data=>{
+      this.memberList = [];
+      this.memberList = data;
+    });
 
     this.statusDefaultSubscription = this.dataservice.statusDefaultData.subscribe(data=>{
       this.newTaskStatus = data
@@ -625,6 +645,12 @@ export class KpiDashboardComponent implements OnInit {
   refreshKpiData(driverID:any):void {
     // this.dataservice.getUserKpiMilestone(this.uID,this.newTaskDriver);
     this.dataservice.getUserKpiMilestone(this.uID,driverID ? driverID : this.driverID);
+  }
+
+  onSelecteMember(userDetail) {
+    console.log(': ===> userDetail.User', userDetail);
+    this.selectedMember = userDetail.User;
+    this.dataservice.getKpiDriverByMember(this.driverID, userDetail.uID)
   }
 }
 

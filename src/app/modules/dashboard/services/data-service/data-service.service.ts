@@ -252,6 +252,9 @@ export class DataServiceService {
   private mileStonedataSource = new BehaviorSubject<any>(this.kpiMilestones);
   milestonedata = this.mileStonedataSource.asObservable();
 
+  private driverChanged = new BehaviorSubject<boolean>(false);
+  driverIsChanged = this.driverChanged.asObservable();
+
   public get currentMilestoneData(): any {
     return this.mileStonedataSource.value;
   }
@@ -1439,11 +1442,60 @@ export class DataServiceService {
           this.getKpiHistory(response.payload[1][key].kpiID);
         }
         this.mileStonedataSource.next(this.kpiMilestones);
+        this.driverChanged.next(true);
+
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  getKpiDriverByMember(driverID:string,uID:string): any {
+    let url = "";
+    if (driverID) {
+      url = `/v1/kpis?driverID=${driverID}&uID=${uID}`;
+    } else {
+      url = `/v1/kpis`;
+    }
+
+    this.apiService.get(url).subscribe(
+      response => {
+        this.kpiMilestones = [];
+        for (const key in response.payload[0]) {
+          this.kpiMilestones.push({
+            objective: response.payload[0][key].objective,
+            qty: response.payload[0][key].qty,
+            unit: response.payload[0][key].unit,
+            achieveQty: response.payload[0][key].achieveQty,
+            Milestones: response.payload[0][key].Milestones,
+            cinput: false,
+            kpiID: response.payload[0][key].kpiID,
+            isCorporateKpi: response.payload[0][key].isCorporateKpi,
+            isDelegated: response.payload[0][key].KpiDelegates.length > 0 ? true : false
+          });
+          this.getKpiHistory(response.payload[0][key].kpiID);
+        }
+        for (const key in response.payload[1]) {
+          this.kpiMilestones.push({
+            objective: response.payload[1][key].objective,
+            qty: response.payload[1][key].qty,
+            unit: response.payload[1][key].unit,
+            achieveQty: response.payload[1][key].achieveQty,
+            Milestones: response.payload[1][key].Milestones,
+            cinput: false,
+            kpiID: response.payload[1][key].kpiID,
+            isCorporateKpi: response.payload[1][key].isCorporateKpi,
+            isDelegated: true
+          });
+          this.getKpiHistory(response.payload[1][key].kpiID);
+        }
+        this.mileStonedataSource.next(this.kpiMilestones);
+      },
+      error => {
+      }
+    );
+
   }
   getMilestoneAll(): any {
     this.apiService.get(`/v1/milesstoneAll`).subscribe(

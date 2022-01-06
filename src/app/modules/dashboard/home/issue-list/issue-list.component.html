@@ -12,7 +12,9 @@
               stroke="#111827" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
           </svg>
         </a>
-        <a class="filter-btn ml-15" (click)="showIssueArchive(!displayIssueArchive)">
+        <a class="filter-btn ml-15" (click)="showIssueArchive(!displayIssueArchive)" [matTooltip]="toolTipIssueFunnel"
+        matTooltipClass="toolTip"
+        aria-label="Button that displays a tooltip when focused or hovered over">
           <svg _ngcontent-dkb-c5="" fill="none" height="24" viewBox="0 0 24 24" width="24"
             xmlns="http://www.w3.org/2000/svg">
             <path _ngcontent-dkb-c5=""

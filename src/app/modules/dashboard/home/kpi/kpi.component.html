@@ -161,33 +161,25 @@
           </mat-option>
         </mat-select> -->
       <!-- </mat-form-field> -->
-      <div class="dropdown-select">
+      <!-- dropdown -->
+      <div class="dropdown-select" *ngIf="driverName != 'You' && memberList?.length > 0"> 
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
             data-toggle="dropdown">
-            Select User
+            {{selectedMember}}
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div>
-              <a class="dropdown-item"><img src="https://api.catipult.ai/1595537885613.jpg" width="5px"
-                  height="5px" />Karen Smith</a>
-            </div>
-            <div>
-              <a class="dropdown-item"><img src="https://api.catipult.ai/1595537885613.jpg" width="5px"
-                  height="5px" />Karen Smith</a>
-            </div>
-            <div>
-              <a class="dropdown-item"><img src="https://api.catipult.ai/1595537885613.jpg" width="5px"
-                  height="5px" />Karen Smith</a>
-            </div>
-            <div>
-              <a class="dropdown-item"><img src="https://api.catipult.ai/1595537885613.jpg" width="5px"
-                  height="5px" />Karen Smith</a>
+            <!-- <div *ngFor='let u of memberList; let i = index'>
+              <a class="dropdown-item" (click)="onSelecteMember(u)"><img [src]='u.imageUrl ? u.imageUrl : "assets/img.jpg"'>{{ u.User }}</a>
+            </div> -->
+            <div *ngFor='let u of memberList; let i = index'>
+              <a class="dropdown-item" (click)="onSelecteMember(u)"><img [src]='u.imageUrl ? u.imageUrl : "assets/img.jpg"'>{{ u.User }}</a>
             </div>
             <!-- (click)="selectedUser('Karen Smith')" -->
           </div>
         </div>
       </div>
+
     </div>
     <div class="action-wrap">
       <a class="add-btn" (click)="showModal(kpiNew, 'modal-sm')">
@@ -506,7 +498,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="submit" data-dismiss="modal" class="btn btn-secondary">
+    <button type="submit" data-dismiss="modal" class="btn btn-secondary" (click)="modalRef.hide()">
       <b>Back to Report Detail</b>
     </button>
     <button class="btn btn-primary" (click)="createNewKpi()">

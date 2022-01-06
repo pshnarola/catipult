@@ -22,6 +22,8 @@ export class IssueListComponent implements OnChanges {
   @Input() scope:string;
   @Input() modify:boolean = true;
 
+  toolTipIssueFunnel:string = "Show closed issues";
+
   modalRef: BsModalRef;
 
   constructor(private IssueDataService: IssueDataService,private modalService: BsModalService,private SharedDataService: SharedDataService) { }
@@ -150,8 +152,10 @@ export class IssueListComponent implements OnChanges {
     this.displayIssueArchive = display;
     if(display){
       this.issueDataActive = this.issueArchiveData;
+      this.toolTipIssueFunnel = "Show open issues";
     }else if (!display){
       this.issueDataActive = this.issueData;
+      this.toolTipIssueFunnel = "Show closed issues";
     }
   }
 }

@@ -447,3 +447,14 @@
 ::ng-deep .toolTip {
   font-size:13px !important;
 }
+
+
+.dropdown-item img {
+  border: 2px solid #ffffff;
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 16px;
+  border-radius: 100px;
+}

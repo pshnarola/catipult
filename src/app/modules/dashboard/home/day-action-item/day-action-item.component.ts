@@ -22,7 +22,6 @@ export class DayActionItemComponent implements OnInit {
     this.name = this.dataservice.getUserInfo();
     this.notSub = this.dataservice.notifydata.subscribe(data => {
       this.notifications = data;
-      console.log(': ===> this.notifications', this.notifications);
       this.dataservice.updateNotify();
     });
   }

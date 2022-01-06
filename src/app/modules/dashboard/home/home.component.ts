@@ -460,6 +460,7 @@ export class HomeComponent implements OnInit {
 
     this.organizationUserListSubscription = this.TeamLevelAllDataService.dataAccessUserListdata.subscribe(data=>{
       this.teamLevelAllUserList = data;
+      console.log(': ===> this.teamLevelAllUserList', this.teamLevelAllUserList);
     });
 
     this.TeamLevelAllDataService.getDataAccessUserList(this.uID);
@@ -556,6 +557,7 @@ export class HomeComponent implements OnInit {
     this.dataservice.getMileStoneAssignUsers(driverID, null);
 
     this.dataservice.getKpiDriver(driverID);
+    // here i want to do
   }
 
   getKpiM(item, i) {
