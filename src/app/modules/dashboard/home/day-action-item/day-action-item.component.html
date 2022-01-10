@@ -1,4 +1,4 @@
-<div class="feedback-wrapper">
+<div class="feedback-wrapper" *ngIf="notifications && notifications.length > 0">
     <div class="card-header">
       <div class="title-wraper">
         <h4 _ngcontent-ykl-c5="">45-Day Action Items</h4>
@@ -22,7 +22,7 @@
         </a> -->
       </div>
     </div>
-    <div class="issue-card">
+    <div class="issue-card" *ngIf="notifications && notifications.length > 0">
       <div class="livestream-wrapper mt-1" *ngFor="let item of notifications; let i = index">
         <h3>{{item.achieveText}}</h3>
         <div class="milestone-wrapper">
@@ -40,4 +40,9 @@
         </div>
       </div>
     </div>
+    <!-- <div class="issue-card" *ngIf="notifications && notifications.length === 0">
+      <div class="livestream-wrapper mt-1">
+        <p class="noRecord">No records found..!</p>
+      </div>
+    </div> -->
   </div>

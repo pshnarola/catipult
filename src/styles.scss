@@ -2005,20 +2005,22 @@ button + button {
     }
   }
   .direct-reports {
-    .dropdown-toggle {
-      background: #ffffff;
-      border: 1px solid #d4d4d4;
-      box-sizing: border-box;
+    .btn-rounded {
       border-radius: 6px;
-      padding: 10px 10px;
-      font-style: normal;
-      font-weight: 500 !important;
-      font-size: 16px;
-      line-height: 22px;
-      letter-spacing: -0.01em;
-      color: #000;
-      min-height: 44px;
-      box-shadow: none;
+      border: 1px solid #d4d4d4;
+      color: #474f59;
+      span {
+        white-space: nowrap;
+        max-width: 122px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #535559;
+        text-align: right;
+        font-weight: 500;
+      }
+      svg {
+        transform: rotate(0deg);
+      }
     }
     .dropdown-toggle::after {
       display: inline-block;
@@ -2040,8 +2042,9 @@ button + button {
         font-weight: 500;
         font-size: 12px;
         line-height: 24px;
+        display: flex;
         color: #2d3944;
-        display: block;
+        // display: block;
         &:hover {
           color: #043750;
         }
@@ -2053,6 +2056,11 @@ button + button {
           vertical-align: middle;
           margin-right: 12px;
           border-radius: 100px;
+        }
+        .client-names {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
@@ -2117,6 +2125,14 @@ button + button {
           width: 108px !important;
           margin: auto;
         }
+        .noRecord {
+          justify-content: center;
+          text-align: center;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 15px;
+          color: #474f59;
+        }
         th {
           font-style: normal;
           font-weight: 500;
@@ -2129,8 +2145,6 @@ button + button {
             width: 65%;
             padding-left: 16px;
           }
-          
-
           
           + th {
             > div {
@@ -2352,6 +2366,14 @@ button + button {
   border: 1px solid #dae3e8;
   border-radius: 12px;
   padding: 16px;
+  .noRecord {
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #474f59;
+  }
   h3 {
     border-bottom: 1px solid #dae3e8;
     margin: 0 0 8px 0;
