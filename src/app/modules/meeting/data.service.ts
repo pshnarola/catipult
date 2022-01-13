@@ -296,10 +296,11 @@ export class MeetingDataService implements OnDestroy{
     }));
   }
 
-  deleteUserMeeting(meetingId:string):void {
+  deleteUserMeeting(meetingId:string):Observable<any> {
     this.dataSubscription.push(this.apiService.delete(`/v1/meeting?meetingId=${meetingId}`).subscribe(response=>{
       this.deleteUserMeetingDataSource.next(response);
     }));
+    return this.apiService.delete(`/v1/meeting?meetingId=${meetingId}`);
   }
 
   getOrganizationUserList(orgID:string):void {

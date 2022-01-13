@@ -7,6 +7,7 @@ import { SharedDataService } from "src/app/shared/services/data.service";
 import { TeamLevelAllDataService } from "src/app/modules/dashboard/home/team-level-all/data.service";
 import * as notification from "src/app/shared/libraries/exports.library";
 import { DateTime } from "luxon";
+import { DataService } from "src/app/modules/account/services/data.service";
 
 @Component({
   selector: "app-dashboard-kpi",
@@ -15,9 +16,13 @@ import { DateTime } from "luxon";
 })
 export class KpiDashboardComponent implements OnInit {
   modalRef: BsModalRef;
+  isActive:boolean = false;
+  selectedMember:string = "Select Member";
+  memberList:any;
 
   // Data Subscriptions
   milestoneDataSubscription: Subscription;
+  driverIsChangedSubscription: Subscription;
   driverIdSubscription: Subscription;
   driverListSubscription: Subscription;
   userKpiSubscription: Subscription;
@@ -94,6 +99,41 @@ export class KpiDashboardComponent implements OnInit {
   editKpiShareUser: string;
 
   deleteText: string;
+
+
+  // milestone
+  userMilestoneSubscription:Subscription;
+  kpiListSubscription:Subscription;
+  statusDefaultSubscription:Subscription;
+  userSubscription:Subscription;
+  newElement:string;
+  newTaskKpi:string;
+  kpiList:any;
+
+  newMilestoneMilestone:string;
+  newMilestoneDueDate:string;
+  newTaskStatus:string;
+
+  newMilestoneAssigned:any = [];
+
+  charp : Charp[] = [
+    { value: "C", viewValue: "Change" },
+    { value: "H", viewValue: "Help" },
+    { value: "A", viewValue: "Aware" },
+    { value: "R", viewValue: "Redirect" },
+    { value: "P", viewValue: "Plan" },
+    { value: "D", viewValue: "Done" }
+  ];
+
+  userList:any
+
+  users: any;
+  user: User[] = []
+
+  milestoneRecurringNew:boolean = false;
+  milestoneRecurringFrequencyNew:string;
+  newMilestoneNote:string;
+
 
   constructor(
     public dataservice: DataServiceService,
@@ -215,15 +255,27 @@ export class KpiDashboardComponent implements OnInit {
     this.dataservice.driversdata.subscribe(data => {
       if (data) {
         this.driverData = data;
+        console.log(': ===> "call driver"', "call driver");
         this.setDriverImg();
       }
     });
 
     this.milestoneDataSubscription = this.dataservice.milestonedata.subscribe(
       data => {
+        this.isActive = false;
         this.kpiMileData = data;
+        console.log(': ===> "call kpi"', "call kpi");
+        
         if (this.kpiMileData != null) {
           this.kpiMileData.forEach((element, id) => {});
+        }
+      }
+    );
+
+    this.driverIsChangedSubscription = this.dataservice.driverIsChanged.subscribe(
+      data => {
+        if (data === true) {
+          this.selectedMember = "Select Member";
         }
       }
     );
@@ -269,6 +321,43 @@ export class KpiDashboardComponent implements OnInit {
     );
 
     this.DataService.getUserList(this.orgID);
+
+    this.userRole = this.dataservice.getRole();
+
+    if(this.userRole == 'admin' || this.userRole == 'CEO' || this.userRole =='Chief Executive Officer'){
+
+      this.dataService.getAllUsers(this.orgID);
+      this.userSubscription = this.dataService.usersdata.subscribe((data) => {
+        var value: any;
+        var key: any;
+  
+        this.users = data;
+        this.userList = data && data.length>0 ? data.sort((a,b)=>a.name.localeCompare(b.name)) : data;
+
+        if (data){
+          for ([key,value] of Object.entries(data)){
+            this.user[key] = {uID: value.uID, userName: value.name + ' ' + value.lname}
+          }
+        }
+      });  
+    } else {
+      this.users = null;
+    }
+
+    this.organizationUserListSubscription = this.DataService.dataAccessUserListdata.subscribe(data=>{
+      this.memberList = [];
+      this.memberList = data;
+    });
+
+    this.statusDefaultSubscription = this.dataservice.statusDefaultData.subscribe(data=>{
+      this.newTaskStatus = data
+    });
+
+    this.kpiListSubscription = this.dataservice.userKpiMilestoneData.subscribe(data => {
+      if(data){
+        this.kpiList = data;
+      }
+    });
   }
 
   destroySubscriptions(): void {
@@ -284,6 +373,10 @@ export class KpiDashboardComponent implements OnInit {
           sub.unsubscribe();
         })
       : null;
+
+    this.statusDefaultSubscription ? this.statusDefaultSubscription.unsubscribe() : null;
+    this.userMilestoneSubscription ? this.userMilestoneSubscription.unsubscribe() : null;
+    this.userSubscription ? this.userSubscription.unsubscribe() : null;
   }
 
   setDriverImg(): void {
@@ -357,6 +450,16 @@ export class KpiDashboardComponent implements OnInit {
     this.editKpiShareStatus = null;
     this.editKpiShareUser = null;
     this.kpiHistoryData = null;
+
+    
+    this.newMilestoneMilestone = '';
+    this.newTaskKpi = '';
+    this.newMilestoneDueDate = '';
+    this.newTaskStatus = 'C';
+    this.newMilestoneAssigned = '';
+    this.milestoneRecurringFrequencyNew = null;
+    this.milestoneRecurringNew = null;
+    this.newMilestoneNote = null;
   }
 
   clearDeleteModal(): void {
@@ -478,9 +581,90 @@ export class KpiDashboardComponent implements OnInit {
     this.editKpiReportTarget = latestReport.budgetAmount;
     this.editKpiReportActual = 0;
   }
+
+  expand(index) {
+    if(this.kpiMileData[index].isActive) {
+      this.isActive = false;
+    }
+    this.kpiMileData[index].isActive = !this.kpiMileData[index].isActive;
+  }
+
+  expandAll() {
+    console.log(': ===> 122', 122);
+    if(this.isActive) {
+      this.isActive = false;
+      this.kpiMileData.map(item => item.isActive = false );
+    } else {
+      this.isActive = true;
+      this.kpiMileData.map(item => item.isActive = true );
+    }
+  }
+
+  SetInitialValue(kpiID) {
+    this.newTaskKpi = kpiID;
+  }
+  createNewMilestone():void {
+
+    var body:any = { }
+    console.log(': ===> this.newMilestoneAssigned', this.newMilestoneAssigned);
+    for (const i in this.newMilestoneAssigned){
+      
+      body.achieveText = this.newMilestoneMilestone;
+      body.kpiID = this.newTaskKpi;
+      body.dueDate = this.newMilestoneDueDate;
+      body.charpStatus = this.newTaskStatus;
+      body.uID = this.newMilestoneAssigned[i],
+      body.superReferUserID = this.uID;
+      body.recurringFrequency = this.milestoneRecurringFrequencyNew;
+      body.milestoneNote = this.newMilestoneNote;
+
+      this.userMilestoneSubscription = this.dataservice.postPortfolioMilestoneData.pipe(take(1)).subscribe((data:any) =>{
+        if(data){
+          notification.notification(data.status,data.msg,5000)
+          if(data.status.toLowerCase() == 'success'){
+            this.modalRef.hide();
+            this.clearModal();
+            this.clearDeleteModal();
+          }
+        }
+      });
+      this.dataservice.postQuarterSplitBulk({ uID: body['uID'] });
+
+      this.dataservice.postPortfolioMilestone(body);
+    }
+    this.timeoutList();
+  }
+
+  setMilestoneRecurringNew():void {
+    this.milestoneRecurringNew = !this.milestoneRecurringNew;
+    if(!this.milestoneRecurringNew){
+      this.milestoneRecurringFrequencyNew = null;
+    }
+  }
+
+  refreshKpiData(driverID:any):void {
+    // this.dataservice.getUserKpiMilestone(this.uID,this.newTaskDriver);
+    this.dataservice.getUserKpiMilestone(this.uID,driverID ? driverID : this.driverID);
+  }
+
+  onSelecteMember(userDetail) {
+    console.log(': ===> userDetail.User', userDetail);
+    this.selectedMember = userDetail.User;
+    this.dataservice.getKpiDriverByMember(this.driverID, userDetail.uID)
+  }
 }
 
 export interface ReportingFrequency {
   value: string;
   viewValue: string;
+}
+
+export interface Charp {
+  value: string;
+  viewValue: string;
+}
+
+export interface User {
+  uID: string;
+  userName: string;
 }

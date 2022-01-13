@@ -1,48 +1,86 @@
 <app-on-top-nav></app-on-top-nav>
 <app-sidenav></app-sidenav>
-<div
-  class="right_col ml230 nsidebar-content"
-  role="main"
-  (click)="toggleClass()"
->
+<div class="right_col ml230 nsidebar-content" role="main">
   <div class="dashboard-wrapper mt-1">
     <div class="meeting-header mb-1">
       <h4 id="test">
         Business Drivers
-        <span
-          style="padding-left:8px;cursor:pointer;"
-          (click)="printDashboard()"
-          matTooltip="{{ PrintToolTip }}"
-          matTooltipClass="toolTip"
-          aria-label="Button that displays a tooltip when focused or hovered over"
-        >
-          <svg
-            style="vertical-align: middle;margin-top: -2px;"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+        <span style="padding-left:8px;cursor:pointer;" (click)="printDashboard()" matTooltip="{{ PrintToolTip }}"
+          matTooltipClass="toolTip" aria-label="Button that displays a tooltip when focused or hovered over">
+          <svg style="vertical-align: middle;margin-top: -2px;" width="16" height="16" viewBox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
               d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM8.00001 5C7.63113 5 7.3076 5.19922 7.13318 5.50073C6.85664 5.97879 6.24491 6.14215 5.76685 5.86561C5.28879 5.58906 5.12543 4.97733 5.40197 4.49927C5.91918 3.60518 6.88833 3 8.00001 3C9.65687 3 11 4.34315 11 6C11 7.30622 10.1652 8.41746 9.00001 8.82929V9C9.00001 9.55228 8.5523 10 8.00001 10C7.44773 10 7.00001 9.55228 7.00001 9V8C7.00001 7.44772 7.44773 7 8.00001 7C8.5523 7 9.00001 6.55228 9.00001 6C9.00001 5.44772 8.5523 5 8.00001 5ZM8 13C8.55228 13 9 12.5523 9 12C9 11.4477 8.55228 11 8 11C7.44772 11 7 11.4477 7 12C7 12.5523 7.44772 13 8 13Z"
-              fill="#474F59"
-            />
+              fill="#474F59" />
           </svg>
         </span>
       </h4>
     </div>
     <app-gauges [uID]="uID"></app-gauges>
-    <div class="x_content">
+    <div class="row">
+      <div class="col-md-8 col-lg-9">
+        <app-dashboard-kpi></app-dashboard-kpi>
+        <!-- <div class="collapse-card">
+          <div class="card-header">
+            <div class="title-wraper">
+              <h4>Direct Reports</h4>
+              <p>
+                Folks that owe you things and stuff
+              </p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="reports-row">
+              <div class="reports-item">
+                <div class="user-description">
+                  <div class="user-detail">
+                    <div class="user-img"></div>
+                    Karen Smith
+                  </div>
+                </div>
+                <a href="#">View Karen’s KPIs</a>
+              </div>
+              <div class="reports-item">
+                <div class="user-description">
+                  <div class="user-detail">
+                    <div class="user-img"></div>
+                    Karen Smith
+                  </div>
+                </div>
+                <a href="#">View Karen’s KPIs</a>
+              </div>
+              <div class="reports-item">
+                <div class="user-description">
+                  <div class="user-detail">
+                    <div class="user-img"></div>
+                    Karen Smith
+                  </div>
+                </div>
+                <a href="#">View Karen’s KPIs</a>
+              </div>
+              <div class="reports-item">
+                <div class="user-description">
+                  <div class="user-detail">
+                    <div class="user-img"></div>
+                    Karen Smith
+                  </div>
+                </div>
+                <a href="#">View Karen’s KPIs</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <app-issue-list [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue-list>
+        <app-day-action-item></app-day-action-item>
+      </div>
+    </div>
+    <hr class="mt-1 mb-0" />
+    <!-- <app-team-level-all *ngIf="driverName != 'You' && teamLevelAllUserList?.length > 0" [uID]="uID" [driverID]="driverID"></app-team-level-all> -->
+    <!-- <div class="x_content">
       <div class="row">
-        <div
-          fxFlex="100"
-          fxLayout="column"
-          class="example-container"
-          style="height: auto!important;"
-        >
+        <div fxFlex="100" fxLayout="column" class="example-container" style="height: auto!important;">
           <div fxFlex fxLayout="row" fxLayoutAlign="start start">
             <mat-tab-group dynamicHeight fxFlex="100" mat-stretch-tabs>
               <mat-tab>
@@ -50,42 +88,26 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <app-dashboard-kpi></app-dashboard-kpi>
                     <app-coach [uID]="uID" *ngIf="coachName"></app-coach>
-                    <app-issue
-                      class="x_panel"
-                      [data]="{ user: { uID: uID } }"
-                      [userData]="issueData"
-                    ></app-issue>
+                    <app-issue class="x_panel" [data]="{ user: { uID: uID } }" [userData]="issueData"></app-issue>
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
-                    <app-dashboard-milestone
-                      id="id_milestone"
-                      #milestone
-                    ></app-dashboard-milestone>
+                    <app-dashboard-milestone id="id_milestone" #milestone></app-dashboard-milestone>
                   </div>
                 </div>
-                <div
-                  class="row"
-                  *ngIf="driverName != 'You' && corporateKpiData?.length > 0"
-                >
+                <div class="row" *ngIf="driverName != 'You' && corporateKpiData?.length > 0">
                   <app-team-level-corporate></app-team-level-corporate>
                 </div>
-                <div
-                  class="row"
-                  *ngIf="
+                <div class="row" *ngIf="
                     driverName != 'You' && teamLevelAllUserList?.length > 0
-                  "
-                >
-                  <app-team-level-all
-                    [uID]="uID"
-                    [driverID]="driverID"
-                  ></app-team-level-all>
+                  ">
+                  <app-team-level-all [uID]="uID" [driverID]="driverID"></app-team-level-all>
                 </div>
               </mat-tab>
             </mat-tab-group>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <ng-template #template>
     <div class="modal-header">
@@ -97,10 +119,7 @@
     </div>
     <div class="modal-body">
       <br />
-      <div
-        class="padding-bottom"
-        *ngFor="let d of userInviteData; let i; of: index"
-      >
+      <div class="padding-bottom" *ngFor="let d of userInviteData; let i; of: index">
         <p style="width:100%; text-align: center;">
           <strong>{{ d.coach.name }} {{ d.coach.lname }}</strong> has invited
           you to join their team.
@@ -110,29 +129,19 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="col-lg-2 col-xl-2"></div>
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <button
-              type="submit"
-              data-dismiss="modal"
-              class="btn btn-success"
-              (click)="sendNotificationResponse('Accepted')"
-            >
+            <button type="submit" data-dismiss="modal" class="btn btn-success"
+              (click)="sendNotificationResponse('Accepted')">
               <b>Accept</b>
             </button>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <button
-              type="submit"
-              data-dismiss="modal"
-              class="btn btn-danger"
-              (click)="sendNotificationResponse('Declined')"
-            >
+            <button type="submit" data-dismiss="modal" class="btn btn-danger"
+              (click)="sendNotificationResponse('Declined')">
               <b>Decline</b>
             </button>
           </div>
         </div>
-        <div
-          style="text-align:center; width:100%;margin-bottom:5px;cursor:pointer;"
-        >
+        <div style="text-align:center; width:100%;margin-bottom:5px;cursor:pointer;">
           <a (click)="dismissNotification()">postpone</a>
         </div>
       </div>

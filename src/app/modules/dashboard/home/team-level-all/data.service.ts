@@ -105,7 +105,6 @@ export class TeamLevelAllDataService {
         }
 
         const userList = await this.apiService.get(`/v1/getUserList?uID=${uID}&level=MinusOne`).toPromise();
-
         for (const i in userList.payload){
             element = { User: userList.payload[i]['name'] + ' ' + userList.payload[i]['lname'],uID: userList.payload[i]['uID'],imageUrl: userList.payload[i]['info'] && userList.payload[i]['info']['photo'].length>0 ? this.imgUrl + userList.payload[i]['info']['photo'] : null }
             data.push(element);

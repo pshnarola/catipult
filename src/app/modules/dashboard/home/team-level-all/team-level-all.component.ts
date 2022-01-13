@@ -107,11 +107,12 @@ export class TeamLevelAllComponent implements OnInit {
 
     this.userKpiAllSubscription = this.dataService.userKpiData.subscribe(data => {
       this.kpiData = data;
+      console.log(': ===> this.kpiData', this.kpiData);
     });
 
     this.organizationUserListSubscription = this.dataService.dataAccessUserListdata.subscribe(data=>{
       this.userList = data;
-      // console.log(data);
+      console.log("this.userList",this.userList);
       // this.userList = data && data.length>0 ? data.sort((a,b)=>a.name.localeCompare(b.name)) : data;
     });
     
