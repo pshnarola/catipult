@@ -38,6 +38,7 @@ export class OnTopNavComponent implements OnInit {
   role= '';
   name= '';
   url= "http://108.163.221.122:2004/";
+  headerTitle = "";
 
   notifications = [];
   notificationCount: number;
@@ -47,6 +48,16 @@ export class OnTopNavComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    let curentRoute = this.router.url.split('/');
+    console.log(': ===> curentRoute', curentRoute);
+    if(curentRoute[1] === 'dashboard') {
+      this.headerTitle = "World class company";
+    } else if(curentRoute[1] === 'meeting') {
+      this.headerTitle = "Meeting";
+    }else {
+      this.headerTitle = ""
+    }
 
     this.role = this.dataService.getRoleInfo();
     const token =  this.dataService.getToken();

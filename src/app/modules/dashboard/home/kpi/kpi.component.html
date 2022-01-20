@@ -215,7 +215,7 @@
   </div>
 
   <div *ngIf="kpiMileData && kpiMileData.length > 0">
-    <div class="card-body collapse-card-body" *ngFor="let item of kpiMileData; let i = index"
+    <div class="card-body collapse-card-body" *ngFor="let item of kpiMileData; let ikPI = index"
       [ngClass]="item.isActive ? 'active': ''">
       <div class="table-responsive">
         <table class="kpi-table">
@@ -225,9 +225,9 @@
                 {{item.objective}}<span class="company-tag" *ngIf="item.isCorporateKpi">Corporate</span>
               </th>
               <th class="item-qty">
-                <div>{{item.achieveQty}} / {{item.qty}}
-                  <span *ngIf="item.qty == 0" class="company-tag" [ngStyle]="{'color':'#AE1905', 'background':'#FFE5E5'}">{{ 000 | number : '1.2-2'}}%</span>
-                  <span *ngIf="item.qty > 0" class="company-tag" [ngStyle]="{'color':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#AE1905' : ((item.achieveQty / item.qty) *100) <= 50 ? '#DC4614' : ((item.achieveQty / item.qty) *100) <= 80 ? '#0C5292' : '#0C924A', 'background':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#FFE5E5' : ((item.achieveQty / item.qty) *100) <= 50 ? '#FFEED6' : ((item.achieveQty / item.qty) *100) <= 80 ? '#E5F6FF' : '#E8FFE5' }">{{((item.achieveQty / item.qty) *100) | number : '1.2-2'}}%</span>
+                <div>{{item.achieveQty | number : '1.0-2':'en-US'}} / {{item.qty | number : '1.0':'en-US'}}
+                  <span *ngIf="item.qty == 0" class="company-tag" [ngStyle]="{'color':'#AE1905', 'background':'#FFE5E5'}">{{ 000 | number : '1.0-2':'en-US'}}%</span>
+                  <span *ngIf="item.qty > 0" class="company-tag" [ngStyle]="{'color':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#AE1905' : ((item.achieveQty / item.qty) *100) <= 50 ? '#DC4614' : ((item.achieveQty / item.qty) *100) <= 80 ? '#0C5292' : '#0C924A', 'background':((item.achieveQty / item.qty) *100) <= 30 || !((item.achieveQty / item.qty) *100) ? '#FFE5E5' : ((item.achieveQty / item.qty) *100) <= 50 ? '#FFEED6' : ((item.achieveQty / item.qty) *100) <= 80 ? '#E5F6FF' : '#E8FFE5' }">{{((item.achieveQty / item.qty) *100) | number : '1.0-2':'en-US'}} %</span>
                   </div>
               </th>
               <th class="kpi-time">
@@ -250,7 +250,7 @@
                         stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   </a> -->
-                  <a class="btn-collapse" (click)="expand(i)">
+                  <a class="btn-collapse" (click)="expand(ikPI)">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M14.7071 12.7071C14.3166 13.0976 13.6834 13.0976 13.2929 12.7071L10 9.41421L6.70711 12.7071C6.31658 13.0976 5.68342 13.0976 5.29289 12.7071C4.90237 12.3166 4.90237 11.6834 5.29289 11.2929L9.29289 7.29289C9.68342 6.90237 10.3166 6.90237 10.7071 7.29289L14.7071 11.2929C15.0976 11.6834 15.0976 12.3166 14.7071 12.7071Z"
@@ -265,13 +265,19 @@
             <tr>
               <td colspan="5" *ngIf="item.Milestones.length > 0">
                 <table>
-                  <tr *ngFor="let milestone of item.Milestones; let i = index">
+                  <tr *ngFor="let milestone of item.Milestones; let iMileStone = index" (click)="milestoneEdit(editMilestone,'modal-md', ikPI, iMileStone)">
                     <td>
                       <div class="user-description">
                         <div class="user-detail">
-                          <div class="user-img"></div>
-                          Karen Smith
+                          
+                         
+                          <img [src]="getUserImg(milestone['User'])" alt="user" class="user-img" />
+                          {{milestone['User'] ? milestone['User']['name'] : ""}} {{milestone['User'] ? milestone['User']['lname'] : ""}}
                         </div>
+                        <!-- <div class="user-detail" *ngIf="!milestone['User']['info']['photo']">
+                          <div class="user-img"></div>
+                          {{milestone['User'] ? milestone['User']['name'] : ""}} {{milestone['User'] ? milestone['User']['lname'] : ""}}
+                        </div> -->
                         <div class="designation">{{milestone.achieveText}}</div>
                       </div>
                     </td>
@@ -774,5 +780,112 @@
         <button class='btn btn-primary' (click)='createNewMilestone();' *ngIf='newMilestoneAssigned && newTaskKpi && newMilestoneMilestone && newMilestoneDueDate'>Add {{ newElement }}</button>
       </div>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #editMilestone>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">  
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center">
+          <img src="{{ driverImg }}"/>
+      </div>
+    </h4>
+  </div>  
+  <div class="modal-body">
+    <br>
+    <div class="container">
+      <div class='row'>
+        <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+          <span class=''>Milestone</span>
+          <input name='kpiObjective' type="text" class="form-control" style='padding-bottom:10px;' placeholder="Example: Working out" name='milestone' [(ngModel)]='milestoneMilestoneEdit'>    
+        </div>
+        <div class='col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+          <span class="">Due Date</span>
+          <input name="qty" type='date' class="form-control" style='line-height:normal !important;padding-bottom:9px;' placeholder = 'mm-dd-yyyy' name='milestoneDueDate' [(ngModel)]='milestoneDueDateEdit' (change)='updateQuarterList()'>  
+        </div>  
+      </div>  
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Status</mat-label>
+            <mat-select class='form-control' [(ngModel)]="milestoneStatusEdit" name='milestoneStatus'>
+              <mat-option *ngFor="let c of charp" [value]="c.value">{{ c.viewValue }}</mat-option>
+            </mat-select>  
+          </mat-form-field>              
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <mat-form-field appearance='fill' style='width:100%;'>
+            <mat-label>Assigned</mat-label>
+            <mat-select class='form-control' [(ngModel)]="milestoneAssignedEdit" name='milestoneAssigned' (selectionChange)='updateQuarterList()'>
+              <mat-option *ngFor="let u of userList" [value]="u.name + ' ' + u.lname">{{ u.name + ' ' + u.lname }}</mat-option>
+            </mat-select>  
+          </mat-form-field>                  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6" style='padding-left:1px !important;'>
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12">
+            Recurring
+            <div class='row' [ngClass]="milestoneRecurringEdit?'isRecurring':'isNotRecurring'" style='border-style:solid;border-width:2px;height:30px;margin-left:10px;margin-bottom:10px;margin-top:5px;max-width:75px;cursor:pointer;' (click)='setMilestoneRecurringEdit();'>
+              <div *ngIf='milestoneRecurringEdit' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#337ab7'></div>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#337ab7;height:100%;'></div>  
+              </div>
+              <div *ngIf='!milestoneRecurringEdit' style='height:100%;'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='background-color:#666666;height:100%;'></div>  
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-6' style='vertical-align:middle;padding-top:2px;color:#666666;text-align:right;'></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12" style='padding-right:0px !important;'>
+            <div *ngIf='milestoneRecurringEdit'>
+              <mat-form-field appearance='fill' style='width:100%;'>
+                <mat-label>Frequency</mat-label>
+                <mat-select class='form-control' [(ngModel)]="milestoneRecurringFrequencyEdit" name='milestoneRecurringFrequency'>
+                  <mat-option *ngFor="let f of frequency" [value]="f.value">{{ f.viewValue }}</mat-option>
+                </mat-select>  
+              </mat-form-field>
+            </div>
+          </div>  
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            Comments
+          <textarea name="milestoneEditNote" id="id_MilestoneEditNote" [(ngModel)]='milestoneNoteEdit'cols="30" rows="2" class='' style='width:100%;margin-top:5px;border-color:#d9d9d9 !important;'></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="">
+            <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)='updateMilestoneData()' *ngIf='milestoneAssignedEdit && milestoneDueDateEdit && milestoneMilestoneEdit'><b>Update</b></button>
+            <button type="submit" data-dismiss="modal" class="btn btn-danger" style='margin-left:0px !important;' (click)='modalRef.hide();showModal(deleteMilestoneTemplate,"modal-sm");'><b>Delete</b></button>
+          </div>
+      </div>
+    </div>  
+  </div> 
+</ng-template>
+
+<ng-template #deleteMilestoneTemplate>  
+  <div class="modal-header">  
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='modalRef.hide();showModal(editMilestone,"modal-sm");clearDeleteModal();'>
+      <span aria-hidden="true">×</span>  
+    </button>  
+    <h4 class="modal-title" id="myModalLabel">
+      <div class="col-md-12 col-sm-12 col-xs-12 text_center"><h2>Delete Milestone</h2></div>
+    </h4>
+  </div>  
+  <div class='modal-footer'>
+    <div class='input-box padding-bottom'>
+      <span class=''>Please confirm you want to delete the milestone by typing <span class='text-danger'>delete</span> below.</span>
+      <input id='delete_milestone' name='milestoneDelete' type="text" class="form-control" [(ngModel)]='deleteText'>
+    </div>
+    <button class='btn btn-danger' (click)='deleteMilestone();modalRef.hide();' *ngIf='deleteText==="delete"'>Delete Milestone</button>
+    <button class='btn btn-danger' *ngIf='deleteText!="delete"' disabled>Delete Milestone</button>
+    <button class='btn btn-primary' style='margin-left:auto !important;' (click)='modalRef.hide();showModal(editMilestone,"modal-sm");clearDeleteModal();'>Cancel</button>
   </div>
 </ng-template>

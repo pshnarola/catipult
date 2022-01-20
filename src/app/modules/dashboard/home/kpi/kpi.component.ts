@@ -8,6 +8,7 @@ import { TeamLevelAllDataService } from "src/app/modules/dashboard/home/team-lev
 import * as notification from "src/app/shared/libraries/exports.library";
 import { DateTime } from "luxon";
 import { DataService } from "src/app/modules/account/services/data.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-dashboard-kpi",
@@ -109,12 +110,28 @@ export class KpiDashboardComponent implements OnInit {
   newElement:string;
   newTaskKpi:string;
   kpiList:any;
-
   newMilestoneMilestone:string;
   newMilestoneDueDate:string;
   newTaskStatus:string;
+  url= environment.imgUrl ? environment.imgUrl: "http://108.163.221.122:2004/";
 
   newMilestoneAssigned:any = [];
+
+
+  // edit milesone 
+  userDeleteMilestoneSubscription:Subscription;
+  milestoneQuarterList:any;
+  milestoneDataEdit:any;
+  milestoneRecurringEdit:boolean = false;
+  milestoneDueDateEdit:string;
+  milestoneMilestoneEdit:string;
+  milestoneMileIdEdit:string;
+  milestoneStatusEdit:string;
+  MilestoneQsIdEdit:string;
+  milestoneNoteEdit:string;
+  editMilestoneKpiId:string;
+  milestoneAssignedEdit:string;
+  milestoneRecurringFrequencyEdit:string;
 
   charp : Charp[] = [
     { value: "C", viewValue: "Change" },
@@ -255,7 +272,6 @@ export class KpiDashboardComponent implements OnInit {
     this.dataservice.driversdata.subscribe(data => {
       if (data) {
         this.driverData = data;
-        console.log(': ===> "call driver"', "call driver");
         this.setDriverImg();
       }
     });
@@ -358,6 +374,10 @@ export class KpiDashboardComponent implements OnInit {
         this.kpiList = data;
       }
     });
+
+    this.dataservice.quarterListdata.subscribe(data => {
+      this.milestoneQuarterList = data;
+    });
   }
 
   destroySubscriptions(): void {
@@ -376,6 +396,7 @@ export class KpiDashboardComponent implements OnInit {
 
     this.statusDefaultSubscription ? this.statusDefaultSubscription.unsubscribe() : null;
     this.userMilestoneSubscription ? this.userMilestoneSubscription.unsubscribe() : null;
+    this.userDeleteMilestoneSubscription ? this.userDeleteMilestoneSubscription.unsubscribe() : null;
     this.userSubscription ? this.userSubscription.unsubscribe() : null;
   }
 
@@ -652,6 +673,202 @@ export class KpiDashboardComponent implements OnInit {
     this.selectedMember = userDetail.User;
     this.dataservice.getKpiDriverByMember(this.driverID, userDetail.uID)
   }
+
+  milestoneEdit(template: TemplateRef<any>,cls:any,elementKpi, element: any){
+
+    this.setDriverImg();
+    var data = this.kpiMileData[elementKpi].Milestones[element];
+
+    this.milestoneDataEdit = this.dataservice.currentMilestoneData;
+
+    this.milestoneMilestoneEdit = data['achieveText'];
+    this.milestoneMileIdEdit = data['mileID'];
+    this.milestoneDueDateEdit = data['dueDate'];
+    this.milestoneStatusEdit = data['charpStatus'];
+    this.milestoneAssignedEdit = data['User'] ? data['User']['name'] + ' ' + data['User']['lname'] : null;
+    this.milestoneRecurringEdit = data['recurringFrequency'] ? true : false; // data['isRecurring'];
+    this.milestoneRecurringFrequencyEdit = data['recurringFrequency'];
+    this.milestoneNoteEdit = data['milestoneNote'];
+    this.dataservice.getQuarterList(data['User'] ? data['User']['uID']: null);
+    this.editMilestoneKpiId = data.kpiID;
+
+    this.showModal(template,cls);
+  }
+
+  updateQuarterList(): void {
+    this.dataservice.getQuarterList(this.getEditUid());
+  }
+
+  getEditUid(): string { 
+    var uId: string = 'Unknown';
+    var arr: any;
+    var matchValue: string;
+    
+    arr = this.userList;
+    matchValue = this.milestoneAssignedEdit;
+
+    Object.keys(arr).forEach(function(i){
+      if (arr[i]['name'] + ' ' + arr[i]['lname'] == matchValue) {
+        uId = arr[i]['uId'] || arr[i]['uID'];
+      }
+    });
+    return uId;
+  }
+
+  setMilestoneRecurringEdit():void {
+    this.milestoneRecurringEdit = !this.milestoneRecurringEdit;
+    if(!this.milestoneRecurringEdit){
+      this.milestoneRecurringFrequencyEdit = null;
+    }
+  }
+
+  updateMilestoneData(){
+    var milestoneData: any;
+    var quarterData: any;
+    var uId: string;
+    var frequency:object = {};
+
+    uId = this.getEditUid();
+
+    milestoneData = {
+      dueDate: this.milestoneDueDateEdit,
+      achieveText: this.milestoneMilestoneEdit,
+      mileID: this.milestoneMileIdEdit,
+      uID: uId,
+      charpStatus: this.milestoneStatusEdit,
+      recurringFrequency: this.milestoneRecurringFrequencyEdit,
+      milestoneNote: this.milestoneNoteEdit
+    }
+
+    quarterData = this.getQuarterData(this.milestoneDataEdit,this.milestoneMileIdEdit)
+    quarterData.qsID = this.getEditQsid();
+    quarterData.uID = uId;
+
+    this.dataservice.updateMilestone(milestoneData);
+    this.dataservice.updateMilestoneQuarter(quarterData);
+
+    this.timeoutList();
+    
+    this.modalRef.hide();
+
+    if(this.milestoneRecurringEdit&&this.milestoneStatusEdit=='D'){
+      if(this.milestoneRecurringFrequencyEdit=='Weekly'){
+        frequency['a'] = 'days';
+        frequency['b'] = 7;
+        frequency = {days: 7};
+      } else if (this.milestoneRecurringFrequencyEdit=='Monthly'){
+        frequency['a'] = 'months';
+        frequency['b'] = 1;
+        frequency = {months: 1};
+      } else if (this.milestoneRecurringFrequencyEdit=='Quarterly'){
+        frequency['a'] = 'quarters';
+        frequency['b'] = 1;
+        frequency = {quarters: 1};
+      } else if (this.milestoneRecurringFrequencyEdit=='Yearly'){
+        frequency['a']='years';
+        frequency['b']=1;
+        frequency = {years: 1}
+      }
+      this.createRecurringMilestone(this.milestoneMilestoneEdit,this.editMilestoneKpiId,DateTime.fromISO(this.milestoneDueDateEdit).plus(frequency).toISODate(),'P',uId,this.uID,this.milestoneRecurringFrequencyEdit);
+    }
+  }
+
+  createRecurringMilestone(achieveText:string,kpiID:string,dueDate:string,charpStatus:string,uID:string,superReferUserID:string,recurringFrequency:string):void {
+    var body:Object = {
+      achieveText: achieveText,
+      kpiID: kpiID,
+      dueDate: dueDate,
+      charpStatus: charpStatus,
+      uID: uID,
+      superReferUserID: superReferUserID,
+      recurringFrequency: recurringFrequency
+    }
+
+    this.userMilestoneSubscription = this.dataservice.postPortfolioMilestoneData.pipe(take(1)).subscribe((data:any) =>{
+      if(data){
+        notification.notification(data.status,data.msg,5000)
+        if(data.status.toLowerCase() == 'success'){
+          this.modalRef.hide();
+          this.clearModal();
+          this.clearDeleteModal();
+        }
+      }
+    });
+
+    this.dataservice.postPortfolioMilestone(body);
+    this.timeoutList();
+  }
+
+  getEditQsid(): string {
+    
+    var qsId: string = 'Unknown';
+    var arr: any;
+    var matchValue: string;
+    
+    arr = this.milestoneQuarterList;
+    matchValue = this.milestoneDueDateEdit;
+
+    Object.keys(arr).forEach(function(i){
+      if (arr[i]['startDate']<=matchValue && arr[i]['endDate']>=matchValue){
+          qsId = arr[i]['qsID'];
+        } else if (arr[0]['startDate']>matchValue){
+          qsId = arr[0]['qsID'];
+        } else if (arr[arr.length-1]['startDate']<matchValue){
+          qsId = arr[arr.length-1]['qsID'];
+        }
+      });
+    return qsId;
+  }
+
+  getQuarterData(arr:object, matchValue: string): object {
+    
+    var data: object = {};
+
+    Object.keys(arr).forEach(function(i){
+      Object.keys(arr[i]['Milestones']).forEach(function(n){
+        if (arr[i]['Milestones'][n]['mileID'] == matchValue){
+          if (arr[i]['Milestones'][n]['QuarterKpiAssigns'].length > 0 && arr[i]['Milestones'][n]['QuarterKpiAssigns'][0].hasOwnProperty('qkaID')){
+            data = {qkaID: arr[i]['Milestones'][n]['QuarterKpiAssigns'][0]['qkaID']};
+          } else {
+            data = {qkaID: 'Unknown'};
+          }
+          } else {
+            data = {qkaID: 'Unknown'};
+        } 
+      });
+    });
+    return data;
+  }
+
+  deleteMilestone(): void{
+    if(this.deleteText==='delete'){
+      this.userDeleteMilestoneSubscription = this.dataservice.deleteUserMilestoneData.pipe(take(1)).subscribe((data:any) =>{
+        if(data){
+          notification.notification(data.status,data.msg,5000)
+          if(data.status.toLowerCase() == 'success'){
+            this.modalRef.hide();
+            this.clearModal();
+            this.clearDeleteModal();
+          }
+        }
+      });
+      this.dataservice.deleteMilestone(this.milestoneMileIdEdit);
+      this.timeoutList();
+    }
+  }
+
+  getUserImg(user){
+    if(user) {
+      if(user['info'] && user['info']['photo']) {
+      return this.url + user['info']['photo'];
+      } else {
+        return "assets/img.jpg";
+      }
+    } else {
+      return "assets/img.jpg";
+    }
+  }
+
 }
 
 export interface ReportingFrequency {
