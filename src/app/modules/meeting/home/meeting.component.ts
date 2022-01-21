@@ -27,6 +27,7 @@ import { IssueDataService } from "../../issue/data.service";
 import * as notification from "src/app/shared/libraries/exports.library";
 import { RESOURCE_CACHE_PROVIDER } from "@angular/platform-browser-dynamic";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-meeting",
@@ -52,6 +53,8 @@ export class MeetingComponent implements OnInit, OnDestroy {
   dayOfWeek: string = "";
   dayOfMonth: string = "";
   keyword = 'name';
+
+  url= environment.imgUrl ? environment.imgUrl: "http://108.163.221.122:2004/";
 
   constructor(
     private router: Router,
@@ -270,9 +273,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
         this.orgUserList = data;
         this.selectedParticipants = [];
         this.suggestOrgUserList = [];
-        console.log(': ===> 1', 1);
         data.map(res => {
-          console.log(': ===> 1', this.selectedParticipants);
           if(res.uID === this.uID){
             this.selectedParticipants.push({uID: res.uID, name:`${res.name} ${res.lname}`});
           }
@@ -300,7 +301,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.dataSubscription.push(
       this.dataService.getMeetingUserData.subscribe(data => {
         this.userMeetingData = data;
-        console.log(': ===> "vik here"', "vik here");
         if(!this.previewMeetingId && this.userMeetingData.length > 0) {
           this.viewMeetingDetails(this.userMeetingData[0]);
         }
@@ -360,7 +360,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   launchMeeting(meeting: any): void {
-    console.log(": ===> meeting", meeting);
     this.meetingIsLaunched = true;
     this.displayMeetingList = false;
     this.displayAttendeeList = true;
@@ -369,7 +368,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.dataSubscription.push(
       this.dataService.getUserMeetingData(meeting.meetingId).subscribe(data => {
         if (data) {
-          console.log(": ===> data.payload[0]", data.payload[0]);
           this.activeMeeting = meeting;
           this.activeMeetingName = meeting.meeting;
           this.timers = meeting.timerData;
@@ -389,7 +387,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   viewMeetingDetails(meeting: any): void {
-    console.log(": ===> meeting", meeting);
     this.selectedMeeting = meeting;
     this.meetingIsPreview = true;
     this.displayMeetingList = true;
@@ -635,7 +632,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   stopMeeting(meetingData: any): void {
-    console.log(": ===> here", "vik stop");
     this.meetingInProgress = false;
     this.timerSubscription.forEach(s => s.unsubscribe(), (this.play = false));
     this.timerSubscription = [];
@@ -716,9 +712,7 @@ export class MeetingComponent implements OnInit, OnDestroy {
       this.showModal(this.meetingEdit, "modal-md");
       this.editMeeting(this.selectedMeeting);
     } else if (event === "delete") {
-      console.log(": ===> event d", event);
       this.dataService.deleteUserMeeting(this.previewMeetingId).subscribe(result => {
-        console.log(': ===> result', result);
         if(result.status == "Success") {
           this.previewMeetingId = "";
         }
@@ -752,7 +746,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
       scoreNotes: this.activeMeetingScoreNotes,
       meetingNotes: this.activeMeetingNotes
     };
-    console.log(": ===> meetingBody", meetingBody);
     this.putMeetingHistorySubscription = this.dataService.putMeetingHistoryData
       .pipe(take(1))
       .subscribe((data: any) => {
@@ -785,7 +778,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
     this.resetMeetingData();
     this.timeoutList();
     setTimeout(() => {
-      console.log(": ===> this.previewMeetingId", this.previewMeetingId);
       this.dataService.getUserMeetingDataDetail(this.previewMeetingId);
     }, 1500);
   }
@@ -821,7 +813,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe((data: any) => {
         if (data) {
-          console.log(": ===> data", data);
           notification.notification(data.status, data.msg, 5000);
           if (data.status.toLowerCase() == "success") {
             this.dataService.putMeetingUsers(body);
@@ -844,7 +835,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   createNewMeeting(): void {
     var body: any = {};
     var attendees: any = [];
-    console.log(this.timerNewArr);
 
     if (this.timerNewArr && this.timerNewArr.length > 0) {
       this.meetingNewCustomTimer = true;
@@ -860,7 +850,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
       timerData: this.meetingNewCustomTimer ? this.timerNewArr : this.timers
     };
 
-    console.log(': ===> ', this.meetingNewMeetingAttendees);
 
     this.postUserMeetingSubscription = this.dataService.postUserMeetingData
       .pipe(take(1))
@@ -1165,7 +1154,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
   }
 
   getKpiData(meetingID: string): void {
-    console.log(": ===> this.activeMeeting", this.activeMeeting);
     this.activeMeeting.displayKPI = true;
     this.activeMeeting.displayMilestones = false;
     this.activeMeeting.displayIssues = false;
@@ -1472,7 +1460,6 @@ export class MeetingComponent implements OnInit, OnDestroy {
     } 
 
     if(type === 'edit') {
-      console.log(': ===> selected.item.uID', selected.item.uID);
       if(!this.meetingEditMeetingAttendees.includes(selected.item.uID)) {
         this.meetingEditMeetingAttendees.push(selected.item.uID);
         this.selectedParticipants.push(selected.item);
@@ -1494,7 +1481,15 @@ export class MeetingComponent implements OnInit, OnDestroy {
     }
     
   }
-  
+
+  getUserImg(user){
+    
+    if(user['User'] && user['User']['info'] && user['User']['info']['photo']){
+      return this.url + user['User']['info']['photo'];
+    } else {
+      return "assets/img.jpg";
+    }
+  }
 
 }
 

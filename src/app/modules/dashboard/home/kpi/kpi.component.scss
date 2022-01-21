@@ -421,3 +421,11 @@ input:focus {
 .font-red {
   color: red !important;
 }
+
+.textClickable {
+  cursor: pointer;
+}
+
+.textClickable:hover {
+  color: #007bff;
+}

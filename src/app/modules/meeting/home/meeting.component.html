@@ -125,24 +125,14 @@
                             <img src="assets/images/meeting/attendee.svg" />
                           </div>
                           <div class="attendees">
-                            <h6>6 Attendee:</h6>
+                            <h6>{{m.attendees.length}} Attendee:</h6>
                             <ul>
-                              <li>
-                                <div class="attendee-profile">
-                                  <img src="assets/img.jpg" />
+                              <li *ngFor="let user of m.attendees; let i = index">
+                                <div class="attendee-profile" *ngIf="i < 3">
+                                  <img [src]="getUserImg(user)" />
                                 </div>
                               </li>
-                              <li>
-                                <div class="attendee-profile">
-                                  <img src="assets/img.jpg" />
-                                </div>
-                              </li>
-                              <li>
-                                <div class="attendee-profile">
-                                  <img src="assets/img.jpg" />
-                                </div>
-                              </li>
-                              <li>+1 More</li>
+                              <li *ngIf="m.attendees.length > 3">+{{m.attendees.length - 3}} More</li>
                             </ul>
                           </div>
                         </div>

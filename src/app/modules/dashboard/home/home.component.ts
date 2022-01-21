@@ -362,7 +362,9 @@ export class HomeComponent implements OnInit {
 
         // this.dataservice.getMileStoneAssignUsersKpi(this.drivers[0].driverID, this.depID, null, 'dash');
         this.dataservice.getMileStoneAssignUsers(this.drivers[0].driverID, null);
+        
         this.dataservice.getKpiDriver(this.drivers[0].driverID);
+        // this.dataservice.getKpiDriverByMember(this.drivers[0].driverID, this.uID);
         
         this.kpiMileData = [];
         this.driverImg = this.drivers[0].driverImage;

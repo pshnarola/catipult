@@ -67,7 +67,6 @@ export class DataService {
       : "http://108.163.221.122:2004/";
     if (v.img) {
       this.url = this.url + v.img;
-      console.log(this.url);
     } else {
       this.url = "assets/img.jpg";
     }
@@ -94,7 +93,6 @@ export class DataService {
   
   resetKpi() {
     this.apiService.delete("/v1/resetUser").subscribe(response => {
-      console.log("kpi Reset");
     });
   }
   getDrivers() {
@@ -113,7 +111,6 @@ export class DataService {
   }
   confirmService(c: any) {
     this.flag = c;
-    console.log(this.flag);
     this.confirmdataSource.next(this.flag);
   }
   orgFetch() {
@@ -144,7 +141,6 @@ export class DataService {
     this.apiService
       .delete(`/v1/question?queID=${queID}`)
       .subscribe(response => {
-        console.log("deleted");
       });
   }
   getQType() {
@@ -196,10 +192,8 @@ export class DataService {
 
     this.apiService.post("/v1/question", question).subscribe(
       response => {
-        console.log("added");
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -208,13 +202,11 @@ export class DataService {
 
     this.apiService.post("/v1/role", role).subscribe(
       response => {
-        console.log("added");
         if (response.msg === "Role Allready exists") {
           this.deptFlagdataSource.next(true);
         }
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -223,13 +215,11 @@ export class DataService {
 
     this.apiService.post("/v1/department", dept).subscribe(
       response => {
-        console.log("added");
         if (response.msg === "Department already exists") {
           this.deptFlagdataSource.next(true);
         }
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -238,10 +228,8 @@ export class DataService {
 
     this.apiService.put("/v1/question", question).subscribe(
       response => {
-        console.log("updated");
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -304,24 +292,20 @@ export class DataService {
 
   updateDept(dept) {
     this.apiService.put("/v1/department", dept).subscribe(response => {
-      console.log(response);
     });
   }
   updateRole(role) {
     this.apiService.put("/v1/role", role).subscribe(response => {
-      console.log(response);
     });
   }
   deleteDeptRole(depID: any) {
     this.apiService
       .delete("/v1/deleteDept?depID=" + depID)
       .subscribe(response => {
-        console.log(response);
       });
   }
   deleteRole(rID: any) {
     this.apiService.delete("/v1/deleteRole?rID=" + rID).subscribe(response => {
-      console.log(response);
     });
   }
   async deleteUser(uID: any) {
@@ -339,7 +323,6 @@ export class DataService {
   }
   inviteUser(userInfo) {
     this.apiService.post("/v1/invite", userInfo).subscribe(response => {
-      console.log(response);
     });
   }
 }

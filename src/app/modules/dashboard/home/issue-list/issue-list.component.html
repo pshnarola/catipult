@@ -26,7 +26,7 @@
     </div>
     <div class="issue-card">
       <div class="livestream-wrapper mt-1" *ngFor="let issue of issueDataActive; let i = index">
-        <h3>{{issue.issueName}}</h3>
+        <h3 class="textClickable" (click)="EditIssue(t_editIssue, 'modal-sm', issue)">{{issue.issueName}}</h3>
         <div class="milestone-wrapper">
           <span>Milestone:</span>
           <span>Q3 Strategic Marketing</span>

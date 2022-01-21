@@ -90,7 +90,6 @@ qBankData: QBank[] =[];
                 ]).subscribe(result => {
                   if (result.matches) {
                     this.leftStyle = 'mobile';
-                    console.log('mobile mode');
                   }
                 });
                 breakpointObserver.observe([
@@ -225,7 +224,6 @@ qBankData: QBank[] =[];
              this.descAns = '';
              this.rfpOptions= [];
              if(this.qBankData[this.currentIndex].QuestionType.typeName === 'rfp'){
-              // console.log('rfpOptions');
               this.dataService.getAllRfpOptions(this.qBankData[this.currentIndex].queID);
             }
           }
@@ -234,7 +232,6 @@ qBankData: QBank[] =[];
             this.currentIndex -=1;
             this.rfpOptions=[];
             if(this.qBankData[this.currentIndex].QuestionType.typeName === 'rfp'){
-              // console.log('rfpOptions');
               this.dataService.getAllRfpOptions(this.qBankData[this.currentIndex].queID);
             }
            }
@@ -254,9 +251,7 @@ qBankData: QBank[] =[];
            }
 
            submitAns(option:any, i: any){
-            //  console.log(option,i);
              if(this.qBankData[this.currentIndex].answer){
-              // console.log('update');
               if(this.qBankData[this.currentIndex].QuestionType.typeName === 'Multiple Choice'){
                 if(option.correctAns){
                 this.dataService.addUserAns({
@@ -268,7 +263,6 @@ qBankData: QBank[] =[];
                 this.qBankData[this.currentIndex].Options[i].correctAns=true;
                 }
                 else {
-                  // console.log('remove');
                 }
               } else {
               this.dataService.updateUserAns({
@@ -289,7 +283,6 @@ qBankData: QBank[] =[];
              this.qBankData[this.currentIndex].answer = true;
            }
            submitAnsM(e:any, option:any, i: any){
-            // console.log(option,i,e);
             if(e.checked){
             this.dataService.addUserAns({
               driverID:this.routeData[0].driverID,
@@ -300,7 +293,6 @@ qBankData: QBank[] =[];
             this.qBankData[this.currentIndex].Options[i].correctAns=true;
             }
             else{
-              // console.log('remove');
               this.dataService.rmoveUserAns(option.optionID);
               this.qBankData[this.currentIndex].Options[i].correctAns=false;
             }
@@ -308,7 +300,6 @@ qBankData: QBank[] =[];
           }
 
           submitAnsR(e:any, option:any, i: any){
-            // console.log(option,i,e);
             if(e.checked){
             this.dataService.addUserAns({
               answer: option.answer,
@@ -316,7 +307,6 @@ qBankData: QBank[] =[];
             this.qBankData[this.currentIndex].Options[i].correctAns=true;
             }
             else{
-              // console.log('remove');
               this.dataService.rmoveUserAns(option.optionID);
               this.qBankData[this.currentIndex].Options[i].correctAns=false;
             }
@@ -324,7 +314,6 @@ qBankData: QBank[] =[];
           }
 
           submitAnsRfpq(e:any, option:any, i: any){
-            // console.log(option,i,e);
 
             if(e.checked){
             this.dataService.addUserRfpqAns({
@@ -336,7 +325,6 @@ qBankData: QBank[] =[];
             this.qBankData[this.currentIndex].Options[i].correctAns=true;
             }
             else{
-              // console.log('remove');
             //  this.dataService.rmoveUserAns(option.optionID);
               this.qBankData[this.currentIndex].Options[i].correctAns=false;
             }

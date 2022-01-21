@@ -257,9 +257,6 @@ a {
 }
 
 // sidebar-content-css
-.nav-md .container.body .nsidebar-content {
-  margin-left: 256px;
-}
 
 .nav-sm .container.body .nsidebar-content {
   margin-left: 88px;
@@ -1925,7 +1922,7 @@ button + button {
         width: 100% !important;
         padding: 20px 20px;
         border: 0;
-        height: auto !important;
+        height: 100% !important;
         text-align: left !important;
         border-radius: 0;
         cursor: pointer;
@@ -2241,7 +2238,7 @@ button + button {
                   display: inline-block;
                   vertical-align: middle;
                   margin-right: 12px;
-                  background: red;
+                  background: none;
                   border-radius: 100px;
                 }
               }
@@ -2502,6 +2499,15 @@ button + button {
 }
 
 // responsive-css
+@media all and (min-width:992px){
+  .nav-md .container.body .nsidebar-content {
+    margin-left: 256px;
+  }
+  .toggle{
+    display: none;
+  }
+  
+}
 @media (max-width: 1366px) {
   .meeting-wrapper {
     .meeting-tab {
@@ -2544,4 +2550,37 @@ button + button {
   .btn.btn-primary {
     font-size: 10px;
   }
+}
+
+.textClickable {
+  cursor: pointer;
+}
+
+.textClickable:hover {
+  color: #007bff;
+}
+
+@media all and (max-width:991px){
+  .navigation{
+    flex-flow: row !important;
+    .toggle{ 
+      padding-top: 0;
+      -webkit-box-flex: 0 !important;
+    flex-grow: 0 !important;
+    width: auto;
+      a{
+        padding: 0;
+      }
+    } 
+    h1{
+      margin-left: 10px !important;
+      font-size: 16px !important;
+      line-height: normal !important;
+      }
+      .navbar-nav{
+        margin: 0;
+      }
+    }
+  
+
 }

@@ -33,6 +33,9 @@ export class GaugesComponent implements OnInit {
   dashStatusDataSubscription:Subscription;
   driverDataSubscription:Subscription;
   activeUserDataSubscription:Subscription;
+  selectedUserDataSubscription: Subscription;
+
+  selectedUserUID: string = null;
 
   canvas: any;
   ctx: any;
@@ -81,7 +84,8 @@ export class GaugesComponent implements OnInit {
     this.dashStatusDataSubscription ? this.dashStatusDataSubscription : null;
     this.dashStatusDataSubscription = this.dataservice.dashStatusSummaryData.subscribe(data=>{
         this.dashStatus = data;
-        this.you = data[0];
+        const loggedInUserID =  this.dataService.getUserId();
+        this.you = data[0].uID === loggedInUserID ? data[0] : this.you;
         this.leadership = data[1];
         this.employees = data[2];
         this.customers = data[3];
@@ -93,6 +97,13 @@ export class GaugesComponent implements OnInit {
         // },this);  
 
     });  
+
+    this.selectedUserDataSubscription = this.dataservice.selectedMemberData.subscribe(uID => {
+      if(uID) {
+        this.selectedUserUID = uID;
+        console.log("selectedUID", this.selectedUserUID);
+      }
+    })
 
     this.milestoneManagerSubscription = this.dataservice.mileStoneManagerUsersdata.subscribe(data => {
       if (data) {
@@ -168,7 +179,16 @@ export class GaugesComponent implements OnInit {
 
   setDriverName(driverID:string,driverName:string):void {
     this.dataservice.setDriverId(driverID,driverName);
-    this.dataservice.getKpiDriver(driverID);
+
+    console.log(driverName);
+    
+    if(this.selectedUserUID && driverName !== 'You'){
+      this.dataservice.getDashStatus(this.selectedUserUID);
+      this.dataservice.getKpiDriverByMember(driverID, this.selectedUserUID);
+    } else {
+      this.dataservice.getDashStatus(this.uID);
+      this.dataservice.getKpiDriver(driverID);
+    }
     this.dataservice.getMileStoneAssignUsersKpi(driverID, JSON.parse(this.dataService.getToken()).depID, null, 'dash');
 
     this.dataservice.getUserKpiAllM(this.managerUid,driverID);

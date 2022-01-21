@@ -102,7 +102,6 @@ export class DataServiceService {
 
   registerDevice(data: any) {
     this.apiService.post("/v1/registerDevice", data).subscribe(response => {
-      console.log("register device");
     });
   }
   getkpislist() {
@@ -146,11 +145,9 @@ export class DataServiceService {
             question: response.userAnw[key].Question.question
           });
         }
-        // console.log(this.users);
         this.userAnsdataSource.next(this.userAns);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -193,7 +190,6 @@ export class DataServiceService {
         this.qBankdataSource.next(this.qBank);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -226,11 +222,9 @@ export class DataServiceService {
             }
           }
         }
-        // console.log(this.users);
         this.quarterListdataSource.next(this.quarterList);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -261,11 +255,9 @@ export class DataServiceService {
             });
           }
         }
-        // console.log(this.users);
         this.dUsersdataSource.next(this.deptUsers);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -280,11 +272,9 @@ export class DataServiceService {
             queID: response.uoptions[key].queID
           });
         }
-        // console.log(this.users);
         this.rfpOptionsdataSource.next(this.rfpOptions);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -314,11 +304,9 @@ export class DataServiceService {
             driverID: response.pagecontents[key].PageContent.driverID
           });
         }
-        // console.log(this.users);
         this.routedataSource.next(this.routeData);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -336,11 +324,9 @@ export class DataServiceService {
             driverID: response.pagecontents[key].PageContent.driverID
           });
         }
-        // console.log(this.users);
         this.routedataSource1.next(this.routeData1);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -364,7 +350,6 @@ export class DataServiceService {
         this.mileStonedataSource.next(this.kpiMilestones);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -418,7 +403,6 @@ export class DataServiceService {
         this.mileDataSource.next(this.mileStoneAll);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -434,11 +418,9 @@ export class DataServiceService {
             kpiID: response.kpis[key].kpiID
           });
         }
-        // console.log(this.users);
         this.kpiListdataSource.next(this.kpiListAll);
       },
       error => {
-        console.log(error);
       }
     );
   }
@@ -464,14 +446,11 @@ export class DataServiceService {
     });
   }
   addActiveState(data: any): any {
-    // console.log(order);
     // this.bill =[];
     this.apiService.post("/v1/registerOnboarding", data).subscribe(
       response => {
-        console.log("added" + response);
       },
       error => {
-        console.log(error);
         //  this.router.navigateByUrl('/account');
       }
     );
@@ -487,7 +466,6 @@ export class DataServiceService {
   addUserRfpqAns(uAns: any, driverID: any): any {
     this.apiService.post("/v1/registerAnsrfpqUser", uAns).subscribe(
       response => {
-        console.log("added" + response);
         const p = response.q;
         // this.addUserKpi({
         //   objective: response.q.answer,
@@ -495,45 +473,37 @@ export class DataServiceService {
         // });
       },
       error => {
-        console.log(error);
       }
     );
   }
 
   addUserKpi(uAns: any): any {
-    // console.log(order);
     // this.bill =[];
     this.apiService.post("/v1/kpi", uAns).subscribe(
       response => {
-        console.log("added kpi" + response);
       },
       error => {
-        console.log(error);
         //  this.router.navigateByUrl('/account');
       }
     );
   }
   addUserMileStones(m: any): any {
-    // console.log(order);
     // this.bill =[];
     this.apiService.post("/v1/registerMileBulk", m).subscribe(
       response => {
       },
       error => {
-        console.log(error);
         //  this.router.navigateByUrl('/account');
       }
     );
   }
   addOutcomeStatement(s: any): any {
-    // console.log(order);
     // this.bill =[];
     this.apiService.put("/v1/registerOutcome", s).subscribe(
       response => {
         return response;
       },
       error => {
-        console.log(error);
         return error;
         //  this.router.navigateByUrl('/account');
       }
@@ -545,24 +515,20 @@ export class DataServiceService {
       response => {
       },
       error => {
-        console.log(error);
       }
     );
   }
   rmoveUserAns(optionID: any): any {
     this.apiService.delete(`/v1/removeAnsUser?optionID=${optionID}`).subscribe(
       response => {
-        console.log("deleted" + response);
       },
       error => {
-        console.log(error);
       }
     );
   }
 
   putUserAnswer(body:object):void {
     this.putUserAnswerSubscription = this.apiService.put(`/v1/userAnswer`,body).subscribe(response => {
-      // console.log(response);
     });
   }
 

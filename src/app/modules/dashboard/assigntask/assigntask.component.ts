@@ -100,7 +100,6 @@ dueDate: any;
                 this.id = 12;
                 this.sub = this.route.params.subscribe(params => {
                   this.id = +params['id']; // (+) converts string 'id' to a number
-                  console.log(this.id);
                 });
                 this.date = new Date();
     this.element = new Drivers();
@@ -120,7 +119,6 @@ dueDate: any;
     this.ELEMENT_DATA.push(this.element);
     this.dataSource = [...this.ELEMENT_DATA];
 
-    console.log(this.dataSource);
 
     breakpointObserver.observe([
       Breakpoints.HandsetLandscape,
@@ -128,7 +126,6 @@ dueDate: any;
     ]).subscribe(result => {
       if (result.matches) {
         this.leftStyle = 'step2response';
-        console.log('handset mode');
       }
     });
     breakpointObserver.observe([
@@ -138,7 +135,6 @@ dueDate: any;
     ]).subscribe(result => {
       if (result.matches) {
         this.leftStyle = 'step2';
-        console.log('handset mode');
       }
     });
   }
@@ -153,11 +149,9 @@ dueDate: any;
     this.name = this.dataService.getUserInfo();
     this.dataService.quarterListdata.subscribe((data) =>{
       this.quarterList = data;
-      console.log(this.quarterList);
     })
     this.dataService.detpUsersdata.subscribe((data) =>{
       this.users = data;
-      console.log(this.users);
     });
     this.dataService.getDeptUsers();
     this.dataService.getQuarterList();
@@ -165,9 +159,7 @@ dueDate: any;
     this.sub=  this.dataService.mileAlldata.subscribe((data) =>{
       this.kpiData = data;
       // this.dataService.getSingle(this.kpiData[0]['kpiID']);
-      console.log(this.kpiData);
     })
-    console.log(this.id);
     // tslint:disable-next-line: use-isnan
     if(isNaN(this.id)){
       this.dataService.getMilestoneAll1('a',1);
@@ -182,7 +174,6 @@ dueDate: any;
     this.sub.unsubscribe();
   }
   onChange(ev){
-    console.log(ev);
   }
   clearUsers(){
 
@@ -281,7 +272,6 @@ dueDate: any;
   }
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     // tslint:disable-next-line: max-line-length
-   console.log(event,type);
   }
   dateOpen(event){
  // var target = event.srElement.id;
@@ -341,7 +331,6 @@ dat.datepicker( {dateFormat : "yy-mm-dd"});
   }
   save() {
     const element= this.selectElement;
-    console.log(this.users,this.aText, this.kpiID);
     // let temp = [];
     // this.users.forEach(element => {
     //     if(element.assign) {
@@ -357,14 +346,11 @@ dat.datepicker( {dateFormat : "yy-mm-dd"});
         mileID: this.currKpi,
         dueDate: this.dueDate
       });
-    console.log(this.currKpi);
     this.kpiData.forEach(e => {
         if(e.mileID === this.currKpi) {
           e.assignName= element.name;
         }
       });
-    console.log(this.kpiData);
-      // console.log(temp,data);
   }
   totalSumQty(): any {
     let qty=0;
@@ -381,7 +367,6 @@ dat.datepicker( {dateFormat : "yy-mm-dd"});
     return qty;
   }
   assUser(e: any,i: any) {
-    console.log(e,i);
     this.aText = i.achieveText;
     if (e.checked) {
       i.assign = true;
@@ -390,14 +375,11 @@ dat.datepicker( {dateFormat : "yy-mm-dd"});
     } else {
       i.assign = false;
       i.qty = 0;
-      console.log('remove');
 
     }
-    console.log(i, this.users);
 
   }
   // assUser(e:any,i: any) {
-  //   console.log(e,i);
   //   if(e.checked){
   //     i.assign = true;
   //     i.qty = this.totalQty - this.totalSumQty();
@@ -405,10 +387,8 @@ dat.datepicker( {dateFormat : "yy-mm-dd"});
   //   } else {
   //     i.assign = false;
   //     i.qty = 0;
-  //     console.log('remove');
 
   //   }
-  //   console.log(i, this.users);
 
   // }
 

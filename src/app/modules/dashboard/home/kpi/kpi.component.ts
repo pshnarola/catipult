@@ -9,6 +9,7 @@ import * as notification from "src/app/shared/libraries/exports.library";
 import { DateTime } from "luxon";
 import { DataService } from "src/app/modules/account/services/data.service";
 import { environment } from "src/environments/environment";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-dashboard-kpi",
@@ -19,7 +20,7 @@ export class KpiDashboardComponent implements OnInit {
   modalRef: BsModalRef;
   isActive:boolean = false;
   selectedMember:string = "Select Member";
-  memberList:any;
+  memberList:any = [];
 
   // Data Subscriptions
   milestoneDataSubscription: Subscription;
@@ -253,7 +254,17 @@ export class KpiDashboardComponent implements OnInit {
 
   timeoutList(): void {
     setTimeout(() => {
-      this.dataservice.getKpiDriver(this.driverID);
+      let uId = null;
+      console.log("driverName",);
+      
+      if(this.selectedMember && this.driverName !== 'You'){
+        console.log("uid =>",this.uID);
+        console.log("selected member =>",this.selectedMember);
+        uId = this.uID;
+        this.dataservice.getKpiDriverByMember(this.driverID, this.uID);
+      } else{
+        this.dataservice.getKpiDriver(this.driverID);
+      }
       this.dataservice.getMileStoneAssignUsersKpi(
         this.driverID,
         this.depID,
@@ -268,7 +279,9 @@ export class KpiDashboardComponent implements OnInit {
 
   setSubscriptions(): void {
     this.orgID = this.dataservice.getOrgID();
-
+    const token =  this.dataService.getToken();
+    const v = JSON.parse(token);
+    this.selectedMember = v.name;
     this.dataservice.driversdata.subscribe(data => {
       if (data) {
         this.driverData = data;
@@ -280,19 +293,15 @@ export class KpiDashboardComponent implements OnInit {
       data => {
         this.isActive = false;
         this.kpiMileData = data;
-        console.log(': ===> "call kpi"', "call kpi");
-        
         if (this.kpiMileData != null) {
           this.kpiMileData.forEach((element, id) => {});
         }
-      }
-    );
-
-    this.driverIsChangedSubscription = this.dataservice.driverIsChanged.subscribe(
-      data => {
-        if (data === true) {
-          this.selectedMember = "Select Member";
-        }
+        // if(!this.selectedMember) {
+        // } else {
+        //   console.log("uid =>",this.uID);
+        //   console.log("selected member =>",this.selectedMember);
+          
+        // }
       }
     );
 
@@ -301,6 +310,12 @@ export class KpiDashboardComponent implements OnInit {
         this.driverID = data.driverID;
         this.newTaskDriver = data.driverID;
         this.driverName = data.driverName;
+        if(this.driverName === 'You') {
+          const token =  this.dataService.getToken();
+          const v = JSON.parse(token);
+          this.uID = v.uID;
+          this.selectedMember = v.name;
+        }
       }
     );
 
@@ -361,8 +376,16 @@ export class KpiDashboardComponent implements OnInit {
     }
 
     this.organizationUserListSubscription = this.DataService.dataAccessUserListdata.subscribe(data=>{
-      this.memberList = [];
-      this.memberList = data;
+      if(data){
+        this.memberList = [];
+        var url = environment.imgUrl ? environment.imgUrl: "http://108.163.221.122:2004/";
+        var loggedInUser = {
+          User: v.name,
+          imageUrl: url + v.img,
+          uID: v.uID
+        }
+        this.memberList = [loggedInUser, ...data]
+      }
     });
 
     this.statusDefaultSubscription = this.dataservice.statusDefaultData.subscribe(data=>{
@@ -671,7 +694,11 @@ export class KpiDashboardComponent implements OnInit {
   onSelecteMember(userDetail) {
     console.log(': ===> userDetail.User', userDetail);
     this.selectedMember = userDetail.User;
+    this.uID = userDetail.uID;
+    // localStorage.setItem('selectedMember')
+    this.dataservice.setMemberUid(this.uID);
     this.dataservice.getKpiDriverByMember(this.driverID, userDetail.uID)
+    this.timeoutList();
   }
 
   milestoneEdit(template: TemplateRef<any>,cls:any,elementKpi, element: any){
